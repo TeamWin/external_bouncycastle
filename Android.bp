@@ -60,6 +60,7 @@ java_library_static {
 java_library {
     name: "bouncycastle",
     defaults: ["bouncycastle-defaults"],
+    installable: true,
 
     static_libs: ["bouncycastle-unbundled"],
     no_framework_libs: true,
@@ -78,6 +79,7 @@ java_library {
 java_library {
     name: "bouncycastle-testdex",
     defaults: ["bouncycastle-defaults"],
+    installable: true,
 
     static_libs: ["bouncycastle-unbundled"],
     no_framework_libs: true,
