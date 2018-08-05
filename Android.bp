@@ -43,7 +43,8 @@ java_defaults {
     },
 }
 
-// non-jarjar version to build okhttp-tests
+// A bouncycastle library in the original org.bouncycastle package for use
+// outside of the platform. e.g. for host or in unbundled apps.
 java_library_static {
     name: "bouncycastle-unbundled",
     defaults: ["bouncycastle-defaults"],
@@ -57,20 +58,19 @@ java_library_static {
     java_version: "1.7",
 }
 
+// A bouncycastle library repackaged in com.android.org.bouncycastle for use
+// in the Android platform where it is important not to conflict with the
+// original org.bouncycastle package.
 java_library {
     name: "bouncycastle",
     defaults: ["bouncycastle-defaults"],
     installable: true,
 
     static_libs: ["bouncycastle-unbundled"],
+    jarjar_rules: "jarjar-rules.txt",
+
     no_framework_libs: true,
     java_version: "1.7",
-
-    target: {
-        android: {
-            jarjar_rules: "jarjar-rules.txt",
-        },
-    },
 }
 
 // A guaranteed unstripped version of bouncycastle.
@@ -82,71 +82,77 @@ java_library {
     installable: true,
 
     static_libs: ["bouncycastle-unbundled"],
-    no_framework_libs: true,
     jarjar_rules: "jarjar-rules.txt",
+
+    no_framework_libs: true,
     java_version: "1.7",
 }
 
-// PKIX classes used for testing
+// Bouncycastle PKIX classes repackaged in com.android.org.bouncycastle and used
+// for testing.
 java_library_static {
     name: "bouncycastle-bcpkix",
     defaults: ["bouncycastle-defaults"],
 
     static_libs: ["bouncycastle-bcpkix-unbundled"],
+    jarjar_rules: "jarjar-rules.txt",
+
     no_framework_libs: true,
     java_version: "1.7",
-
-    target: {
-        android: {
-            jarjar_rules: "jarjar-rules.txt",
-        },
-    },
 }
 
+// Bouncycastle PKIX classes in the original org.bouncycastle package for use
+// outside of the platform. e.g. for host or in unbundled apps.
 java_library_static {
     name: "bouncycastle-bcpkix-unbundled",
-    defaults: [
-        "bouncycastle-defaults",
-    ],
-    libs: [ "bouncycastle-unbundled" ],
-    sdk_version: "9",
+    defaults: ["bouncycastle-defaults"],
+
     srcs: ["bcpkix/src/main/java/**/*.java"],
     exclude_srcs: ["bcpkix/src/main/java/org/bouncycastle/cert/ocsp/**/*.java"],
+    libs: ["bouncycastle-unbundled"],
+
+    sdk_version: "9",
 }
 
 
-// OCSP classes used for testing
+// Bouncycastle OCSP classes repackaged in com.android.org.bouncycastle and
+// used for testing.
 java_library_static {
     name: "bouncycastle-ocsp",
     defaults: ["bouncycastle-defaults"],
 
     static_libs: ["bouncycastle-ocsp-unbundled"],
     jarjar_rules: "jarjar-rules.txt",
-    java_version: "1.7",
+
     no_framework_libs: true,
+    java_version: "1.7",
 }
 
+// Bouncycastle OCSP classes in the original org.bouncycastle package for use
+// outside of the platform. e.g. for host or in unbundled apps.
 java_library_static {
     name: "bouncycastle-ocsp-unbundled",
-    defaults: [
-        "bouncycastle-defaults",
-    ],
-    libs: [ "bouncycastle-unbundled",
-            "bouncycastle-bcpkix-unbundled" ],
-    sdk_version: "9",
+    defaults: ["bouncycastle-defaults"],
+
     srcs: [
         "bcpkix/src/main/java/org/bouncycastle/cert/ocsp/**/*.java",
         "bcprov/src/main/java/org/bouncycastle/asn1/ocsp/**/*.java",
     ],
+    libs: [ "bouncycastle-unbundled",
+            "bouncycastle-bcpkix-unbundled"
+    ],
+
+    sdk_version: "9",
 }
 
-// For compatibilityy with old bouncycastle-host and bouncycastle-bcpkix-host names
+// For compatibility with old bouncycastle-host name.
 java_library_host {
     name: "bouncycastle-host",
-    static_libs: ["bouncycastle"],
+    static_libs: ["bouncycastle-unbundled"],
 }
 
+// For compatibility with old bouncycastle-bcpkix-host name.
 java_library_host {
     name: "bouncycastle-bcpkix-host",
-    static_libs: ["bouncycastle-bcpkix"],
+    static_libs: ["bouncycastle-bcpkix-unbundled"],
 }
