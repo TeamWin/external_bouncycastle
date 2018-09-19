@@ -1,0 +1,9 @@
+/* GENERATED SOURCE. DO NOT MODIFY. */
+package com.android.org.bouncycastle.math.ec.endo;
+
+import java.math.BigInteger;
+
+public interface GLVEndomorphism extends ECEndomorphism
+{
+    BigInteger[] decomposeScalar(BigInteger k);
+}
