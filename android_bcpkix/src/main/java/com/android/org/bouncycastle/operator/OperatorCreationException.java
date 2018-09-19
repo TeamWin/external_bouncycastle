@@ -1,0 +1,16 @@
+/* GENERATED SOURCE. DO NOT MODIFY. */
+package com.android.org.bouncycastle.operator;
+
+public class OperatorCreationException
+    extends OperatorException
+{
+    public OperatorCreationException(String msg, Throwable cause)
+    {
+        super(msg, cause);
+    }
+
+    public OperatorCreationException(String msg)
+    {
+        super(msg);
+    }
+}
