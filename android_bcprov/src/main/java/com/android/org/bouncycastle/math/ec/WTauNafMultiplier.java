@@ -6,6 +6,7 @@ import java.math.BigInteger;
 /**
  * Class implementing the WTNAF (Window
  * <code>&tau;</code>-adic Non-Adjacent Form) algorithm.
+ * @hide This class is not part of the Android public SDK API
  */
 public class WTauNafMultiplier extends AbstractECMultiplier
 {

@@ -6,6 +6,7 @@ import java.io.OutputStream;
 
 /**
  * Stream that outputs encoding based on definite length.
+ * @hide This class is not part of the Android public SDK API
  */
 public class DLOutputStream
     extends ASN1OutputStream

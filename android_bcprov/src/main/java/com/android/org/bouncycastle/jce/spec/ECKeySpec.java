@@ -5,6 +5,7 @@ import java.security.spec.KeySpec;
 
 /**
  * base class for an Elliptic Curve Key Spec
+ * @hide This class is not part of the Android public SDK API
  */
 public class ECKeySpec
     implements KeySpec

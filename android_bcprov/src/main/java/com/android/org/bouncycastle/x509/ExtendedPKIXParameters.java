@@ -21,6 +21,7 @@ import java.util.Set;
  * This class extends the PKIXParameters with a validity model parameter.
  *
  * @deprecated use PKIXExtendedParameters
+ * @hide This class is not part of the Android public SDK API
  */
 public class ExtendedPKIXParameters
     extends PKIXParameters

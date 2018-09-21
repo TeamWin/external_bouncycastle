@@ -10,6 +10,9 @@ import com.android.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.org.bouncycastle.asn1.DERSequence;
 import com.android.org.bouncycastle.asn1.DERTaggedObject;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class CertBag
     extends ASN1Object
 {

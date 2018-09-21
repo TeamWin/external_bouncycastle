@@ -18,6 +18,9 @@ import com.android.org.bouncycastle.crypto.params.RSAKeyParameters;
 import com.android.org.bouncycastle.jcajce.provider.asymmetric.util.KeyUtil;
 import com.android.org.bouncycastle.util.Strings;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class BCRSAPublicKey
     implements RSAPublicKey
 {

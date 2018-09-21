@@ -5,6 +5,7 @@ import com.android.org.bouncycastle.jce.spec.ECParameterSpec;
 
 /**
  * generic interface for an Elliptic Curve Key.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface ECKey
 {

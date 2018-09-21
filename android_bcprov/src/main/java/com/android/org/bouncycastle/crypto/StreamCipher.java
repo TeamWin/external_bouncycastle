@@ -3,6 +3,7 @@ package com.android.org.bouncycastle.crypto;
 
 /**
  * the interface stream ciphers conform to.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface StreamCipher
 {

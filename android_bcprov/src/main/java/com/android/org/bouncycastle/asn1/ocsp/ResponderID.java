@@ -11,6 +11,9 @@ import com.android.org.bouncycastle.asn1.DEROctetString;
 import com.android.org.bouncycastle.asn1.DERTaggedObject;
 import com.android.org.bouncycastle.asn1.x500.X500Name;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class ResponderID
     extends ASN1Object
     implements ASN1Choice

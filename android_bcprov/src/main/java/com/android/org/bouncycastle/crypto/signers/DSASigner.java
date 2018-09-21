@@ -15,6 +15,7 @@ import com.android.org.bouncycastle.crypto.params.ParametersWithRandom;
 /**
  * The Digital Signature Algorithm - as described in "Handbook of Applied
  * Cryptography", pages 452 - 453.
+ * @hide This class is not part of the Android public SDK API
  */
 public class DSASigner
     implements DSA

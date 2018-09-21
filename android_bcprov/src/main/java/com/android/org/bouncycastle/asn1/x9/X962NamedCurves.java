@@ -13,6 +13,7 @@ import com.android.org.bouncycastle.util.encoders.Hex;
 
 /**
  * Table of the current named curves defined in X.962 EC-DSA.
+ * @hide This class is not part of the Android public SDK API
  */
 public class X962NamedCurves
 {

@@ -37,6 +37,7 @@ import com.android.org.bouncycastle.x509.ExtendedPKIXParameters;
 /**
  * CertPathValidatorSpi implementation for X.509 Certificate validation � la RFC
  * 3280.
+ * @hide This class is not part of the Android public SDK API
  */
 public class PKIXCertPathValidatorSpi
         extends CertPathValidatorSpi

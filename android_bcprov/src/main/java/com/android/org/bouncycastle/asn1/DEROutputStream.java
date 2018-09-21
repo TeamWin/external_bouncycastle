@@ -6,6 +6,7 @@ import java.io.OutputStream;
 
 /**
  * Stream that outputs encoding based on distinguished encoding rules.
+ * @hide This class is not part of the Android public SDK API
  */
 public class DEROutputStream
     extends ASN1OutputStream

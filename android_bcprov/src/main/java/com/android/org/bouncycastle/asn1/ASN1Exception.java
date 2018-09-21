@@ -5,6 +5,7 @@ import java.io.IOException;
 
 /**
  * Exception thrown in cases of corrupted or unexpected data in a stream.
+ * @hide This class is not part of the Android public SDK API
  */
 public class ASN1Exception
     extends IOException

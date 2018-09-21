@@ -44,6 +44,9 @@ import com.android.org.bouncycastle.jcajce.provider.symmetric.util.BaseWrapCiphe
 import com.android.org.bouncycastle.jcajce.provider.symmetric.util.PBE;
 import com.android.org.bouncycastle.jcajce.provider.util.AlgorithmProvider;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public final class DES
 {
     private DES()

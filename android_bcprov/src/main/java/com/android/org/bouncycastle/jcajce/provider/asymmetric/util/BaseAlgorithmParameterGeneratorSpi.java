@@ -9,6 +9,9 @@ import java.security.NoSuchProviderException;
 import com.android.org.bouncycastle.jcajce.util.BCJcaJceHelper;
 import com.android.org.bouncycastle.jcajce.util.JcaJceHelper;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public abstract class BaseAlgorithmParameterGeneratorSpi
     extends AlgorithmParameterGeneratorSpi
 {

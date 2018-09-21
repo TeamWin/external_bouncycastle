@@ -3,6 +3,9 @@ package com.android.org.bouncycastle.math.ec;
 
 import java.math.BigInteger;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public abstract class AbstractECMultiplier implements ECMultiplier
 {
     public ECPoint multiply(ECPoint p, BigInteger k)

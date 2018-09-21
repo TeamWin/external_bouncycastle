@@ -3,6 +3,9 @@ package com.android.org.bouncycastle.crypto.params;
 
 import java.security.SecureRandom;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class DSAParameterGenerationParameters
 {
     public static final int DIGITAL_SIGNATURE_USAGE = 1;

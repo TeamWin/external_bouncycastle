@@ -15,6 +15,9 @@ import com.android.org.bouncycastle.jcajce.provider.symmetric.util.BaseKeyGenera
 import com.android.org.bouncycastle.jcajce.provider.symmetric.util.IvAlgorithmParameters;
 import com.android.org.bouncycastle.jcajce.provider.util.AlgorithmProvider;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public final class Blowfish
 {
     private Blowfish()

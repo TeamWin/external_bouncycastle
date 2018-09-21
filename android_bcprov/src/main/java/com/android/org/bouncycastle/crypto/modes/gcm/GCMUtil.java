@@ -3,6 +3,9 @@ package com.android.org.bouncycastle.crypto.modes.gcm;
 
 import com.android.org.bouncycastle.util.Pack;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public abstract class GCMUtil
 {
     private static final int E1 = 0xe1000000;

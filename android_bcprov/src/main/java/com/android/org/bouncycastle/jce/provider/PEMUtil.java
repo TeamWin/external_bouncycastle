@@ -9,6 +9,9 @@ import com.android.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.org.bouncycastle.util.encoders.Base64;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class PEMUtil
 {
     private final String _header1;

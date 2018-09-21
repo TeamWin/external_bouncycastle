@@ -7,6 +7,7 @@ import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
  *
  * NIST:
  *     iso/itu(2) joint-assign(16) us(840) organization(1) gov(101) csor(3) 
+ * @hide This class is not part of the Android public SDK API
  */
 public interface NISTObjectIdentifiers
 {

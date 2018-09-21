@@ -20,6 +20,7 @@ import com.android.org.bouncycastle.jce.PrincipalUtil;
 /**
  * A high level authority key identifier.
  * @deprecated use JcaX509ExtensionUtils and AuthorityKeyIdentifier.getInstance()
+ * @hide This class is not part of the Android public SDK API
  */
 public class AuthorityKeyIdentifierStructure
     extends AuthorityKeyIdentifier

@@ -5,6 +5,7 @@ import java.security.SecureRandom;
 
 /**
  * all BC provider keystores implement this interface.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface BCKeyStore
 {

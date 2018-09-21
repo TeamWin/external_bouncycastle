@@ -12,6 +12,7 @@ import com.android.org.bouncycastle.asn1.ASN1Primitive;
  * <pre>
  * CRLNumber::= INTEGER(0..MAX)
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class CRLNumber
     extends ASN1Object

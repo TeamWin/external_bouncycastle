@@ -26,6 +26,9 @@ import com.android.org.bouncycastle.operator.OperatorStreamException;
 import com.android.org.bouncycastle.operator.RawContentVerifier;
 import com.android.org.bouncycastle.operator.RuntimeOperatorException;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class JcaContentVerifierProviderBuilder
 {
     private OperatorHelper helper = new OperatorHelper(new DefaultJcaJceHelper());

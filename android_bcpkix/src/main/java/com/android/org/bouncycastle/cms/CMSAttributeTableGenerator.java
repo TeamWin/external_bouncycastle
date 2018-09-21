@@ -7,6 +7,7 @@ import com.android.org.bouncycastle.asn1.cms.AttributeTable;
 
 /**
  * Note: The SIGNATURE parameter is only available when generating unsigned attributes.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface CMSAttributeTableGenerator
 {

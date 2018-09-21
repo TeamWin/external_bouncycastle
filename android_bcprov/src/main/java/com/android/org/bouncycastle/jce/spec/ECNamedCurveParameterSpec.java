@@ -11,6 +11,7 @@ import com.android.org.bouncycastle.math.ec.ECPoint;
  * referred to by name.
  * <p>
  * If you are using JDK 1.5 you should be looking at {@link ECNamedCurveSpec}.
+ * @hide This class is not part of the Android public SDK API
  */
 public class ECNamedCurveParameterSpec
     extends ECParameterSpec

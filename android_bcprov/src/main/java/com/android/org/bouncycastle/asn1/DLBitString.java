@@ -5,6 +5,7 @@ import java.io.IOException;
 
 /**
  * A Definite length BIT STRING
+ * @hide This class is not part of the Android public SDK API
  */
 public class DLBitString
     extends ASN1BitString

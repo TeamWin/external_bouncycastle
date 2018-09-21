@@ -5,6 +5,7 @@ import java.io.IOException;
 
 /**
  * Parser class for DER SETs.
+ * @hide This class is not part of the Android public SDK API
  */
 public class DERSetParser
     implements ASN1SetParser

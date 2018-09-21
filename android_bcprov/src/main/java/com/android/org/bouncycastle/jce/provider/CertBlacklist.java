@@ -34,6 +34,9 @@ import com.android.org.bouncycastle.crypto.Digest;
 import com.android.org.bouncycastle.crypto.digests.AndroidDigestFactory;
 import com.android.org.bouncycastle.util.encoders.Hex;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class CertBlacklist {
     private static final Logger logger = Logger.getLogger(CertBlacklist.class.getName());
 

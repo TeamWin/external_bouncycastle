@@ -7,6 +7,7 @@ package com.android.org.bouncycastle.jce.interfaces;
  * <p>
  * By default BC keys produce encodings without point compression,
  * to turn this on call setPointFormat() with "COMPRESSED".
+ * @hide This class is not part of the Android public SDK API
  */
 public interface ECPointEncoder
 {

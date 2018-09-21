@@ -10,6 +10,9 @@ import com.android.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import com.android.org.bouncycastle.asn1.teletrust.TeleTrusTObjectIdentifiers;
 import com.android.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class DefaultCMSSignatureEncryptionAlgorithmFinder
     implements CMSSignatureEncryptionAlgorithmFinder
 {

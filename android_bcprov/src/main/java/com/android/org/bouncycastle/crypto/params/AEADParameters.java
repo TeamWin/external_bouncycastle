@@ -3,6 +3,9 @@ package com.android.org.bouncycastle.crypto.params;
 
 import com.android.org.bouncycastle.crypto.CipherParameters;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class AEADParameters
     implements CipherParameters
 {

@@ -13,6 +13,9 @@ import com.android.org.bouncycastle.asn1.DERTaggedObject;
 import com.android.org.bouncycastle.asn1.oiw.OIWObjectIdentifiers;
 import com.android.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class RSAESOAEPparams
     extends ASN1Object
 {

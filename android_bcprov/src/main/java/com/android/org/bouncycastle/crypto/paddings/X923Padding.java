@@ -8,6 +8,7 @@ import com.android.org.bouncycastle.crypto.InvalidCipherTextException;
 /**
  * A padder that adds X9.23 padding to a block - if a SecureRandom is
  * passed in random padding is assumed, otherwise padding with zeros is used.
+ * @hide This class is not part of the Android public SDK API
  */
 public class X923Padding
     implements BlockCipherPadding

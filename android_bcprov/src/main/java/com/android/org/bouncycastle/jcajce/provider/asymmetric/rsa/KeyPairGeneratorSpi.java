@@ -15,6 +15,9 @@ import com.android.org.bouncycastle.crypto.params.RSAKeyParameters;
 import com.android.org.bouncycastle.crypto.params.RSAPrivateCrtKeyParameters;
 import com.android.org.bouncycastle.jcajce.provider.asymmetric.util.PrimeCertaintyCalculator;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class KeyPairGeneratorSpi
     extends java.security.KeyPairGenerator
 {

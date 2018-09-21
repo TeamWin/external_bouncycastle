@@ -15,6 +15,9 @@ import com.android.org.bouncycastle.crypto.params.DSAParameters;
 import com.android.org.bouncycastle.jcajce.provider.asymmetric.util.BaseAlgorithmParameterGeneratorSpi;
 import com.android.org.bouncycastle.jcajce.provider.asymmetric.util.PrimeCertaintyCalculator;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class AlgorithmParameterGeneratorSpi
     extends BaseAlgorithmParameterGeneratorSpi
 {

@@ -18,6 +18,7 @@ import com.android.org.bouncycastle.asn1.x500.X500Name;
  *      signature               BIT STRING
  *  }
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class Certificate
     extends ASN1Object

@@ -3,6 +3,9 @@ package com.android.org.bouncycastle.asn1.nsri;
 
 import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public interface NSRIObjectIdentifiers
 {
     static final ASN1ObjectIdentifier   nsri                = new ASN1ObjectIdentifier("1.2.410.200046");

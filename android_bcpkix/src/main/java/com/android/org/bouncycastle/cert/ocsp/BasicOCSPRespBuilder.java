@@ -29,6 +29,7 @@ import com.android.org.bouncycastle.operator.DigestCalculator;
 
 /**
  * Generator for basic OCSP response objects.
+ * @hide This class is not part of the Android public SDK API
  */
 public class BasicOCSPRespBuilder
 {

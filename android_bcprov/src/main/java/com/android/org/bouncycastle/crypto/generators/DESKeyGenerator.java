@@ -5,6 +5,9 @@ import com.android.org.bouncycastle.crypto.CipherKeyGenerator;
 import com.android.org.bouncycastle.crypto.KeyGenerationParameters;
 import com.android.org.bouncycastle.crypto.params.DESParameters;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class DESKeyGenerator
     extends CipherKeyGenerator
 {

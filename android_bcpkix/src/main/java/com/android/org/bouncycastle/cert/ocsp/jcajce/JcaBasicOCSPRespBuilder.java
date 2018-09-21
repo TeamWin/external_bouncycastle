@@ -8,6 +8,9 @@ import com.android.org.bouncycastle.cert.ocsp.BasicOCSPRespBuilder;
 import com.android.org.bouncycastle.cert.ocsp.OCSPException;
 import com.android.org.bouncycastle.operator.DigestCalculator;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class JcaBasicOCSPRespBuilder
     extends BasicOCSPRespBuilder
 {

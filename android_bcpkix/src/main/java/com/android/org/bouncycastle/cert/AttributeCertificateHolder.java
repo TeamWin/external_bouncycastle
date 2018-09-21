@@ -41,6 +41,7 @@ import com.android.org.bouncycastle.util.Selector;
  * method setDigestCalculatorProvider <b>must</b> be called once to configure the class
  * to do the necessary calculations.
  * </p>
+ * @hide This class is not part of the Android public SDK API
  */
 public class AttributeCertificateHolder
     implements Selector

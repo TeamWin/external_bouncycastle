@@ -6,6 +6,7 @@ import java.security.SecureRandom;
 
 /**
  * BigInteger utilities.
+ * @hide This class is not part of the Android public SDK API
  */
 public final class BigIntegers
 {

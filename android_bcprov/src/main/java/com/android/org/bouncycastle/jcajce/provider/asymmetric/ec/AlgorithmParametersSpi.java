@@ -18,6 +18,9 @@ import com.android.org.bouncycastle.jce.provider.BouncyCastleProvider;
 import com.android.org.bouncycastle.jce.spec.ECNamedCurveSpec;
 import com.android.org.bouncycastle.math.ec.ECCurve;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class AlgorithmParametersSpi
     extends java.security.AlgorithmParametersSpi
 {

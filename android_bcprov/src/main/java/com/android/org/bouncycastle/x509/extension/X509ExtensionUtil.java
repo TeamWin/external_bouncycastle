@@ -22,6 +22,9 @@ import com.android.org.bouncycastle.asn1.x509.X509Extension;
 import com.android.org.bouncycastle.util.Integers;
 
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class X509ExtensionUtil
 {
     public static ASN1Primitive fromExtensionValue(

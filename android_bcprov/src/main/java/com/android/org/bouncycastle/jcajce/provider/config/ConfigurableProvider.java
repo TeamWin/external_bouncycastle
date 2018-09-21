@@ -9,6 +9,7 @@ import com.android.org.bouncycastle.jcajce.provider.util.AsymmetricKeyInfoConver
 /**
  * Implemented by the BC provider. This allows setting of hidden parameters,
  * such as the ImplicitCA parameters from X.962, if used.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface ConfigurableProvider
 {

@@ -21,6 +21,7 @@ import com.android.org.bouncycastle.asn1.DLSet;
  * Attributes ::=
  *   SET SIZE(1..MAX) OF Attribute
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class Attributes
     extends ASN1Object

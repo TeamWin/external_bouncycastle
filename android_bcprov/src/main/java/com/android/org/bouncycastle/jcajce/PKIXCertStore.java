@@ -12,6 +12,7 @@ import com.android.org.bouncycastle.util.StoreException;
  * Generic interface for a PKIX based certificate store.
  *
  * @param <T> the certificate type.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface PKIXCertStore<T extends Certificate>
     extends Store<T>

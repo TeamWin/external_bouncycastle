@@ -16,6 +16,7 @@ import java.math.BigInteger;
  *
  * This generates keys consistent for use with the basic algorithm for
  * Diffie-Hellman.
+ * @hide This class is not part of the Android public SDK API
  */
 public class DHBasicKeyPairGenerator
     implements AsymmetricCipherKeyPairGenerator

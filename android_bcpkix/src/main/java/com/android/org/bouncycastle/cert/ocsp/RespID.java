@@ -14,6 +14,7 @@ import com.android.org.bouncycastle.operator.DigestCalculator;
 
 /**
  * Carrier for a ResponderID.
+ * @hide This class is not part of the Android public SDK API
  */
 public class RespID
 {

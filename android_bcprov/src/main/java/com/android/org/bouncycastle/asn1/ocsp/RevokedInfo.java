@@ -12,6 +12,9 @@ import com.android.org.bouncycastle.asn1.DERSequence;
 import com.android.org.bouncycastle.asn1.DERTaggedObject;
 import com.android.org.bouncycastle.asn1.x509.CRLReason;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class RevokedInfo
     extends ASN1Object
 {

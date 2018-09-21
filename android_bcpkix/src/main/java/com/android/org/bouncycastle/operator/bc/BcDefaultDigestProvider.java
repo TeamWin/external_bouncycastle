@@ -31,6 +31,9 @@ import com.android.org.bouncycastle.crypto.digests.SHA384Digest;
 import com.android.org.bouncycastle.crypto.digests.SHA512Digest;
 import com.android.org.bouncycastle.operator.OperatorCreationException;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class BcDefaultDigestProvider
     implements BcDigestProvider
 {

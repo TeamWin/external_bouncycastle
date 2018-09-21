@@ -6,6 +6,7 @@ import java.security.PrivateKey;
 
 /**
  * interface for Elliptic Curve Private keys.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface ECPrivateKey
     extends ECKey, PrivateKey

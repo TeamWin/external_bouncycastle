@@ -36,6 +36,7 @@ import com.android.org.bouncycastle.util.Arrays;
 /**
  * An implementation of a version 2 X.509 Attribute Certificate.
  * @deprecated use org.bouncycastle.cert.X509AttributeCertificateHolder
+ * @hide This class is not part of the Android public SDK API
  */
 public class X509V2AttributeCertificate
     implements X509AttributeCertificate

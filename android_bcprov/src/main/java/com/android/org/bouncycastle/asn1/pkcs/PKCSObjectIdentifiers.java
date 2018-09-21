@@ -6,6 +6,7 @@ import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 /**
  * pkcs-1 OBJECT IDENTIFIER ::=<p>
  *   { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) 1 }
+ * @hide This class is not part of the Android public SDK API
  *
  */
 public interface PKCSObjectIdentifiers

@@ -20,6 +20,7 @@ import com.android.org.bouncycastle.operator.ContentSigner;
 
 /**
  * class to produce an X.509 Version 3 certificate.
+ * @hide This class is not part of the Android public SDK API
  */
 public class X509v3CertificateBuilder
 {

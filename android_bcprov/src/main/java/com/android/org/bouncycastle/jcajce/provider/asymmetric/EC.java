@@ -19,6 +19,9 @@ import com.android.org.bouncycastle.jcajce.provider.util.AsymmetricAlgorithmProv
 // import org.bouncycastle.util.Properties;
 // END Android-removed: Unsupported algorithms
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class EC
 {
     private static final String PREFIX = "com.android.org.bouncycastle.jcajce.provider.asymmetric" + ".ec.";

@@ -3,6 +3,9 @@ package com.android.org.bouncycastle.math.ec;
 
 import java.math.BigInteger;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class FixedPointCombMultiplier extends AbstractECMultiplier
 {
     protected ECPoint multiplyPositive(ECPoint p, BigInteger k)

@@ -8,6 +8,7 @@ import com.android.org.bouncycastle.crypto.params.KeyParameter;
 
 /**
  * a class that provides a basic DESede (or Triple DES) engine.
+ * @hide This class is not part of the Android public SDK API
  */
 public class DESedeEngine
     extends DESEngine

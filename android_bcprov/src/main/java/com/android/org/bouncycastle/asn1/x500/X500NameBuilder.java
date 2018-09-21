@@ -9,6 +9,7 @@ import com.android.org.bouncycastle.asn1.x500.style.BCStyle;
 
 /**
  * A builder class for making X.500 Name objects.
+ * @hide This class is not part of the Android public SDK API
  */
 public class X500NameBuilder
 {

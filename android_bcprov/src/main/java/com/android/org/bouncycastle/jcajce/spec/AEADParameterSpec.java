@@ -9,6 +9,7 @@ import com.android.org.bouncycastle.util.Arrays;
  * ParameterSpec for AEAD modes which allows associated data to be added via an algorithm parameter spec.In normal
  * circumstances you would only want to use this if you had to work with the pre-JDK1.7 Cipher class as associated
  * data is ignored for the purposes of returning a Cipher's parameters.
+ * @hide This class is not part of the Android public SDK API
  */
 public class AEADParameterSpec
     extends IvParameterSpec

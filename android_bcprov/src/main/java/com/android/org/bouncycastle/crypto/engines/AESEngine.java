@@ -30,6 +30,7 @@ import com.android.org.bouncycastle.util.Pack;
  * The slowest version uses no static tables at all and computes the values in each round.
  * <p>
  * This file contains the middle performance version with 2Kbytes of static tables for round precomputation.
+ * @hide This class is not part of the Android public SDK API
  *
  */
 public class AESEngine

@@ -13,6 +13,7 @@ import java.util.Set;
  * This class contains extended parameters for PKIX certification path builders.
  * 
  * @see PKIXBuilderParameters
+ * @hide This class is not part of the Android public SDK API
  */
 public class PKIXExtendedBuilderParameters
     implements CertPathParameters

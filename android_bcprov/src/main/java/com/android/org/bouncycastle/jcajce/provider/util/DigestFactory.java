@@ -16,6 +16,9 @@ import com.android.org.bouncycastle.crypto.digests.AndroidDigestFactory;
 // END Android-added: Use Android digests
 import com.android.org.bouncycastle.util.Strings;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class DigestFactory
 {
     private static Set md5 = new HashSet();

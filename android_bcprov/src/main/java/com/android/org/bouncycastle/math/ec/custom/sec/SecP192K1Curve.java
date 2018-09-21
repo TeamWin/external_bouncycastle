@@ -9,6 +9,9 @@ import com.android.org.bouncycastle.math.ec.ECFieldElement;
 import com.android.org.bouncycastle.math.ec.ECPoint;
 import com.android.org.bouncycastle.util.encoders.Hex;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class SecP192K1Curve extends ECCurve.AbstractFp
 {
     public static final BigInteger q = new BigInteger(1,

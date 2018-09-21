@@ -3,6 +3,7 @@ package com.android.org.bouncycastle.crypto;
 
 /**
  * Signer with message recovery.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface SignerWithRecovery 
     extends Signer

@@ -6,6 +6,7 @@ import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 /**
  * OIDs for <a href="http://tools.ietf.org/html/rfc2560">RFC 2560</a> and <a href="http://tools.ietf.org/html/rfc6960">RFC 6960</a>
  * Online Certificate Status Protocol - OCSP.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface OCSPObjectIdentifiers
 {

@@ -10,6 +10,9 @@ import com.android.org.bouncycastle.jcajce.provider.asymmetric.dh.KeyFactorySpi;
 import com.android.org.bouncycastle.jcajce.provider.config.ConfigurableProvider;
 import com.android.org.bouncycastle.jcajce.provider.util.AsymmetricAlgorithmProvider;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class DH
 {
     private static final String PREFIX = "com.android.org.bouncycastle.jcajce.provider.asymmetric" + ".dh.";

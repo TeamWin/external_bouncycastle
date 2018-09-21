@@ -3,6 +3,7 @@ package com.android.org.bouncycastle.util;
 
 /**
  * Exception thrown if there's an issue doing a match in store.
+ * @hide This class is not part of the Android public SDK API
  */
 public class StoreException
     extends RuntimeException

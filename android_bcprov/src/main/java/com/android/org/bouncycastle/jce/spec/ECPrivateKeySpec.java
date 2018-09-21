@@ -5,6 +5,7 @@ import java.math.BigInteger;
 
 /**
  * Elliptic Curve private key specification.
+ * @hide This class is not part of the Android public SDK API
  */
 public class ECPrivateKeySpec
     extends ECKeySpec

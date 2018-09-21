@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * A simple collection backed store.
+ * @hide This class is not part of the Android public SDK API
  */
 public class CollectionStore<T>
     implements Store<T>, Iterable<T>

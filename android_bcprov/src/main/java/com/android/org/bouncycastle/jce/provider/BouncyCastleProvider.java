@@ -42,6 +42,7 @@ import com.android.org.bouncycastle.jcajce.provider.util.AsymmetricKeyInfoConver
  * most preferred).
  * <p>Note: JCE algorithm names should be upper-case only so the case insensitive
  * test for getInstance works.
+ * @hide This class is not part of the Android public SDK API
  */
 public final class BouncyCastleProvider extends Provider
     implements ConfigurableProvider

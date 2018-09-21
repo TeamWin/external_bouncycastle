@@ -33,6 +33,9 @@ import com.android.org.bouncycastle.crypto.params.ParametersWithIV;
 import com.android.org.bouncycastle.crypto.digests.AndroidDigestFactory;
 // END Android-changed: Use Android digests
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public interface PBE
 {
     //

@@ -27,6 +27,7 @@ import com.android.org.bouncycastle.jcajce.spec.UserKeyingMaterialSpec;
  * Diffie-Hellman key agreement. There's actually a better way of doing this
  * if you are using long term public keys, see the light-weight version for
  * details.
+ * @hide This class is not part of the Android public SDK API
  */
 public class KeyAgreementSpi
     extends BaseAgreementSpi

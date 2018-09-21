@@ -15,6 +15,7 @@ import com.android.org.bouncycastle.util.Arrays;
 /**
  * this does your basic PKCS 1 v1.5 padding - whether or not you should be using this
  * depends on your application - see PKCS1 Version 2 for details.
+ * @hide This class is not part of the Android public SDK API
  */
 public class PKCS1Encoding
     implements AsymmetricBlockCipher

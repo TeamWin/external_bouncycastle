@@ -35,6 +35,9 @@ import com.android.org.bouncycastle.jcajce.provider.symmetric.util.PBESecretKeyF
 import com.android.org.bouncycastle.jcajce.provider.util.AlgorithmProvider;
 import com.android.org.bouncycastle.util.Arrays;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public final class RC2
 {
     private RC2()

@@ -9,6 +9,7 @@ import com.android.org.bouncycastle.crypto.params.KeyParameter;
 
 /**
  * a class that provides a basic DES engine.
+ * @hide This class is not part of the Android public SDK API
  */
 public class DESEngine
     implements BlockCipher

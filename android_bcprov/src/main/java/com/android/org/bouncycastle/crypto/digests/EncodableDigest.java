@@ -6,6 +6,7 @@ package com.android.org.bouncycastle.crypto.digests;
  *  you need to generate a signature on an external device and it allows for "sign with last round", so a copy of the
  *  internal state of the digest, plus the last few blocks of the message are all that needs to be sent, rather than the
  *  entire message.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface EncodableDigest
 {

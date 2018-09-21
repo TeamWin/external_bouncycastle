@@ -12,6 +12,9 @@ import com.android.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.org.bouncycastle.asn1.DLSequence;
 import com.android.org.bouncycastle.asn1.DLTaggedObject;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class SafeBag
     extends ASN1Object
 {

@@ -9,6 +9,7 @@ import com.android.org.bouncycastle.jce.spec.ECNamedCurveParameterSpec;
 
 /**
  * a table of locally supported named curves.
+ * @hide This class is not part of the Android public SDK API
  */
 public class ECNamedCurveTable
 {

@@ -25,6 +25,7 @@ import com.android.org.bouncycastle.crypto.Digest;
 /**
  * Level of indirection to let us select OpenSSLDigest implementations
  * for libcore but fallback to BouncyCastle ones on the RI.
+ * @hide This class is not part of the Android public SDK API
  */
 public final class AndroidDigestFactory {
     private static final AndroidDigestFactoryInterface CONSCRYPT;

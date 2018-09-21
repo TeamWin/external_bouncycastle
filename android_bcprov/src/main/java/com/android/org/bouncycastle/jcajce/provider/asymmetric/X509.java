@@ -6,6 +6,7 @@ import com.android.org.bouncycastle.jcajce.provider.util.AsymmetricAlgorithmProv
 
 /**
  * For some reason the class path project thinks that such a KeyFactory will exist.
+ * @hide This class is not part of the Android public SDK API
  */
 public class X509
 {

@@ -4,6 +4,7 @@ package com.android.org.bouncycastle.crypto;
 /**
  * A parent class for block cipher modes that do not require block aligned data to be processed, but can function in
  * a streaming mode.
+ * @hide This class is not part of the Android public SDK API
  */
 public abstract class StreamBlockCipher
     implements BlockCipher, StreamCipher

@@ -8,6 +8,7 @@ import com.android.org.bouncycastle.util.Arrays;
 
 /**
  * DER UniversalString object.
+ * @hide This class is not part of the Android public SDK API
  */
 public class DERUniversalString
     extends ASN1Primitive

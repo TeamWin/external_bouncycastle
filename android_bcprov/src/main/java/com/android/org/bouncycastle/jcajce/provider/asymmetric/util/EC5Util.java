@@ -30,6 +30,9 @@ import com.android.org.bouncycastle.math.field.Polynomial;
 import com.android.org.bouncycastle.math.field.PolynomialExtensionField;
 import com.android.org.bouncycastle.util.Arrays;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class EC5Util
 {
     private static Map customCurves = new HashMap();

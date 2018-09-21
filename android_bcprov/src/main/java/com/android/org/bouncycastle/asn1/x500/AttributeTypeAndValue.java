@@ -11,6 +11,7 @@ import com.android.org.bouncycastle.asn1.DERSequence;
 
 /**
  * Holding class for the AttributeTypeAndValue structures that make up an RDN.
+ * @hide This class is not part of the Android public SDK API
  */
 public class AttributeTypeAndValue
     extends ASN1Object

@@ -14,6 +14,7 @@ import com.android.org.bouncycastle.math.ec.WNafUtil;
 
 /**
  * an RSA key pair generator.
+ * @hide This class is not part of the Android public SDK API
  */
 public class RSAKeyPairGenerator
     implements AsymmetricCipherKeyPairGenerator

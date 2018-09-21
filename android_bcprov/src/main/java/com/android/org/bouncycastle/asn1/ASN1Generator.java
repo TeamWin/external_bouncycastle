@@ -5,6 +5,7 @@ import java.io.OutputStream;
 
 /**
  * Basic class for streaming generators.
+ * @hide This class is not part of the Android public SDK API
  */
 public abstract class ASN1Generator
 {

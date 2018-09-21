@@ -5,6 +5,7 @@ import java.io.IOException;
 
 /**
  * Interface implemented by objects that can be converted from streaming to in-memory objects.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface InMemoryRepresentable
 {

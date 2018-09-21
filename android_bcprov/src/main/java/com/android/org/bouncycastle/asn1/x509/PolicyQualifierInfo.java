@@ -21,6 +21,7 @@ import com.android.org.bouncycastle.asn1.DERSequence;
  *
  *  PolicyQualifierId ::= OBJECT IDENTIFIER ( id-qt-cps | id-qt-unotice )
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class PolicyQualifierInfo
     extends ASN1Object

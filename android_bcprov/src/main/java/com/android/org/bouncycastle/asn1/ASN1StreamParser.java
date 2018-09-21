@@ -7,6 +7,7 @@ import java.io.InputStream;
 
 /**
  * A parser for ASN.1 streams which also returns, where possible, parsers for the objects it encounters.
+ * @hide This class is not part of the Android public SDK API
  */
 public class ASN1StreamParser
 {

@@ -28,6 +28,9 @@ import com.android.org.bouncycastle.cert.X509CertificateHolder;
 import com.android.org.bouncycastle.util.Arrays;
 import com.android.org.bouncycastle.util.Store;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class CMSSignedGenerator
 {
     /**

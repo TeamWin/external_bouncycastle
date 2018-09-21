@@ -6,6 +6,7 @@ import java.io.OutputStream;
 
 /**
  * Use CMSTypedData instead of this. See CMSProcessableFile/ByteArray for defaults.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface CMSProcessable
 {

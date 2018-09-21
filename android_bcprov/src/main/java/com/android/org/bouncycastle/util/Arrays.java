@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 
 /**
  * General array utilities.
+ * @hide This class is not part of the Android public SDK API
  */
 public final class Arrays
 {

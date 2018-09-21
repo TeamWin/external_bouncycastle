@@ -19,6 +19,7 @@ import com.android.org.bouncycastle.util.Strings;
  * <p>
  * The main difference between these and UTC time is a 4 digit year.
  * </p>
+ * @hide This class is not part of the Android public SDK API
  */
 public class ASN1GeneralizedTime
     extends ASN1Primitive

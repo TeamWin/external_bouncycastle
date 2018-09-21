@@ -12,6 +12,7 @@ import com.android.org.bouncycastle.crypto.params.KeyParameter;
  * such as encoding data and generating keys.
  * All the algorithms herein are from Applied Cryptography
  * and implement a simplified cryptography interface.
+ * @hide This class is not part of the Android public SDK API
  */
 public final class BlowfishEngine
 implements BlockCipher

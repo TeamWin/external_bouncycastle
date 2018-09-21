@@ -19,6 +19,7 @@ import com.android.org.bouncycastle.util.BigIntegers;
  *
  * This generates DSA keys in line with the method described 
  * in <i>FIPS 186-3 B.1 FFC Key Pair Generation</i>.
+ * @hide This class is not part of the Android public SDK API
  */
 public class DSAKeyPairGenerator
     implements AsymmetricCipherKeyPairGenerator

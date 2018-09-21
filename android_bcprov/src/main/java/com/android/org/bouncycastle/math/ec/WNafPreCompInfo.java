@@ -4,6 +4,7 @@ package com.android.org.bouncycastle.math.ec;
 /**
  * Class holding precomputation data for the WNAF (Window Non-Adjacent Form)
  * algorithm.
+ * @hide This class is not part of the Android public SDK API
  */
 public class WNafPreCompInfo implements PreCompInfo
 {

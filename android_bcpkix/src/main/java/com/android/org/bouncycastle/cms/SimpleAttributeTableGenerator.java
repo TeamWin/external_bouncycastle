@@ -7,6 +7,7 @@ import java.util.Map;
 
 /**
  * Basic generator that just returns a preconstructed attribute table
+ * @hide This class is not part of the Android public SDK API
  */
 public class SimpleAttributeTableGenerator
     implements CMSAttributeTableGenerator

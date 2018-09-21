@@ -6,6 +6,7 @@ import java.util.Enumeration;
 
 /**
  * Carrier class for an indefinite-length SET.
+ * @hide This class is not part of the Android public SDK API
  */
 public class BERSet
     extends ASN1Set

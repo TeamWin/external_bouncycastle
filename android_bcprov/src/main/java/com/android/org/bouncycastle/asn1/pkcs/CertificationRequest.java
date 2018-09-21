@@ -18,6 +18,7 @@ import com.android.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
  *   signature                 BIT STRING
  * }
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class CertificationRequest
     extends ASN1Object

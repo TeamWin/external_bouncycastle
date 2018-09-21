@@ -3,6 +3,7 @@ package com.android.org.bouncycastle.asn1;
 
 /**
  * Supported encoding formats.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface ASN1Encoding
 {

@@ -19,6 +19,7 @@ import com.android.org.bouncycastle.asn1.DERSequence;
  *          digestAlgorithm  AlgorithmIdentifier,
  *          digest OCTET STRING }
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class DigestInfo
     extends ASN1Object

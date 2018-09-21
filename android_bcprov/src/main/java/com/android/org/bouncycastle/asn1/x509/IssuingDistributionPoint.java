@@ -21,6 +21,7 @@ import com.android.org.bouncycastle.util.Strings;
  *   indirectCRL                [4] BOOLEAN DEFAULT FALSE,
  *   onlyContainsAttributeCerts [5] BOOLEAN DEFAULT FALSE }
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class IssuingDistributionPoint
     extends ASN1Object

@@ -3,6 +3,7 @@ package com.android.org.bouncycastle.cert;
 
 /**
  * General checked Exception thrown in the cert package and its sub-packages.
+ * @hide This class is not part of the Android public SDK API
  */
 public class CertException
     extends Exception
