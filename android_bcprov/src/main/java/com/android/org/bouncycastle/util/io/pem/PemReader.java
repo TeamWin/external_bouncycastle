@@ -11,6 +11,7 @@ import com.android.org.bouncycastle.util.encoders.Base64;
 
 /**
  * A generic PEM reader, based on the format outlined in RFC 1421
+ * @hide This class is not part of the Android public SDK API
  */
 public class PemReader
     extends BufferedReader

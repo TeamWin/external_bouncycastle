@@ -6,6 +6,7 @@ package com.android.org.bouncycastle.asn1;
  * java.util.StringTokenizer. We need this class as some of the
  * lightweight Java environment don't support classes like
  * StringTokenizer.
+ * @hide This class is not part of the Android public SDK API
  */
 public class OIDTokenizer
 {

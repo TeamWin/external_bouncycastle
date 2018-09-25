@@ -8,6 +8,7 @@ import java.io.OutputStream;
 
 /**
  * Utility methods to assist with stream processing.
+ * @hide This class is not part of the Android public SDK API
  */
 public final class Streams
 {

@@ -36,6 +36,7 @@ import com.android.org.bouncycastle.asn1.x500.X500Name;
  *                                         -- if present, shall be v2
  *                                }
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class TBSCertList
     extends ASN1Object

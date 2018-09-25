@@ -13,6 +13,7 @@ import com.android.org.bouncycastle.crypto.params.KeyParameter;
  * This Java implementation is based on the Java reference
  * implementation provided by Bruce Schneier and developed
  * by Raif S. Naffah.
+ * @hide This class is not part of the Android public SDK API
  */
 public final class TwofishEngine
     implements BlockCipher

@@ -14,6 +14,7 @@ import com.android.org.bouncycastle.crypto.params.ParametersWithIV;
  * The document this implementation is based on can be found at
  * <a href=http://www.rsasecurity.com/rsalabs/pkcs/pkcs-12/index.html>
  * RSA's PKCS12 Page</a>
+ * @hide This class is not part of the Android public SDK API
  */
 public class PKCS12ParametersGenerator
     extends PBEParametersGenerator

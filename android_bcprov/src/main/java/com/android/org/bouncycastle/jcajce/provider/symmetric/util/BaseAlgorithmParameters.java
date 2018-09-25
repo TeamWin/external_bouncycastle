@@ -5,6 +5,9 @@ import java.security.AlgorithmParametersSpi;
 import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.InvalidParameterSpecException;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public abstract class BaseAlgorithmParameters
     extends AlgorithmParametersSpi
 {

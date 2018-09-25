@@ -10,6 +10,9 @@ import javax.crypto.spec.DHParameterSpec;
 import com.android.org.bouncycastle.asn1.ASN1Encoding;
 import com.android.org.bouncycastle.asn1.pkcs.DHParameter;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class AlgorithmParametersSpi
     extends java.security.AlgorithmParametersSpi
 {

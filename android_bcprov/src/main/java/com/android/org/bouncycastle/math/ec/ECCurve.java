@@ -14,6 +14,7 @@ import com.android.org.bouncycastle.util.Integers;
 
 /**
  * base class for an elliptic curve
+ * @hide This class is not part of the Android public SDK API
  */
 public abstract class ECCurve
 {

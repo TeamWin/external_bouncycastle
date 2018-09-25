@@ -5,6 +5,7 @@ import java.io.IOException;
 
 /**
  * General IOException thrown in the cert package and its sub-packages.
+ * @hide This class is not part of the Android public SDK API
  */
 public class CertIOException
     extends IOException

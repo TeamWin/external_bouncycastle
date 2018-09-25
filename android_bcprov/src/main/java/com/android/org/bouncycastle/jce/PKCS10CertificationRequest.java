@@ -72,6 +72,7 @@ import com.android.org.bouncycastle.util.Strings;
  *  }
  * </pre>
  * @deprecated use classes in org.bouncycastle.pkcs.
+ * @hide This class is not part of the Android public SDK API
  */
 public class PKCS10CertificationRequest
     extends CertificationRequest

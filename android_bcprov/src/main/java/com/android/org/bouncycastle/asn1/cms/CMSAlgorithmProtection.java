@@ -24,6 +24,7 @@ import com.android.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
  *  WITH COMPONENTS { signatureAlgorithm ABSENT,
  *                    macAlgorithm PRESENT })
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class CMSAlgorithmProtection
     extends ASN1Object

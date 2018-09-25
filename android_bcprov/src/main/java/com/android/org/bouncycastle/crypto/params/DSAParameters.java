@@ -5,6 +5,9 @@ import java.math.BigInteger;
 
 import com.android.org.bouncycastle.crypto.CipherParameters;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class DSAParameters
     implements CipherParameters
 {

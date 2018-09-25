@@ -32,6 +32,7 @@ import com.android.org.bouncycastle.util.Pack;
  * This file contains the fast version with 8Kbytes of static tables for round precomputation.
  * </p>
  * @deprecated unfortunately this class is has a few side channel issues. In an environment where encryption/decryption may be closely observed it should not be used.
+ * @hide This class is not part of the Android public SDK API
  */
 public class AESFastEngine
     implements BlockCipher

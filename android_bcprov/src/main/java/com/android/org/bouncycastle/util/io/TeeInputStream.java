@@ -7,6 +7,7 @@ import java.io.OutputStream;
 
 /**
  * An input stream which copies anything read through it to another stream.
+ * @hide This class is not part of the Android public SDK API
  */
 public class TeeInputStream
     extends InputStream

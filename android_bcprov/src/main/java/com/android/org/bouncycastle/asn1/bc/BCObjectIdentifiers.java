@@ -5,6 +5,7 @@ import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 
 /**
  *  Object Identifiers belonging to iso.org.dod.internet.private.enterprise.legion-of-the-bouncy-castle (1.3.6.1.4.1.22554)
+ * @hide This class is not part of the Android public SDK API
  */
 public interface BCObjectIdentifiers
 {

@@ -5,6 +5,7 @@ import java.io.IOException;
 
 /**
  * A parser for indefinite-length application specific objects.
+ * @hide This class is not part of the Android public SDK API
  */
 public class BERApplicationSpecificParser
     implements ASN1ApplicationSpecificParser

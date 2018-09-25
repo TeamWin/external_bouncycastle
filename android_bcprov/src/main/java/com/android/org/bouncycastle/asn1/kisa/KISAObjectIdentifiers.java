@@ -12,6 +12,7 @@ import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
  * in Cryptographic Message Syntax (CMS),
  * and <a href="http://tools.ietf.org/html/rfc4269">RFC 4269</a>
  * The SEED Encryption Algorithm
+ * @hide This class is not part of the Android public SDK API
  */
 public interface KISAObjectIdentifiers
 {

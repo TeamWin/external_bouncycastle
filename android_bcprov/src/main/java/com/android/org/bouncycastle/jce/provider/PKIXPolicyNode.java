@@ -8,6 +8,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class PKIXPolicyNode
     implements PolicyNode
 {

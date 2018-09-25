@@ -21,6 +21,7 @@ import com.android.org.bouncycastle.math.ec.FixedPointCombMultiplier;
 
 /**
  * EC-DSA as described in X9.62
+ * @hide This class is not part of the Android public SDK API
  */
 public class ECDSASigner
     implements ECConstants, DSA

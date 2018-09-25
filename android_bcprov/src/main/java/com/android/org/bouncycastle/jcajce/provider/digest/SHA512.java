@@ -14,6 +14,9 @@ import com.android.org.bouncycastle.jcajce.provider.config.ConfigurableProvider;
 import com.android.org.bouncycastle.jcajce.provider.symmetric.util.BaseKeyGenerator;
 import com.android.org.bouncycastle.jcajce.provider.symmetric.util.BaseMac;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class SHA512
 {
     private SHA512()

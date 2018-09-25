@@ -10,6 +10,7 @@ import com.android.org.bouncycastle.util.BigIntegers;
 
 /**
  * Utility methods for generating primes and testing for primality.
+ * @hide This class is not part of the Android public SDK API
  */
 public abstract class Primes
 {

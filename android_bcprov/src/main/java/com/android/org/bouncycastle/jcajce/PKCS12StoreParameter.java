@@ -11,6 +11,7 @@ import java.security.KeyStore.ProtectionParameter;
  * <p>
  * Note: if you want a straight DER encoding of a PKCS#12 file you should use this.
  * </p>
+ * @hide This class is not part of the Android public SDK API
  */
 public class PKCS12StoreParameter
     implements LoadStoreParameter

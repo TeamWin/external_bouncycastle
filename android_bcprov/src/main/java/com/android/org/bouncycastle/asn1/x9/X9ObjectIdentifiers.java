@@ -10,6 +10,7 @@ import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
  * ansi-X9-62 OBJECT IDENTIFIER ::= { iso(1) member-body(2)
  *                                    us(840) ansi-x962(10045) }
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public interface X9ObjectIdentifiers
 {

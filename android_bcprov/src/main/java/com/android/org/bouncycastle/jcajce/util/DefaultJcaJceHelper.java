@@ -22,6 +22,7 @@ import javax.crypto.SecretKeyFactory;
 /**
  * {@link JcaJceHelper} that obtains all algorithms using the default JCA/JCE mechanism (i.e.
  * without specifying a provider).
+ * @hide This class is not part of the Android public SDK API
  */
 public class DefaultJcaJceHelper
     implements JcaJceHelper

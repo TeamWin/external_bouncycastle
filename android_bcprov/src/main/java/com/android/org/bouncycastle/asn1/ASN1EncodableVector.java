@@ -6,6 +6,7 @@ import java.util.Vector;
 
 /**
  * Mutable class for building ASN.1 constructed objects.
+ * @hide This class is not part of the Android public SDK API
  */
 public class ASN1EncodableVector
 {

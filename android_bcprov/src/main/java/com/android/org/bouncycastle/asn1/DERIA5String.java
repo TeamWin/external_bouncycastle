@@ -8,6 +8,7 @@ import com.android.org.bouncycastle.util.Strings;
 
 /**
  * DER IA5String object - this is an ascii string.
+ * @hide This class is not part of the Android public SDK API
  */
 public class DERIA5String
     extends ASN1Primitive

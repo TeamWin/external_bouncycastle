@@ -5,6 +5,7 @@ import java.io.IOException;
 
 /**
  * A NULL object - use DERNull.INSTANCE for populating structures.
+ * @hide This class is not part of the Android public SDK API
  */
 public abstract class ASN1Null
     extends ASN1Primitive

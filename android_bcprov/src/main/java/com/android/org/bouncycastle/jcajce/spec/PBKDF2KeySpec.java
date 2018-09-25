@@ -9,6 +9,7 @@ import com.android.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 
 /**
  * Extension of PBEKeySpec which takes into account the PRF algorithm setting available in PKCS#5 PBKDF2.
+ * @hide This class is not part of the Android public SDK API
  */
 public class PBKDF2KeySpec
     extends PBEKeySpec

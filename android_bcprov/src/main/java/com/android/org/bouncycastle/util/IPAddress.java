@@ -3,6 +3,7 @@ package com.android.org.bouncycastle.util;
 
 /**
  * Utility methods for processing String objects containing IP addresses.
+ * @hide This class is not part of the Android public SDK API
  */
 public class IPAddress
 {

@@ -40,6 +40,7 @@ import com.android.org.bouncycastle.crypto.params.RSAPrivateCrtKeyParameters;
 
 /**
  * Factory for creating private key objects from PKCS8 PrivateKeyInfo objects.
+ * @hide This class is not part of the Android public SDK API
  */
 public class PrivateKeyFactory
 {

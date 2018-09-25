@@ -11,6 +11,9 @@ import com.android.org.bouncycastle.asn1.x500.RDN;
 import com.android.org.bouncycastle.asn1.x500.X500Name;
 import com.android.org.bouncycastle.asn1.x500.X500NameStyle;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class RFC4519Style
 	extends AbstractX500NameStyle
 {

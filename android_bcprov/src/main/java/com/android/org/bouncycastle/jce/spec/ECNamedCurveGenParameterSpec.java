@@ -7,6 +7,7 @@ import java.security.spec.AlgorithmParameterSpec;
  * Named curve generation spec
  * <p>
  * If you are using JDK 1.5 you should be looking at ECGenParameterSpec.
+ * @hide This class is not part of the Android public SDK API
  */
 public class ECNamedCurveGenParameterSpec
     implements AlgorithmParameterSpec

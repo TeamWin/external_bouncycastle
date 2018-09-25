@@ -4,6 +4,7 @@ package com.android.org.bouncycastle.crypto;
 
 /**
  * Block cipher engines are expected to conform to this interface.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface BlockCipher
 {

@@ -41,6 +41,9 @@ import com.android.org.bouncycastle.jce.spec.ECNamedCurveSpec;
 import com.android.org.bouncycastle.math.ec.ECCurve;
 import com.android.org.bouncycastle.util.Strings;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class JCEECPrivateKey
     implements ECPrivateKey, com.android.org.bouncycastle.jce.interfaces.ECPrivateKey, PKCS12BagAttributeCarrier, ECPointEncoder
 {

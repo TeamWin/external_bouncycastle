@@ -3,6 +3,7 @@ package com.android.org.bouncycastle.iana;
 
 /**
  * RFC 5116 
+ * @hide This class is not part of the Android public SDK API
  */
 public class AEADAlgorithm
 {

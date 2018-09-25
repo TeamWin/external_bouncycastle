@@ -7,6 +7,7 @@ import com.android.org.bouncycastle.util.Arrays;
 
 /**
  * Base class for an application specific object
+ * @hide This class is not part of the Android public SDK API
  */
 public abstract class ASN1ApplicationSpecific
     extends ASN1Primitive

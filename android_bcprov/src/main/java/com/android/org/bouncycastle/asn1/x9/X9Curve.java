@@ -18,6 +18,7 @@ import com.android.org.bouncycastle.math.ec.ECCurve;
 /**
  * ASN.1 def for Elliptic-Curve Curve structure. See
  * X9.62, for further details.
+ * @hide This class is not part of the Android public SDK API
  */
 public class X9Curve
     extends ASN1Object

@@ -5,6 +5,9 @@ import com.android.org.bouncycastle.asn1.DERNull;
 import com.android.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import com.android.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public interface PasswordRecipient
     extends Recipient
 {

@@ -12,6 +12,7 @@ import com.android.org.bouncycastle.asn1.ASN1Primitive;
 /**
  * an object for the elements in the X.509 V3 extension block.
  * @deprecated use Extension
+ * @hide This class is not part of the Android public SDK API
  */
 public class X509Extension
 {

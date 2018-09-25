@@ -5,6 +5,7 @@ import java.util.Date;
 
 /**
  * DER UTC time object.
+ * @hide This class is not part of the Android public SDK API
  */
 public class DERUTCTime
     extends ASN1UTCTime

@@ -17,6 +17,7 @@ import com.android.org.bouncycastle.crypto.params.ParametersWithRandom;
  * note: This is only the basic algorithm, it doesn't take advantage of
  * long term public keys if they are available. See the DHAgreement class
  * for a "better" implementation.
+ * @hide This class is not part of the Android public SDK API
  */
 public class DHBasicAgreement
     implements BasicAgreement

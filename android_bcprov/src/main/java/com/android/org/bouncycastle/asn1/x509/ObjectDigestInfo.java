@@ -29,6 +29,7 @@ import com.android.org.bouncycastle.asn1.DERSequence;
  *    }
  *   
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  * 
  */
 public class ObjectDigestInfo

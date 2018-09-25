@@ -15,6 +15,7 @@ import com.android.org.bouncycastle.util.Selector;
  * This class is a Selector implementation for certificates.
  * 
  * @see com.android.org.bouncycastle.util.Selector
+ * @hide This class is not part of the Android public SDK API
  */
 public class PKIXCertStoreSelector<T extends Certificate>
     implements Selector<T>

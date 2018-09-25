@@ -19,6 +19,7 @@ import com.android.org.bouncycastle.util.Arrays;
  * NIST Special Publication 800-38C.
  * <p>
  * <b>Note</b>: this mode is a packet mode - it needs all the data up front.
+ * @hide This class is not part of the Android public SDK API
  */
 public class CCMBlockCipher
     implements AEADBlockCipher

@@ -1,6 +1,9 @@
 /* GENERATED SOURCE. DO NOT MODIFY. */
 package com.android.org.bouncycastle.operator;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class OperatorCreationException
     extends OperatorException
 {

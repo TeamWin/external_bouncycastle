@@ -12,6 +12,9 @@ import com.android.org.bouncycastle.asn1.DERSequence;
 import com.android.org.bouncycastle.asn1.x500.X500Name;
 import com.android.org.bouncycastle.asn1.x509.X509Name;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class IssuerAndSerialNumber
     extends ASN1Object
 {

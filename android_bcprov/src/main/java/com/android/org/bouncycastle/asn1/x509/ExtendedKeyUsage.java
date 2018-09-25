@@ -19,6 +19,7 @@ import com.android.org.bouncycastle.asn1.DERSequence;
  * <pre>
  *      extendedKeyUsage ::= SEQUENCE SIZE (1..MAX) OF KeyPurposeId
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class ExtendedKeyUsage
     extends ASN1Object

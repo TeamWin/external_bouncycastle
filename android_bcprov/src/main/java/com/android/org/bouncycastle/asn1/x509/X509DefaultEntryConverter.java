@@ -13,6 +13,7 @@ import com.android.org.bouncycastle.asn1.DERUTF8String;
 /**
  * The default converter for X509 DN entries when going from their
  * string value to ASN.1 strings.
+ * @hide This class is not part of the Android public SDK API
  */
 public class X509DefaultEntryConverter
     extends X509NameEntryConverter

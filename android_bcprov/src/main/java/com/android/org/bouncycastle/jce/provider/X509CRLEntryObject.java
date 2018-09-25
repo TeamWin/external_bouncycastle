@@ -32,6 +32,7 @@ import com.android.org.bouncycastle.util.Strings;
  * 
  * ReasonCode Hode Instruction Code Invalidity Date Certificate Issuer
  * (critical)
+ * @hide This class is not part of the Android public SDK API
  */
 public class X509CRLEntryObject extends X509CRLEntry
 {

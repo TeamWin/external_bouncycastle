@@ -30,6 +30,9 @@ import com.android.org.bouncycastle.crypto.params.KDFParameters;
 import com.android.org.bouncycastle.util.Integers;
 import com.android.org.bouncycastle.util.Strings;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public abstract class BaseAgreementSpi
     extends KeyAgreementSpi
 {

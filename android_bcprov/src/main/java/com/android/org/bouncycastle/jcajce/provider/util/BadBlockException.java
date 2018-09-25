@@ -3,6 +3,9 @@ package com.android.org.bouncycastle.jcajce.provider.util;
 
 import javax.crypto.BadPaddingException;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class BadBlockException
     extends BadPaddingException
 {

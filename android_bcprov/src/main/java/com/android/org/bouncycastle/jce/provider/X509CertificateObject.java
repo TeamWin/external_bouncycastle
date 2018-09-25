@@ -72,6 +72,7 @@ import com.android.org.bouncycastle.util.encoders.Hex;
 
 /**
  * @deprecated Do not use this class directly - either use org.bouncycastle.cert (bcpkix) or CertificateFactory.
+ * @hide This class is not part of the Android public SDK API
  */
 public class X509CertificateObject
     extends X509Certificate

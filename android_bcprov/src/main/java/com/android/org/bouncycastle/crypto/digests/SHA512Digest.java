@@ -15,6 +15,7 @@ import com.android.org.bouncycastle.util.Pack;
  * SHA-384 1024   64    384
  * SHA-512 1024   64    512
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class SHA512Digest
     extends LongDigest

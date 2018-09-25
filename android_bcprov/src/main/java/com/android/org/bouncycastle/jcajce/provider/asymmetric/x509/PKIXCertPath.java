@@ -44,6 +44,7 @@ import com.android.org.bouncycastle.util.io.pem.PemObject;
 /**
  * CertPath implementation for X.509 certificates.
  * <br />
+ * @hide This class is not part of the Android public SDK API
  **/
 public  class PKIXCertPath
     extends CertPath

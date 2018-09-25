@@ -6,6 +6,7 @@ import com.android.org.bouncycastle.cert.X509CertificateHolder;
 
 /**
  * General interface for providers of ContentVerifier objects.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface ContentVerifierProvider
 {

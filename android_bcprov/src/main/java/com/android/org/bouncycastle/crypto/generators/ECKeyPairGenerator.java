@@ -17,6 +17,9 @@ import com.android.org.bouncycastle.math.ec.ECPoint;
 import com.android.org.bouncycastle.math.ec.FixedPointCombMultiplier;
 import com.android.org.bouncycastle.math.ec.WNafUtil;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class ECKeyPairGenerator
     implements AsymmetricCipherKeyPairGenerator, ECConstants
 {

@@ -37,6 +37,7 @@ import com.android.org.bouncycastle.asn1.DERTaggedObject;
  *          subjectName [1] EXPLICIT GeneralNames },
  *          -- associated with a name
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class Holder
     extends ASN1Object

@@ -13,6 +13,9 @@ import javax.crypto.spec.SecretKeySpec;
 import com.android.org.bouncycastle.crypto.CipherKeyGenerator;
 import com.android.org.bouncycastle.crypto.KeyGenerationParameters;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class BaseKeyGenerator
     extends KeyGeneratorSpi
 {

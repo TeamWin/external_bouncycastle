@@ -6,6 +6,9 @@ import java.io.ByteArrayOutputStream;
 import com.android.org.bouncycastle.crypto.Digest;
 
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class NullDigest
     implements Digest
 {

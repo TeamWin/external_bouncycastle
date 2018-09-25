@@ -5,6 +5,7 @@ import java.math.BigInteger;
 
 /**
  * interface for classes implementing algorithms modeled similar to the Digital Signature Alorithm.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface DSA
 {

@@ -4,6 +4,7 @@ package com.android.org.bouncycastle.util;
 /**
  * Interface for Memoable objects. Memoable objects allow the taking of a snapshot of their internal state
  * via the copy() method and then reseting the object back to that state later using the reset() method.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface Memoable
 {

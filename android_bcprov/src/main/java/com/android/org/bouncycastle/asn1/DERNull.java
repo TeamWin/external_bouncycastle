@@ -5,6 +5,7 @@ import java.io.IOException;
 
 /**
  * A NULL object.
+ * @hide This class is not part of the Android public SDK API
  */
 public class DERNull
     extends ASN1Null

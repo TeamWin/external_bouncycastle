@@ -47,6 +47,7 @@ import com.android.org.bouncycastle.util.Strings;
  *     }
  * }
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public abstract class X509NameEntryConverter
 {

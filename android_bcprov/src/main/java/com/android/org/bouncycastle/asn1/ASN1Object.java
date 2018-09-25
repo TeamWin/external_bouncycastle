@@ -8,6 +8,7 @@ import com.android.org.bouncycastle.util.Encodable;
 
 /**
  * Base class for defining an ASN.1 object.
+ * @hide This class is not part of the Android public SDK API
  */
 public abstract class ASN1Object
     implements ASN1Encodable, Encodable

@@ -12,6 +12,7 @@ import com.android.org.bouncycastle.asn1.BERSequence;
 
 /**
  * the infamous Pfx from PKCS12
+ * @hide This class is not part of the Android public SDK API
  */
 public class Pfx
     extends ASN1Object

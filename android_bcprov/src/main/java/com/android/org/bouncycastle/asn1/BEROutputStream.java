@@ -6,6 +6,7 @@ import java.io.OutputStream;
 
 /**
  * A class which writes indefinite and definite length objects,
+ * @hide This class is not part of the Android public SDK API
  */
 public class BEROutputStream
     extends DEROutputStream

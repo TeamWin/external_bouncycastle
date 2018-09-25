@@ -15,6 +15,7 @@ import com.android.org.bouncycastle.util.Memoable;
  * HMAC implementation based on RFC2104
  *
  * H(K XOR opad, H(K XOR ipad, text))
+ * @hide This class is not part of the Android public SDK API
  */
 public class HMac
     implements Mac

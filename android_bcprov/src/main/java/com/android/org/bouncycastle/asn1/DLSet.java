@@ -51,6 +51,7 @@ import java.util.Enumeration;
  * The encoding of a set value or sequence value shall not include
  * an encoding for any component value which is equal to
  * its default value.
+ * @hide This class is not part of the Android public SDK API
  */
 public class DLSet
     extends ASN1Set

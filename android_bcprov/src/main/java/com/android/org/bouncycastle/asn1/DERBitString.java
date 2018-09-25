@@ -5,6 +5,7 @@ import java.io.IOException;
 
 /**
  * A BIT STRING with DER encoding.
+ * @hide This class is not part of the Android public SDK API
  */
 public class DERBitString
     extends ASN1BitString

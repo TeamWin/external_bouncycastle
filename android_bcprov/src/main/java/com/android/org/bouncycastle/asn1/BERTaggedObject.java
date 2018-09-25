@@ -8,6 +8,7 @@ import java.util.Enumeration;
  * BER TaggedObject - in ASN.1 notation this is any object preceded by
  * a [n] where n is some number - these are assumed to follow the construction
  * rules (as with sequences).
+ * @hide This class is not part of the Android public SDK API
  */
 public class BERTaggedObject
     extends ASN1TaggedObject

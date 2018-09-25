@@ -13,6 +13,7 @@ import com.android.org.bouncycastle.asn1.ASN1TaggedObject;
  * <pre>
  *     DHPublicKey ::= INTEGER
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class DHPublicKey
     extends ASN1Object

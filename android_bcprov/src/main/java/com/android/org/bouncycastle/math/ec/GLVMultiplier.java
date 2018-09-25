@@ -5,6 +5,9 @@ import java.math.BigInteger;
 
 import com.android.org.bouncycastle.math.ec.endo.GLVEndomorphism;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class GLVMultiplier extends AbstractECMultiplier
 {
     protected final ECCurve curve;

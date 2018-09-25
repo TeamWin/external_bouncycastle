@@ -6,6 +6,7 @@ import com.android.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 /**
  * Finder which is used to look up the algorithm identifiers representing the encryption algorithms that
  * are associated with a particular signature algorithm.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface CMSSignatureEncryptionAlgorithmFinder
 {

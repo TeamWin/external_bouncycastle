@@ -8,6 +8,9 @@ import com.android.org.bouncycastle.math.raw.Mod;
 import com.android.org.bouncycastle.math.raw.Nat224;
 import com.android.org.bouncycastle.util.Arrays;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class SecP224K1FieldElement extends ECFieldElement
 {
     public static final BigInteger Q = SecP224K1Curve.q;

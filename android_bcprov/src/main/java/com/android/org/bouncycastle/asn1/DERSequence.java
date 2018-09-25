@@ -4,6 +4,9 @@ package com.android.org.bouncycastle.asn1;
 import java.io.IOException;
 import java.util.Enumeration;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class DERSequence
     extends ASN1Sequence
 {

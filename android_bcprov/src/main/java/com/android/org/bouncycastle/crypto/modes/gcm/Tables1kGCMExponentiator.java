@@ -5,6 +5,9 @@ import java.util.Vector;
 
 import com.android.org.bouncycastle.util.Arrays;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class Tables1kGCMExponentiator implements GCMExponentiator
 {
     // A lookup table of the power-of-two powers of 'x'

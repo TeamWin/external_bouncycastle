@@ -5,6 +5,7 @@ import java.io.IOException;
 
 /**
  * Parser for indefinite-length tagged objects.
+ * @hide This class is not part of the Android public SDK API
  */
 public class BERTaggedObjectParser
     implements ASN1TaggedObjectParser

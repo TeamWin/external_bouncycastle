@@ -20,6 +20,9 @@ import com.android.org.bouncycastle.operator.OperatorCreationException;
 import com.android.org.bouncycastle.operator.OperatorStreamException;
 import com.android.org.bouncycastle.operator.RuntimeOperatorException;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class JcaContentSignerBuilder
 {
     private OperatorHelper helper = new OperatorHelper(new DefaultJcaJceHelper());

@@ -18,6 +18,9 @@ import com.android.org.bouncycastle.asn1.ASN1UTCTime;
 import com.android.org.bouncycastle.asn1.DERGeneralizedTime;
 import com.android.org.bouncycastle.asn1.DERUTCTime;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class Time
     extends ASN1Object
     implements ASN1Choice

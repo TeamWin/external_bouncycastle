@@ -33,6 +33,9 @@ import java.util.Enumeration;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEParameterSpec;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class PBES2AlgorithmParameters
 {
     private PBES2AlgorithmParameters()

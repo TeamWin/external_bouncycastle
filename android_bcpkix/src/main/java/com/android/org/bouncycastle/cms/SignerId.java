@@ -9,6 +9,7 @@ import com.android.org.bouncycastle.util.Selector;
 
 /**
  * a basic index for a signer.
+ * @hide This class is not part of the Android public SDK API
  */
 public class SignerId
     implements Selector

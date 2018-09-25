@@ -4,6 +4,9 @@ package com.android.org.bouncycastle.jce.exception;
 import java.security.cert.CertPath;
 import java.security.cert.CertPathValidatorException;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class ExtCertPathValidatorException
     extends CertPathValidatorException
     implements ExtException

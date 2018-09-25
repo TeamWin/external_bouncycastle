@@ -34,6 +34,9 @@ import com.android.org.bouncycastle.jcajce.provider.asymmetric.util.DSAEncoder;
 import com.android.org.bouncycastle.jcajce.provider.asymmetric.util.ECUtil;
 import com.android.org.bouncycastle.util.Arrays;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class SignatureSpi
     extends DSABase
 {

@@ -8,6 +8,7 @@ import com.android.org.bouncycastle.util.io.Streams;
 
 /**
  * A parser for indefinite-length OCTET STRINGs.
+ * @hide This class is not part of the Android public SDK API
  */
 public class BEROctetStringParser
     implements ASN1OctetStringParser

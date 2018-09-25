@@ -7,6 +7,7 @@ import com.android.org.bouncycastle.crypto.InvalidCipherTextException;
 
 /**
  * Block cipher padders are expected to conform to this interface
+ * @hide This class is not part of the Android public SDK API
  */
 public interface BlockCipherPadding
 {

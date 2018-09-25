@@ -32,6 +32,7 @@ import com.android.org.bouncycastle.x509.ExtendedPKIXParameters;
  * Implements the PKIX CertPathBuilding algorithm for BouncyCastle.
  * 
  * @see CertPathBuilderSpi
+ * @hide This class is not part of the Android public SDK API
  */
 public class PKIXCertPathBuilderSpi
     extends CertPathBuilderSpi

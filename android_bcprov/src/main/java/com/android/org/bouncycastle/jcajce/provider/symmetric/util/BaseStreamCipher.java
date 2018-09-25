@@ -28,6 +28,9 @@ import com.android.org.bouncycastle.crypto.params.ParametersWithIV;
 import com.android.org.bouncycastle.jcajce.PKCS12Key;
 import com.android.org.bouncycastle.jcajce.PKCS12KeyWithParameters;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class BaseStreamCipher
     extends BaseWrapCipher
     implements PBE

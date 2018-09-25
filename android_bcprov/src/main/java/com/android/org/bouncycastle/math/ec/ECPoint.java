@@ -6,6 +6,7 @@ import java.util.Hashtable;
 
 /**
  * base class for points on elliptic curves.
+ * @hide This class is not part of the Android public SDK API
  */
 public abstract class ECPoint
 {

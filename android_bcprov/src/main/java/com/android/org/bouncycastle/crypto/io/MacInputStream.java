@@ -7,6 +7,9 @@ import java.io.InputStream;
 
 import com.android.org.bouncycastle.crypto.Mac;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class MacInputStream
     extends FilterInputStream
 {

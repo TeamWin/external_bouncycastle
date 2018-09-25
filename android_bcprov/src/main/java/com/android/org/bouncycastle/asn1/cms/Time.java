@@ -33,6 +33,7 @@ import com.android.org.bouncycastle.asn1.DERUTCTime;
  * supplied datetime is in range 1950-01-01-00:00:00 UTC until 2049-12-31-23:59:60 UTC.
  * If the datetime value is outside that range, the generated object will be
  * {@link com.android.org.bouncycastle.asn1.DERGeneralizedTime DERGeneralizedTime}.
+ * @hide This class is not part of the Android public SDK API
  */
 public class Time
     extends ASN1Object

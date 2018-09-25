@@ -19,6 +19,9 @@ package com.android.org.bouncycastle.crypto.digests;
 
 import com.android.org.bouncycastle.crypto.Digest;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class AndroidDigestFactoryBouncyCastle implements AndroidDigestFactoryInterface {
     public Digest getMD5() {
         return new MD5Digest();

@@ -4,6 +4,9 @@ package com.android.org.bouncycastle.cert.ocsp;
 import com.android.org.bouncycastle.asn1.ocsp.Request;
 import com.android.org.bouncycastle.asn1.x509.Extensions;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class Req
 {
     private Request req;

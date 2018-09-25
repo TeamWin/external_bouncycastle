@@ -7,6 +7,9 @@ import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.org.bouncycastle.math.ec.ECCurve;
 import com.android.org.bouncycastle.math.ec.ECPoint;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class ECNamedDomainParameters
     extends ECDomainParameters
 {
