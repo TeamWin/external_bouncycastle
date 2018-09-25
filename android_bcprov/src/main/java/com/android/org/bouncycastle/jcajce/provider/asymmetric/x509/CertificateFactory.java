@@ -38,6 +38,7 @@ import com.android.org.bouncycastle.util.io.Streams;
  * At the moment this will deal with "-----BEGIN CERTIFICATE-----" to "-----END CERTIFICATE-----"
  * base 64 encoded certs, as well as the BER binaries of certificates and some classes of PKCS#7
  * objects.
+ * @hide This class is not part of the Android public SDK API
  */
 public class CertificateFactory
     extends CertificateFactorySpi

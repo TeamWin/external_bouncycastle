@@ -16,6 +16,9 @@ import com.android.org.bouncycastle.jcajce.provider.config.ConfigurableProvider;
 import com.android.org.bouncycastle.jcajce.provider.util.AsymmetricAlgorithmProvider;
 import com.android.org.bouncycastle.jcajce.provider.util.AsymmetricKeyInfoConverter;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class RSA
 {
     private static final String PREFIX = "com.android.org.bouncycastle.jcajce.provider.asymmetric" + ".rsa.";

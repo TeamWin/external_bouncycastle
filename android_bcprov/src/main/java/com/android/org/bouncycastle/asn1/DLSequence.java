@@ -6,6 +6,7 @@ import java.util.Enumeration;
 
 /**
  * The DLSequence encodes a SEQUENCE using definite length form.
+ * @hide This class is not part of the Android public SDK API
  */
 public class DLSequence
     extends ASN1Sequence

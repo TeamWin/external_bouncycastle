@@ -25,6 +25,9 @@ import com.android.org.bouncycastle.crypto.params.DHPublicKeyParameters;
 import com.android.org.bouncycastle.crypto.params.DHValidationParameters;
 import com.android.org.bouncycastle.jcajce.provider.asymmetric.util.KeyUtil;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class BCDHPublicKey
     implements DHPublicKey
 {

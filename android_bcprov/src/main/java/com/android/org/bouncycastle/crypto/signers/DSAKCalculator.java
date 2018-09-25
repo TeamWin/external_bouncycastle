@@ -6,6 +6,7 @@ import java.security.SecureRandom;
 
 /**
  * Interface define calculators of K values for DSA/ECDSA.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface DSAKCalculator
 {

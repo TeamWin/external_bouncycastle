@@ -8,6 +8,9 @@ import com.android.org.bouncycastle.math.ec.ECCurve;
 import com.android.org.bouncycastle.math.ec.ECPointMap;
 import com.android.org.bouncycastle.math.ec.ScaleXPointMap;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class GLVTypeBEndomorphism implements GLVEndomorphism
 {
     protected final ECCurve curve;

@@ -5,6 +5,9 @@ import java.security.SecureRandom;
 
 import com.android.org.bouncycastle.crypto.KeyGenerationParameters;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class DHKeyGenerationParameters
     extends KeyGenerationParameters
 {

@@ -9,6 +9,7 @@ import com.android.org.bouncycastle.math.ec.ECFieldElement;
 /**
  * A class which converts integers to byte arrays, allowing padding and calculations
  * to be done according the the filed size of the curve or field element involved.
+ * @hide This class is not part of the Android public SDK API
  */
 public class X9IntegerConverter
 {

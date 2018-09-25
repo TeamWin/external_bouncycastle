@@ -12,6 +12,7 @@ import com.android.org.bouncycastle.util.Arrays;
 
 /**
  * a holding class for a byte array of data to be processed.
+ * @hide This class is not part of the Android public SDK API
  */
 public class CMSProcessableByteArray
     implements CMSTypedData, CMSReadable

@@ -31,6 +31,7 @@ import com.android.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
  *
  *    EncryptedContent ::= OCTET STRING
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class EncryptedData
     extends ASN1Object

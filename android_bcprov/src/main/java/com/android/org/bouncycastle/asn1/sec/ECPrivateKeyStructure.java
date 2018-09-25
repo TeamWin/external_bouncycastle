@@ -21,6 +21,7 @@ import com.android.org.bouncycastle.util.BigIntegers;
 /**
  * the elliptic curve private key object from SEC 1
  * @deprecated use ECPrivateKey
+ * @hide This class is not part of the Android public SDK API
  */
 public class ECPrivateKeyStructure
     extends ASN1Object

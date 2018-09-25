@@ -43,6 +43,9 @@ import com.android.org.bouncycastle.jcajce.util.DefaultJcaJceHelper;
 import com.android.org.bouncycastle.jcajce.util.JcaJceHelper;
 import com.android.org.bouncycastle.util.Strings;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class CipherSpi
     extends BaseCipherSpi
 {

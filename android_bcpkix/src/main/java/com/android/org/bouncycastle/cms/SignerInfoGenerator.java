@@ -26,6 +26,9 @@ import com.android.org.bouncycastle.operator.OperatorCreationException;
 import com.android.org.bouncycastle.util.Arrays;
 import com.android.org.bouncycastle.util.io.TeeOutputStream;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class SignerInfoGenerator
 {
     private final SignerIdentifier signerIdentifier;

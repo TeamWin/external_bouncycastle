@@ -11,6 +11,7 @@ import com.android.org.bouncycastle.util.Arrays;
 
 /**
  * Class representing the ASN.1 OBJECT IDENTIFIER type.
+ * @hide This class is not part of the Android public SDK API
  */
 public class ASN1ObjectIdentifier
     extends ASN1Primitive

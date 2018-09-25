@@ -11,6 +11,9 @@ import com.android.org.bouncycastle.asn1.x509.X509ObjectIdentifiers;
 import com.android.org.bouncycastle.crypto.DSA;
 import com.android.org.bouncycastle.crypto.Digest;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public abstract class DSABase
     extends SignatureSpi
     implements PKCSObjectIdentifiers, X509ObjectIdentifiers

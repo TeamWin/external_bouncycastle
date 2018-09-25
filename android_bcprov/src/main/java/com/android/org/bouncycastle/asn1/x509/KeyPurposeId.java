@@ -20,6 +20,7 @@ import com.android.org.bouncycastle.asn1.ASN1Primitive;
  *
  *     KeyPurposeId newKeyPurposeId = KeyPurposeId.getInstance(newKeyPurposeIdOID);
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class KeyPurposeId
     extends ASN1Object

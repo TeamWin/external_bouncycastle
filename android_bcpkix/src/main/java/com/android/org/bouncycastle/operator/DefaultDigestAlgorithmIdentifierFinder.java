@@ -18,6 +18,9 @@ import com.android.org.bouncycastle.asn1.teletrust.TeleTrusTObjectIdentifiers;
 import com.android.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import com.android.org.bouncycastle.asn1.x9.X9ObjectIdentifiers;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class DefaultDigestAlgorithmIdentifierFinder
     implements DigestAlgorithmIdentifierFinder
 {

@@ -15,6 +15,7 @@ import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
  * Technical Guideline TR-03110-3</a>
  * Advanced Security Mechanisms for Machine Readable Travel Documents;
  * Part 3: Common Specifications.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface EACObjectIdentifiers
 {

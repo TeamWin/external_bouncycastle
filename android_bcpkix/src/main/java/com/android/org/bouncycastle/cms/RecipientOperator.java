@@ -8,6 +8,9 @@ import com.android.org.bouncycastle.operator.InputDecryptor;
 import com.android.org.bouncycastle.operator.MacCalculator;
 import com.android.org.bouncycastle.util.io.TeeInputStream;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class RecipientOperator
 {
     private final AlgorithmIdentifier algorithmIdentifier;

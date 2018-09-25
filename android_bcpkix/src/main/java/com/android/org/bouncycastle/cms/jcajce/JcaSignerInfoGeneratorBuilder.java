@@ -15,6 +15,9 @@ import com.android.org.bouncycastle.operator.ContentSigner;
 import com.android.org.bouncycastle.operator.DigestCalculatorProvider;
 import com.android.org.bouncycastle.operator.OperatorCreationException;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class JcaSignerInfoGeneratorBuilder
 {
     private SignerInfoGeneratorBuilder builder;

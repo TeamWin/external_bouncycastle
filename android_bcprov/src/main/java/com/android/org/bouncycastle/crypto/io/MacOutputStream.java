@@ -6,6 +6,9 @@ import java.io.OutputStream;
 
 import com.android.org.bouncycastle.crypto.Mac;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class MacOutputStream
     extends OutputStream
 {

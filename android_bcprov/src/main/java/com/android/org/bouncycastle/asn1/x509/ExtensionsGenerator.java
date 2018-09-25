@@ -12,6 +12,7 @@ import com.android.org.bouncycastle.asn1.DEROctetString;
 
 /**
  * Generator for X.509 extensions
+ * @hide This class is not part of the Android public SDK API
  */
 public class ExtensionsGenerator
 {

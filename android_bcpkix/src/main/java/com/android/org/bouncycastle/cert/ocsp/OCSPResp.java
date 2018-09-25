@@ -14,6 +14,9 @@ import com.android.org.bouncycastle.asn1.ocsp.OCSPResponse;
 import com.android.org.bouncycastle.asn1.ocsp.ResponseBytes;
 import com.android.org.bouncycastle.cert.CertIOException;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class OCSPResp
 {
     public static final int SUCCESSFUL = 0;  // Response has valid confirmations

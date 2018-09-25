@@ -7,6 +7,7 @@ import com.android.org.bouncycastle.crypto.InvalidCipherTextException;
 
 /**
  * A padder that adds ISO10126-2 padding to a block.
+ * @hide This class is not part of the Android public SDK API
  */
 public class ISO10126d2Padding
     implements BlockCipherPadding

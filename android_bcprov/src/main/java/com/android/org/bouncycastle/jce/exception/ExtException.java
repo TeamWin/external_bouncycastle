@@ -8,6 +8,7 @@ package com.android.org.bouncycastle.jce.exception;
  * the <code>Throwable</code> object which was thrown and caused the
  * exception. This interface must be implemented by all exceptions to accomplish
  * this additional functionality.
+ * @hide This class is not part of the Android public SDK API
  * 
  */
 public interface ExtException

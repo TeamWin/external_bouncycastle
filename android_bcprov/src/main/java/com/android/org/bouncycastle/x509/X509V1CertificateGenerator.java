@@ -39,6 +39,7 @@ import com.android.org.bouncycastle.jce.X509Principal;
 /**
  * class to produce an X.509 Version 1 certificate.
  * @deprecated use org.bouncycastle.cert.X509v1CertificateBuilder.
+ * @hide This class is not part of the Android public SDK API
  */
 public class X509V1CertificateGenerator
 {

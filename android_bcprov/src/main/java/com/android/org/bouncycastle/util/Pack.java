@@ -3,6 +3,7 @@ package com.android.org.bouncycastle.util;
 
 /**
  * Utility methods for converting byte arrays into ints and longs, and back again.
+ * @hide This class is not part of the Android public SDK API
  */
 public abstract class Pack
 {

@@ -20,6 +20,7 @@ import com.android.org.bouncycastle.util.Pack;
 /**
  * Implements the Galois/Counter mode (GCM) detailed in
  * NIST Special Publication 800-38D.
+ * @hide This class is not part of the Android public SDK API
  */
 public class GCMBlockCipher
     implements AEADBlockCipher

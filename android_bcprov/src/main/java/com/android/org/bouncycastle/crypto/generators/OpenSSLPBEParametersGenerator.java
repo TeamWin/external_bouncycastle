@@ -16,6 +16,7 @@ import com.android.org.bouncycastle.crypto.digests.AndroidDigestFactory;
  * The scheme is a simple extension of PKCS 5 V2.0 Scheme 1 using MD5 with an
  * iteration count of 1.
  * <p>
+ * @hide This class is not part of the Android public SDK API
  */
 public class OpenSSLPBEParametersGenerator
     extends PBEParametersGenerator

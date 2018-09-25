@@ -8,6 +8,7 @@ import java.security.KeyStore.ProtectionParameter;
 
 /**
  * @deprecated use org.bouncycastle.jcajce.config.PKCS12StoreParameter
+ * @hide This class is not part of the Android public SDK API
  */
 public class JDKPKCS12StoreParameter implements LoadStoreParameter
 {

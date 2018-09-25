@@ -24,6 +24,7 @@ import com.android.org.bouncycastle.asn1.DERSequence;
  *       validationParams  ValidationParams OPTIONAL
  *    }
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class DomainParameters
     extends ASN1Object

@@ -3,6 +3,9 @@ package com.android.org.bouncycastle.asn1.gm;
 
 import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public interface GMObjectIdentifiers
 {
     ASN1ObjectIdentifier sm_scheme = new ASN1ObjectIdentifier("1.2.156.10197.1");

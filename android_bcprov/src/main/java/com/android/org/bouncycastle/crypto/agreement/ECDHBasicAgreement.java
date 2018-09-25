@@ -25,6 +25,7 @@ import com.android.org.bouncycastle.math.ec.ECPoint;
  * specifically, it may be used with the schemes ECKAS-DH1 and
  * DL/ECKAS-DH2. It assumes that the input keys are valid (see also
  * Section 7.2.2).
+ * @hide This class is not part of the Android public SDK API
  */
 public class ECDHBasicAgreement
     implements BasicAgreement

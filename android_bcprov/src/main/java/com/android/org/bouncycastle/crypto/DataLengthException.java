@@ -6,6 +6,7 @@ package com.android.org.bouncycastle.crypto;
  * copied into it turns out to be too short, or if we've been given 
  * insufficient input. In general this exception will get thrown rather
  * than an ArrayOutOfBounds exception.
+ * @hide This class is not part of the Android public SDK API
  */
 public class DataLengthException 
     extends RuntimeCryptoException

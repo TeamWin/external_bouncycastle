@@ -8,6 +8,7 @@ import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 
 /**
  * allow us to set attributes on objects that can go into a PKCS12 store.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface PKCS12BagAttributeCarrier
 {

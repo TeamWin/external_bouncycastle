@@ -25,6 +25,7 @@ import com.android.org.bouncycastle.asn1.x500.X500Name;
  *      extensions        [ 3 ] Extensions OPTIONAL
  *      }
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  *
  */
 public class V3TBSCertificateGenerator

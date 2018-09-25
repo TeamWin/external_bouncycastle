@@ -3,6 +3,9 @@ package com.android.org.bouncycastle.jce.provider;
 
 import com.android.org.bouncycastle.jce.exception.ExtException;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class AnnotatedException
     extends Exception
     implements ExtException

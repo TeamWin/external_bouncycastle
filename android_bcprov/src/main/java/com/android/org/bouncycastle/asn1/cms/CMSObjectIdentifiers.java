@@ -4,6 +4,9 @@ package com.android.org.bouncycastle.asn1.cms;
 import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public interface CMSObjectIdentifiers
 {
     /** PKCS#7: 1.2.840.113549.1.7.1 */

@@ -5,6 +5,7 @@ import java.io.IOException;
 
 /**
  * Parser for indefinite-length SEQUENCEs.
+ * @hide This class is not part of the Android public SDK API
  */
 public class BERSequenceParser
     implements ASN1SequenceParser

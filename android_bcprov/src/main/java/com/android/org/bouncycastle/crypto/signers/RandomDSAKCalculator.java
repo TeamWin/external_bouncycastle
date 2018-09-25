@@ -4,6 +4,9 @@ package com.android.org.bouncycastle.crypto.signers;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class RandomDSAKCalculator
     implements DSAKCalculator
 {

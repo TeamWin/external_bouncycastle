@@ -10,6 +10,7 @@ import com.android.org.bouncycastle.crypto.paddings.BlockCipherPadding;
 /**
  * standard CBC Block Cipher MAC - if no padding is specified the default of
  * pad of zeroes is used.
+ * @hide This class is not part of the Android public SDK API
  */
 public class CBCBlockCipherMac
     implements Mac

@@ -4,6 +4,9 @@ package com.android.org.bouncycastle.crypto.generators;
 import com.android.org.bouncycastle.crypto.KeyGenerationParameters;
 import com.android.org.bouncycastle.crypto.params.DESedeParameters;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class DESedeKeyGenerator
     extends DESKeyGenerator
 {

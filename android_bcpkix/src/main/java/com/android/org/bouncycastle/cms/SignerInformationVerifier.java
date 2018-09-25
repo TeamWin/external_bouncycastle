@@ -10,6 +10,9 @@ import com.android.org.bouncycastle.operator.DigestCalculatorProvider;
 import com.android.org.bouncycastle.operator.OperatorCreationException;
 import com.android.org.bouncycastle.operator.SignatureAlgorithmIdentifierFinder;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class SignerInformationVerifier
 {
     private ContentVerifierProvider verifierProvider;

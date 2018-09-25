@@ -22,6 +22,7 @@ import javax.crypto.SecretKeyFactory;
 
 /**
  * Factory interface for instantiating JCA/JCE primitives.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface JcaJceHelper
 {

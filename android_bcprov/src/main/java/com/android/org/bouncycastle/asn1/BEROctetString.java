@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Vector;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class BEROctetString
     extends ASN1OctetString
 {

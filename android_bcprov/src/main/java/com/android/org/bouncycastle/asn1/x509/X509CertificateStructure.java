@@ -20,6 +20,7 @@ import com.android.org.bouncycastle.asn1.x500.X500Name;
  *  }
  * </pre>
  * @deprecated use org.bouncycastle.asn1.x509.Certificate
+ * @hide This class is not part of the Android public SDK API
  */
 public class X509CertificateStructure
     extends ASN1Object

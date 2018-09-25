@@ -17,6 +17,7 @@ import com.android.org.bouncycastle.util.CollectionStore;
  * <p>
  * The class will convert X509Certificate objects into X509CertificateHolder objects.
  * </p>
+ * @hide This class is not part of the Android public SDK API
  */
 public class JcaCertStore
     extends CollectionStore

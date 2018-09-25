@@ -13,6 +13,9 @@ import com.android.org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
 import com.android.org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 import com.android.org.bouncycastle.jcajce.provider.util.AsymmetricKeyInfoConverter;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public abstract class BaseKeyFactorySpi
     extends java.security.KeyFactorySpi
     implements AsymmetricKeyInfoConverter

@@ -7,6 +7,9 @@ import com.android.org.bouncycastle.math.ec.ECPoint;
 import com.android.org.bouncycastle.math.raw.Nat;
 import com.android.org.bouncycastle.math.raw.Nat192;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class SecP192K1Point extends ECPoint.AbstractFp
 {
     /**

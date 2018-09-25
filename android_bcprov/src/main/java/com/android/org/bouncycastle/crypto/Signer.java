@@ -3,6 +3,7 @@ package com.android.org.bouncycastle.crypto;
 
 /**
  * Generic signer interface for hash based and message recovery signers.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface Signer 
 {

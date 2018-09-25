@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * A generic PEM object - type, header properties, and byte content.
+ * @hide This class is not part of the Android public SDK API
  */
 public class PemObject
     implements PemObjectGenerator

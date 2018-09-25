@@ -17,6 +17,7 @@ import java.util.Date;
 /**
  * Interface for an X.509 Attribute Certificate.
  * @deprecated use X509CertificateHolder class in the PKIX package.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface X509AttributeCertificate
     extends X509Extension

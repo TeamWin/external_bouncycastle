@@ -9,6 +9,7 @@ import com.android.org.bouncycastle.crypto.params.ParametersWithIV;
 
 /**
  * implements a Output-FeedBack (OFB) mode on top of a simple cipher.
+ * @hide This class is not part of the Android public SDK API
  */
 public class OFBBlockCipher
     extends StreamBlockCipher

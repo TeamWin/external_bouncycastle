@@ -20,6 +20,9 @@ import com.android.org.bouncycastle.jcajce.provider.asymmetric.util.PrimeCertain
 import com.android.org.bouncycastle.jce.provider.BouncyCastleProvider;
 import com.android.org.bouncycastle.util.Integers;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class KeyPairGeneratorSpi
     extends java.security.KeyPairGenerator
 {

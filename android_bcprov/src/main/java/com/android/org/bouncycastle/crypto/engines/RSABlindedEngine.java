@@ -14,6 +14,7 @@ import com.android.org.bouncycastle.util.BigIntegers;
 
 /**
  * this does your basic RSA algorithm with blinding
+ * @hide This class is not part of the Android public SDK API
  */
 public class RSABlindedEngine
     implements AsymmetricBlockCipher

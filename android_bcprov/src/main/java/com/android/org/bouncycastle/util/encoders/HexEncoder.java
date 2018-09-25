@@ -6,6 +6,7 @@ import java.io.OutputStream;
 
 /**
  * A streaming Hex encoder.
+ * @hide This class is not part of the Android public SDK API
  */
 public class HexEncoder
     implements Encoder

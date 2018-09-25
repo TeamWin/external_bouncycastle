@@ -25,6 +25,9 @@ import com.android.org.bouncycastle.crypto.params.AsymmetricKeyParameter;
 import com.android.org.bouncycastle.crypto.params.ParametersWithRandom;
 import com.android.org.bouncycastle.util.Arrays;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class RSADigestSigner
     implements Signer
 {

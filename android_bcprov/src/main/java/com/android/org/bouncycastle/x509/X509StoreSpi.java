@@ -5,6 +5,9 @@ import com.android.org.bouncycastle.util.Selector;
 
 import java.util.Collection;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public abstract class X509StoreSpi
 {
     public abstract void engineInit(X509StoreParameters parameters);

@@ -5,6 +5,7 @@ import java.io.IOException;
 
 /**
  * Parser DER EXTERNAL tagged objects.
+ * @hide This class is not part of the Android public SDK API
  */
 public class DERExternalParser
     implements ASN1Encodable, InMemoryRepresentable

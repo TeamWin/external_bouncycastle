@@ -8,6 +8,7 @@ import com.android.org.bouncycastle.util.Strings;
 
 /**
  * Carrier class for a DER encoding GeneralString
+ * @hide This class is not part of the Android public SDK API
  */
 public class DERGeneralString 
     extends ASN1Primitive

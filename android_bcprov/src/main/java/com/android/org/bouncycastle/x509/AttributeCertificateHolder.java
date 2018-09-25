@@ -47,6 +47,7 @@ import com.android.org.bouncycastle.util.Selector;
  *          }
  * </pre>
  * @deprecated use org.bouncycastle.cert.AttributeCertificateHolder
+ * @hide This class is not part of the Android public SDK API
  */
 public class AttributeCertificateHolder
     implements CertSelector, Selector

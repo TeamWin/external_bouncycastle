@@ -4,6 +4,7 @@ package com.android.org.bouncycastle.asn1;
 /**
  *
  * @deprecated Use ASN1ObjectIdentifier instead of this,
+ * @hide This class is not part of the Android public SDK API
  */
 public class DERObjectIdentifier
     extends ASN1ObjectIdentifier

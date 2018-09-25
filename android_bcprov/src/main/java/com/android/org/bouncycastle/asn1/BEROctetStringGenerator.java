@@ -6,6 +6,7 @@ import java.io.OutputStream;
 
 /**
  * A generator for indefinite-length OCTET STRINGs
+ * @hide This class is not part of the Android public SDK API
  */
 public class BEROctetStringGenerator
     extends BERGenerator

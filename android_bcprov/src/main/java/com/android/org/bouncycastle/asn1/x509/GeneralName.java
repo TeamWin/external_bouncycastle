@@ -42,6 +42,7 @@ import com.android.org.bouncycastle.util.IPAddress;
  * 
  * Name ::= CHOICE { RDNSequence }
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class GeneralName
     extends ASN1Object

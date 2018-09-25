@@ -11,6 +11,7 @@ import java.util.Vector;
 
 /**
  * String utilities.
+ * @hide This class is not part of the Android public SDK API
  */
 public final class Strings
 {

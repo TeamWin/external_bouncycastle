@@ -94,6 +94,7 @@ import com.android.org.bouncycastle.util.Arrays;
  * NOTE &mdash; The padding octets are for comparison purposes only
  * and do not appear in the encodings.
  * </blockquote>
+ * @hide This class is not part of the Android public SDK API
  */
 public abstract class ASN1Set
     extends ASN1Primitive

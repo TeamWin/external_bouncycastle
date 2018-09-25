@@ -15,6 +15,7 @@ import com.android.org.bouncycastle.crypto.params.ParametersWithRandom;
  * outputs a block only when the buffer is full and more data is being added,
  * or on a doFinal (unless the current block in the buffer is a pad block).
  * The default padding mechanism used is the one outlined in PKCS5/PKCS7.
+ * @hide This class is not part of the Android public SDK API
  */
 public class PaddedBufferedBlockCipher
     extends BufferedBlockCipher

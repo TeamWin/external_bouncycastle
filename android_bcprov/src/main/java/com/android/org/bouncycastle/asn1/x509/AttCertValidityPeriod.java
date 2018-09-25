@@ -8,6 +8,9 @@ import com.android.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.org.bouncycastle.asn1.DERSequence;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class AttCertValidityPeriod
     extends ASN1Object
 {

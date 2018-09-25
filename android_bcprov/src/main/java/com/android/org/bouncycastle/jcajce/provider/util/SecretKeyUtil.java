@@ -10,6 +10,9 @@ import com.android.org.bouncycastle.asn1.ntt.NTTObjectIdentifiers;
 import com.android.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import com.android.org.bouncycastle.util.Integers;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class SecretKeyUtil
 {
     private static Map keySizes = new HashMap();

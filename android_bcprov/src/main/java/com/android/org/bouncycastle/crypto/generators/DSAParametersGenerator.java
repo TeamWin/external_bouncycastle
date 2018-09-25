@@ -17,6 +17,7 @@ import com.android.org.bouncycastle.util.encoders.Hex;
 
 /**
  * Generate suitable parameters for DSA, in line with FIPS 186-2, or FIPS 186-3.
+ * @hide This class is not part of the Android public SDK API
  */
 public class DSAParametersGenerator
 {

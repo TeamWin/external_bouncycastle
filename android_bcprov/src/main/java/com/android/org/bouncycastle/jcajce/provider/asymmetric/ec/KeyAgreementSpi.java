@@ -47,6 +47,7 @@ import com.android.org.bouncycastle.jce.interfaces.ECPublicKey;
  * both the simple one, and the simple one with cofactors are supported.
  *
  * Also, MQV key agreement per SEC-1
+ * @hide This class is not part of the Android public SDK API
  */
 public class KeyAgreementSpi
     extends BaseAgreementSpi

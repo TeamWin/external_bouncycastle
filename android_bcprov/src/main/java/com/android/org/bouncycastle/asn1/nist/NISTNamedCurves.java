@@ -12,6 +12,7 @@ import com.android.org.bouncycastle.util.Strings;
 
 /**
  * Utility class for fetching curves using their NIST names as published in FIPS-PUB 186-3
+ * @hide This class is not part of the Android public SDK API
  */
 public class NISTNamedCurves
 {

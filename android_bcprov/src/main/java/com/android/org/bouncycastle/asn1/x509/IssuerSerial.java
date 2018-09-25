@@ -13,6 +13,9 @@ import com.android.org.bouncycastle.asn1.DERBitString;
 import com.android.org.bouncycastle.asn1.DERSequence;
 import com.android.org.bouncycastle.asn1.x500.X500Name;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class IssuerSerial
     extends ASN1Object
 {

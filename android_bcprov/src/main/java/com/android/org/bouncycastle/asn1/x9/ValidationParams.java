@@ -20,6 +20,7 @@ import com.android.org.bouncycastle.asn1.DERSequence;
  *    pgenCounter  INTEGER
  * }
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class ValidationParams
     extends ASN1Object

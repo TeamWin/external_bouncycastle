@@ -6,6 +6,7 @@ import java.util.Enumeration;
 
 /**
  * Carrier class for an indefinite-length SEQUENCE.
+ * @hide This class is not part of the Android public SDK API
  */
 public class BERSequence
     extends ASN1Sequence

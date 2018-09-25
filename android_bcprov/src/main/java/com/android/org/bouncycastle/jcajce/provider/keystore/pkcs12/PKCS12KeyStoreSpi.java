@@ -111,6 +111,9 @@ import com.android.org.bouncycastle.util.Integers;
 import com.android.org.bouncycastle.util.Strings;
 import com.android.org.bouncycastle.util.encoders.Hex;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class PKCS12KeyStoreSpi
     extends KeyStoreSpi
     implements PKCSObjectIdentifiers, X509ObjectIdentifiers, BCKeyStore

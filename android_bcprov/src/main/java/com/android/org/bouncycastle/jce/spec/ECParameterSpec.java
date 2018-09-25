@@ -9,6 +9,7 @@ import java.security.spec.AlgorithmParameterSpec;
 
 /**
  * basic domain parameters for an Elliptic Curve public or private key.
+ * @hide This class is not part of the Android public SDK API
  */
 public class ECParameterSpec
     implements AlgorithmParameterSpec

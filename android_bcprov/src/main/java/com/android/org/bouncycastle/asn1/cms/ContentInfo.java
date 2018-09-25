@@ -26,6 +26,7 @@ import com.android.org.bouncycastle.asn1.BERTaggedObject;
  *     eContent [0] EXPLICIT OCTET STRING OPTIONAL
  * }
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class ContentInfo
     extends ASN1Object

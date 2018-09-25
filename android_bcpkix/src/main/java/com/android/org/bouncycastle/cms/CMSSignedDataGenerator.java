@@ -44,6 +44,7 @@ import com.android.org.bouncycastle.asn1.cms.SignerInfo;
  *
  *      CMSSignedData sigData = gen.generate(msg, false);
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class CMSSignedDataGenerator
     extends CMSSignedGenerator

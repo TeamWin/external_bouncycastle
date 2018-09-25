@@ -7,6 +7,7 @@ import com.android.org.bouncycastle.util.Pack;
 
 /**
  * implementation of MD5 as outlined in "Handbook of Applied Cryptography", pages 346 - 347.
+ * @hide This class is not part of the Android public SDK API
  */
 public class MD5Digest
     extends GeneralDigest

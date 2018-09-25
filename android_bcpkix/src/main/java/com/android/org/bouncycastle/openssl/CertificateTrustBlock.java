@@ -16,6 +16,9 @@ import com.android.org.bouncycastle.asn1.DERSequence;
 import com.android.org.bouncycastle.asn1.DERTaggedObject;
 import com.android.org.bouncycastle.asn1.DERUTF8String;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class CertificateTrustBlock
 {
     private ASN1Sequence uses;

@@ -3,6 +3,7 @@ package com.android.org.bouncycastle.util;
 
 /**
  * An interface defining a list of strings.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface StringList
     extends Iterable<String>

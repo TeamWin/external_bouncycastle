@@ -31,6 +31,9 @@ import com.android.org.bouncycastle.jcajce.spec.AEADParameterSpec;
 // Android-removed: Unsupported algorithms
 // import org.bouncycastle.jcajce.spec.SkeinParameterSpec;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class BaseMac
     extends MacSpi implements PBE
 {

@@ -48,6 +48,7 @@ import com.android.org.bouncycastle.crypto.params.RSAKeyParameters;
 /**
  * Factory to create asymmetric public key parameters for asymmetric ciphers from range of
  * ASN.1 encoded SubjectPublicKeyInfo objects.
+ * @hide This class is not part of the Android public SDK API
  */
 public class PublicKeyFactory
 {

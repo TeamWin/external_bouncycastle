@@ -14,6 +14,7 @@ import com.android.org.bouncycastle.asn1.DERSequence;
 /**
  * ASN.1 def for Elliptic-Curve Field ID structure. See
  * X9.62, for further details.
+ * @hide This class is not part of the Android public SDK API
  */
 public class X9FieldID
     extends ASN1Object

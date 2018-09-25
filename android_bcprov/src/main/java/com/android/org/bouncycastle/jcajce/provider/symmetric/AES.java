@@ -60,6 +60,9 @@ import com.android.org.bouncycastle.jcajce.provider.symmetric.util.IvAlgorithmPa
 import com.android.org.bouncycastle.jcajce.provider.symmetric.util.PBESecretKeyFactory;
 import com.android.org.bouncycastle.jcajce.spec.AEADParameterSpec;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public final class AES
 {
     private static final Class gcmSpecClass = lookup("javax.crypto.spec.GCMParameterSpec");
