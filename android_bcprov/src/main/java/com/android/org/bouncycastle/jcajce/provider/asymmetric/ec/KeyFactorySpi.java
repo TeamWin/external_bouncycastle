@@ -24,6 +24,9 @@ import com.android.org.bouncycastle.jce.spec.ECParameterSpec;
 import com.android.org.bouncycastle.jce.spec.ECPrivateKeySpec;
 import com.android.org.bouncycastle.jce.spec.ECPublicKeySpec;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class KeyFactorySpi
     extends BaseKeyFactorySpi
     implements AsymmetricKeyInfoConverter

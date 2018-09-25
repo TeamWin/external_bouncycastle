@@ -19,6 +19,7 @@ import java.util.Set;
  * @see java.security.cert.PKIXBuilderParameters
  * @see com.android.org.bouncycastle.jce.provider.PKIXCertPathBuilderSpi
  * @deprecated use PKIXExtendedBuilderParameters
+ * @hide This class is not part of the Android public SDK API
  */
 public class ExtendedPKIXBuilderParameters extends ExtendedPKIXParameters
 {

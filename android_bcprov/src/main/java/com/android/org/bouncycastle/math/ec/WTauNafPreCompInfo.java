@@ -4,6 +4,7 @@ package com.android.org.bouncycastle.math.ec;
 /**
  * Class holding precomputation data for the WTNAF (Window
  * <code>&tau;</code>-adic Non-Adjacent Form) algorithm.
+ * @hide This class is not part of the Android public SDK API
  */
 public class WTauNafPreCompInfo implements PreCompInfo
 {

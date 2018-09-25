@@ -6,6 +6,7 @@ import java.util.Enumeration;
 
 /**
  * A DER encoded SET object
+ * @hide This class is not part of the Android public SDK API
  */
 public class DERSet
     extends ASN1Set

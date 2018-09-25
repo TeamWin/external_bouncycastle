@@ -7,6 +7,7 @@ import com.android.org.bouncycastle.math.ec.ECPoint;
 
 /**
  * interface for elliptic curve public keys.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface ECPublicKey
     extends ECKey, PublicKey

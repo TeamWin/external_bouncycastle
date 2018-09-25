@@ -6,6 +6,7 @@ import java.io.IOException;
 
 /**
  * A DER encoding version of an application specific object.
+ * @hide This class is not part of the Android public SDK API
  */
 public class DERApplicationSpecific 
     extends ASN1ApplicationSpecific

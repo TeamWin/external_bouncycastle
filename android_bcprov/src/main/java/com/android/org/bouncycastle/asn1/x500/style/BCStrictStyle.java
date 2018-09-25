@@ -8,6 +8,7 @@ import com.android.org.bouncycastle.asn1.x500.X500NameStyle;
 /**
  * Variation of BCStyle that insists on strict ordering for equality
  * and hashCode comparisons
+ * @hide This class is not part of the Android public SDK API
  */
 public class BCStrictStyle
     extends BCStyle

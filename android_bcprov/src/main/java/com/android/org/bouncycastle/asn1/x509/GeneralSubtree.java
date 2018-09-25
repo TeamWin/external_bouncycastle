@@ -27,6 +27,7 @@ import com.android.org.bouncycastle.asn1.DERTaggedObject;
  * </pre>
  * 
  * @see com.android.org.bouncycastle.asn1.x509.NameConstraints
+ * @hide This class is not part of the Android public SDK API
  * 
  */
 public class GeneralSubtree 

@@ -17,6 +17,9 @@ import com.android.org.bouncycastle.util.Arrays;
 import com.android.org.bouncycastle.util.Integers;
 import com.android.org.bouncycastle.util.Strings;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class PKIXNameConstraintValidator
     implements NameConstraintValidator
 {

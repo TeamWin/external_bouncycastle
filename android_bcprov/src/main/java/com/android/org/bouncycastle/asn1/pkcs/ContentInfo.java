@@ -14,6 +14,9 @@ import com.android.org.bouncycastle.asn1.BERSequence;
 import com.android.org.bouncycastle.asn1.BERTaggedObject;
 import com.android.org.bouncycastle.asn1.DLSequence;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class ContentInfo
     extends ASN1Object
     implements PKCSObjectIdentifiers

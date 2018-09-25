@@ -5,6 +5,9 @@ import java.util.Random;
 
 import com.android.org.bouncycastle.util.Pack;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public abstract class Mod
 {
     public static int inverse32(int d)

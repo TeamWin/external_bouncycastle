@@ -17,6 +17,7 @@ import com.android.org.bouncycastle.util.Strings;
 
 /**
  * A provider representation for a RSA private key, with CRT factors included.
+ * @hide This class is not part of the Android public SDK API
  */
 public class BCRSAPrivateCrtKey
     extends BCRSAPrivateKey

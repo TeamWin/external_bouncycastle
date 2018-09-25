@@ -7,6 +7,7 @@ import java.util.Collection;
  * A generic interface describing a simple store of objects.
  *
  * @param <T> the object type stored.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface Store<T>
 {

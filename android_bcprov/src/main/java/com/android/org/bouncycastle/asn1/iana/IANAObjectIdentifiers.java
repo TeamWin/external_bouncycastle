@@ -6,6 +6,7 @@ import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 /**
  * IANA:
  *  { iso(1) identifier-organization(3) dod(6) internet(1) } == IETF defined things
+ * @hide This class is not part of the Android public SDK API
  */
 public interface IANAObjectIdentifiers
 {

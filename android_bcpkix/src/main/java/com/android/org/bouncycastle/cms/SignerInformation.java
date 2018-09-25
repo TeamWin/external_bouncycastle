@@ -37,6 +37,7 @@ import com.android.org.bouncycastle.util.io.TeeOutputStream;
 
 /**
  * an expanded SignerInfo block from a CMS Signed message
+ * @hide This class is not part of the Android public SDK API
  */
 public class SignerInformation
 {

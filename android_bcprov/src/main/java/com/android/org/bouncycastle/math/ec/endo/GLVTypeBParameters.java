@@ -3,6 +3,9 @@ package com.android.org.bouncycastle.math.ec.endo;
 
 import java.math.BigInteger;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class GLVTypeBParameters
 {
     private static void checkVector(BigInteger[] v, String name)

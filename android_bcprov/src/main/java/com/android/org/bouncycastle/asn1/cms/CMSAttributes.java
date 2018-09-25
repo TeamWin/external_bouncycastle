@@ -16,6 +16,7 @@ import com.android.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
  * contentHint      ::= 1.2.840.113549.1.9.16.2.4
  * cmsAlgorithmProtect := 1.2.840.113549.1.9.52
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 
 public interface CMSAttributes

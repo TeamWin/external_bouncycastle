@@ -10,6 +10,7 @@ import com.android.org.bouncycastle.util.Arrays;
 
 /**
  * implements a Cipher-FeedBack (CFB) mode on top of a simple cipher.
+ * @hide This class is not part of the Android public SDK API
  */
 public class CFBBlockCipher
     extends StreamBlockCipher

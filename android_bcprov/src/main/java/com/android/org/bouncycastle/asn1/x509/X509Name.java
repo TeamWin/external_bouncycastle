@@ -35,6 +35,7 @@ import com.android.org.bouncycastle.util.encoders.Hex;
  *                                   value ANY }
  * </pre>
  * @deprecated use org.bouncycastle.asn1.x500.X500Name.
+ * @hide This class is not part of the Android public SDK API
  */
 public class X509Name
     extends ASN1Object

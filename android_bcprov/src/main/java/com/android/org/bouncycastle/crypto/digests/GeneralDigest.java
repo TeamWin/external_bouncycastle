@@ -8,6 +8,7 @@ import com.android.org.bouncycastle.util.Pack;
 /**
  * base implementation of MD4 family style digest as outlined in
  * "Handbook of Applied Cryptography", pages 344 - 347.
+ * @hide This class is not part of the Android public SDK API
  */
 public abstract class GeneralDigest
     implements ExtendedDigest, Memoable

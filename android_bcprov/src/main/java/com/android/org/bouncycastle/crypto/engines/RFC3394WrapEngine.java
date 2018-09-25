@@ -17,6 +17,7 @@ import com.android.org.bouncycastle.util.Arrays;
  * <p>
  * For further details see: <a href="http://www.ietf.org/rfc/rfc3394.txt">http://www.ietf.org/rfc/rfc3394.txt</a>
  * and  <a href="http://csrc.nist.gov/encryption/kms/key-wrap.pdf">http://csrc.nist.gov/encryption/kms/key-wrap.pdf</a>.
+ * @hide This class is not part of the Android public SDK API
  */
 public class RFC3394WrapEngine
     implements Wrapper

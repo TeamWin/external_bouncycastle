@@ -10,6 +10,9 @@ import com.android.org.bouncycastle.asn1.ASN1Encoding;
 import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.org.bouncycastle.asn1.ASN1Sequence;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class PKCS7ProcessableObject
     implements CMSTypedData
 {

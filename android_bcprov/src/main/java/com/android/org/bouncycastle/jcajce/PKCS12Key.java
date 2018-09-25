@@ -5,6 +5,7 @@ import com.android.org.bouncycastle.crypto.PBEParametersGenerator;
 
 /**
  * A password based key for use with PKCS#12.
+ * @hide This class is not part of the Android public SDK API
  */
 public class PKCS12Key
     implements PBKDFKey

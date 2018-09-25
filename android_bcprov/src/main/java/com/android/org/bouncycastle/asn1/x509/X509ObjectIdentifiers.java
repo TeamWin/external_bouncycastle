@@ -3,6 +3,9 @@ package com.android.org.bouncycastle.asn1.x509;
 
 import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public interface X509ObjectIdentifiers
 {
     

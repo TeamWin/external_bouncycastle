@@ -3,6 +3,9 @@ package com.android.org.bouncycastle.asn1.misc;
 
 import com.android.org.bouncycastle.asn1.DERIA5String;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class VerisignCzagExtension
     extends DERIA5String
 {

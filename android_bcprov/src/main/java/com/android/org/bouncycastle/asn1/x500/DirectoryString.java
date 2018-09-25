@@ -15,6 +15,7 @@ import com.android.org.bouncycastle.asn1.DERUniversalString;
 
 /**
  * The DirectoryString CHOICE object.
+ * @hide This class is not part of the Android public SDK API
  */
 public class DirectoryString
     extends ASN1Object

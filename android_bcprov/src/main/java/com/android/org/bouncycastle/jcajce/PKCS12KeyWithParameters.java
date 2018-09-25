@@ -7,6 +7,7 @@ import com.android.org.bouncycastle.util.Arrays;
 
 /**
  * A password based key for use with PKCS#12 with full PBE parameters.
+ * @hide This class is not part of the Android public SDK API
  */
 public class PKCS12KeyWithParameters
     extends PKCS12Key

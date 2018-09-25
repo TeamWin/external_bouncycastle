@@ -5,6 +5,7 @@ import java.io.IOException;
 
 /**
  * Parser class for DER SEQUENCEs.
+ * @hide This class is not part of the Android public SDK API
  */
 public class DERSequenceParser
     implements ASN1SequenceParser

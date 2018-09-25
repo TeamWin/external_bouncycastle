@@ -27,6 +27,9 @@ import com.android.org.bouncycastle.jcajce.provider.symmetric.util.PBE;
 import com.android.org.bouncycastle.jcajce.provider.util.AlgorithmProvider;
 import com.android.org.bouncycastle.jcajce.spec.PBKDF2KeySpec;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class PBEPBKDF2
 {
     private PBEPBKDF2()

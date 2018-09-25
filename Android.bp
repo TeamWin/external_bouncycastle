@@ -58,6 +58,16 @@ java_library_static {
     java_version: "1.7",
 }
 
+// The src files for bouncycastle, used to generate core platform / intra-core
+// API stubs.
+filegroup {
+    name: "bouncycastle_java_files",
+    srcs: ["android_bcprov/src/main/java/**/*.java"],
+    exclude_srcs: [
+        "android_bcprov/src/main/java/org/bouncycastle/asn1/ocsp/**/*.java",
+    ],
+}
+
 // A bouncycastle library repackaged in com.android.org.bouncycastle for use
 // in the Android platform where it is important not to conflict with the
 // original org.bouncycastle package.
@@ -66,10 +76,7 @@ java_library {
     defaults: ["bouncycastle-defaults"],
     installable: true,
 
-    srcs: ["android_bcprov/src/main/java/**/*.java"],
-    exclude_srcs: [
-        "android_bcprov/src/main/java/org/bouncycastle/asn1/ocsp/**/*.java",
-    ],
+    srcs: [":bouncycastle_java_files"],
 
     // We can use core_current here because bouncycastle only depends on
     // public SDK APIs.
@@ -85,10 +92,7 @@ java_library {
     defaults: ["bouncycastle-defaults"],
     installable: true,
 
-    srcs: ["android_bcprov/src/main/java/**/*.java"],
-    exclude_srcs: [
-        "android_bcprov/src/main/java/org/bouncycastle/asn1/ocsp/**/*.java",
-    ],
+    srcs: [":bouncycastle_java_files"],
 
     // We can use core_current here because bouncycastle only depends on
     // public SDK APIs.

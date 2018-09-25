@@ -53,6 +53,7 @@ import com.android.org.bouncycastle.operator.ContentVerifierProvider;
  *       issuerKeyHash       OCTET STRING, -- Hash of Issuers public key
  *       serialNumber        CertificateSerialNumber }
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class OCSPReq
 {

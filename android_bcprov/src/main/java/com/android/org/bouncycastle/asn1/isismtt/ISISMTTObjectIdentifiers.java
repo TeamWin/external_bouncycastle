@@ -5,6 +5,7 @@ import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 
 /**
  * ISISMT -- Industrial Signature Interoperability Specification
+ * @hide This class is not part of the Android public SDK API
  */
 public interface ISISMTTObjectIdentifiers
 {

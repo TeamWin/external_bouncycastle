@@ -15,6 +15,7 @@ import com.android.org.bouncycastle.asn1.sec.SECNamedCurves;
 
 /**
  * A general class that reads all X9.62 style EC curve tables.
+ * @hide This class is not part of the Android public SDK API
  */
 public class ECNamedCurveTable
 {

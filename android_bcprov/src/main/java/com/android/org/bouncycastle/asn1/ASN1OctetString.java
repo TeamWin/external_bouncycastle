@@ -98,6 +98,7 @@ import com.android.org.bouncycastle.util.encoders.Hex;
  * the constructed form of encoding shall not be used.
  * (Contrast with 8.21.6.)
  * </p>
+ * @hide This class is not part of the Android public SDK API
  */
 public abstract class ASN1OctetString
     extends ASN1Primitive

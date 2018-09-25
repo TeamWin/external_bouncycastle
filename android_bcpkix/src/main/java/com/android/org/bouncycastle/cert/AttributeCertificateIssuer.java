@@ -14,6 +14,7 @@ import com.android.org.bouncycastle.util.Selector;
 
 /**
  * Carrying class for an attribute certificate issuer.
+ * @hide This class is not part of the Android public SDK API
  */
 public class AttributeCertificateIssuer
     implements Selector

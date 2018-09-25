@@ -19,6 +19,7 @@ import com.android.org.bouncycastle.crypto.InvalidCipherTextException;
  * failure. The higher level protocol utilising this cipher must ensure the plaintext data is handled 
  * appropriately until the end of data is reached and the entire ciphertext is authenticated.
  * @see com.android.org.bouncycastle.crypto.params.AEADParameters
+ * @hide This class is not part of the Android public SDK API
  */
 public interface AEADBlockCipher
 {

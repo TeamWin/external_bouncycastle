@@ -6,6 +6,9 @@ import com.android.org.bouncycastle.crypto.params.DHParameters;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class DHParametersGenerator
 {
     private int             size;

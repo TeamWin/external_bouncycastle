@@ -22,6 +22,9 @@ import com.android.org.bouncycastle.asn1.x9.X9ObjectIdentifiers;
 import com.android.org.bouncycastle.jcajce.provider.asymmetric.util.BaseKeyFactorySpi;
 import com.android.org.bouncycastle.jcajce.provider.asymmetric.util.ExtendedInvalidKeySpecException;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class KeyFactorySpi
     extends BaseKeyFactorySpi
 {

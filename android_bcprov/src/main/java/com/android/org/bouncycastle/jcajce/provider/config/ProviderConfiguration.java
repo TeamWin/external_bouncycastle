@@ -8,6 +8,9 @@ import javax.crypto.spec.DHParameterSpec;
 
 import com.android.org.bouncycastle.jce.spec.ECParameterSpec;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public interface ProviderConfiguration
 {
     ECParameterSpec getEcImplicitlyCa();

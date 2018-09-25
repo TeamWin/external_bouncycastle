@@ -54,6 +54,7 @@ import com.android.org.bouncycastle.util.Arrays;
  * The encoding of a set value or sequence value shall not include
  * an encoding for any component value which is equal to
  * its default value.
+ * @hide This class is not part of the Android public SDK API
  */
 public abstract class ASN1Sequence
     extends ASN1Primitive

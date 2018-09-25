@@ -59,6 +59,9 @@ import com.android.org.bouncycastle.util.Arrays;
 import com.android.org.bouncycastle.util.io.Streams;
 import com.android.org.bouncycastle.util.io.TeeOutputStream;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class BcKeyStoreSpi
     extends KeyStoreSpi
     implements BCKeyStore

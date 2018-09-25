@@ -6,6 +6,9 @@ import java.math.BigInteger;
 import com.android.org.bouncycastle.math.raw.Nat;
 import com.android.org.bouncycastle.math.raw.Nat224;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class SecP224R1Field
 {
     private static final long M = 0xFFFFFFFFL;

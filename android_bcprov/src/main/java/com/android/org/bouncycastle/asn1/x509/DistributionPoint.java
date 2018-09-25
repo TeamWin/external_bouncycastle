@@ -20,6 +20,7 @@ import com.android.org.bouncycastle.util.Strings;
  *      cRLIssuer         [2] GeneralNames OPTIONAL
  * }
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class DistributionPoint
     extends ASN1Object

@@ -30,6 +30,9 @@ import com.android.org.bouncycastle.math.ec.ECCurve;
 import com.android.org.bouncycastle.math.ec.ECPoint;
 import com.android.org.bouncycastle.util.Integers;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public abstract class KeyPairGeneratorSpi
     extends java.security.KeyPairGenerator
 {

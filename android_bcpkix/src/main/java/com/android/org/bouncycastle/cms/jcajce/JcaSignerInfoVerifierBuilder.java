@@ -18,6 +18,9 @@ import com.android.org.bouncycastle.operator.SignatureAlgorithmIdentifierFinder;
 import com.android.org.bouncycastle.operator.jcajce.JcaContentVerifierProviderBuilder;
 import com.android.org.bouncycastle.operator.jcajce.JcaDigestCalculatorProviderBuilder;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class JcaSignerInfoVerifierBuilder
 {
     private Helper helper = new Helper();

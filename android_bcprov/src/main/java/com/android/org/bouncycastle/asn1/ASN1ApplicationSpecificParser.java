@@ -5,6 +5,7 @@ import java.io.IOException;
 
 /**
  * Interface to parse ASN.1 application specific objects.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface ASN1ApplicationSpecificParser
     extends ASN1Encodable, InMemoryRepresentable

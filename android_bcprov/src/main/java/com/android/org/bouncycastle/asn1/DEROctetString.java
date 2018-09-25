@@ -5,6 +5,7 @@ import java.io.IOException;
 
 /**
  * Carrier class for a DER encoding OCTET STRING
+ * @hide This class is not part of the Android public SDK API
  */
 public class DEROctetString
     extends ASN1OctetString

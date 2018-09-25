@@ -19,6 +19,9 @@ import com.android.org.bouncycastle.asn1.x500.X500NameStyle;
 import com.android.org.bouncycastle.util.Strings;
 import com.android.org.bouncycastle.util.encoders.Hex;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class IETFUtils
 {
     private static String unescape(String elt)

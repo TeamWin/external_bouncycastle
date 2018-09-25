@@ -40,6 +40,9 @@ import com.android.org.bouncycastle.jcajce.provider.symmetric.util.BaseSecretKey
 import com.android.org.bouncycastle.jcajce.provider.symmetric.util.BaseWrapCipher;
 import com.android.org.bouncycastle.jcajce.provider.util.AlgorithmProvider;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public final class DESede
 {
     private DESede()

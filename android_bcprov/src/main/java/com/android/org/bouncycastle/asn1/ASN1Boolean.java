@@ -16,6 +16,7 @@ import com.android.org.bouncycastle.util.Arrays;
  * <li> {@link ASN1Boolean#getInstance(int) ASN1Boolean.getInstance(int)}</li>
  * </ul>
  * </p>
+ * @hide This class is not part of the Android public SDK API
  */
 public class ASN1Boolean
     extends ASN1Primitive

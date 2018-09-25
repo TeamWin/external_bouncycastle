@@ -9,6 +9,7 @@ import com.android.org.bouncycastle.cert.X509CertificateHolder;
 
 /**
  * JCA helper class for converting an X509Certificate into a X509CertificateHolder object.
+ * @hide This class is not part of the Android public SDK API
  */
 public class JcaX509CertificateHolder
     extends X509CertificateHolder

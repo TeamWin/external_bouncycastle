@@ -13,6 +13,7 @@ import com.android.org.bouncycastle.asn1.DERTaggedObject;
 
 /**
  * CRL Bag for PKCS#12
+ * @hide This class is not part of the Android public SDK API
  */
 public class CRLBag
     extends ASN1Object

@@ -19,6 +19,9 @@ import com.android.org.bouncycastle.operator.DigestCalculator;
 import com.android.org.bouncycastle.operator.DigestCalculatorProvider;
 import com.android.org.bouncycastle.operator.OperatorCreationException;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class CertificateID
 {
     public static final AlgorithmIdentifier HASH_SHA1 = new AlgorithmIdentifier(OIWObjectIdentifiers.idSHA1, DERNull.INSTANCE);

@@ -3,6 +3,7 @@ package com.android.org.bouncycastle.crypto.tls;
 
 /**
  * RFC 6091 
+ * @hide This class is not part of the Android public SDK API
  */
 public class CertificateType
 {

@@ -22,6 +22,7 @@ import com.android.org.bouncycastle.util.Selector;
  * lists.
  * 
  * @see com.android.org.bouncycastle.util.Selector
+ * @hide This class is not part of the Android public SDK API
  */
 public class PKIXCRLStoreSelector<T extends CRL>
     implements Selector<T>

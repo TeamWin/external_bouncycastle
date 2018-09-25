@@ -14,6 +14,7 @@ import com.android.org.bouncycastle.asn1.x509.TBSCertList;
 
 /**
  * Holding class for an X.509 CRL Entry structure.
+ * @hide This class is not part of the Android public SDK API
  */
 public class X509CRLEntryHolder
 {

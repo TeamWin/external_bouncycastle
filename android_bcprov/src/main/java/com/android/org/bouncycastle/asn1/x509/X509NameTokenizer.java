@@ -7,6 +7,7 @@ package com.android.org.bouncycastle.asn1.x509;
  * lightweight Java environment don't support classes like
  * StringTokenizer.
  * @deprecated use X500NameTokenizer
+ * @hide This class is not part of the Android public SDK API
  */
 public class X509NameTokenizer
 {

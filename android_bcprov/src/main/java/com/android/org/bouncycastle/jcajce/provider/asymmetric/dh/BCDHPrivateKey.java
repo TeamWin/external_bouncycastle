@@ -28,6 +28,9 @@ import com.android.org.bouncycastle.jcajce.provider.asymmetric.util.PKCS12BagAtt
 import com.android.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier;
 
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class BCDHPrivateKey
     implements DHPrivateKey, PKCS12BagAttributeCarrier
 {

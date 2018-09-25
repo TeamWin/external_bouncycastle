@@ -12,6 +12,7 @@ import com.android.org.bouncycastle.asn1.DERSequence;
 
 /**
  * @deprecated use ValidationParams
+ * @hide This class is not part of the Android public SDK API
  */
 public class DHValidationParms extends ASN1Object
 {

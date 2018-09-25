@@ -21,6 +21,9 @@ import com.android.org.bouncycastle.asn1.x509.GeneralName;
 import com.android.org.bouncycastle.cert.X509CertificateHolder;
 import com.android.org.bouncycastle.operator.ContentSigner;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class OCSPReqBuilder
 {
     private List            list = new ArrayList();

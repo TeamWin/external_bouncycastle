@@ -19,6 +19,7 @@ import com.android.org.bouncycastle.asn1.DERSequence;
  * <p>
  * The getEncoded() method in the public keys in the JCE produces a DER
  * encoded one of these.
+ * @hide This class is not part of the Android public SDK API
  */
 public class SubjectPublicKeyInfo
     extends ASN1Object

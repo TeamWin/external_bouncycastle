@@ -30,6 +30,7 @@ import com.android.org.bouncycastle.util.Encodable;
 
 /**
  * Holding class for an X.509 CRL structure.
+ * @hide This class is not part of the Android public SDK API
  */
 public class X509CRLHolder
     implements Encodable

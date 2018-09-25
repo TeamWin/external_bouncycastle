@@ -4,6 +4,7 @@ package com.android.org.bouncycastle.crypto;
 /**
  * this exception is thrown whenever we find something we don't expect in a
  * message.
+ * @hide This class is not part of the Android public SDK API
  */
 public class InvalidCipherTextException 
     extends CryptoException

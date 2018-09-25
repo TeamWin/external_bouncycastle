@@ -79,6 +79,9 @@ import com.android.org.bouncycastle.jcajce.spec.AEADParameterSpec;
 // import org.bouncycastle.jcajce.spec.RepeatedSecretKeySpec;
 import com.android.org.bouncycastle.util.Strings;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class BaseBlockCipher
     extends BaseWrapCipher
     implements PBE

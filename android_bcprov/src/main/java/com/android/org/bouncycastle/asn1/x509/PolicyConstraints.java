@@ -23,6 +23,7 @@ import com.android.org.bouncycastle.asn1.DERTaggedObject;
  *
  * SkipCerts ::= INTEGER (0..MAX)
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class PolicyConstraints
     extends ASN1Object

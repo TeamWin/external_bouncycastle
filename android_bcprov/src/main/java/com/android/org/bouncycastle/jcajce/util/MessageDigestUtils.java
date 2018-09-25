@@ -15,6 +15,9 @@ import com.android.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 // Android-removed: Unsupported algorithms
 // import org.bouncycastle.asn1.teletrust.TeleTrusTObjectIdentifiers;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class MessageDigestUtils
 {
     private static Map<ASN1ObjectIdentifier, String> digestOidMap = new HashMap<ASN1ObjectIdentifier, String>();

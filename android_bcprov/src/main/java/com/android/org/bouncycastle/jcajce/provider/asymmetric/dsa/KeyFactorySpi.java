@@ -18,6 +18,9 @@ import com.android.org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
 import com.android.org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 import com.android.org.bouncycastle.jcajce.provider.asymmetric.util.BaseKeyFactorySpi;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class KeyFactorySpi
     extends BaseKeyFactorySpi
 {

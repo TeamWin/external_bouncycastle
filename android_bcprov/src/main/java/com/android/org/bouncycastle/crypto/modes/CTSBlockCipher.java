@@ -10,6 +10,7 @@ import com.android.org.bouncycastle.crypto.StreamBlockCipher;
 /**
  * A Cipher Text Stealing (CTS) mode cipher. CTS allows block ciphers to
  * be used to produce cipher text which is the same length as the plain text.
+ * @hide This class is not part of the Android public SDK API
  */
 public class CTSBlockCipher
     extends BufferedBlockCipher

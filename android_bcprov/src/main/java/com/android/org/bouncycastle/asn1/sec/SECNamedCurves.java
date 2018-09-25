@@ -16,6 +16,9 @@ import com.android.org.bouncycastle.math.ec.endo.GLVTypeBParameters;
 import com.android.org.bouncycastle.util.Strings;
 import com.android.org.bouncycastle.util.encoders.Hex;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class SECNamedCurves
 {
     private static ECCurve configureCurve(ECCurve curve)

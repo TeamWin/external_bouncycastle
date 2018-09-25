@@ -11,6 +11,7 @@ import com.android.org.bouncycastle.operator.OperatorCreationException;
 
 /**
  * Builder for SignerInfo generator objects.
+ * @hide This class is not part of the Android public SDK API
  */
 public class SignerInfoGeneratorBuilder
 {

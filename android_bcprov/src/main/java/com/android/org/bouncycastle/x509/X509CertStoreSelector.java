@@ -15,6 +15,7 @@ import com.android.org.bouncycastle.util.Selector;
  * @see com.android.org.bouncycastle.x509.X509Store
  * @see com.android.org.bouncycastle.jce.provider.X509StoreCertCollection
  * @deprecated use the classes under org.bouncycastle.cert.selector
+ * @hide This class is not part of the Android public SDK API
  */
 public class X509CertStoreSelector
     extends X509CertSelector

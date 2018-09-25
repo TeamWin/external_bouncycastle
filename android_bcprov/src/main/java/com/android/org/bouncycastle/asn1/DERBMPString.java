@@ -7,6 +7,7 @@ import com.android.org.bouncycastle.util.Arrays;
 
 /**
  * Carrier class for DER encoding BMPString object.
+ * @hide This class is not part of the Android public SDK API
  */
 public class DERBMPString
     extends ASN1Primitive

@@ -18,6 +18,7 @@ import com.android.org.bouncycastle.asn1.x509.X509Name;
  * Use this in preference to trying to recreate a principal from a String, not all
  * DNs are what they should be, so it's best to leave them encoded where they
  * can be.
+ * @hide This class is not part of the Android public SDK API
  */
 public class PrincipalUtil
 {

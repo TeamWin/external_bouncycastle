@@ -16,6 +16,7 @@ import com.android.org.bouncycastle.util.Arrays;
 
 /**
  * Optimal Asymmetric Encryption Padding (OAEP) - see PKCS 1 V 2.
+ * @hide This class is not part of the Android public SDK API
  */
 public class OAEPEncoding
     implements AsymmetricBlockCipher

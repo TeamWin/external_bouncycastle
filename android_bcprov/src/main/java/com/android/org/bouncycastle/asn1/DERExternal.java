@@ -6,6 +6,7 @@ import java.io.IOException;
 
 /**
  * Class representing the DER-type External
+ * @hide This class is not part of the Android public SDK API
  */
 public class DERExternal
     extends ASN1Primitive

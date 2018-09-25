@@ -41,6 +41,7 @@ import com.android.org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
  * </pre>
  *
  * PublicKey's encoded-format has to be X.509.
+ * @hide This class is not part of the Android public SDK API
  *
  **/
 public class NetscapeCertRequest

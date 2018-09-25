@@ -30,6 +30,7 @@ import com.android.org.bouncycastle.util.Encodable;
  *    signature            BIT STRING,
  *    certs                [0] EXPLICIT SEQUENCE OF Certificate OPTIONAL }
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class BasicOCSPResp
     implements Encodable

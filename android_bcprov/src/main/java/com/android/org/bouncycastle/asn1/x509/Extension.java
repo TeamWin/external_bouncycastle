@@ -16,6 +16,7 @@ import com.android.org.bouncycastle.asn1.DERSequence;
 
 /**
  * an object for the elements in the X.509 V3 extension block.
+ * @hide This class is not part of the Android public SDK API
  */
 public class Extension
     extends ASN1Object

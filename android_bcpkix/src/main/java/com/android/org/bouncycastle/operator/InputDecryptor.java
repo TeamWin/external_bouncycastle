@@ -8,6 +8,7 @@ import com.android.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 /**
  * General interface for an operator that is able to produce
  * an InputStream that will decrypt a stream of encrypted data.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface InputDecryptor
 {

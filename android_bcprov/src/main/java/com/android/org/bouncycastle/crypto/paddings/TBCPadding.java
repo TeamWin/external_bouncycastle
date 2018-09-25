@@ -11,6 +11,7 @@ import com.android.org.bouncycastle.crypto.InvalidCipherTextException;
  * This padding pads the block out with the compliment of the last bit
  * of the plain text.
  * </p>
+ * @hide This class is not part of the Android public SDK API
  */
 public class TBCPadding
     implements BlockCipherPadding

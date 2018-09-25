@@ -9,6 +9,7 @@ import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
  * TeleTrusT:
  *   { iso(1) identifier-organization(3) teleTrust(36) algorithm(3)
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public interface TeleTrusTObjectIdentifiers
 {

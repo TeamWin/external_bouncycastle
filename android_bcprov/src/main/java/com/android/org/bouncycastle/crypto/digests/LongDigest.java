@@ -7,6 +7,7 @@ import com.android.org.bouncycastle.util.Pack;
 
 /**
  * Base class for SHA-384 and SHA-512.
+ * @hide This class is not part of the Android public SDK API
  */
 public abstract class LongDigest
     implements ExtendedDigest, Memoable, EncodableDigest

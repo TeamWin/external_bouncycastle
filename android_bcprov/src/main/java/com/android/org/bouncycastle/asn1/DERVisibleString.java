@@ -11,6 +11,7 @@ import com.android.org.bouncycastle.util.Strings;
  * <p>
  * Explicit character set escape sequences are not allowed.
  * </p>
+ * @hide This class is not part of the Android public SDK API
  */
 public class DERVisibleString
     extends ASN1Primitive

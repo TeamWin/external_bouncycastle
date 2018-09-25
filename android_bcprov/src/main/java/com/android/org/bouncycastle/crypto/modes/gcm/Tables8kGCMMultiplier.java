@@ -4,6 +4,9 @@ package com.android.org.bouncycastle.crypto.modes.gcm;
 import com.android.org.bouncycastle.util.Arrays;
 import com.android.org.bouncycastle.util.Pack;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class Tables8kGCMMultiplier  implements GCMMultiplier
 {
     private byte[] H;

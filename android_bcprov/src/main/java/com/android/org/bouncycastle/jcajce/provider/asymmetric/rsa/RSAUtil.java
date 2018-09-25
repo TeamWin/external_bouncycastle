@@ -14,6 +14,7 @@ import com.android.org.bouncycastle.crypto.params.RSAPrivateCrtKeyParameters;
 /**
  * utility class for converting java.security RSA objects into their
  * org.bouncycastle.crypto counterparts.
+ * @hide This class is not part of the Android public SDK API
  */
 public class RSAUtil
 {

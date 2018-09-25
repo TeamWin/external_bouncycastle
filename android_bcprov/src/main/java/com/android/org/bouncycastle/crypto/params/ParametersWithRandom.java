@@ -5,6 +5,9 @@ import com.android.org.bouncycastle.crypto.CipherParameters;
 
 import java.security.SecureRandom;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class ParametersWithRandom
     implements CipherParameters
 {

@@ -33,6 +33,9 @@ import com.android.org.bouncycastle.crypto.params.ParametersWithRandom;
 import com.android.org.bouncycastle.crypto.digests.AndroidDigestFactory;
 import com.android.org.bouncycastle.util.Arrays;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class DSASigner
     extends SignatureSpi
     implements PKCSObjectIdentifiers, X509ObjectIdentifiers

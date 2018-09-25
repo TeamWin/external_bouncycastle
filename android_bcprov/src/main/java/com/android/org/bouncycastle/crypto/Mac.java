@@ -4,6 +4,7 @@ package com.android.org.bouncycastle.crypto;
 
 /**
  * The base interface for implementations of message authentication codes (MACs).
+ * @hide This class is not part of the Android public SDK API
  */
 public interface Mac
 {

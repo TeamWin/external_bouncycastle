@@ -12,6 +12,9 @@ import com.android.org.bouncycastle.asn1.ocsp.SingleResponse;
 import com.android.org.bouncycastle.asn1.x509.Extension;
 import com.android.org.bouncycastle.asn1.x509.Extensions;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class SingleResp
 {
     private SingleResponse  resp;

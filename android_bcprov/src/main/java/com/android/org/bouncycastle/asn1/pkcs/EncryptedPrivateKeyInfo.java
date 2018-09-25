@@ -12,6 +12,9 @@ import com.android.org.bouncycastle.asn1.DEROctetString;
 import com.android.org.bouncycastle.asn1.DERSequence;
 import com.android.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class EncryptedPrivateKeyInfo
     extends ASN1Object
 {

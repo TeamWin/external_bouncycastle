@@ -20,6 +20,9 @@ import com.android.org.bouncycastle.jcajce.provider.symmetric.util.BaseBlockCiph
 // import org.bouncycastle.jcajce.provider.symmetric.util.IvAlgorithmParameters;
 import com.android.org.bouncycastle.jcajce.provider.symmetric.util.PBESecretKeyFactory;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public final class Twofish
 {
     private Twofish()

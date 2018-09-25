@@ -10,6 +10,7 @@ import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
  * the number of standard ways the fields in a DN should be
  * encoded into their ASN.1 counterparts - a number that is rapidly approaching the
  * number of machines on the internet.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface X500NameStyle
 {

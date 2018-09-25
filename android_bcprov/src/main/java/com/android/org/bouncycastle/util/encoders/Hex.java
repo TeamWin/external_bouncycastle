@@ -9,6 +9,7 @@ import com.android.org.bouncycastle.util.Strings;
 
 /**
  * Utility class for converting hex data to bytes and back again.
+ * @hide This class is not part of the Android public SDK API
  */
 public class Hex
 {

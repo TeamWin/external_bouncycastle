@@ -8,6 +8,7 @@ import com.android.org.bouncycastle.util.Arrays;
 
 /**
  * Class representing the ASN.1 INTEGER type.
+ * @hide This class is not part of the Android public SDK API
  */
 public class ASN1Integer
     extends ASN1Primitive

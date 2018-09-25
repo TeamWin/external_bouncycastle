@@ -7,6 +7,7 @@ import java.io.OutputStream;
 /**
  * Encode and decode byte arrays (typically from binary to 7-bit ASCII 
  * encodings).
+ * @hide This class is not part of the Android public SDK API
  */
 public interface Encoder
 {

@@ -12,6 +12,7 @@ import com.android.org.bouncycastle.util.StoreException;
  * Generic interface for a PKIX based CRL store.
  *
  * @param <T> the CRL type.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface PKIXCRLStore<T extends CRL>
     extends Store<T>

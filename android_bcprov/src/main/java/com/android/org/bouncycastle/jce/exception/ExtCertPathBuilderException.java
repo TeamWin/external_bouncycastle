@@ -4,6 +4,9 @@ package com.android.org.bouncycastle.jce.exception;
 import java.security.cert.CertPath;
 import java.security.cert.CertPathBuilderException;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class ExtCertPathBuilderException
     extends CertPathBuilderException
     implements ExtException

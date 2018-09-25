@@ -6,6 +6,7 @@ package com.android.org.bouncycastle.crypto.engines;
  * Specification.
  * <p>
  * For further details see: <a href="http://csrc.nist.gov/encryption/kms/key-wrap.pdf">http://csrc.nist.gov/encryption/kms/key-wrap.pdf</a>.
+ * @hide This class is not part of the Android public SDK API
  */
 public class AESWrapEngine
     extends RFC3394WrapEngine

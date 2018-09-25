@@ -20,6 +20,7 @@ import com.android.org.bouncycastle.util.Arrays;
  * The document this implementation is based on can be found at
  * <a href=http://www.rsasecurity.com/rsalabs/pkcs/pkcs-5/index.html>
  * RSA's PKCS5 Page</a>
+ * @hide This class is not part of the Android public SDK API
  */
 public class PKCS5S2ParametersGenerator
     extends PBEParametersGenerator

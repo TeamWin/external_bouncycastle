@@ -3,6 +3,7 @@ package com.android.org.bouncycastle.crypto;
 
 /**
  * Ciphers producing a key stream which can be reset to particular points in the stream implement this.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface SkippingCipher
 {

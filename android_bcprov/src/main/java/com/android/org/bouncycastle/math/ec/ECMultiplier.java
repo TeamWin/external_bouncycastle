@@ -6,6 +6,7 @@ import java.math.BigInteger;
 /**
  * Interface for classes encapsulating a point multiplication algorithm
  * for <code>ECPoint</code>s.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface ECMultiplier
 {

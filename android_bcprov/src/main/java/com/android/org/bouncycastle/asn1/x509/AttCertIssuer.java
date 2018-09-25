@@ -9,6 +9,9 @@ import com.android.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.org.bouncycastle.asn1.DERTaggedObject;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class AttCertIssuer
     extends ASN1Object
     implements ASN1Choice

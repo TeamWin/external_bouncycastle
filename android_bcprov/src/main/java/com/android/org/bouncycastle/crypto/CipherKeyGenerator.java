@@ -5,6 +5,7 @@ import java.security.SecureRandom;
 
 /**
  * The base class for symmetric, or secret, cipher key generators.
+ * @hide This class is not part of the Android public SDK API
  */
 public class CipherKeyGenerator
 {

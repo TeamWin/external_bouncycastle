@@ -9,6 +9,7 @@ import com.android.org.bouncycastle.util.Pack;
  *
  * It is interesting to ponder why the, apart from the extra IV, the other difference here from MD5
  * is the "endianness" of the word processing!
+ * @hide This class is not part of the Android public SDK API
  */
 public class SHA1Digest
     extends GeneralDigest
