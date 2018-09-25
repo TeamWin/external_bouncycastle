@@ -15,6 +15,7 @@ import com.android.org.bouncycastle.asn1.DERSequence;
 
 /**
  * @deprecated use DomainParameters
+ * @hide This class is not part of the Android public SDK API
  */
 public class DHDomainParameters
     extends ASN1Object

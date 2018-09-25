@@ -15,6 +15,7 @@ import com.android.org.bouncycastle.asn1.DERTaggedObject;
 
 /**
  * a PKCS#7 signed data object.
+ * @hide This class is not part of the Android public SDK API
  */
 public class SignedData
     extends ASN1Object

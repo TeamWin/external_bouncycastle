@@ -27,6 +27,7 @@ import com.android.org.bouncycastle.asn1.x500.style.BCStyle;
  *                                   type  OBJECT IDENTIFIER,
  *                                   value ANY }
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class X500Name
     extends ASN1Object

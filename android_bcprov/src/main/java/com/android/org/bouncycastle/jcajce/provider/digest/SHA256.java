@@ -11,6 +11,9 @@ import com.android.org.bouncycastle.jcajce.provider.symmetric.util.BaseKeyGenera
 import com.android.org.bouncycastle.jcajce.provider.symmetric.util.BaseMac;
 import com.android.org.bouncycastle.jcajce.provider.symmetric.util.PBESecretKeyFactory;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class SHA256
 {
     private SHA256()

@@ -12,6 +12,9 @@ import com.android.org.bouncycastle.asn1.DERTaggedObject;
 import com.android.org.bouncycastle.asn1.x509.Extensions;
 import com.android.org.bouncycastle.asn1.x509.X509Extensions;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class SingleResponse
     extends ASN1Object
 {

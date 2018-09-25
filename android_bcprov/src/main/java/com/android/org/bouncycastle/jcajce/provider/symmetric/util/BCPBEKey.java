@@ -10,6 +10,9 @@ import com.android.org.bouncycastle.crypto.PBEParametersGenerator;
 import com.android.org.bouncycastle.crypto.params.KeyParameter;
 import com.android.org.bouncycastle.crypto.params.ParametersWithIV;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class BCPBEKey
     implements PBEKey
 {

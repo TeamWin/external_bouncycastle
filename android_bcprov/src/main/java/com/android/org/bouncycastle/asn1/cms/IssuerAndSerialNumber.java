@@ -25,6 +25,7 @@ import com.android.org.bouncycastle.asn1.x509.X509Name;
  *
  * CertificateSerialNumber ::= INTEGER  -- See RFC 5280
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class IssuerAndSerialNumber
     extends ASN1Object

@@ -27,6 +27,7 @@ import com.android.org.bouncycastle.util.Arrays;
  *              keyLength INTEGER (1..MAX) OPTIONAL,
  *              prf AlgorithmIdentifier {{PBKDF2-PRFs}} DEFAULT algid-hmacWithSHA1 }
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class PBKDF2Params
     extends ASN1Object

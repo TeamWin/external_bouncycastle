@@ -8,6 +8,9 @@ import com.android.org.bouncycastle.math.ec.endo.GLVEndomorphism;
 import com.android.org.bouncycastle.math.field.FiniteField;
 import com.android.org.bouncycastle.math.field.PolynomialExtensionField;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class ECAlgorithms
 {
     public static boolean isF2mCurve(ECCurve c)

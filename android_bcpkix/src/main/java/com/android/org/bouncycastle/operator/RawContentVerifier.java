@@ -4,6 +4,7 @@ package com.android.org.bouncycastle.operator;
 /**
  * Interface for ContentVerifiers that also support raw signatures that can be
  * verified using the digest of the calculated data.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface RawContentVerifier
 {

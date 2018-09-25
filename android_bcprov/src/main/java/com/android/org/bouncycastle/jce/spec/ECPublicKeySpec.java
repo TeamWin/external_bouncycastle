@@ -5,6 +5,7 @@ import com.android.org.bouncycastle.math.ec.ECPoint;
 
 /**
  * Elliptic Curve public key specification
+ * @hide This class is not part of the Android public SDK API
  */
 public class ECPublicKeySpec
     extends ECKeySpec

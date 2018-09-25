@@ -27,6 +27,7 @@ import com.android.org.bouncycastle.util.Arrays;
  * parity bits on the key and, if it's a two-key triple-des key, pad it
  * yourself.
  * </ul>
+ * @hide This class is not part of the Android public SDK API
  */
 public class DESedeWrapEngine
     implements Wrapper

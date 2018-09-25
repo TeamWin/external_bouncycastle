@@ -13,6 +13,7 @@ import com.android.org.bouncycastle.util.Selector;
 
 /**
  * a basic index for a X509CertificateHolder class
+ * @hide This class is not part of the Android public SDK API
  */
 public class X509CertificateHolderSelector
     implements Selector

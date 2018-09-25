@@ -5,6 +5,7 @@ import java.io.InputStream;
 
 /**
  * A basic parser for an OCTET STRING object
+ * @hide This class is not part of the Android public SDK API
  */
 public interface ASN1OctetStringParser
     extends ASN1Encodable, InMemoryRepresentable

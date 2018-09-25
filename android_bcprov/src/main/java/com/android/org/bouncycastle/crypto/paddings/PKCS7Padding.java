@@ -7,6 +7,7 @@ import com.android.org.bouncycastle.crypto.InvalidCipherTextException;
 
 /**
  * A padder that adds PKCS7/PKCS5 padding to a block.
+ * @hide This class is not part of the Android public SDK API
  */
 public class PKCS7Padding
     implements BlockCipherPadding

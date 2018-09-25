@@ -3,6 +3,7 @@ package com.android.org.bouncycastle.util;
 
 /**
  * Utility methods for ints.
+ * @hide This class is not part of the Android public SDK API
  */
 public class Integers
 {

@@ -8,6 +8,7 @@ import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
  * <p>
  * id-SHA1 OBJECT IDENTIFIER ::=    
  *   {iso(1) identified-organization(3) oiw(14) secsig(3) algorithms(2) 26 }
+ * @hide This class is not part of the Android public SDK API
  */
 public interface OIWObjectIdentifiers
 {

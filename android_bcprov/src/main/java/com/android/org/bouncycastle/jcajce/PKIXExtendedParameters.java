@@ -18,6 +18,7 @@ import com.android.org.bouncycastle.asn1.x509.GeneralName;
 
 /**
  * This class extends the PKIXParameters with a validity model parameter.
+ * @hide This class is not part of the Android public SDK API
  */
 public class PKIXExtendedParameters
     implements CertPathParameters

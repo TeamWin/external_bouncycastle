@@ -3,6 +3,7 @@ package com.android.org.bouncycastle.asn1;
 
 /**
  * General interface implemented by ASN.1 STRING objects.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface ASN1String
 {

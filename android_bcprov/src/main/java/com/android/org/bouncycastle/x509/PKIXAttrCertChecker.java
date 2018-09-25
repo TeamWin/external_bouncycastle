@@ -6,6 +6,9 @@ import java.security.cert.CertPathValidatorException;
 import java.util.Collection;
 import java.util.Set;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public abstract class PKIXAttrCertChecker
     implements Cloneable
 {

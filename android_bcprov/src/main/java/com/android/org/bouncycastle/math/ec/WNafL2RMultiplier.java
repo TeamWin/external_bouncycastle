@@ -6,6 +6,7 @@ import java.math.BigInteger;
 /**
  * Class implementing the WNAF (Window Non-Adjacent Form) multiplication
  * algorithm.
+ * @hide This class is not part of the Android public SDK API
  */
 public class WNafL2RMultiplier extends AbstractECMultiplier
 {

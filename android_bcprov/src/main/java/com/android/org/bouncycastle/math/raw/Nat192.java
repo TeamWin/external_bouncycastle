@@ -5,6 +5,9 @@ import java.math.BigInteger;
 
 import com.android.org.bouncycastle.util.Pack;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public abstract class Nat192
 {
     private static final long M = 0xFFFFFFFFL;

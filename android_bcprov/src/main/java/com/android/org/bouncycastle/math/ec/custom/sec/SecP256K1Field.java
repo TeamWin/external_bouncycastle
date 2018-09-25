@@ -6,6 +6,9 @@ import java.math.BigInteger;
 import com.android.org.bouncycastle.math.raw.Nat;
 import com.android.org.bouncycastle.math.raw.Nat256;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class SecP256K1Field
 {
     // 2^256 - 2^32 - 2^9 - 2^8 - 2^7 - 2^6 - 2^4 - 1

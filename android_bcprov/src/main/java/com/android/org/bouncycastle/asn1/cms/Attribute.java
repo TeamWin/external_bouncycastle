@@ -30,6 +30,7 @@ import com.android.org.bouncycastle.asn1.DERSequence;
  * <p>
  * General rule of Attribute usage is that the {@link Attributes} containers
  * must not have multiple Attribute:s with same attrType (OID) there.
+ * @hide This class is not part of the Android public SDK API
  */
 public class Attribute
     extends ASN1Object

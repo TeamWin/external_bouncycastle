@@ -9,6 +9,7 @@ package com.android.org.bouncycastle.crypto;
  * <p>
  * Note: in the case where the underlying cipher is either a CFB cipher or an
  * OFB one the last block may not be a multiple of the block size.
+ * @hide This class is not part of the Android public SDK API
  */
 public class BufferedBlockCipher
 {

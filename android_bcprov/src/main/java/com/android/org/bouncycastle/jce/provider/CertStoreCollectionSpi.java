@@ -15,6 +15,9 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class CertStoreCollectionSpi extends CertStoreSpi
 {
     private CollectionCertStoreParameters params;

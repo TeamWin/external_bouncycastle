@@ -5,6 +5,7 @@ import java.security.SecureRandom;
 
 /**
  * The base class for parameters to key generators.
+ * @hide This class is not part of the Android public SDK API
  */
 public class KeyGenerationParameters
 {

@@ -8,6 +8,7 @@ import com.android.org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 /**
  * A JCA/JCE helper that refers to the BC provider for all it's needs.
+ * @hide This class is not part of the Android public SDK API
  */
 public class BCJcaJceHelper
     extends ProviderJcaJceHelper

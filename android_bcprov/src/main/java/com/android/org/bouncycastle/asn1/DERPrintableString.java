@@ -8,6 +8,7 @@ import com.android.org.bouncycastle.util.Strings;
 
 /**
  * DER PrintableString object.
+ * @hide This class is not part of the Android public SDK API
  */
 public class DERPrintableString
     extends ASN1Primitive

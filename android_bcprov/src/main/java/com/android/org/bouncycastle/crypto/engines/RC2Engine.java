@@ -11,6 +11,7 @@ import com.android.org.bouncycastle.crypto.params.RC2Parameters;
 /**
  * an implementation of RC2 as described in RFC 2268
  *      "A Description of the RC2(r) Encryption Algorithm" R. Rivest.
+ * @hide This class is not part of the Android public SDK API
  */
 public class RC2Engine
     implements BlockCipher

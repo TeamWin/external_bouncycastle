@@ -15,6 +15,9 @@ import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.org.bouncycastle.asn1.ASN1OutputStream;
 import com.android.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class PKCS12BagAttributeCarrierImpl
     implements PKCS12BagAttributeCarrier
 {

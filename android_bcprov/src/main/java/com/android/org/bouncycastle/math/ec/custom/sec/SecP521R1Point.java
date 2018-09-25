@@ -6,6 +6,9 @@ import com.android.org.bouncycastle.math.ec.ECFieldElement;
 import com.android.org.bouncycastle.math.ec.ECPoint;
 import com.android.org.bouncycastle.math.raw.Nat;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class SecP521R1Point extends ECPoint.AbstractFp
 {
     /**

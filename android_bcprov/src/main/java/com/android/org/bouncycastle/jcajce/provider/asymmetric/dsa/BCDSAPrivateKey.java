@@ -23,6 +23,9 @@ import com.android.org.bouncycastle.jcajce.provider.asymmetric.util.KeyUtil;
 import com.android.org.bouncycastle.jcajce.provider.asymmetric.util.PKCS12BagAttributeCarrierImpl;
 import com.android.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class BCDSAPrivateKey
     implements DSAPrivateKey, PKCS12BagAttributeCarrier
 {

@@ -18,6 +18,7 @@ import com.android.org.bouncycastle.util.Arrays;
 /**
  * specification signifying that the curve parameters can also be
  * referred to by name.
+ * @hide This class is not part of the Android public SDK API
  */
 public class ECNamedCurveSpec
     extends java.security.spec.ECParameterSpec

@@ -33,6 +33,7 @@ import com.android.org.bouncycastle.util.Strings;
  * "YYMMDD000000Z"
  * </blockquote>
  * where "YYMMDD" represents the day following the midnight in question.
+ * @hide This class is not part of the Android public SDK API
  */
 public class ASN1UTCTime
     extends ASN1Primitive

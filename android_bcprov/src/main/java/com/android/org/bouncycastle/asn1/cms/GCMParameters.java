@@ -19,6 +19,7 @@ import com.android.org.bouncycastle.util.Arrays;
    aes-nonce        OCTET STRING, -- recommended size is 12 octets
    aes-ICVlen       AES-GCM-ICVlen DEFAULT 12 }
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class GCMParameters
     extends ASN1Object

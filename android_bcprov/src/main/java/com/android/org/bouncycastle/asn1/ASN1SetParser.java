@@ -5,6 +5,7 @@ import java.io.IOException;
 
 /**
  * A basic parser for a SET object
+ * @hide This class is not part of the Android public SDK API
  */
 public interface ASN1SetParser
     extends ASN1Encodable, InMemoryRepresentable

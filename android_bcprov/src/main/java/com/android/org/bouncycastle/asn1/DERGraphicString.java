@@ -6,6 +6,9 @@ import java.io.IOException;
 import com.android.org.bouncycastle.util.Arrays;
 import com.android.org.bouncycastle.util.Strings;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class DERGraphicString
     extends ASN1Primitive
     implements ASN1String

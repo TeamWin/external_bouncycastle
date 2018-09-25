@@ -6,6 +6,7 @@ import java.io.IOException;
 
 /**
  * An indefinite-length encoding version of an application specific object.
+ * @hide This class is not part of the Android public SDK API
  */
 public class BERApplicationSpecific
     extends ASN1ApplicationSpecific

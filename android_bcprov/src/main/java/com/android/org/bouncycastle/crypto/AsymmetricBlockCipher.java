@@ -5,6 +5,7 @@ package com.android.org.bouncycastle.crypto;
 /**
  * base interface that a public/private key block cipher needs
  * to conform to.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface AsymmetricBlockCipher
 {

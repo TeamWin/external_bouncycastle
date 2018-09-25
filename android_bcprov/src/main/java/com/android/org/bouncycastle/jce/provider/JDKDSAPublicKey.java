@@ -21,6 +21,9 @@ import com.android.org.bouncycastle.asn1.x9.X9ObjectIdentifiers;
 import com.android.org.bouncycastle.crypto.params.DSAPublicKeyParameters;
 import com.android.org.bouncycastle.util.Strings;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class JDKDSAPublicKey
     implements DSAPublicKey
 {

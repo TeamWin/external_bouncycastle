@@ -11,6 +11,7 @@ import java.util.StringTokenizer;
 
 /**
  * Utility method for accessing system properties.
+ * @hide This class is not part of the Android public SDK API
  */
 public class Properties
 {

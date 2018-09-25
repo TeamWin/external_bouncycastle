@@ -9,6 +9,9 @@ import com.android.org.bouncycastle.math.raw.Nat;
 import com.android.org.bouncycastle.util.Arrays;
 import com.android.org.bouncycastle.util.BigIntegers;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public abstract class ECFieldElement
     implements ECConstants
 {

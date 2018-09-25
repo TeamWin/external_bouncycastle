@@ -25,6 +25,7 @@ import com.android.org.bouncycastle.util.Integers;
  *  aACompromise           (10)
  * }
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class CRLReason
     extends ASN1Object

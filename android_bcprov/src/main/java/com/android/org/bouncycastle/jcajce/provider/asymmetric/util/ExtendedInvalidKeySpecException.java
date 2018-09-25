@@ -3,6 +3,9 @@ package com.android.org.bouncycastle.jcajce.provider.asymmetric.util;
 
 import java.security.spec.InvalidKeySpecException;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class ExtendedInvalidKeySpecException
     extends InvalidKeySpecException
 {

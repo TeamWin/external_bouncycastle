@@ -7,6 +7,9 @@ import com.android.org.bouncycastle.asn1.ASN1Enumerated;
 import com.android.org.bouncycastle.asn1.ASN1Object;
 import com.android.org.bouncycastle.asn1.ASN1Primitive;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class OCSPResponseStatus
     extends ASN1Object
 {

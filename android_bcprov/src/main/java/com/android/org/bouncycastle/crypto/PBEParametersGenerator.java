@@ -5,6 +5,7 @@ import com.android.org.bouncycastle.util.Strings;
 
 /**
  * super class for all Password Based Encryption (PBE) parameter generator classes.
+ * @hide This class is not part of the Android public SDK API
  */
 public abstract class PBEParametersGenerator
 {

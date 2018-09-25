@@ -17,6 +17,7 @@ import com.android.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 
 /**
  * General JCA/JCE utility methods.
+ * @hide This class is not part of the Android public SDK API
  */
 public class JcaJceUtils
 {

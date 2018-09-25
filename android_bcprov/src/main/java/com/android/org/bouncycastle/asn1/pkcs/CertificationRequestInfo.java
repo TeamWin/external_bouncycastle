@@ -33,6 +33,7 @@ import com.android.org.bouncycastle.asn1.x509.X509Name;
  *    values  SET SIZE(1..MAX) OF ATTRIBUTE.&amp;Type({IOSet}{\@type})
  *  }
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class CertificationRequestInfo
     extends ASN1Object

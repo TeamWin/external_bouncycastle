@@ -8,6 +8,7 @@ import com.android.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 /**
  * General interface for an operator that is able to calculate a digest from
  * a stream of output.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface DigestCalculator
 {

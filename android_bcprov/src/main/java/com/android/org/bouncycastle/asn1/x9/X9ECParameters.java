@@ -18,6 +18,7 @@ import com.android.org.bouncycastle.math.field.PolynomialExtensionField;
 /**
  * ASN.1 def for Elliptic-Curve ECParameters structure. See
  * X9.62, for further details.
+ * @hide This class is not part of the Android public SDK API
  */
 public class X9ECParameters
     extends ASN1Object

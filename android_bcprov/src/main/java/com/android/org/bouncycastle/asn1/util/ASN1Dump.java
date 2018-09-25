@@ -41,6 +41,7 @@ import com.android.org.bouncycastle.util.encoders.Hex;
 
 /**
  * Utility class for dumping ASN.1 objects as (hopefully) human friendly strings.
+ * @hide This class is not part of the Android public SDK API
  */
 public class ASN1Dump
 {

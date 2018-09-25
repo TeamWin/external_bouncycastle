@@ -8,6 +8,7 @@ import java.util.Vector;
 
 /**
  * @deprecated use BEROctetString
+ * @hide This class is not part of the Android public SDK API
  */
 public class BERConstructedOctetString
     extends BEROctetString

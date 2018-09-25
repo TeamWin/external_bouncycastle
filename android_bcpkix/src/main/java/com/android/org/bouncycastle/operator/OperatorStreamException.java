@@ -3,6 +3,9 @@ package com.android.org.bouncycastle.operator;
 
 import java.io.IOException;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class OperatorStreamException
     extends IOException
 {

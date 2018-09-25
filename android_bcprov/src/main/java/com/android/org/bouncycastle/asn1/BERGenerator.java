@@ -6,6 +6,7 @@ import java.io.OutputStream;
 
 /**
  * Base class for generators for indefinite-length structures.
+ * @hide This class is not part of the Android public SDK API
  */
 public class BERGenerator
     extends ASN1Generator

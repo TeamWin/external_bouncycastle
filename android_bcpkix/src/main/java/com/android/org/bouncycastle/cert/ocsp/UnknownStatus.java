@@ -3,6 +3,7 @@ package com.android.org.bouncycastle.cert.ocsp;
 
 /**
  * wrapper for the UnknownInfo object
+ * @hide This class is not part of the Android public SDK API
  */
 public class UnknownStatus
     implements CertificateStatus

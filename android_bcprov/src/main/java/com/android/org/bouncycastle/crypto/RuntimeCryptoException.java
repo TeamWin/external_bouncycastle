@@ -3,6 +3,7 @@ package com.android.org.bouncycastle.crypto;
 
 /**
  * the foundation class for the exceptions thrown by the crypto packages.
+ * @hide This class is not part of the Android public SDK API
  */
 public class RuntimeCryptoException 
     extends RuntimeException

@@ -13,6 +13,7 @@ import com.android.org.bouncycastle.util.Arrays;
  * <pre>
  * SubjectKeyIdentifier::= OCTET STRING
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class SubjectKeyIdentifier
     extends ASN1Object

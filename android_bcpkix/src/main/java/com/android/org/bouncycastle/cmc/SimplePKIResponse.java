@@ -18,6 +18,7 @@ import com.android.org.bouncycastle.util.Store;
  * A Simple PKI Response is defined in RFC 5272 as a CMS SignedData object with no EncapsulatedContentInfo
  * and no SignerInfos attached.
  * </p>
+ * @hide This class is not part of the Android public SDK API
  */
 public class SimplePKIResponse
     implements Encodable

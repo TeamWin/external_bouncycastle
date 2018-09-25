@@ -10,6 +10,7 @@ import com.android.org.bouncycastle.asn1.cms.CMSObjectIdentifiers;
 
 /**
  * a class representing null or absent content.
+ * @hide This class is not part of the Android public SDK API
  */
 public class CMSAbsentContent
     implements CMSTypedData, CMSReadable

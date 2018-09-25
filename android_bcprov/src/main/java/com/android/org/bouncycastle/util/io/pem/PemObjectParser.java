@@ -5,6 +5,7 @@ import java.io.IOException;
 
 /**
  * Base interface for parsers to convert PEM objects into specific objects.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface PemObjectParser
 {

@@ -3,6 +3,7 @@ package com.android.org.bouncycastle.math.ec;
 
 /**
  * Class holding precomputation data for fixed-point multiplications.
+ * @hide This class is not part of the Android public SDK API
  */
 public class FixedPointPreCompInfo implements PreCompInfo
 {

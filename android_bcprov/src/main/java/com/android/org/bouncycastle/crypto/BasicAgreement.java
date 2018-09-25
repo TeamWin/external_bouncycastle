@@ -6,6 +6,7 @@ import java.math.BigInteger;
 /**
  * The basic interface that basic Diffie-Hellman implementations
  * conforms to.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface BasicAgreement
 {

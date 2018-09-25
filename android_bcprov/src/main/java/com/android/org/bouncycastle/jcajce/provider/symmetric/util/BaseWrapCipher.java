@@ -42,6 +42,9 @@ import com.android.org.bouncycastle.jcajce.util.JcaJceHelper;
 import com.android.org.bouncycastle.jce.provider.BouncyCastleProvider;
 import com.android.org.bouncycastle.util.Arrays;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public abstract class BaseWrapCipher
     extends CipherSpi
     implements PBE

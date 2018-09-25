@@ -3,6 +3,7 @@ package com.android.org.bouncycastle.asn1;
 
 /**
  * Exception thrown when correctly encoded, but unexpected data is found in a stream while building an object.
+ * @hide This class is not part of the Android public SDK API
  */
 public class ASN1ParsingException
     extends IllegalStateException

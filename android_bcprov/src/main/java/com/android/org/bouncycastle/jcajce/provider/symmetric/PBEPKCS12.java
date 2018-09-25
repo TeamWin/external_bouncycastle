@@ -14,6 +14,9 @@ import com.android.org.bouncycastle.jcajce.provider.config.ConfigurableProvider;
 import com.android.org.bouncycastle.jcajce.provider.symmetric.util.BaseAlgorithmParameters;
 import com.android.org.bouncycastle.jcajce.provider.util.AlgorithmProvider;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class PBEPKCS12
 {
     private PBEPKCS12()

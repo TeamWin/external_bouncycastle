@@ -14,6 +14,9 @@ import com.android.org.bouncycastle.asn1.DERIA5String;
 import com.android.org.bouncycastle.asn1.DERSequence;
 import com.android.org.bouncycastle.asn1.DERTaggedObject;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class CrlID
     extends ASN1Object
 {

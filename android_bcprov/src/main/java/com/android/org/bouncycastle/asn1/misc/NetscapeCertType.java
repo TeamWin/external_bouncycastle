@@ -16,6 +16,7 @@ import com.android.org.bouncycastle.asn1.DERBitString;
  *         S/MIME CA               (6),
  *         Object Signing CA       (7) }
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class NetscapeCertType
     extends DERBitString

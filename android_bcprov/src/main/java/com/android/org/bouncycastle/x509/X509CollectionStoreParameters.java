@@ -8,6 +8,7 @@ import java.util.Collection;
  * This class contains a collection for collection based <code>X509Store</code>s.
  * 
  * @see com.android.org.bouncycastle.x509.X509Store
+ * @hide This class is not part of the Android public SDK API
  * 
  */
 public class X509CollectionStoreParameters

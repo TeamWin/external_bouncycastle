@@ -5,6 +5,7 @@ import com.android.org.bouncycastle.crypto.params.AsymmetricKeyParameter;
 
 /**
  * a holding class for public/private parameter pairs.
+ * @hide This class is not part of the Android public SDK API
  */
 public class AsymmetricCipherKeyPair
 {

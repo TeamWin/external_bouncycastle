@@ -4,6 +4,9 @@ package com.android.org.bouncycastle.jcajce.provider.util;
 import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.org.bouncycastle.jcajce.provider.config.ConfigurableProvider;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public abstract class AsymmetricAlgorithmProvider
     extends AlgorithmProvider
 {       

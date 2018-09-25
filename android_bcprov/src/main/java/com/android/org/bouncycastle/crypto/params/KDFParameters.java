@@ -5,6 +5,7 @@ import com.android.org.bouncycastle.crypto.DerivationParameters;
 
 /**
  * parameters for Key derivation functions for IEEE P1363a
+ * @hide This class is not part of the Android public SDK API
  */
 public class KDFParameters
     implements DerivationParameters

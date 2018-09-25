@@ -11,6 +11,7 @@ import com.android.org.bouncycastle.util.Arrays;
 
 /**
  * class for describing an ECPoint as a DER object.
+ * @hide This class is not part of the Android public SDK API
  */
 public class X9ECPoint
     extends ASN1Object

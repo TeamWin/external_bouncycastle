@@ -55,6 +55,7 @@ import com.android.org.bouncycastle.asn1.DERTaggedObject;
  *       ELSE version MUST be 1
  * </pre>
  * <p>
+ * @hide This class is not part of the Android public SDK API
  */
 public class SignedData
     extends ASN1Object

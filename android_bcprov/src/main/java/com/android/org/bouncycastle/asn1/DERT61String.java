@@ -9,6 +9,7 @@ import com.android.org.bouncycastle.util.Strings;
 /**
  * DER T61String (also the teletex string), try not to use this if you don't need to. The standard support the encoding for
  * this has been withdrawn.
+ * @hide This class is not part of the Android public SDK API
  */
 public class DERT61String
     extends ASN1Primitive

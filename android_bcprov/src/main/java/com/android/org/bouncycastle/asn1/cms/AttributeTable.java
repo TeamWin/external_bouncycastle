@@ -13,6 +13,7 @@ import com.android.org.bouncycastle.asn1.DERSet;
 
 /**
  * This is helper tool to construct {@link Attributes} sets.
+ * @hide This class is not part of the Android public SDK API
  */
 public class AttributeTable
 {

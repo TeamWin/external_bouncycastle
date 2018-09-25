@@ -7,6 +7,7 @@ import com.android.org.bouncycastle.crypto.InvalidCipherTextException;
 
 /**
  * A padder that adds NULL byte padding to a block.
+ * @hide This class is not part of the Android public SDK API
  */
 public class ZeroBytePadding
     implements BlockCipherPadding

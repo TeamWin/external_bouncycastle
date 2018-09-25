@@ -7,6 +7,9 @@ import com.android.org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
 import com.android.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import com.android.org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class KeyUtil
 {
     public static byte[] getEncodedSubjectPublicKeyInfo(AlgorithmIdentifier algId, ASN1Encodable keyData)

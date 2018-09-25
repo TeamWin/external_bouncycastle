@@ -14,6 +14,7 @@ import com.android.org.bouncycastle.util.io.Streams;
  * others in that it returns null after it has read the last object in
  * the stream. If an ASN.1 NULL is encountered a DER/BER Null object is
  * returned.
+ * @hide This class is not part of the Android public SDK API
  */
 public class ASN1InputStream
     extends FilterInputStream

@@ -3,6 +3,7 @@ package com.android.org.bouncycastle.crypto;
 
 /**
  * base interface for general purpose byte derivation functions.
+ * @hide This class is not part of the Android public SDK API
  */
 public interface DerivationFunction
 {

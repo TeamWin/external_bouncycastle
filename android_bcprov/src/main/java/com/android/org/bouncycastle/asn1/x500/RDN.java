@@ -12,6 +12,7 @@ import com.android.org.bouncycastle.asn1.DERSet;
 
 /**
  * Holding class for a single Relative Distinguished Name (RDN).
+ * @hide This class is not part of the Android public SDK API
  */
 public class RDN
     extends ASN1Object

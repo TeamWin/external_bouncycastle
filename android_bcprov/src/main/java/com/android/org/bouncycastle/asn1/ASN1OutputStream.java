@@ -6,6 +6,7 @@ import java.io.OutputStream;
 
 /**
  * Stream that produces output based on the default encoding for the passed in objects.
+ * @hide This class is not part of the Android public SDK API
  */
 public class ASN1OutputStream
 {

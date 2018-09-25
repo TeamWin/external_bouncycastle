@@ -7,6 +7,7 @@ import java.io.IOException;
  * DER TaggedObject - in ASN.1 notation this is any object preceded by
  * a [n] where n is some number - these are assumed to follow the construction
  * rules (as with sequences).
+ * @hide This class is not part of the Android public SDK API
  */
 public class DERTaggedObject
     extends ASN1TaggedObject

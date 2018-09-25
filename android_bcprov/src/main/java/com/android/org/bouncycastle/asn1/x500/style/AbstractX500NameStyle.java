@@ -18,6 +18,7 @@ import com.android.org.bouncycastle.asn1.x500.X500NameStyle;
  * This class provides some default behavior and common implementation for a
  * X500NameStyle. It should be easily extendable to support implementing the
  * desired X500NameStyle.
+ * @hide This class is not part of the Android public SDK API
  */
 public abstract class AbstractX500NameStyle
     implements X500NameStyle

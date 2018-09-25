@@ -9,6 +9,7 @@ import com.android.org.bouncycastle.asn1.ASN1Primitive;
 
 /**
  * General JCA/JCE utility methods.
+ * @hide This class is not part of the Android public SDK API
  */
 public class AlgorithmParametersUtils
 {

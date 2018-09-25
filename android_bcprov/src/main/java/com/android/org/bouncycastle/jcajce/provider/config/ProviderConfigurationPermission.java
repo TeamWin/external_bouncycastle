@@ -24,6 +24,7 @@ import com.android.org.bouncycastle.util.Strings;
  * <p>
  * Note: permission checks are only enforced if a security manager is present.
  * </p>
+ * @hide This class is not part of the Android public SDK API
  */
 public class ProviderConfigurationPermission
     extends BasicPermission

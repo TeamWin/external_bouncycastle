@@ -18,6 +18,7 @@ import com.android.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 
 /**
  * Default signed attributes generator.
+ * @hide This class is not part of the Android public SDK API
  */
 public class DefaultSignedAttributeTableGenerator
     implements CMSAttributeTableGenerator

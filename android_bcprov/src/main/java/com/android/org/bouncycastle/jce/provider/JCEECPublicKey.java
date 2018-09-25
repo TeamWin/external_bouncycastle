@@ -46,6 +46,9 @@ import com.android.org.bouncycastle.math.ec.custom.sec.SecP256K1Point;
 import com.android.org.bouncycastle.math.ec.custom.sec.SecP256R1Point;
 import com.android.org.bouncycastle.util.Strings;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class JCEECPublicKey
     implements ECPublicKey, com.android.org.bouncycastle.jce.interfaces.ECPublicKey, ECPointEncoder
 {

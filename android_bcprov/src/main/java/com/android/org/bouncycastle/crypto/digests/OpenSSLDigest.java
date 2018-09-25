@@ -25,6 +25,7 @@ import java.security.MessageDigest;
 /**
  * Implements the BouncyCastle Digest interface using OpenSSL's EVP API. This
  * must be an ExtendedDigest for {@link BcKeyStoreSpi} to be able to use it.
+ * @hide This class is not part of the Android public SDK API
  */
 public class OpenSSLDigest implements ExtendedDigest {
     private final MessageDigest delegate;

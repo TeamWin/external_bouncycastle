@@ -10,6 +10,9 @@ import java.util.Map;
 
 import com.android.org.bouncycastle.util.Iterable;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public class SignerInformationStore
     implements Iterable<SignerInformation>
 {

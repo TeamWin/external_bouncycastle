@@ -11,6 +11,7 @@ import com.android.org.bouncycastle.math.ec.ECFieldElement;
 
 /**
  * class for processing an FieldElement as a DER object.
+ * @hide This class is not part of the Android public SDK API
  */
 public class X9FieldElement
     extends ASN1Object

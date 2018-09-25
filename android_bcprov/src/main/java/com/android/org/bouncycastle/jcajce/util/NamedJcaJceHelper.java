@@ -22,6 +22,7 @@ import javax.crypto.SecretKeyFactory;
 
 /**
  * {@link JcaJceHelper} that obtains all algorithms using a specific named provider.
+ * @hide This class is not part of the Android public SDK API
  */
 public class NamedJcaJceHelper
     implements JcaJceHelper

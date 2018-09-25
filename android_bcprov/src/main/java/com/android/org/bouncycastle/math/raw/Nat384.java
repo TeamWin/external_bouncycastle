@@ -2,6 +2,9 @@
 package com.android.org.bouncycastle.math.raw;
 
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public abstract class Nat384
 {
     public static void mul(int[] x, int[] y, int[] zz)

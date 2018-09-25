@@ -3,6 +3,9 @@ package com.android.org.bouncycastle.math.field;
 
 import java.math.BigInteger;
 
+/**
+ * @hide This class is not part of the Android public SDK API
+ */
 public abstract class FiniteFields
 {
     static final FiniteField GF_2 = new PrimeField(BigInteger.valueOf(2));

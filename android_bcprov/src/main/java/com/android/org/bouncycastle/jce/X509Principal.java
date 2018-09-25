@@ -21,6 +21,7 @@ import com.android.org.bouncycastle.asn1.x509.X509Name;
  * </p>
  * @see com.android.org.bouncycastle.jce.PrincipalUtil
  * @deprecated use the X500Name class.
+ * @hide This class is not part of the Android public SDK API
  */
 public class X509Principal
     extends X509Name

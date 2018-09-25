@@ -13,6 +13,7 @@ import com.android.org.bouncycastle.asn1.ocsp.ResponseBytes;
 /**
  * base generator for an OCSP response - at the moment this only supports the
  * generation of responses containing BasicOCSP responses.
+ * @hide This class is not part of the Android public SDK API
  */
 public class OCSPRespBuilder
 {

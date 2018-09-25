@@ -13,6 +13,7 @@ import com.android.org.bouncycastle.util.Pack;
 /**
  * Implements the Segmented Integer Counter (SIC) mode on top of a simple
  * block cipher. This mode is also known as CTR mode.
+ * @hide This class is not part of the Android public SDK API
  */
 public class SICBlockCipher
     extends StreamBlockCipher

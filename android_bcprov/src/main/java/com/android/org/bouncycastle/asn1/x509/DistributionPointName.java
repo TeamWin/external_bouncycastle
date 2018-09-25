@@ -18,6 +18,7 @@ import com.android.org.bouncycastle.util.Strings;
  *     nameRelativeToCRLIssuer  [1] RDN
  * }
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class DistributionPointName
     extends ASN1Object

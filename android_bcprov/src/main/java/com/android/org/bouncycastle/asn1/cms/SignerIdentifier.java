@@ -23,6 +23,7 @@ import com.android.org.bouncycastle.asn1.DERTaggedObject;
  *
  * SubjectKeyIdentifier ::= OCTET STRING
  * </pre>
+ * @hide This class is not part of the Android public SDK API
  */
 public class SignerIdentifier
     extends ASN1Object

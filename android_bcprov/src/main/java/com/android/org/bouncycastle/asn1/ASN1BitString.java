@@ -11,6 +11,7 @@ import com.android.org.bouncycastle.util.io.Streams;
 
 /**
  * Base class for BIT STRING objects
+ * @hide This class is not part of the Android public SDK API
  */
 public abstract class ASN1BitString
     extends ASN1Primitive
