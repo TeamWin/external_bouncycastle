@@ -74,6 +74,7 @@ import com.android.org.bouncycastle.util.encoders.Hex;
  * @deprecated Do not use this class directly - either use org.bouncycastle.cert (bcpkix) or CertificateFactory.
  * @hide This class is not part of the Android public SDK API
  */
+@libcore.api.CorePlatformApi
 public class X509CertificateObject
     extends X509Certificate
     implements PKCS12BagAttributeCarrier
@@ -86,6 +87,7 @@ public class X509CertificateObject
 
     private PKCS12BagAttributeCarrier   attrCarrier = new PKCS12BagAttributeCarrierImpl();
 
+    @libcore.api.CorePlatformApi
     public X509CertificateObject(
         com.android.org.bouncycastle.asn1.x509.Certificate    c)
         throws CertificateParsingException

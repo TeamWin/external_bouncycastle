@@ -1,0 +1,104 @@
+field:com.android.org.bouncycastle.asn1.DERNull#INSTANCE
+field:com.android.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers#sha256WithRSAEncryption
+field:com.android.org.bouncycastle.asn1.x509.X509Name#CN
+field:com.android.org.bouncycastle.asn1.x509.X509Name#O
+field:com.android.org.bouncycastle.asn1.x509.X509Name#OU
+field:com.android.org.bouncycastle.asn1.x9.X9ObjectIdentifiers#ecdsa_with_SHA256
+method:com.android.org.bouncycastle.asn1.ASN1EncodableVector#add(ASN1Encodable)
+method:com.android.org.bouncycastle.asn1.ASN1EncodableVector#ASN1EncodableVector()
+method:com.android.org.bouncycastle.asn1.ASN1InputStream#ASN1InputStream(byte[])
+method:com.android.org.bouncycastle.asn1.ASN1InputStream#readObject()
+method:com.android.org.bouncycastle.asn1.ASN1Integer#ASN1Integer(BigInteger)
+method:com.android.org.bouncycastle.asn1.DERBitString#DERBitString(byte[])
+method:com.android.org.bouncycastle.asn1.DERInteger#DERInteger(long)
+method:com.android.org.bouncycastle.asn1.DERSequence#DERSequence()
+method:com.android.org.bouncycastle.asn1.DERSequence#DERSequence(ASN1EncodableVector)
+method:com.android.org.bouncycastle.asn1.x509.AlgorithmIdentifier#AlgorithmIdentifier(ASN1ObjectIdentifier)
+method:com.android.org.bouncycastle.asn1.x509.AlgorithmIdentifier#AlgorithmIdentifier(ASN1ObjectIdentifier,ASN1Encodable)
+method:com.android.org.bouncycastle.asn1.x509.Certificate#getInstance(Object)
+method:com.android.org.bouncycastle.asn1.x509.SubjectPublicKeyInfo#getInstance(Object)
+method:com.android.org.bouncycastle.asn1.x509.Time#Time(Date)
+method:com.android.org.bouncycastle.asn1.x509.V3TBSCertificateGenerator#generateTBSCertificate()
+method:com.android.org.bouncycastle.asn1.x509.V3TBSCertificateGenerator#setEndDate(Time)
+method:com.android.org.bouncycastle.asn1.x509.V3TBSCertificateGenerator#setIssuer(X509Name)
+method:com.android.org.bouncycastle.asn1.x509.V3TBSCertificateGenerator#setSerialNumber(ASN1Integer)
+method:com.android.org.bouncycastle.asn1.x509.V3TBSCertificateGenerator#setSignature(AlgorithmIdentifier)
+method:com.android.org.bouncycastle.asn1.x509.V3TBSCertificateGenerator#setStartDate(Time)
+method:com.android.org.bouncycastle.asn1.x509.V3TBSCertificateGenerator#setSubjectPublicKeyInfo(SubjectPublicKeyInfo)
+method:com.android.org.bouncycastle.asn1.x509.V3TBSCertificateGenerator#setSubject(X509Name)
+method:com.android.org.bouncycastle.asn1.x509.V3TBSCertificateGenerator#V3TBSCertificateGenerator()
+method:com.android.org.bouncycastle.asn1.x509.X509Name#getOIDs()
+method:com.android.org.bouncycastle.asn1.x509.X509Name#getValues()
+method:com.android.org.bouncycastle.asn1.x509.X509Name#X509Name(String)
+method:com.android.org.bouncycastle.jce.X509Principal#X509Principal(byte[])
+method:com.android.org.bouncycastle.util.io.pem.PemObject#getContent()
+method:com.android.org.bouncycastle.util.io.pem.PemObject#getType()
+method:com.android.org.bouncycastle.util.io.pem.PemObject#PemObject(String,byte[])
+method:com.android.org.bouncycastle.util.io.pem.PemReader#PemReader(Reader)
+method:com.android.org.bouncycastle.util.io.pem.PemReader#readPemObject()
+method:com.android.org.bouncycastle.util.io.pem.PemWriter#PemWriter(Writer)
+method:com.android.org.bouncycastle.util.io.pem.PemWriter#writeObject(PemObjectGenerator)
+method:com.android.org.bouncycastle.x509.X509V3CertificateGenerator#generate(PrivateKey)
+method:com.android.org.bouncycastle.x509.X509V3CertificateGenerator#setIssuerDN(X500Principal)
+method:com.android.org.bouncycastle.x509.X509V3CertificateGenerator#setNotAfter(Date)
+method:com.android.org.bouncycastle.x509.X509V3CertificateGenerator#setNotBefore(Date)
+method:com.android.org.bouncycastle.x509.X509V3CertificateGenerator#setPublicKey(PublicKey)
+method:com.android.org.bouncycastle.x509.X509V3CertificateGenerator#setSerialNumber(BigInteger)
+method:com.android.org.bouncycastle.x509.X509V3CertificateGenerator#setSignatureAlgorithm(String)
+method:com.android.org.bouncycastle.x509.X509V3CertificateGenerator#setSubjectDN(X500Principal)
+method:com.android.org.bouncycastle.x509.X509V3CertificateGenerator#X509V3CertificateGenerator()
+type:com.android.org.bouncycastle.asn1.ASN1Encodable
+type:com.android.org.bouncycastle.asn1.ASN1EncodableVector
+type:com.android.org.bouncycastle.asn1.ASN1InputStream
+type:com.android.org.bouncycastle.asn1.ASN1Integer
+type:com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier
+type:com.android.org.bouncycastle.asn1.ASN1Primitive
+type:com.android.org.bouncycastle.asn1.DERBitString
+type:com.android.org.bouncycastle.asn1.DERInteger
+type:com.android.org.bouncycastle.asn1.DERNull
+type:com.android.org.bouncycastle.asn1.DERSequence
+type:com.android.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers
+type:com.android.org.bouncycastle.asn1.x509.AlgorithmIdentifier
+type:com.android.org.bouncycastle.asn1.x509.Certificate
+type:com.android.org.bouncycastle.asn1.x509.SubjectPublicKeyInfo
+type:com.android.org.bouncycastle.asn1.x509.TBSCertificate
+type:com.android.org.bouncycastle.asn1.x509.Time
+type:com.android.org.bouncycastle.asn1.x509.V3TBSCertificateGenerator
+type:com.android.org.bouncycastle.asn1.x509.X509Name
+type:com.android.org.bouncycastle.asn1.x9.X9ObjectIdentifiers
+type:com.android.org.bouncycastle.jce.provider.X509CertificateObject
+type:com.android.org.bouncycastle.jce.X509Principal
+type:com.android.org.bouncycastle.util.io.pem.PemObject
+type:com.android.org.bouncycastle.util.io.pem.PemObjectGenerator
+type:com.android.org.bouncycastle.util.io.pem.PemReader
+type:com.android.org.bouncycastle.util.io.pem.PemWriter
+type:com.android.org.bouncycastle.x509.X509V3CertificateGenerator
+
+# BEGIN: Manually added as tool did not find it or generated incorrect locator
+
+# Needed for stubs generation, otherwise cannot convert to ASN1Encodable
+type:com.android.org.bouncycastle.asn1.ASN1Object
+
+# Got the wrong class
+# method:com.android.org.bouncycastle.asn1.DERSequence#getEncoded()
+method:com.android.org.bouncycastle.asn1.ASN1Object#getEncoded()
+
+# Unqualified name
+# method:com.android.org.bouncycastle.jce.provider.X509CertificateObject#X509CertificateObject(Certificate)
+method:com.android.org.bouncycastle.jce.provider.X509CertificateObject#X509CertificateObject(com.android.org.bouncycastle.asn1.x509.Certificate)
+
+# END
+
+# BEGIN: Avoid b/116777737
+type:com.android.org.bouncycastle.util.Iterable
+# END
+
+# BEGIN: Added as stubs generator will add an abstract hashCode() method to the ASN1Primitive
+# superclass even though that is marked @hide.
+type:com.android.org.bouncycastle.asn1.ASN1BitString
+type:com.android.org.bouncycastle.asn1.ASN1Null
+type:com.android.org.bouncycastle.asn1.ASN1Sequence
+method:com.android.org.bouncycastle.asn1.ASN1BitString#hashCode()
+method:com.android.org.bouncycastle.asn1.ASN1Null#hashCode()
+method:com.android.org.bouncycastle.asn1.ASN1Sequence#hashCode()
+# END

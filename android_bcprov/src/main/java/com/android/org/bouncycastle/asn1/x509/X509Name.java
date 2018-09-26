@@ -37,6 +37,7 @@ import com.android.org.bouncycastle.util.encoders.Hex;
  * @deprecated use org.bouncycastle.asn1.x500.X500Name.
  * @hide This class is not part of the Android public SDK API
  */
+@libcore.api.CorePlatformApi
 public class X509Name
     extends ASN1Object
 {
@@ -50,12 +51,14 @@ public class X509Name
      * organization - StringType(SIZE(1..64))
      * @deprecated use a X500NameStyle
      */
+    @libcore.api.CorePlatformApi
     public static final ASN1ObjectIdentifier O = new ASN1ObjectIdentifier("2.5.4.10");
 
     /**
      * organizational unit name - StringType(SIZE(1..64))
      * @deprecated use a X500NameStyle
      */
+    @libcore.api.CorePlatformApi
     public static final ASN1ObjectIdentifier OU = new ASN1ObjectIdentifier("2.5.4.11");
 
     /**
@@ -68,6 +71,7 @@ public class X509Name
      * common name - StringType(SIZE(1..64))
      * @deprecated use a X500NameStyle
      */
+    @libcore.api.CorePlatformApi
     public static final ASN1ObjectIdentifier CN = new ASN1ObjectIdentifier("2.5.4.3");
 
     /**
@@ -592,6 +596,7 @@ public class X509Name
      * some such, converting it into an ordered set of name attributes.
      * @deprecated use X500Name, X500NameBuilder
      */
+    @libcore.api.CorePlatformApi
     public X509Name(
         String  dirName)
     {
@@ -863,6 +868,7 @@ public class X509Name
     /**
      * return a vector of the oids in the name, in the order they were found.
      */
+    @libcore.api.CorePlatformApi
     public Vector getOIDs()
     {
         Vector  v = new Vector();
@@ -879,6 +885,7 @@ public class X509Name
      * return a vector of the values found in the name, in the order they
      * were found.
      */
+    @libcore.api.CorePlatformApi
     public Vector getValues()
     {
         Vector  v = new Vector();
