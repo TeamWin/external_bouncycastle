@@ -7,6 +7,7 @@ import java.io.IOException;
  * A NULL object - use DERNull.INSTANCE for populating structures.
  * @hide This class is not part of the Android public SDK API
  */
+@libcore.api.CorePlatformApi
 public abstract class ASN1Null
     extends ASN1Primitive
 {
@@ -51,6 +52,7 @@ public abstract class ASN1Null
         return null;
     }
 
+    @libcore.api.CorePlatformApi
     public int hashCode()
     {
         return -1;

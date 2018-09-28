@@ -13,6 +13,7 @@ import com.android.org.bouncycastle.asn1.DERSequence;
 /**
  * @hide This class is not part of the Android public SDK API
  */
+@libcore.api.CorePlatformApi
 public class AlgorithmIdentifier
     extends ASN1Object
 {
@@ -41,12 +42,14 @@ public class AlgorithmIdentifier
         return null;
     }
 
+    @libcore.api.CorePlatformApi
     public AlgorithmIdentifier(
         ASN1ObjectIdentifier algorithm)
     {
         this.algorithm = algorithm;
     }
 
+    @libcore.api.CorePlatformApi
     public AlgorithmIdentifier(
         ASN1ObjectIdentifier algorithm,
         ASN1Encodable           parameters)

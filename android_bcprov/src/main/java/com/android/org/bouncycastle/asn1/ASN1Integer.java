@@ -10,6 +10,7 @@ import com.android.org.bouncycastle.util.Arrays;
  * Class representing the ASN.1 INTEGER type.
  * @hide This class is not part of the Android public SDK API
  */
+@libcore.api.CorePlatformApi
 public class ASN1Integer
     extends ASN1Primitive
 {
@@ -77,6 +78,7 @@ public class ASN1Integer
         bytes = BigInteger.valueOf(value).toByteArray();
     }
 
+    @libcore.api.CorePlatformApi
     public ASN1Integer(
         BigInteger value)
     {

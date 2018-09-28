@@ -12,6 +12,7 @@ import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
  * </pre>
  * @hide This class is not part of the Android public SDK API
  */
+@libcore.api.CorePlatformApi
 public interface X9ObjectIdentifiers
 {
     /** Base OID: 1.2.840.10045 */
@@ -54,6 +55,7 @@ public interface X9ObjectIdentifiers
     static final ASN1ObjectIdentifier ecdsa_with_SHA224 = ecdsa_with_SHA2.branch("1");
 
     /** OID: 1.2.840.10045.4.3.2 */
+    @libcore.api.CorePlatformApi
     static final ASN1ObjectIdentifier ecdsa_with_SHA256 = ecdsa_with_SHA2.branch("2");
 
     /** OID: 1.2.840.10045.4.3.3 */
