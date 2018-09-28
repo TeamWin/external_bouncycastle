@@ -23,6 +23,7 @@ import com.android.org.bouncycastle.asn1.x509.X509Name;
  * @deprecated use the X500Name class.
  * @hide This class is not part of the Android public SDK API
  */
+@libcore.api.CorePlatformApi
 public class X509Principal
     extends X509Name
     implements Principal
@@ -44,6 +45,7 @@ public class X509Principal
     /**
      * Constructor from an encoded byte array.
      */
+    @libcore.api.CorePlatformApi
     public X509Principal(
         byte[]  bytes)
         throws IOException

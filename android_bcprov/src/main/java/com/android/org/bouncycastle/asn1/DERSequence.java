@@ -7,6 +7,7 @@ import java.util.Enumeration;
 /**
  * @hide This class is not part of the Android public SDK API
  */
+@libcore.api.CorePlatformApi
 public class DERSequence
     extends ASN1Sequence
 {
@@ -15,6 +16,7 @@ public class DERSequence
     /**
      * create an empty sequence
      */
+    @libcore.api.CorePlatformApi
     public DERSequence()
     {
     }
@@ -33,6 +35,7 @@ public class DERSequence
      * create a sequence containing a vector of objects.
      * @param v the vector of objects to make up the sequence.
      */
+    @libcore.api.CorePlatformApi
     public DERSequence(
         ASN1EncodableVector v)
     {
