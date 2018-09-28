@@ -7,6 +7,7 @@ import java.io.IOException;
  * A BIT STRING with DER encoding.
  * @hide This class is not part of the Android public SDK API
  */
+@libcore.api.CorePlatformApi
 public class DERBitString
     extends ASN1BitString
 {
@@ -96,6 +97,7 @@ public class DERBitString
         super(data, padBits);
     }
 
+    @libcore.api.CorePlatformApi
     public DERBitString(
         byte[]  data)
     {

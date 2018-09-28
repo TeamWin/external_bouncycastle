@@ -31,6 +31,7 @@ import com.android.org.bouncycastle.asn1.x500.X500Name;
  * will parse them, but you really shouldn't be creating new ones.
  * @hide This class is not part of the Android public SDK API
  */
+@libcore.api.CorePlatformApi
 public class TBSCertificate
     extends ASN1Object
 {

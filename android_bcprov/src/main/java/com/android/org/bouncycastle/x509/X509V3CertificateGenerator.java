@@ -46,6 +46,7 @@ import com.android.org.bouncycastle.x509.extension.X509ExtensionUtil;
  *  @deprecated use org.bouncycastle.cert.X509v3CertificateBuilder.
  * @hide This class is not part of the Android public SDK API
  */
+@libcore.api.CorePlatformApi
 public class X509V3CertificateGenerator
 {
     private final JcaJceHelper bcHelper = new BCJcaJceHelper(); // needed to force provider loading
@@ -57,6 +58,7 @@ public class X509V3CertificateGenerator
     private String                      signatureAlgorithm;
     private X509ExtensionsGenerator     extGenerator;
 
+    @libcore.api.CorePlatformApi
     public X509V3CertificateGenerator()
     {
         tbsGen = new V3TBSCertificateGenerator();
@@ -75,6 +77,7 @@ public class X509V3CertificateGenerator
     /**
      * set the serial number for the certificate.
      */
+    @libcore.api.CorePlatformApi
     public void setSerialNumber(
         BigInteger      serialNumber)
     {
@@ -90,6 +93,7 @@ public class X509V3CertificateGenerator
      * Set the issuer distinguished name - the issuer is the entity whose private key is used to sign the
      * certificate.
      */
+    @libcore.api.CorePlatformApi
     public void setIssuerDN(
         X500Principal   issuer)
     {
@@ -113,12 +117,14 @@ public class X509V3CertificateGenerator
         tbsGen.setIssuer(issuer);
     }
 
+    @libcore.api.CorePlatformApi
     public void setNotBefore(
         Date    date)
     {
         tbsGen.setStartDate(new Time(date));
     }
 
+    @libcore.api.CorePlatformApi
     public void setNotAfter(
         Date    date)
     {
@@ -128,6 +134,7 @@ public class X509V3CertificateGenerator
     /**
      * Set the subject distinguished name. The subject describes the entity associated with the public key.
      */
+    @libcore.api.CorePlatformApi
     public void setSubjectDN(
         X500Principal   subject)
     {
@@ -150,6 +157,7 @@ public class X509V3CertificateGenerator
         tbsGen.setSubject(subject);
     }
 
+    @libcore.api.CorePlatformApi
     public void setPublicKey(
         PublicKey       key)
         throws IllegalArgumentException
@@ -171,6 +179,7 @@ public class X509V3CertificateGenerator
      * 
      * @param signatureAlgorithm string representation of the algorithm name.
      */
+    @libcore.api.CorePlatformApi
     public void setSignatureAlgorithm(
         String  signatureAlgorithm)
     {
@@ -412,6 +421,7 @@ public class X509V3CertificateGenerator
      * used - not "BC".
      * </p>
      */
+    @libcore.api.CorePlatformApi
     public X509Certificate generate(
         PrivateKey      key)
         throws CertificateEncodingException, IllegalStateException, NoSuchAlgorithmException, SignatureException, InvalidKeyException
