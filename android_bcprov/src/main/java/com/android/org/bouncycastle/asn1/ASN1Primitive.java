@@ -7,6 +7,7 @@ import java.io.IOException;
  * Base class for ASN.1 primitive objects. These are the actual objects used to generate byte encodings.
  * @hide This class is not part of the Android public SDK API
  */
+@libcore.api.CorePlatformApi
 public abstract class ASN1Primitive
     extends ASN1Object
 {
