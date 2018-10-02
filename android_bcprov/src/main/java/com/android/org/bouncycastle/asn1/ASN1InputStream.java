@@ -26,6 +26,7 @@ public class ASN1InputStream
 
     private final byte[][] tmpBuffers;
 
+    @libcore.api.CorePlatformApi
     public ASN1InputStream(
         InputStream is)
     {
