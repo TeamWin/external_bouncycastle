@@ -1,6 +1,7 @@
 field:com.android.org.bouncycastle.asn1.DERNull#INSTANCE
 field:com.android.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers#sha256WithRSAEncryption
 field:com.android.org.bouncycastle.asn1.x509.X509Name#CN
+field:com.android.org.bouncycastle.asn1.x509.X509Name#DefaultSymbols
 field:com.android.org.bouncycastle.asn1.x509.X509Name#O
 field:com.android.org.bouncycastle.asn1.x509.X509Name#OU
 field:com.android.org.bouncycastle.asn1.x9.X9ObjectIdentifiers#ecdsa_with_SHA256
@@ -30,6 +31,8 @@ method:com.android.org.bouncycastle.asn1.x509.V3TBSCertificateGenerator#V3TBSCer
 method:com.android.org.bouncycastle.asn1.x509.X509Name#getOIDs()
 method:com.android.org.bouncycastle.asn1.x509.X509Name#getValues()
 method:com.android.org.bouncycastle.asn1.x509.X509Name#X509Name(String)
+method:com.android.org.bouncycastle.asn1.x509.X509Name#getInstance(Object)
+method:com.android.org.bouncycastle.asn1.x509.X509Name#toString(boolean,Hashtable)
 method:com.android.org.bouncycastle.jce.X509Principal#X509Principal(byte[])
 method:com.android.org.bouncycastle.util.io.pem.PemObject#getContent()
 method:com.android.org.bouncycastle.util.io.pem.PemObject#getType()
