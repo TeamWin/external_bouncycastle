@@ -230,6 +230,7 @@ public class X509Name
      * default look up table translating OID values into their common symbols following
      * the convention in RFC 2253 with a few extras
      */
+    @libcore.api.CorePlatformApi
     public static final Hashtable DefaultSymbols = new Hashtable();
 
     /**
@@ -379,6 +380,7 @@ public class X509Name
         return getInstance(ASN1Sequence.getInstance(obj, explicit));
     }
 
+    @libcore.api.CorePlatformApi
     public static X509Name getInstance(
         Object  obj)
     {
@@ -1305,6 +1307,7 @@ public class X509Name
      * @param reverse if true start at the end of the sequence and work back.
      * @param oidSymbols look up table strings for oids.
      */
+    @libcore.api.CorePlatformApi
     public String toString(
         boolean     reverse,
         Hashtable   oidSymbols)
