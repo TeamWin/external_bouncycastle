@@ -79,6 +79,7 @@ public class AlgorithmIdentifier
         }
     }
 
+    @libcore.api.CorePlatformApi
     public ASN1ObjectIdentifier getAlgorithm()
     {
         return algorithm;
