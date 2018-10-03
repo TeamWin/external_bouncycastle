@@ -205,6 +205,7 @@ public class ASN1ObjectIdentifier
      *
      * @return the string representation of the OID carried by this object.
      */
+    @libcore.api.CorePlatformApi
     public String getId()
     {
         return identifier;
