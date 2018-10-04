@@ -100,6 +100,7 @@ import com.android.org.bouncycastle.util.encoders.Hex;
  * </p>
  * @hide This class is not part of the Android public SDK API
  */
+@libcore.api.CorePlatformApi
 public abstract class ASN1OctetString
     extends ASN1Primitive
     implements ASN1OctetStringParser
@@ -208,11 +209,13 @@ public abstract class ASN1OctetString
      *
      * @return the byte[] representing the OCTET STRING's content.
      */
+    @libcore.api.CorePlatformApi
     public byte[] getOctets()
     {
         return string;
     }
 
+    @libcore.api.CorePlatformApi
     public int hashCode()
     {
         return Arrays.hashCode(this.getOctets());
