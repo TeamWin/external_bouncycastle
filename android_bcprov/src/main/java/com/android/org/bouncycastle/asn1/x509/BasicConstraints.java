@@ -15,6 +15,7 @@ import com.android.org.bouncycastle.asn1.DERSequence;
 /**
  * @hide This class is not part of the Android public SDK API
  */
+@libcore.api.CorePlatformApi
 public class BasicConstraints
     extends ASN1Object
 {
@@ -28,6 +29,7 @@ public class BasicConstraints
         return getInstance(ASN1Sequence.getInstance(obj, explicit));
     }
 
+    @libcore.api.CorePlatformApi
     public static BasicConstraints getInstance(
         Object  obj)
     {
@@ -111,6 +113,7 @@ public class BasicConstraints
         this.pathLenConstraint = new ASN1Integer(pathLenConstraint);
     }
 
+    @libcore.api.CorePlatformApi
     public boolean isCA()
     {
         return (cA != null) && cA.isTrue();
