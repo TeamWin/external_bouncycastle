@@ -44,6 +44,7 @@ import com.android.org.bouncycastle.jcajce.provider.util.AsymmetricKeyInfoConver
  * test for getInstance works.
  * @hide This class is not part of the Android public SDK API
  */
+@libcore.api.CorePlatformApi
 public final class BouncyCastleProvider extends Provider
     implements ConfigurableProvider
 {
@@ -140,6 +141,7 @@ public final class BouncyCastleProvider extends Provider
      * using runtime registration of the provider using the
      * <code>Security.addProvider()</code> mechanism.
      */
+    @libcore.api.CorePlatformApi
     public BouncyCastleProvider()
     {
         super(PROVIDER_NAME, 1.57, info);
