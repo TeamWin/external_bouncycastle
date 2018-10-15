@@ -43,6 +43,7 @@ method:com.android.org.bouncycastle.asn1.x509.X509Name#X509Name(String)
 method:com.android.org.bouncycastle.asn1.x509.X509Name#getInstance(Object)
 method:com.android.org.bouncycastle.asn1.x509.X509Name#toString(boolean,Hashtable)
 method:com.android.org.bouncycastle.jce.X509Principal#X509Principal(byte[])
+method:com.android.org.bouncycastle.jce.provider.BouncyCastleProvider#BouncyCastleProvider()
 method:com.android.org.bouncycastle.util.io.pem.PemObject#getContent()
 method:com.android.org.bouncycastle.util.io.pem.PemObject#getType()
 method:com.android.org.bouncycastle.util.io.pem.PemObject#PemObject(String,byte[])
@@ -82,6 +83,7 @@ type:com.android.org.bouncycastle.asn1.x509.Time
 type:com.android.org.bouncycastle.asn1.x509.V3TBSCertificateGenerator
 type:com.android.org.bouncycastle.asn1.x509.X509Name
 type:com.android.org.bouncycastle.asn1.x9.X9ObjectIdentifiers
+type:com.android.org.bouncycastle.jce.provider.BouncyCastleProvider
 type:com.android.org.bouncycastle.jce.provider.X509CertificateObject
 type:com.android.org.bouncycastle.jce.X509Principal
 type:com.android.org.bouncycastle.util.io.pem.PemObject
