@@ -1,5 +1,9 @@
+# TODO: Remove comments and sort.
 field:com.android.org.bouncycastle.asn1.DERNull#INSTANCE
 field:com.android.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers#sha256WithRSAEncryption
+field:com.android.org.bouncycastle.asn1.x509.GeneralName#dNSName
+field:com.android.org.bouncycastle.asn1.x509.GeneralName#iPAddress
+field:com.android.org.bouncycastle.asn1.x509.GeneralName#otherName
 field:com.android.org.bouncycastle.asn1.x509.X509Name#CN
 field:com.android.org.bouncycastle.asn1.x509.X509Name#DefaultSymbols
 field:com.android.org.bouncycastle.asn1.x509.X509Name#O
@@ -12,12 +16,20 @@ method:com.android.org.bouncycastle.asn1.ASN1InputStream#ASN1InputStream(byte[])
 method:com.android.org.bouncycastle.asn1.ASN1InputStream#readObject()
 method:com.android.org.bouncycastle.asn1.ASN1Integer#ASN1Integer(BigInteger)
 method:com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier#getId()
+method:com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier#getInstance(Object)
+method:com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier#ASN1ObjectIdentifier(String)
 method:com.android.org.bouncycastle.asn1.ASN1OctetString#getOctets()
 method:com.android.org.bouncycastle.asn1.ASN1OctetString#hashCode()
+method:com.android.org.bouncycastle.asn1.ASN1TaggedObject#getObject()
+method:com.android.org.bouncycastle.asn1.ASN1TaggedObject#hashCode()
 method:com.android.org.bouncycastle.asn1.DERBitString#DERBitString(byte[])
 method:com.android.org.bouncycastle.asn1.DERInteger#DERInteger(long)
+method:com.android.org.bouncycastle.asn1.DEROctetString#DEROctetString(byte[])
 method:com.android.org.bouncycastle.asn1.DERSequence#DERSequence()
 method:com.android.org.bouncycastle.asn1.DERSequence#DERSequence(ASN1EncodableVector)
+method:com.android.org.bouncycastle.asn1.DERTaggedObject#DERTaggedObject(int,ASN1Encodable)
+method:com.android.org.bouncycastle.asn1.DERUTF8String#DERUTF8String(String)
+method:com.android.org.bouncycastle.asn1.DERUTF8String#getString()
 method:com.android.org.bouncycastle.asn1.pkcs.PrivateKeyInfo#getInstance(Object)
 method:com.android.org.bouncycastle.asn1.pkcs.PrivateKeyInfo#getPrivateKeyAlgorithm()
 method:com.android.org.bouncycastle.asn1.x509.AlgorithmIdentifier#getAlgorithm()
@@ -26,6 +38,9 @@ method:com.android.org.bouncycastle.asn1.x509.AlgorithmIdentifier#AlgorithmIdent
 method:com.android.org.bouncycastle.asn1.x509.BasicConstraints#getInstance(Object)
 method:com.android.org.bouncycastle.asn1.x509.BasicConstraints#isCA()
 method:com.android.org.bouncycastle.asn1.x509.Certificate#getInstance(Object)
+method:com.android.org.bouncycastle.asn1.x509.GeneralName#GeneralName(int,ASN1Encodable)
+method:com.android.org.bouncycastle.asn1.x509.GeneralName#GeneralName(int,String)
+method:com.android.org.bouncycastle.asn1.x509.GeneralName#getTagNo()
 method:com.android.org.bouncycastle.asn1.x509.SubjectPublicKeyInfo#getInstance(Object)
 method:com.android.org.bouncycastle.asn1.x509.Time#Time(Date)
 method:com.android.org.bouncycastle.asn1.x509.V3TBSCertificateGenerator#generateTBSCertificate()
@@ -67,16 +82,20 @@ type:com.android.org.bouncycastle.asn1.ASN1Integer
 type:com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier
 type:com.android.org.bouncycastle.asn1.ASN1OctetString
 type:com.android.org.bouncycastle.asn1.ASN1Primitive
+type:com.android.org.bouncycastle.asn1.ASN1TaggedObject
 type:com.android.org.bouncycastle.asn1.DERBitString
 type:com.android.org.bouncycastle.asn1.DERInteger
 type:com.android.org.bouncycastle.asn1.DERNull
 type:com.android.org.bouncycastle.asn1.DEROctetString
 type:com.android.org.bouncycastle.asn1.DERSequence
+type:com.android.org.bouncycastle.asn1.DERTaggedObject
+type:com.android.org.bouncycastle.asn1.DERUTF8String
 type:com.android.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers
 type:com.android.org.bouncycastle.asn1.pkcs.PrivateKeyInfo
 type:com.android.org.bouncycastle.asn1.x509.AlgorithmIdentifier
 type:com.android.org.bouncycastle.asn1.x509.BasicConstraints
 type:com.android.org.bouncycastle.asn1.x509.Certificate
+type:com.android.org.bouncycastle.asn1.x509.GeneralName
 type:com.android.org.bouncycastle.asn1.x509.SubjectPublicKeyInfo
 type:com.android.org.bouncycastle.asn1.x509.TBSCertificate
 type:com.android.org.bouncycastle.asn1.x509.Time
@@ -100,6 +119,7 @@ type:com.android.org.bouncycastle.asn1.ASN1Object
 # Got the wrong class
 # method:com.android.org.bouncycastle.asn1.DERSequence#getEncoded()
 method:com.android.org.bouncycastle.asn1.ASN1Object#getEncoded()
+method:com.android.org.bouncycastle.asn1.ASN1Object#getEncoded(String)
 
 # Unqualified name
 # method:com.android.org.bouncycastle.jce.provider.X509CertificateObject#X509CertificateObject(Certificate)
@@ -118,5 +138,7 @@ type:com.android.org.bouncycastle.asn1.ASN1Null
 type:com.android.org.bouncycastle.asn1.ASN1Sequence
 method:com.android.org.bouncycastle.asn1.ASN1BitString#hashCode()
 method:com.android.org.bouncycastle.asn1.ASN1Null#hashCode()
+method:com.android.org.bouncycastle.asn1.ASN1Sequence#getObjectAt(int)
 method:com.android.org.bouncycastle.asn1.ASN1Sequence#hashCode()
+method:com.android.org.bouncycastle.asn1.ASN1Sequence#size()
 # END
