@@ -44,17 +44,21 @@ import com.android.org.bouncycastle.util.IPAddress;
  * </pre>
  * @hide This class is not part of the Android public SDK API
  */
+@libcore.api.CorePlatformApi
 public class GeneralName
     extends ASN1Object
     implements ASN1Choice
 {
+    @libcore.api.CorePlatformApi
     public static final int otherName                     = 0;
     public static final int rfc822Name                    = 1;
+    @libcore.api.CorePlatformApi
     public static final int dNSName                       = 2;
     public static final int x400Address                   = 3;
     public static final int directoryName                 = 4;
     public static final int ediPartyName                  = 5;
     public static final int uniformResourceIdentifier     = 6;
+    @libcore.api.CorePlatformApi
     public static final int iPAddress                     = 7;
     public static final int registeredID                  = 8;
 
@@ -106,6 +110,7 @@ public class GeneralName
      * RFC 1883, the octet string MUST contain exactly sixteen octets [RFC
      * 1883].
      */
+    @libcore.api.CorePlatformApi
     public GeneralName(
         int           tag,
         ASN1Encodable name)
@@ -137,6 +142,7 @@ public class GeneralName
      * @param name string representation of name
      * @throws IllegalArgumentException if the string encoding is not correct or     *             not supported.
      */
+    @libcore.api.CorePlatformApi
     public GeneralName(
         int       tag,
         String    name)
@@ -231,6 +237,7 @@ public class GeneralName
         return GeneralName.getInstance(ASN1TaggedObject.getInstance(tagObj, true));
     }
 
+    @libcore.api.CorePlatformApi
     public int getTagNo()
     {
         return tag;
