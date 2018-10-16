@@ -10,6 +10,7 @@ import com.android.org.bouncycastle.util.Strings;
  * DER UTF8String object.
  * @hide This class is not part of the Android public SDK API
  */
+@libcore.api.CorePlatformApi
 public class DERUTF8String
     extends ASN1Primitive
     implements ASN1String
@@ -88,11 +89,13 @@ public class DERUTF8String
      *
      * @param string the string to be carried in the UTF8String object,
      */
+    @libcore.api.CorePlatformApi
     public DERUTF8String(String string)
     {
         this.string = Strings.toUTF8ByteArray(string);
     }
 
+    @libcore.api.CorePlatformApi
     public String getString()
     {
         return Strings.fromUTF8ByteArray(string);

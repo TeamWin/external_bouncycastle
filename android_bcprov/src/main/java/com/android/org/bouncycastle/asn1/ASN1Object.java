@@ -39,6 +39,7 @@ public abstract class ASN1Object
      * @return byte encoded object.
      * @throws IOException on encoding error.
      */
+    @libcore.api.CorePlatformApi
     public byte[] getEncoded(
         String encoding)
         throws IOException

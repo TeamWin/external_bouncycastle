@@ -16,6 +16,7 @@ public class DEROctetString
      *
      * @param string the octets making up the octet string.
      */
+    @libcore.api.CorePlatformApi
     public DEROctetString(
         byte[]  string)
     {
