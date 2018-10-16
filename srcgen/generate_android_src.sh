@@ -30,7 +30,3 @@ function do_transform() {
 BCPROV_SRC_IN_DIR=${BOUNCY_CASTLE_DIR}/bcprov/src/main/java
 BCPROV_SRC_OUT_DIR=${BOUNCY_CASTLE_DIR}/android_bcprov/src/main/java
 do_transform ${BCPROV_SRC_IN_DIR} ${BCPROV_SRC_OUT_DIR}
-
-BCPKIX_SRC_IN_DIR=${BOUNCY_CASTLE_DIR}/bcpkix/src/main/java
-BCPKIX_SRC_OUT_DIR=${BOUNCY_CASTLE_DIR}/android_bcpkix/src/main/java
-do_transform ${BCPKIX_SRC_IN_DIR} ${BCPKIX_SRC_OUT_DIR}
