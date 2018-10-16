@@ -272,6 +272,7 @@ public abstract class ASN1Sequence
      * @param index the sequence number (starting at zero) of the object
      * @return the object at the sequence position indicated by index.
      */
+    @libcore.api.CorePlatformApi
     public ASN1Encodable getObjectAt(
         int index)
     {
@@ -283,6 +284,7 @@ public abstract class ASN1Sequence
      *
      * @return the number of objects in this sequence.
      */
+    @libcore.api.CorePlatformApi
     public int size()
     {
         return seq.size();

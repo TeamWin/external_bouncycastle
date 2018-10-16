@@ -28,6 +28,7 @@ public class ASN1ObjectIdentifier
      * @return an ASN1ObjectIdentifier instance, or null.
      * @throws IllegalArgumentException if the object cannot be converted.
      */
+    @libcore.api.CorePlatformApi
     public static ASN1ObjectIdentifier getInstance(
         Object obj)
     {
@@ -168,6 +169,7 @@ public class ASN1ObjectIdentifier
      *
      * @param identifier a string representation of an OID.
      */
+    @libcore.api.CorePlatformApi
     public ASN1ObjectIdentifier(
         String identifier)
     {
