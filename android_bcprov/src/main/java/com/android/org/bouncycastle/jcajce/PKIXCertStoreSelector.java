@@ -22,6 +22,7 @@ public class PKIXCertStoreSelector<T extends Certificate>
 {
     /**
      * Builder for a PKIXCertStoreSelector.
+     * @hide This class is not part of the Android public SDK API
      */
     public static class Builder
     {

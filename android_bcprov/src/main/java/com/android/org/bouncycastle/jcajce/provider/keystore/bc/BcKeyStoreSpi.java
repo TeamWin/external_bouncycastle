@@ -943,6 +943,7 @@ public class BcKeyStoreSpi
      * touch you.
      *
      * Also referred to by the alias UBER.
+     * @hide This class is not part of the Android public SDK API
      */
     public static class BouncyCastleStore
         extends BcKeyStoreSpi
@@ -1067,6 +1068,9 @@ public class BcKeyStoreSpi
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class Std
        extends BcKeyStoreSpi
     {
@@ -1076,6 +1080,9 @@ public class BcKeyStoreSpi
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class Version1
         extends BcKeyStoreSpi
     {

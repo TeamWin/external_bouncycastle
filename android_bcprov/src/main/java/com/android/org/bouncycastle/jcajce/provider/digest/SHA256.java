@@ -21,6 +21,9 @@ public class SHA256
 
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class Digest
         extends BCMessageDigest
         implements Cloneable
@@ -40,6 +43,9 @@ public class SHA256
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class HashMac
         extends BaseMac
     {
@@ -67,6 +73,7 @@ public class SHA256
 
     /**
      * HMACSHA256
+     * @hide This class is not part of the Android public SDK API
      */
     public static class KeyGenerator
         extends BaseKeyGenerator
@@ -77,6 +84,9 @@ public class SHA256
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class Mappings
         extends DigestAlgorithmProvider
     {

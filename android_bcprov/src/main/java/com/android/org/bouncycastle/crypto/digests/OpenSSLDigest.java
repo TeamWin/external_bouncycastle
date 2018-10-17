@@ -73,26 +73,44 @@ public class OpenSSLDigest implements ExtendedDigest {
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class MD5 extends OpenSSLDigest {
         public MD5() { super("MD5", 64); }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class SHA1 extends OpenSSLDigest {
         public SHA1() { super("SHA-1", 64); }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class SHA224 extends OpenSSLDigest {
         public SHA224() { super("SHA-224", 64); }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class SHA256 extends OpenSSLDigest {
         public SHA256() { super("SHA-256", 64); }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class SHA384 extends OpenSSLDigest {
         public SHA384() { super("SHA-384", 128); }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class SHA512 extends OpenSSLDigest {
         public SHA512() { super("SHA-512", 128); }
     }

@@ -41,6 +41,9 @@ public abstract class KeyPairGeneratorSpi
         super(algorithmName);
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class EC
         extends KeyPairGeneratorSpi
     {
@@ -258,6 +261,9 @@ public abstract class KeyPairGeneratorSpi
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class ECDSA
         extends EC
     {
@@ -267,6 +273,9 @@ public abstract class KeyPairGeneratorSpi
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class ECDH
         extends EC
     {
@@ -276,6 +285,9 @@ public abstract class KeyPairGeneratorSpi
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class ECDHC
         extends EC
     {
@@ -285,6 +297,9 @@ public abstract class KeyPairGeneratorSpi
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class ECMQV
         extends EC
     {
