@@ -48,6 +48,9 @@ public abstract class AlgorithmParametersSpi
     protected abstract AlgorithmParameterSpec localEngineGetParameterSpec(Class paramSpec)
         throws InvalidParameterSpecException;
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class OAEP
         extends AlgorithmParametersSpi
     {
@@ -166,6 +169,9 @@ public abstract class AlgorithmParametersSpi
         }
     }
     
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class PSS
         extends AlgorithmParametersSpi
     {  

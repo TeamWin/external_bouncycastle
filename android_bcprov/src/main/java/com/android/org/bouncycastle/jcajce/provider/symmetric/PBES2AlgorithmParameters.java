@@ -176,6 +176,9 @@ public class PBES2AlgorithmParameters
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class PBEWithHmacSHA1AES128AlgorithmParameters
             extends BasePBEWithHmacAlgorithmParameters {
         public PBEWithHmacSHA1AES128AlgorithmParameters() {
@@ -187,6 +190,9 @@ public class PBES2AlgorithmParameters
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class PBEWithHmacSHA224AES128AlgorithmParameters
             extends BasePBEWithHmacAlgorithmParameters {
         public PBEWithHmacSHA224AES128AlgorithmParameters() {
@@ -198,6 +204,9 @@ public class PBES2AlgorithmParameters
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class PBEWithHmacSHA256AES128AlgorithmParameters
             extends BasePBEWithHmacAlgorithmParameters {
         public PBEWithHmacSHA256AES128AlgorithmParameters() {
@@ -209,6 +218,9 @@ public class PBES2AlgorithmParameters
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class PBEWithHmacSHA384AES128AlgorithmParameters
             extends BasePBEWithHmacAlgorithmParameters {
         public PBEWithHmacSHA384AES128AlgorithmParameters() {
@@ -220,6 +232,9 @@ public class PBES2AlgorithmParameters
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class PBEWithHmacSHA512AES128AlgorithmParameters
             extends BasePBEWithHmacAlgorithmParameters {
         public PBEWithHmacSHA512AES128AlgorithmParameters() {
@@ -231,6 +246,9 @@ public class PBES2AlgorithmParameters
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class PBEWithHmacSHA1AES256AlgorithmParameters
             extends BasePBEWithHmacAlgorithmParameters {
         public PBEWithHmacSHA1AES256AlgorithmParameters() {
@@ -242,6 +260,9 @@ public class PBES2AlgorithmParameters
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class PBEWithHmacSHA224AES256AlgorithmParameters
             extends BasePBEWithHmacAlgorithmParameters {
         public PBEWithHmacSHA224AES256AlgorithmParameters() {
@@ -253,6 +274,9 @@ public class PBES2AlgorithmParameters
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class PBEWithHmacSHA256AES256AlgorithmParameters
             extends BasePBEWithHmacAlgorithmParameters {
         public PBEWithHmacSHA256AES256AlgorithmParameters() {
@@ -264,6 +288,9 @@ public class PBES2AlgorithmParameters
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class PBEWithHmacSHA384AES256AlgorithmParameters
             extends BasePBEWithHmacAlgorithmParameters {
         public PBEWithHmacSHA384AES256AlgorithmParameters() {
@@ -275,6 +302,9 @@ public class PBES2AlgorithmParameters
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class PBEWithHmacSHA512AES256AlgorithmParameters
             extends BasePBEWithHmacAlgorithmParameters {
         public PBEWithHmacSHA512AES256AlgorithmParameters() {
@@ -287,6 +317,9 @@ public class PBES2AlgorithmParameters
     }
 
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class Mappings
             extends AlgorithmProvider
     {

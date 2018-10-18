@@ -33,6 +33,9 @@ public abstract class ECCurve
             COORD_JACOBIAN_MODIFIED, COORD_LAMBDA_AFFINE, COORD_LAMBDA_PROJECTIVE, COORD_SKEWED };
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public class Config
     {
         protected int coord;
@@ -498,6 +501,9 @@ public abstract class ECCurve
             ^ Integers.rotateLeft(getB().toBigInteger().hashCode(), 16);
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static abstract class AbstractFp extends ECCurve
     {
         protected AbstractFp(BigInteger q)
@@ -536,6 +542,7 @@ public abstract class ECCurve
 
     /**
      * Elliptic curve over Fp
+     * @hide This class is not part of the Android public SDK API
      */
     public static class Fp extends AbstractFp
     {
@@ -656,6 +663,9 @@ public abstract class ECCurve
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static abstract class AbstractF2m extends ECCurve
     {
         public static BigInteger inverse(int m, int[] ks, BigInteger x)
@@ -876,6 +886,7 @@ public abstract class ECCurve
     /**
      * Elliptic curves over F2m. The Weierstrass equation is given by
      * <code>y<sup>2</sup> + xy = x<sup>3</sup> + ax<sup>2</sup> + b</code>.
+     * @hide This class is not part of the Android public SDK API
      */
     public static class F2m extends AbstractF2m
     {

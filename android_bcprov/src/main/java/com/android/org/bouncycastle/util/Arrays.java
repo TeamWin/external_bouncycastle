@@ -1157,6 +1157,7 @@ public final class Arrays
 
     /**
      * Iterator backed by a specific array.
+     * @hide This class is not part of the Android public SDK API
      */
     public static class Iterator<T>
         implements java.util.Iterator<T>

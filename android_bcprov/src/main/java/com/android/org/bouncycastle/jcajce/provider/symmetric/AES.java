@@ -79,6 +79,9 @@ public final class AES
     {
     }
     
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class ECB
         extends BaseBlockCipher
     {
@@ -94,6 +97,9 @@ public final class AES
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class CBC
        extends BaseBlockCipher
     {
@@ -103,6 +109,9 @@ public final class AES
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class CFB
         extends BaseBlockCipher
     {
@@ -112,6 +121,9 @@ public final class AES
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class OFB
         extends BaseBlockCipher
     {
@@ -121,6 +133,9 @@ public final class AES
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class GCM
         extends BaseBlockCipher
     {
@@ -262,6 +277,9 @@ public final class AES
     */
     // END Android-removed: Unsupported algorithms
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class Wrap
         extends BaseWrapCipher
     {
@@ -304,6 +322,7 @@ public final class AES
 
     /**
      * PBEWithAES-CBC
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithAESCBC
         extends BaseBlockCipher
@@ -316,6 +335,7 @@ public final class AES
 
     /**
      * PBEWithSHA1AES-CBC
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithSHA1AESCBC128
         extends BaseBlockCipher
@@ -326,6 +346,9 @@ public final class AES
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class PBEWithSHA1AESCBC192
         extends BaseBlockCipher
     {
@@ -335,6 +358,9 @@ public final class AES
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class PBEWithSHA1AESCBC256
         extends BaseBlockCipher
     {
@@ -346,6 +372,7 @@ public final class AES
 
     /**
      * PBEWithSHA256AES-CBC
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithSHA256AESCBC128
         extends BaseBlockCipher
@@ -356,6 +383,9 @@ public final class AES
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class PBEWithSHA256AESCBC192
         extends BaseBlockCipher
     {
@@ -365,6 +395,9 @@ public final class AES
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class PBEWithSHA256AESCBC256
         extends BaseBlockCipher
     {
@@ -374,6 +407,9 @@ public final class AES
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class KeyGen
         extends BaseKeyGenerator
     {
@@ -426,6 +462,7 @@ public final class AES
     
     /**
      * PBEWithSHA1And128BitAES-BC
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithSHAAnd128BitAESBC
         extends PBESecretKeyFactory
@@ -438,6 +475,7 @@ public final class AES
     
     /**
      * PBEWithSHA1And192BitAES-BC
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithSHAAnd192BitAESBC
         extends PBESecretKeyFactory
@@ -450,6 +488,7 @@ public final class AES
     
     /**
      * PBEWithSHA1And256BitAES-BC
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithSHAAnd256BitAESBC
         extends PBESecretKeyFactory
@@ -462,6 +501,7 @@ public final class AES
     
     /**
      * PBEWithSHA256And128BitAES-BC
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithSHA256And128BitAESBC
         extends PBESecretKeyFactory
@@ -474,6 +514,7 @@ public final class AES
     
     /**
      * PBEWithSHA256And192BitAES-BC
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithSHA256And192BitAESBC
         extends PBESecretKeyFactory
@@ -486,6 +527,7 @@ public final class AES
     
     /**
      * PBEWithSHA256And256BitAES-BC
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithSHA256And256BitAESBC
         extends PBESecretKeyFactory
@@ -498,6 +540,7 @@ public final class AES
     
     /**
      * PBEWithMD5And128BitAES-OpenSSL
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithMD5And128BitAESCBCOpenSSL
         extends PBESecretKeyFactory
@@ -510,6 +553,7 @@ public final class AES
     
     /**
      * PBEWithMD5And192BitAES-OpenSSL
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithMD5And192BitAESCBCOpenSSL
         extends PBESecretKeyFactory
@@ -522,6 +566,7 @@ public final class AES
     
     /**
      * PBEWithMD5And256BitAES-OpenSSL
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithMD5And256BitAESCBCOpenSSL
         extends PBESecretKeyFactory
@@ -652,6 +697,9 @@ public final class AES
     */
     // END Android-removed: Unsupported algorithms
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class AlgParams
         extends IvAlgorithmParameters
     {
@@ -661,6 +709,9 @@ public final class AES
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class AlgParamsGCM
         extends BaseAlgorithmParameters
     {
@@ -835,6 +886,9 @@ public final class AES
     */
     // END Android-removed: Unsupported algorithms
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class Mappings
         extends SymmetricAlgorithmProvider
     {

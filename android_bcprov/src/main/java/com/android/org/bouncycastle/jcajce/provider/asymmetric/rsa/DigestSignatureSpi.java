@@ -252,6 +252,9 @@ public class DigestSignatureSpi
         return dInfo.getEncoded(ASN1Encoding.DER);
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class SHA1
         extends DigestSignatureSpi
     {
@@ -263,6 +266,9 @@ public class DigestSignatureSpi
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class SHA224
         extends DigestSignatureSpi
     {
@@ -274,6 +280,9 @@ public class DigestSignatureSpi
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class SHA256
         extends DigestSignatureSpi
     {
@@ -285,6 +294,9 @@ public class DigestSignatureSpi
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class SHA384
         extends DigestSignatureSpi
     {
@@ -296,6 +308,9 @@ public class DigestSignatureSpi
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class SHA512
         extends DigestSignatureSpi
     {
@@ -383,6 +398,9 @@ public class DigestSignatureSpi
     */
     // END Android-removed: Unsupported algorithms
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class MD5
         extends DigestSignatureSpi
     {

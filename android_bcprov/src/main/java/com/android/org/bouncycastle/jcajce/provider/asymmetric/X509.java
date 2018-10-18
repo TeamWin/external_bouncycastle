@@ -10,6 +10,9 @@ import com.android.org.bouncycastle.jcajce.provider.util.AsymmetricAlgorithmProv
  */
 public class X509
 {
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class Mappings
         extends AsymmetricAlgorithmProvider
     {

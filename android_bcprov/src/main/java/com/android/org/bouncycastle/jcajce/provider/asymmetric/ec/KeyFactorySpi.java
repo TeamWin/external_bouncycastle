@@ -194,6 +194,9 @@ public class KeyFactorySpi
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class EC
         extends KeyFactorySpi
     {
@@ -203,6 +206,9 @@ public class KeyFactorySpi
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class ECDSA
         extends KeyFactorySpi
     {
@@ -225,6 +231,9 @@ public class KeyFactorySpi
     */
     // END Android-removed: Unsupported algorithm
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class ECDH
         extends KeyFactorySpi
     {
@@ -234,6 +243,9 @@ public class KeyFactorySpi
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class ECDHC
         extends KeyFactorySpi
     {
@@ -243,6 +255,9 @@ public class KeyFactorySpi
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class ECMQV
         extends KeyFactorySpi
     {

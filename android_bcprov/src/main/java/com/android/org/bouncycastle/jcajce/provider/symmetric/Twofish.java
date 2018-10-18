@@ -86,6 +86,7 @@ public final class Twofish
 
     /**
      * PBEWithSHAAndTwofish-CBC
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithSHAKeyFactory
         extends PBESecretKeyFactory
@@ -98,6 +99,7 @@ public final class Twofish
 
     /**
      * PBEWithSHAAndTwofish-CBC
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithSHA
         extends BaseBlockCipher
@@ -121,6 +123,9 @@ public final class Twofish
     */
     // END Android-removed: Unsupported algorithms
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class Mappings
         extends SymmetricAlgorithmProvider
     {
