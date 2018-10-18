@@ -24,6 +24,9 @@ public final class Blowfish
     {
     }
     
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class ECB
         extends BaseBlockCipher
     {
@@ -33,6 +36,9 @@ public final class Blowfish
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class CBC
         extends BaseBlockCipher
     {
@@ -55,6 +61,9 @@ public final class Blowfish
     */
     // END Android-removed: Unsupported algorithms
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class KeyGen
         extends BaseKeyGenerator
     {
@@ -64,6 +73,9 @@ public final class Blowfish
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class AlgParams
         extends IvAlgorithmParameters
     {
@@ -73,6 +85,9 @@ public final class Blowfish
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class Mappings
         extends AlgorithmProvider
     {

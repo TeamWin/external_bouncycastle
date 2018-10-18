@@ -24,6 +24,7 @@ public abstract class Primes
      * Used to return the output from the
      * {@linkplain Primes#enhancedMRProbablePrimeTest(BigInteger, SecureRandom, int) Enhanced
      * Miller-Rabin Probabilistic Primality Test}
+     * @hide This class is not part of the Android public SDK API
      */
     public static class MROutput
     {
@@ -71,6 +72,7 @@ public abstract class Primes
      * Used to return the output from the
      * {@linkplain Primes#generateSTRandomPrime(Digest, int, byte[]) Shawe-Taylor Random_Prime
      * Routine}
+     * @hide This class is not part of the Android public SDK API
      */
     public static class STOutput
     {

@@ -53,6 +53,9 @@ public final class DES
     {
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class ECB
         extends BaseBlockCipher
     {
@@ -62,6 +65,9 @@ public final class DES
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class CBC
         extends BaseBlockCipher
     {
@@ -89,6 +95,7 @@ public final class DES
 
     /**
      * DES64
+     * @hide This class is not part of the Android public SDK API
      */
     public static class DES64
         extends BaseMac
@@ -101,6 +108,7 @@ public final class DES
 
     /**
      * DES64with7816-4Padding
+     * @hide This class is not part of the Android public SDK API
      */
     public static class DES64with7816d4
         extends BaseMac
@@ -111,6 +119,9 @@ public final class DES
         }
     }
     
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class CBCMAC
         extends BaseMac
     {
@@ -210,6 +221,7 @@ public final class DES
      * key material (the first 8 bytes is repeated as the last
      * 8 bytes). If you give it a size, you'll get just what you
      * asked for.
+ * @hide This class is not part of the Android public SDK API
      */
     public static class KeyGenerator
         extends BaseKeyGenerator
@@ -238,6 +250,9 @@ public final class DES
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class KeyFactory
         extends BaseSecretKeyFactory
     {
@@ -295,6 +310,9 @@ public final class DES
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class DESPBEKeyFactory
         extends BaseSecretKeyFactory
     {
@@ -382,6 +400,7 @@ public final class DES
 
     /**
      * PBEWithMD5AndDES
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithMD5KeyFactory
         extends DESPBEKeyFactory
@@ -394,6 +413,7 @@ public final class DES
 
     /**
      * PBEWithSHA1AndDES
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithSHA1KeyFactory
         extends DESPBEKeyFactory
@@ -422,6 +442,7 @@ public final class DES
 
     /**
      * PBEWithMD5AndDES
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithMD5
         extends BaseBlockCipher
@@ -434,6 +455,7 @@ public final class DES
 
     /**
      * PBEWithSHA1AndDES
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithSHA1
         extends BaseBlockCipher
@@ -444,6 +466,9 @@ public final class DES
         }
     }
     
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class Mappings
         extends AlgorithmProvider
     {

@@ -104,6 +104,7 @@ public final class RC2
 
     /**
      * PBEWithSHA1AndRC2
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithSHA1KeyFactory
         extends PBESecretKeyFactory
@@ -116,6 +117,7 @@ public final class RC2
 
     /**
      * PBEWithSHAAnd128BitRC2-CBC
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithSHAAnd128BitKeyFactory
         extends PBESecretKeyFactory
@@ -128,6 +130,7 @@ public final class RC2
 
     /**
      * PBEWithSHAAnd40BitRC2-CBC
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithSHAAnd40BitKeyFactory
         extends PBESecretKeyFactory
@@ -140,6 +143,7 @@ public final class RC2
 
     /**
      * PBEWithMD5AndRC2
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithMD5AndRC2
         extends BaseBlockCipher
@@ -152,6 +156,7 @@ public final class RC2
     
     /**
      * PBEWithSHA1AndRC2
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithSHA1AndRC2
         extends BaseBlockCipher
@@ -164,6 +169,7 @@ public final class RC2
 
     /**
      * PBEWithSHAAnd128BitRC2-CBC
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithSHAAnd128BitRC2
         extends BaseBlockCipher
@@ -176,6 +182,7 @@ public final class RC2
 
     /**
      * PBEWithSHAAnd40BitRC2-CBC
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithSHAAnd40BitRC2
         extends BaseBlockCipher
@@ -204,6 +211,7 @@ public final class RC2
 
    /**
     * PBEWithMD5AndRC2
+ * @hide This class is not part of the Android public SDK API
     */
    static public class PBEWithMD5KeyFactory
        extends PBESecretKeyFactory
@@ -460,6 +468,9 @@ public final class RC2
     */
     // END Android-removed: Unsupported algorithms
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class Mappings
         extends AlgorithmProvider
     {

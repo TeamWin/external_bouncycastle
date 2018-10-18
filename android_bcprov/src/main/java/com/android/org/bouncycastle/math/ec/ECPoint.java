@@ -527,6 +527,9 @@ public abstract class ECPoint
         return this.getCurve().getMultiplier().multiply(this, k);
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static abstract class AbstractFp extends ECPoint
     {
         protected AbstractFp(ECCurve curve, ECFieldElement x, ECFieldElement y)
@@ -600,6 +603,7 @@ public abstract class ECPoint
 
     /**
      * Elliptic curve points over Fp
+     * @hide This class is not part of the Android public SDK API
      */
     public static class Fp extends AbstractFp
     {
@@ -1345,6 +1349,9 @@ public abstract class ECPoint
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static abstract class AbstractF2m extends ECPoint
     {
         protected AbstractF2m(ECCurve curve, ECFieldElement x, ECFieldElement y)
@@ -1575,6 +1582,7 @@ public abstract class ECPoint
 
     /**
      * Elliptic curve points over F2m
+     * @hide This class is not part of the Android public SDK API
      */
     public static class F2m extends AbstractF2m
     {

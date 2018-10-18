@@ -24,6 +24,9 @@ public class PBEPKCS12
 
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class AlgParams
         extends BaseAlgorithmParameters
     {
@@ -107,6 +110,9 @@ public class PBEPKCS12
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class Mappings
         extends AlgorithmProvider
     {

@@ -29,6 +29,7 @@ public class PKIXCRLStoreSelector<T extends CRL>
 {
     /**
      * Builder for a PKIXCRLStoreSelector.
+     * @hide This class is not part of the Android public SDK API
      */
     public static class Builder
     {

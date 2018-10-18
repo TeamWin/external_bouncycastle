@@ -72,6 +72,9 @@ public class SignatureSpi
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class ecDSA
         extends SignatureSpi
     {
@@ -96,6 +99,9 @@ public class SignatureSpi
     */
     // END Android-removed: Unsupported algorithm
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class ecDSAnone
         extends SignatureSpi
     {
@@ -105,6 +111,9 @@ public class SignatureSpi
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class ecDSA224
         extends SignatureSpi
     {
@@ -129,6 +138,9 @@ public class SignatureSpi
     */
     // END Android-removed: Unsupported algorithm
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class ecDSA256
         extends SignatureSpi
     {
@@ -153,6 +165,9 @@ public class SignatureSpi
     */
     // END Android-removed: Unsupported algorithm
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class ecDSA384
         extends SignatureSpi
     {
@@ -177,6 +192,9 @@ public class SignatureSpi
     */
     // END Android-removed: Unsupported algorithms
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class ecDSA512
         extends SignatureSpi
     {

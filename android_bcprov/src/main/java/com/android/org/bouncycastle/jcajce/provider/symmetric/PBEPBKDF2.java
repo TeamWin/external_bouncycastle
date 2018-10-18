@@ -124,6 +124,9 @@ public class PBEPBKDF2
     */
     // END Android-removed: Unsupported algorithms
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class BasePBKDF2
         extends BaseSecretKeyFactory
     {
@@ -328,6 +331,9 @@ public class PBEPBKDF2
 
     // BEGIN Android-added: Android implementations of PBKDF2 algorithms.
     // See note in Mappings below.
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class BasePBKDF2WithHmacSHA1 extends BasePBKDF2 {
         public BasePBKDF2WithHmacSHA1(String name, int scheme)
         {
@@ -335,6 +341,9 @@ public class PBEPBKDF2
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class PBKDF2WithHmacSHA1UTF8
             extends BasePBKDF2WithHmacSHA1
     {
@@ -344,6 +353,9 @@ public class PBEPBKDF2
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class PBKDF2WithHmacSHA18BIT
             extends BasePBKDF2WithHmacSHA1
     {
@@ -353,6 +365,9 @@ public class PBEPBKDF2
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class BasePBKDF2WithHmacSHA224 extends BasePBKDF2 {
         public BasePBKDF2WithHmacSHA224(String name, int scheme)
         {
@@ -360,6 +375,9 @@ public class PBEPBKDF2
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class PBKDF2WithHmacSHA224UTF8
             extends BasePBKDF2WithHmacSHA224
     {
@@ -369,6 +387,9 @@ public class PBEPBKDF2
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class BasePBKDF2WithHmacSHA256 extends BasePBKDF2 {
         public BasePBKDF2WithHmacSHA256(String name, int scheme)
         {
@@ -376,6 +397,9 @@ public class PBEPBKDF2
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class PBKDF2WithHmacSHA256UTF8
             extends BasePBKDF2WithHmacSHA256
     {
@@ -386,6 +410,9 @@ public class PBEPBKDF2
     }
 
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class BasePBKDF2WithHmacSHA384 extends BasePBKDF2 {
         public BasePBKDF2WithHmacSHA384(String name, int scheme)
         {
@@ -393,6 +420,9 @@ public class PBEPBKDF2
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class PBKDF2WithHmacSHA384UTF8
             extends BasePBKDF2WithHmacSHA384
     {
@@ -402,6 +432,9 @@ public class PBEPBKDF2
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class BasePBKDF2WithHmacSHA512 extends BasePBKDF2 {
         public BasePBKDF2WithHmacSHA512(String name, int scheme)
         {
@@ -409,6 +442,9 @@ public class PBEPBKDF2
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class PBKDF2WithHmacSHA512UTF8
             extends BasePBKDF2WithHmacSHA512
     {
@@ -418,6 +454,9 @@ public class PBEPBKDF2
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class PBEWithHmacSHA1AndAES_128
             extends BasePBKDF2 {
         public PBEWithHmacSHA1AndAES_128() {
@@ -425,6 +464,9 @@ public class PBEPBKDF2
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class PBEWithHmacSHA224AndAES_128
             extends BasePBKDF2 {
         public PBEWithHmacSHA224AndAES_128() {
@@ -432,6 +474,9 @@ public class PBEPBKDF2
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class PBEWithHmacSHA256AndAES_128
             extends BasePBKDF2 {
         public PBEWithHmacSHA256AndAES_128() {
@@ -439,6 +484,9 @@ public class PBEPBKDF2
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class PBEWithHmacSHA384AndAES_128
             extends BasePBKDF2 {
         public PBEWithHmacSHA384AndAES_128() {
@@ -446,6 +494,9 @@ public class PBEPBKDF2
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class PBEWithHmacSHA512AndAES_128
             extends BasePBKDF2 {
         public PBEWithHmacSHA512AndAES_128() {
@@ -454,6 +505,9 @@ public class PBEPBKDF2
     }
 
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class PBEWithHmacSHA1AndAES_256
             extends BasePBKDF2 {
         public PBEWithHmacSHA1AndAES_256() {
@@ -461,6 +515,9 @@ public class PBEPBKDF2
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class PBEWithHmacSHA224AndAES_256
             extends BasePBKDF2 {
         public PBEWithHmacSHA224AndAES_256() {
@@ -468,6 +525,9 @@ public class PBEPBKDF2
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class PBEWithHmacSHA256AndAES_256
             extends BasePBKDF2 {
         public PBEWithHmacSHA256AndAES_256() {
@@ -475,6 +535,9 @@ public class PBEPBKDF2
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class PBEWithHmacSHA384AndAES_256
             extends BasePBKDF2 {
         public PBEWithHmacSHA384AndAES_256() {
@@ -482,6 +545,9 @@ public class PBEPBKDF2
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class PBEWithHmacSHA512AndAES_256
             extends BasePBKDF2 {
         public PBEWithHmacSHA512AndAES_256() {
@@ -490,6 +556,9 @@ public class PBEPBKDF2
     }
     // END Android-added: Android implementations of PBKDF2 algorithms.
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class Mappings
         extends AlgorithmProvider
     {
