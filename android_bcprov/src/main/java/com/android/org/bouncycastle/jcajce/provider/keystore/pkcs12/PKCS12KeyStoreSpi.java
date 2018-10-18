@@ -1719,6 +1719,9 @@ public class PKCS12KeyStoreSpi
         return mac.doFinal();
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class BCPKCS12KeyStore
         extends PKCS12KeyStoreSpi
     {

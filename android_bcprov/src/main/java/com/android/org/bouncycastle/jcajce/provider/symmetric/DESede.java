@@ -49,6 +49,9 @@ public final class DESede
     {
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class ECB
         extends BaseBlockCipher
     {
@@ -58,6 +61,9 @@ public final class DESede
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class CBC
         extends BaseBlockCipher
     {
@@ -85,6 +91,7 @@ public final class DESede
 
     /**
      * DESede64
+     * @hide This class is not part of the Android public SDK API
      */
     public static class DESede64
         extends BaseMac
@@ -97,6 +104,7 @@ public final class DESede
 
     /**
      * DESede64with7816-4Padding
+     * @hide This class is not part of the Android public SDK API
      */
     public static class DESede64with7816d4
         extends BaseMac
@@ -107,6 +115,9 @@ public final class DESede
         }
     }
     
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class CBCMAC
         extends BaseMac
     {
@@ -129,6 +140,9 @@ public final class DESede
     */
     // END Android-removed: Unsupported algorithms
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class Wrap
         extends BaseWrapCipher
     {
@@ -157,6 +171,7 @@ public final class DESede
      * key material (the first 8 bytes is repeated as the last
      * 8 bytes). If you give it a size, you'll get just what you
      * asked for.
+ * @hide This class is not part of the Android public SDK API
      */
     public static class KeyGenerator
         extends BaseKeyGenerator
@@ -205,6 +220,7 @@ public final class DESede
 
     /**
      * generate a desEDE key in the a-b-c format.
+     * @hide This class is not part of the Android public SDK API
      */
     public static class KeyGenerator3
         extends BaseKeyGenerator
@@ -217,6 +233,7 @@ public final class DESede
 
     /**
      * PBEWithSHAAnd3-KeyTripleDES-CBC
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithSHAAndDES3Key
         extends BaseBlockCipher
@@ -229,6 +246,7 @@ public final class DESede
 
     /**
      * PBEWithSHAAnd2-KeyTripleDES-CBC
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithSHAAndDES2Key
         extends BaseBlockCipher
@@ -241,6 +259,7 @@ public final class DESede
 
     /**
      * PBEWithSHAAnd3-KeyTripleDES-CBC
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithSHAAndDES3KeyFactory
         extends DES.DESPBEKeyFactory
@@ -253,6 +272,7 @@ public final class DESede
 
     /**
      * PBEWithSHAAnd2-KeyTripleDES-CBC
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithSHAAndDES2KeyFactory
         extends DES.DESPBEKeyFactory
@@ -305,6 +325,9 @@ public final class DESede
     */
     // END Android-removed: Unsupported algorithms
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class KeyFactory
         extends BaseSecretKeyFactory
     {
@@ -374,6 +397,9 @@ public final class DESede
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class Mappings
         extends AlgorithmProvider
     {

@@ -19,6 +19,9 @@ public final class ARC4
     {
     }
     
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class Base
         extends BaseStreamCipher
     {
@@ -28,6 +31,9 @@ public final class ARC4
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class KeyGen
         extends BaseKeyGenerator
     {
@@ -41,6 +47,7 @@ public final class ARC4
 
     /**
      * PBEWithSHAAnd128BitRC4
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithSHAAnd128BitKeyFactory
         extends PBESecretKeyFactory
@@ -53,6 +60,7 @@ public final class ARC4
 
     /**
      * PBEWithSHAAnd40BitRC4
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithSHAAnd40BitKeyFactory
         extends PBESecretKeyFactory
@@ -66,6 +74,7 @@ public final class ARC4
 
     /**
      * PBEWithSHAAnd128BitRC4
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithSHAAnd128Bit
         extends BaseStreamCipher
@@ -78,6 +87,7 @@ public final class ARC4
 
     /**
      * PBEWithSHAAnd40BitRC4
+     * @hide This class is not part of the Android public SDK API
      */
     static public class PBEWithSHAAnd40Bit
         extends BaseStreamCipher
@@ -88,6 +98,9 @@ public final class ARC4
         }
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class Mappings
         extends AlgorithmProvider
     {

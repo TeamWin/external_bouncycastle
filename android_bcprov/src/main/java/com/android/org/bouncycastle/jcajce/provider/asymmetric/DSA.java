@@ -15,6 +15,9 @@ public class DSA
 {
     private static final String PREFIX = "com.android.org.bouncycastle.jcajce.provider.asymmetric" + ".dsa.";
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class Mappings
         extends AsymmetricAlgorithmProvider
     {

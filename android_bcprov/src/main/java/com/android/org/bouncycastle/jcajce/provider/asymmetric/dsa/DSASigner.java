@@ -223,6 +223,9 @@ public class DSASigner
         };
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class stdDSA
         extends DSASigner
     {
@@ -247,6 +250,9 @@ public class DSASigner
     */
     // END Android-removed: Unsupported algorithm
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class dsa224
         extends DSASigner
     {
@@ -271,6 +277,9 @@ public class DSASigner
     */
     // END Android-removed: Unsupported algorithm
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class dsa256
         extends DSASigner
     {
@@ -403,6 +412,9 @@ public class DSASigner
     */
     // END Android-removed: Unsupported algorithms
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class noneDSA
         extends DSASigner
     {

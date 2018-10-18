@@ -20,6 +20,7 @@ public class PKIXExtendedBuilderParameters
 {
     /**
      * Builder for a PKIXExtendedBuilderParameters object.
+     * @hide This class is not part of the Android public SDK API
      */
     public static class Builder
     {

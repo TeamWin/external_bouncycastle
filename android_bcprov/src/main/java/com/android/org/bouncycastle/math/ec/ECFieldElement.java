@@ -88,6 +88,9 @@ public abstract class ECFieldElement
         return BigIntegers.asUnsignedByteArray((getFieldSize() + 7) / 8, toBigInteger());
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class Fp extends ECFieldElement
     {
         BigInteger q, r, x;
@@ -501,6 +504,7 @@ public abstract class ECFieldElement
      * representation. Both trinomial (TPB) and pentanomial (PPB) polynomial
      * basis representations are supported. Gaussian normal basis (GNB)
      * representation is not supported.
+     * @hide This class is not part of the Android public SDK API
      */
     public static class F2m extends ECFieldElement
     {
