@@ -24,6 +24,9 @@ public class SHA512
 
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     static public class Digest
         extends BCMessageDigest
         implements Cloneable
@@ -84,6 +87,9 @@ public class SHA512
     */
     // END Android-removed: Unsupported algorithms
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class HashMac
         extends BaseMac
     {
@@ -129,6 +135,7 @@ public class SHA512
 
     /**
      * HMACSHA512
+     * @hide This class is not part of the Android public SDK API
      */
     public static class KeyGenerator
         extends BaseKeyGenerator
@@ -161,6 +168,9 @@ public class SHA512
     */
     // END Android-removed: Unsupported algorithms
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class Mappings
         extends DigestAlgorithmProvider
     {

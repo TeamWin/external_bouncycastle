@@ -11,6 +11,9 @@ public class BC
 {
     private static final String PREFIX = "com.android.org.bouncycastle.jcajce.provider.keystore" + ".bc.";
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class Mappings
         extends AsymmetricAlgorithmProvider
     {

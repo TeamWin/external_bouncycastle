@@ -25,6 +25,9 @@ public class DH
         generalDhAttributes.put("SupportedKeyFormats", "PKCS#8|X.509");
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class Mappings
         extends AsymmetricAlgorithmProvider
     {

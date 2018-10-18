@@ -263,6 +263,9 @@ public class KeyAgreementSpi
         return bigIntToBytes(result);
     }
 
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
     public static class DH
         extends KeyAgreementSpi
     {

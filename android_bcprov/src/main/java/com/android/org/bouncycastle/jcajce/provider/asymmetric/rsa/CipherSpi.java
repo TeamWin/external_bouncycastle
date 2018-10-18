@@ -567,6 +567,7 @@ public class CipherSpi
 
     /**
      * classes that inherit from us.
+     * @hide This class is not part of the Android public SDK API
      */
 
     static public class NoPadding
