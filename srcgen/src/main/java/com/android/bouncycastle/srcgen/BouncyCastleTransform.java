@@ -27,7 +27,7 @@ import com.google.currysrc.api.output.OutputSourceFileGenerator;
 import com.google.currysrc.api.process.Rule;
 import com.google.currysrc.api.process.ast.BodyDeclarationLocators;
 import com.google.currysrc.api.process.ast.TypeLocator;
-import com.google.currysrc.processors.AddAnnotation;
+import com.google.currysrc.processors.AddMarkerAnnotation;
 import com.google.currysrc.processors.HidePublicClasses;
 import com.google.currysrc.processors.InsertHeader;
 import com.google.currysrc.processors.ModifyQualifiedNames;
@@ -108,7 +108,7 @@ public class BouncyCastleTransform {
                     // Doc change: Insert @hide on all public classes.
                     createHidePublicClassesRule(),
                     // AST change: Add CorePlatformApi to specified classes and members
-                    createOptionalRule(new AddAnnotation("libcore.api.CorePlatformApi",
+                    createOptionalRule(new AddMarkerAnnotation("libcore.api.CorePlatformApi",
                         BodyDeclarationLocators.readBodyDeclarationLocators(corePlatformApiFile)))
                     );
         }
