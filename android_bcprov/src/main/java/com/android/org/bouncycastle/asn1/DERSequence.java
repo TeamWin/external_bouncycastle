@@ -16,6 +16,7 @@ public class DERSequence
     /**
      * create an empty sequence
      */
+    @dalvik.annotation.compat.UnsupportedAppUsage
     @libcore.api.CorePlatformApi
     public DERSequence()
     {
@@ -35,6 +36,7 @@ public class DERSequence
      * create a sequence containing a vector of objects.
      * @param v the vector of objects to make up the sequence.
      */
+    @dalvik.annotation.compat.UnsupportedAppUsage
     @libcore.api.CorePlatformApi
     public DERSequence(
         ASN1EncodableVector v)

@@ -78,6 +78,7 @@ public class ASN1Integer
         bytes = BigInteger.valueOf(value).toByteArray();
     }
 
+    @dalvik.annotation.compat.UnsupportedAppUsage
     @libcore.api.CorePlatformApi
     public ASN1Integer(
         BigInteger value)

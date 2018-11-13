@@ -39,6 +39,7 @@ public interface PKCSObjectIdentifiers
     /** PKCS#1: 1.2.840.113549.1.1.10 */
     static final ASN1ObjectIdentifier    id_RSASSA_PSS             = pkcs_1.branch("10");
     /** PKCS#1: 1.2.840.113549.1.1.11 */
+    @dalvik.annotation.compat.UnsupportedAppUsage
     @libcore.api.CorePlatformApi
     static final ASN1ObjectIdentifier    sha256WithRSAEncryption   = pkcs_1.branch("11");
     /** PKCS#1: 1.2.840.113549.1.1.12 */

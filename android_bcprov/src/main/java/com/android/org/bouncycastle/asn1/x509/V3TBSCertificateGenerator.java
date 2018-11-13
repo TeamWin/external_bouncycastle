@@ -45,11 +45,13 @@ public class V3TBSCertificateGenerator
     private DERBitString issuerUniqueID;
     private DERBitString subjectUniqueID;
 
+    @dalvik.annotation.compat.UnsupportedAppUsage
     @libcore.api.CorePlatformApi
     public V3TBSCertificateGenerator()
     {
     }
 
+    @dalvik.annotation.compat.UnsupportedAppUsage
     @libcore.api.CorePlatformApi
     public void setSerialNumber(
         ASN1Integer  serialNumber)
@@ -57,6 +59,7 @@ public class V3TBSCertificateGenerator
         this.serialNumber = serialNumber;
     }
 
+    @dalvik.annotation.compat.UnsupportedAppUsage
     @libcore.api.CorePlatformApi
     public void setSignature(
         AlgorithmIdentifier    signature)
@@ -67,6 +70,7 @@ public class V3TBSCertificateGenerator
         /**
      * @deprecated use X500Name method
      */
+    @dalvik.annotation.compat.UnsupportedAppUsage
     @libcore.api.CorePlatformApi
     public void setIssuer(
         X509Name    issuer)
@@ -86,6 +90,7 @@ public class V3TBSCertificateGenerator
         this.startDate = new Time(startDate);
     }
 
+    @dalvik.annotation.compat.UnsupportedAppUsage
     @libcore.api.CorePlatformApi
     public void setStartDate(
         Time startDate)
@@ -99,6 +104,7 @@ public class V3TBSCertificateGenerator
         this.endDate = new Time(endDate);
     }
 
+    @dalvik.annotation.compat.UnsupportedAppUsage
     @libcore.api.CorePlatformApi
     public void setEndDate(
         Time endDate)
@@ -109,6 +115,7 @@ public class V3TBSCertificateGenerator
         /**
      * @deprecated use X500Name method
      */
+    @dalvik.annotation.compat.UnsupportedAppUsage
     @libcore.api.CorePlatformApi
     public void setSubject(
         X509Name    subject)
@@ -134,6 +141,7 @@ public class V3TBSCertificateGenerator
         this.subjectUniqueID = uniqueID;
     }
 
+    @dalvik.annotation.compat.UnsupportedAppUsage
     @libcore.api.CorePlatformApi
     public void setSubjectPublicKeyInfo(
         SubjectPublicKeyInfo    pubKeyInfo)
@@ -166,6 +174,7 @@ public class V3TBSCertificateGenerator
         }
     }
 
+    @dalvik.annotation.compat.UnsupportedAppUsage
     @libcore.api.CorePlatformApi
     public TBSCertificate generateTBSCertificate()
     {
