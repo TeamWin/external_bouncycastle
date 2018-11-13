@@ -55,6 +55,7 @@ public interface X9ObjectIdentifiers
     static final ASN1ObjectIdentifier ecdsa_with_SHA224 = ecdsa_with_SHA2.branch("1");
 
     /** OID: 1.2.840.10045.4.3.2 */
+    @dalvik.annotation.compat.UnsupportedAppUsage
     @libcore.api.CorePlatformApi
     static final ASN1ObjectIdentifier ecdsa_with_SHA256 = ecdsa_with_SHA2.branch("2");
 

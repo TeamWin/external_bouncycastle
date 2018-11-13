@@ -11,6 +11,7 @@ import java.io.OutputStream;
 public class DEROutputStream
     extends ASN1OutputStream
 {
+    @dalvik.annotation.compat.UnsupportedAppUsage
     public DEROutputStream(
         OutputStream    os)
     {

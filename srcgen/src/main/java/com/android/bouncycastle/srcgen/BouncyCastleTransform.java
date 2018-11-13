@@ -19,6 +19,7 @@ import static com.google.currysrc.api.process.Rules.createMandatoryRule;
 import static com.google.currysrc.api.process.Rules.createOptionalRule;
 
 import com.google.currysrc.Main;
+import com.google.currysrc.aosp.Annotations;
 import com.google.currysrc.api.RuleSet;
 import com.google.currysrc.api.input.DirectoryInputFileGenerator;
 import com.google.currysrc.api.input.InputFileGenerator;
@@ -33,7 +34,6 @@ import com.google.currysrc.processors.InsertHeader;
 import com.google.currysrc.processors.ModifyQualifiedNames;
 import com.google.currysrc.processors.ModifyStringLiterals;
 import com.google.currysrc.processors.RenamePackage;
-
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -56,14 +56,18 @@ public class BouncyCastleTransform {
      * java BouncyCastleTransform {source dir} {target dir}
      */
     public static void main(String[] args) throws Exception {
-        if (args.length != 3) {
+        if (args.length != 4) {
           throw new IllegalArgumentException(
               "Usage: " + BouncyCastleTransform.class.getCanonicalName()
-                  + " <source-dir> <target-dir> <core-platform-api-file>");
+                  + " <source-dir>"
+                  + " <target-dir>"
+                  + " <core-platform-api-file>"
+                  + " <unsupported-app-usage-file>");
         }
         String sourceDir = args[0];
         String targetDir = args[1];
         Path corePlatformApiFile = Paths.get(args[2]);
+        Path unsupportedAppUsageFile = Paths.get(args[3]);
 
         Map<String, String> options = JavaCore.getOptions();
         options.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_1_8);
@@ -74,18 +78,22 @@ public class BouncyCastleTransform {
 
         new Main(false /* debug */)
             .setJdtOptions(options)
-            .execute(new TransformRuleSet(sourceDir, targetDir, corePlatformApiFile));
+            .execute(new TransformRuleSet(sourceDir, targetDir, corePlatformApiFile,
+                unsupportedAppUsageFile));
     }
 
     static class TransformRuleSet implements RuleSet {
         private final String sourceDir;
         private final String targetDir;
         private final Path corePlatformApiFile;
+        private final Path unsupportedAppUsageFile;
 
-        TransformRuleSet(String sourceDir, String targetDir, Path corePlatformApiFile) {
+        TransformRuleSet(String sourceDir, String targetDir, Path corePlatformApiFile,
+            Path unsupportedAppUsageFile) {
             this.sourceDir = sourceDir;
             this.targetDir = targetDir;
             this.corePlatformApiFile = corePlatformApiFile;
+            this.unsupportedAppUsageFile = unsupportedAppUsageFile;
         }
 
         @Override
@@ -109,7 +117,10 @@ public class BouncyCastleTransform {
                     createHidePublicClassesRule(),
                     // AST change: Add CorePlatformApi to specified classes and members
                     createOptionalRule(new AddMarkerAnnotation("libcore.api.CorePlatformApi",
-                        BodyDeclarationLocators.readBodyDeclarationLocators(corePlatformApiFile)))
+                        BodyDeclarationLocators.readBodyDeclarationLocators(corePlatformApiFile))),
+                    // AST Change: Add UnsupportedAppUsage to specified class members.
+                    createOptionalRule(
+                        Annotations.addUnsupportedAppUsage(unsupportedAppUsageFile))
                     );
         }
 
