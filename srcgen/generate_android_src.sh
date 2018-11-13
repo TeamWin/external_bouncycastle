@@ -5,11 +5,11 @@ if [ -z "$ANDROID_BUILD_TOP" ]; then
     exit 1
 fi
 
-CLASSPATH=${ANDROID_HOST_OUT}/framework/currysrc.jar:${ANDROID_HOST_OUT}/framework/android_bouncycastle_srcgen.jar
+CLASSPATH=${ANDROID_HOST_OUT}/framework/currysrc.jar
 BOUNCY_CASTLE_DIR=${ANDROID_BUILD_TOP}/external/bouncycastle
 
 cd ${ANDROID_BUILD_TOP}
-make -j15 currysrc android_bouncycastle_srcgen
+make -j15 currysrc
 
 CORE_PLATFORM_API_FILE=${BOUNCY_CASTLE_DIR}/srcgen/core-platform-api.txt
 UNSUPPORTED_APP_USAGE_FILE=${BOUNCY_CASTLE_DIR}/srcgen/unsupported-app-usage.json
@@ -25,11 +25,12 @@ function do_transform() {
   rm -rf ${SRC_OUT_DIR}
   mkdir -p ${SRC_OUT_DIR}
 
-  java -cp ${CLASSPATH} com.android.bouncycastle.srcgen.BouncyCastleTransform \
-       ${SRC_IN_DIR} \
-       ${SRC_OUT_DIR} \
-       ${CORE_PLATFORM_API_FILE} \
-       ${UNSUPPORTED_APP_USAGE_FILE}
+  java -cp ${CLASSPATH} com.google.currysrc.aosp.RepackagingTransform \
+       --source-dir ${SRC_IN_DIR} \
+       --target-dir ${SRC_OUT_DIR} \
+       --package-transformation "org.bouncycastle:com.android.org.bouncycastle" \
+       --core-platform-api-file ${CORE_PLATFORM_API_FILE} \
+       --unsupported-app-usage-file ${UNSUPPORTED_APP_USAGE_FILE}
 }
 
 BCPROV_SRC_IN_DIR=${BOUNCY_CASTLE_DIR}/bcprov/src/main/java
