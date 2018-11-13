@@ -49,6 +49,7 @@ public class DigestInfo
         return null;
     }
 
+    @dalvik.annotation.compat.UnsupportedAppUsage
     public DigestInfo(
         AlgorithmIdentifier  algId,
         byte[]               digest)

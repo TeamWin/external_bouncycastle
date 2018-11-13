@@ -54,6 +54,7 @@ public class Time
      *
      * @param time a date object representing the time of interest.
      */
+    @dalvik.annotation.compat.UnsupportedAppUsage
     @libcore.api.CorePlatformApi
     public Time(
         Date    time)

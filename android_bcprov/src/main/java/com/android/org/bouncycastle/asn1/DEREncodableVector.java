@@ -13,6 +13,7 @@ public class DEREncodableVector
     /**
      * @deprecated use ASN1EncodableVector instead.
      */
+    @dalvik.annotation.compat.UnsupportedAppUsage
     public DEREncodableVector()
     {
 

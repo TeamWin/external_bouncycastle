@@ -9,6 +9,7 @@ package com.android.org.bouncycastle.asn1;
 public class DERObjectIdentifier
     extends ASN1ObjectIdentifier
 {
+    @dalvik.annotation.compat.UnsupportedAppUsage
     public DERObjectIdentifier(String identifier)
     {
         super(identifier);
