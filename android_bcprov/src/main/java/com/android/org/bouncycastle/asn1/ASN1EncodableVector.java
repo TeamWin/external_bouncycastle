@@ -16,6 +16,7 @@ public class ASN1EncodableVector
     /**
      * Base constructor.
      */
+    @dalvik.annotation.compat.UnsupportedAppUsage
     @libcore.api.CorePlatformApi
     public ASN1EncodableVector()
     {
@@ -26,6 +27,7 @@ public class ASN1EncodableVector
      *
      * @param obj the encodable to add.
      */
+    @dalvik.annotation.compat.UnsupportedAppUsage
     @libcore.api.CorePlatformApi
     public void add(ASN1Encodable obj)
     {
