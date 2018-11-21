@@ -62,10 +62,7 @@ java_library_static {
 // API stubs.
 filegroup {
     name: "bouncycastle_java_files",
-    srcs: ["android_bcprov/src/main/java/**/*.java"],
-    exclude_srcs: [
-        "android_bcprov/src/main/java/org/bouncycastle/asn1/ocsp/**/*.java",
-    ],
+    srcs: ["repackaged/bcprov/src/main/java/**/*.java"],
 }
 
 // A bouncycastle library repackaged in com.android.org.bouncycastle for use
