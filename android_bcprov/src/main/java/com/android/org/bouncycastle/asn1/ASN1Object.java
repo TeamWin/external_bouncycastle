@@ -14,6 +14,10 @@ import com.android.org.bouncycastle.util.Encodable;
 public abstract class ASN1Object
     implements ASN1Encodable, Encodable
 {
+    @libcore.api.CorePlatformApi
+    public ASN1Object() {
+    }
+
     /**
      * Return the default BER or DER encoding for this object.
      *
