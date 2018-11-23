@@ -16,6 +16,7 @@ method:com.android.org.bouncycastle.asn1.ASN1InputStream#ASN1InputStream(InputSt
 method:com.android.org.bouncycastle.asn1.ASN1InputStream#readObject()
 method:com.android.org.bouncycastle.asn1.ASN1Integer#ASN1Integer(BigInteger)
 method:com.android.org.bouncycastle.asn1.ASN1Null#hashCode()
+method:com.android.org.bouncycastle.asn1.ASN1Object#ASN1Object()
 method:com.android.org.bouncycastle.asn1.ASN1Object#getEncoded()
 method:com.android.org.bouncycastle.asn1.ASN1Object#getEncoded(String)
 method:com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier#ASN1ObjectIdentifier(String)
