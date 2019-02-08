@@ -58,11 +58,13 @@ import org.bouncycastle.jce.ECKeyUtil;
 import org.bouncycastle.jce.ECNamedCurveTable;
 import org.bouncycastle.jce.ECPointUtil;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.bouncycastle.jce.spec.ECNamedCurveGenParameterSpec;
 import org.bouncycastle.jce.spec.ECNamedCurveParameterSpec;
 import org.bouncycastle.math.ec.ECCurve;
 import org.bouncycastle.util.Arrays;
 import org.bouncycastle.util.BigIntegers;
 import org.bouncycastle.util.Strings;
+import org.bouncycastle.util.encoders.Base64;
 import org.bouncycastle.util.encoders.Hex;
 import org.bouncycastle.util.test.FixedSecureRandom;
 import org.bouncycastle.util.test.SimpleTest;
@@ -71,6 +73,10 @@ import org.bouncycastle.util.test.TestRandomBigInteger;
 public class ECDSA5Test
     extends SimpleTest
 {
+    private static final byte[] namedPubKey = Base64.decode(
+        "MHYwEAYHKoZIzj0CAQYFK4EEACIDYgAEJMeqHZzm+saHt1m3a4u5BIqgSznd8LNvoeS93zzE9Ll31/AMaveAj" +
+            "JqWxGdyCwnqmM5m3IFCZV3abKVGNpnuQwhIOPMm1355YX1JeEy/ifCx7lYe1o8Xs/Ajqz8cJB3j");
+
     byte[] k1 = Hex.decode("d5014e4b60ef2ba8b6211b4062ba3224e0427dd3");
     byte[] k2 = Hex.decode("345e8d05c075c3a508df729a1685690e68fcfb8c8117847e89063bca1f85d968fd281540b6e13bd1af989a1fbf17e06462bf511f9d0b140fb48ac1b1baa5bded");
 
@@ -162,6 +168,23 @@ public class ECDSA5Test
 
             isTrue("sig verified when shouldn't: " + i, failed);
         }
+    }
+
+    public void testNamedCurveInKeyFactory()
+        throws Exception
+    {
+        KeyFactory kfBc = KeyFactory.getInstance("EC", "BC");
+        BigInteger x = new BigInteger("24c7aa1d9ce6fac687b759b76b8bb9048aa04b39ddf0b36fa1e4bddf3cc4f4b977d7f00c6af7808c9a96c467720b09ea", 16);
+        BigInteger y = new BigInteger("98ce66dc8142655dda6ca5463699ee43084838f326d77e79617d49784cbf89f0b1ee561ed68f17b3f023ab3f1c241de3", 16);
+        String curveName = "secp384r1";
+        ECPoint point = new ECPoint(x, y);
+
+        AlgorithmParameters parameters = AlgorithmParameters.getInstance("EC", "BC");
+        parameters.init(new ECGenParameterSpec(curveName));
+        ECParameterSpec ecParamSpec = parameters.getParameterSpec(ECParameterSpec.class);
+        PublicKey pubKey = kfBc.generatePublic(new ECPublicKeySpec(point, ecParamSpec));
+
+        isTrue(Arrays.areEqual(namedPubKey, pubKey.getEncoded()));
     }
 
     private void decodeTest()
@@ -258,6 +281,49 @@ public class ECDSA5Test
         }
     }
 
+    private void testSM2()
+        throws Exception
+    {
+        KeyPairGenerator kpGen = KeyPairGenerator.getInstance("ECDSA", "BC");
+
+        kpGen.initialize(new ECGenParameterSpec("sm2p256v1"));
+
+        KeyPair kp = kpGen.generateKeyPair();
+
+        kpGen.initialize(new ECNamedCurveGenParameterSpec("sm2p256v1"));
+
+        kp = kpGen.generateKeyPair();
+    }
+
+    private void testNonsense()
+        throws Exception
+    {
+        KeyPairGenerator kpGen = KeyPairGenerator.getInstance("ECDSA", "BC");
+
+        try
+        {
+            kpGen.initialize(new ECGenParameterSpec("no_such_curve"));
+            fail("no exception");
+        }
+        catch (InvalidAlgorithmParameterException e)
+        {
+            isEquals("unknown curve name: no_such_curve", e.getMessage());
+        }
+        KeyPair kp = kpGen.generateKeyPair();
+
+        try
+        {
+            kpGen.initialize(new ECNamedCurveGenParameterSpec("1.2.3.4.5"));
+            fail("no exception");
+        }
+        catch (InvalidAlgorithmParameterException e)
+        {
+            isEquals("unknown curve OID: 1.2.3.4.5", e.getMessage());
+        }
+
+        kp = kpGen.generateKeyPair();
+    }
+
     // test BSI algorithm support.
     private void testBSI()
         throws Exception
@@ -286,6 +352,15 @@ public class ECDSA5Test
             BSIObjectIdentifiers.ecdsa_plain_SHA512.getId(), BSIObjectIdentifiers.ecdsa_plain_RIPEMD160.getId()};
 
         testBsiAlgorithms(kp, data, plainAlgs, plainOids);
+
+        kpGen = KeyPairGenerator.getInstance("ECDSA", "BC");
+
+        kpGen.initialize(new ECGenParameterSpec(SECObjectIdentifiers.secp521r1.getId()));
+
+        kp = kpGen.generateKeyPair();
+
+        ECNamedCurveParameterSpec spec = ECNamedCurveTable.getParameterSpec(SECObjectIdentifiers.secp521r1.getId());
+        testBsiSigSize(kp, spec.getN(), "SHA224WITHPLAIN-ECDSA");
     }
 
     private void testBsiAlgorithms(KeyPair kp, byte[] data, String[] algs, String[] oids)
@@ -313,6 +388,32 @@ public class ECDSA5Test
         }
     }
 
+    private void testBsiSigSize(KeyPair kp, BigInteger order, String alg)
+        throws Exception
+    {
+        for (int i = 0; i != 20; i++)
+        {
+            Signature sig1 = Signature.getInstance(alg, "BC");
+            Signature sig2 = Signature.getInstance(alg, "BC");
+
+            sig1.initSign(kp.getPrivate());
+
+            sig1.update(new byte[]{(byte)i});
+
+            byte[] sig = sig1.sign();
+            
+            isTrue(sig.length == (2 * ((order.bitLength() + 7) / 8)));
+            sig2.initVerify(kp.getPublic());
+
+            sig2.update(new byte[]{(byte)i});
+
+            if (!sig2.verify(sig))
+            {
+                fail("BSI CVC signature failed: " + alg);
+            }
+        }
+    }
+    
     /**
      * X9.62 - 1998,<br>
      * J.2.1, Page 100, ECDSA over the field F2m<br>
@@ -505,7 +606,7 @@ public class ECDSA5Test
         PublicKey pubKey = ECKeyUtil.publicToExplicitParameters(pair.getPublic(), "BC");
 
         SubjectPublicKeyInfo info = SubjectPublicKeyInfo.getInstance(ASN1Primitive.fromByteArray(pubKey.getEncoded()));
-        X962Parameters params = X962Parameters.getInstance(info.getAlgorithmId().getParameters());
+        X962Parameters params = X962Parameters.getInstance(info.getAlgorithm().getParameters());
 
         if (params.isNamedCurve() || params.isImplicitlyCA())
         {
@@ -519,7 +620,7 @@ public class ECDSA5Test
 
         PrivateKey privKey = ECKeyUtil.privateToExplicitParameters(pair.getPrivate(), "BC");
         PrivateKeyInfo privInfo = PrivateKeyInfo.getInstance(ASN1Primitive.fromByteArray(privKey.getEncoded()));
-        params = X962Parameters.getInstance(privInfo.getAlgorithmId().getParameters());
+        params = X962Parameters.getInstance(privInfo.getPrivateKeyAlgorithm().getParameters());
 
         if (params.isNamedCurve() || params.isImplicitlyCA())
         {
@@ -1123,6 +1224,9 @@ public class ECDSA5Test
         testMQVwithHMACOnePass();
         testAlgorithmParameters();
         testModified();
+        testSM2();
+        testNonsense();
+        testNamedCurveInKeyFactory();
     }
 
     public static void main(

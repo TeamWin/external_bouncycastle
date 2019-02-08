@@ -3,6 +3,9 @@ package org.bouncycastle.pqc.math.linearalgebra;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
+import org.bouncycastle.crypto.CryptoServicesRegistrar;
+import org.bouncycastle.util.BigIntegers;
+
 /**
  * Class of number-theory related functions for use with integers represented as
  * <tt>int</tt>'s or <tt>BigInteger</tt> objects.
@@ -887,7 +890,7 @@ public final class IntegerFunctions
             n -= 2;
         }
 
-        while (n > 3 & !isPrime(n))
+        while (n > 3 && !isPrime(n))
         {
             n -= 2;
         }
@@ -1051,7 +1054,7 @@ public final class IntegerFunctions
     {
         if (sr == null)
         {
-            sr = new SecureRandom();
+            sr = CryptoServicesRegistrar.getSecureRandom();
         }
         return randomize(upperBound, sr);
     }
@@ -1064,12 +1067,12 @@ public final class IntegerFunctions
 
         if (prng == null)
         {
-            prng = sr != null ? sr : new SecureRandom();
+            prng = sr != null ? sr : CryptoServicesRegistrar.getSecureRandom();
         }
 
         for (int i = 0; i < 20; i++)
         {
-            randomNum = new BigInteger(blen, prng);
+            randomNum = BigIntegers.createRandomBigInteger(blen, prng);
             if (randomNum.compareTo(upperBound) < 0)
             {
                 return randomNum;

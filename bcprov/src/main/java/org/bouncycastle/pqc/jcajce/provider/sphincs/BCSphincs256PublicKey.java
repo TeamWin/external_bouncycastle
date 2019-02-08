@@ -1,6 +1,8 @@
 package org.bouncycastle.pqc.jcajce.provider.sphincs;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.security.PublicKey;
 
 import org.bouncycastle.asn1.ASN1ObjectIdentifier;
@@ -10,6 +12,8 @@ import org.bouncycastle.crypto.CipherParameters;
 import org.bouncycastle.pqc.asn1.PQCObjectIdentifiers;
 import org.bouncycastle.pqc.asn1.SPHINCS256KeyParams;
 import org.bouncycastle.pqc.crypto.sphincs.SPHINCSPublicKeyParameters;
+import org.bouncycastle.pqc.crypto.util.PublicKeyFactory;
+import org.bouncycastle.pqc.crypto.util.SubjectPublicKeyInfoFactory;
 import org.bouncycastle.pqc.jcajce.interfaces.SPHINCSKey;
 import org.bouncycastle.util.Arrays;
 
@@ -18,8 +22,8 @@ public class BCSphincs256PublicKey
 {
     private static final long serialVersionUID = 1L;
 
-    private final ASN1ObjectIdentifier treeDigest;
-    private final SPHINCSPublicKeyParameters params;
+    private transient ASN1ObjectIdentifier treeDigest;
+    private transient SPHINCSPublicKeyParameters params;
 
     public BCSphincs256PublicKey(
         ASN1ObjectIdentifier treeDigest,
@@ -30,11 +34,18 @@ public class BCSphincs256PublicKey
     }
 
     public BCSphincs256PublicKey(SubjectPublicKeyInfo keyInfo)
+        throws IOException
     {
-        this.treeDigest = SPHINCS256KeyParams.getInstance(keyInfo.getAlgorithm().getParameters()).getTreeDigest().getAlgorithm();
-        this.params = new SPHINCSPublicKeyParameters(keyInfo.getPublicKeyData().getBytes());
+        init(keyInfo);
     }
 
+    private void init(SubjectPublicKeyInfo keyInfo)
+        throws IOException
+    {
+        this.treeDigest = SPHINCS256KeyParams.getInstance(keyInfo.getAlgorithm().getParameters()).getTreeDigest().getAlgorithm();
+        this.params = (SPHINCSPublicKeyParameters)PublicKeyFactory.createKey(keyInfo);
+    }
+    
     /**
      * Compare this SPHINCS-256 public key with another object.
      *
@@ -43,13 +54,19 @@ public class BCSphincs256PublicKey
      */
     public boolean equals(Object o)
     {
-        if (o == null || !(o instanceof BCSphincs256PublicKey))
+        if (o == this)
         {
-            return false;
+            return true;
         }
-        BCSphincs256PublicKey otherKey = (BCSphincs256PublicKey)o;
 
-        return treeDigest.equals(otherKey.treeDigest) && Arrays.areEqual(params.getKeyData(), otherKey.params.getKeyData());
+        if (o instanceof BCSphincs256PublicKey)
+        {
+            BCSphincs256PublicKey otherKey = (BCSphincs256PublicKey)o;
+
+            return treeDigest.equals(otherKey.treeDigest) && Arrays.areEqual(params.getKeyData(), otherKey.params.getKeyData());
+        }
+
+        return false;
     }
 
     public int hashCode()
@@ -67,11 +84,19 @@ public class BCSphincs256PublicKey
 
     public byte[] getEncoded()
     {
-        SubjectPublicKeyInfo pki;
         try
         {
-            AlgorithmIdentifier algorithmIdentifier = new AlgorithmIdentifier(PQCObjectIdentifiers.sphincs256, new SPHINCS256KeyParams(new AlgorithmIdentifier(treeDigest)));
-            pki = new SubjectPublicKeyInfo(algorithmIdentifier, params.getKeyData());
+            SubjectPublicKeyInfo pki;
+
+            if (params.getTreeDigest() != null)
+            {
+                pki = SubjectPublicKeyInfoFactory.createSubjectPublicKeyInfo(params);
+            }
+            else
+            {
+                AlgorithmIdentifier algorithmIdentifier = new AlgorithmIdentifier(PQCObjectIdentifiers.sphincs256, new SPHINCS256KeyParams(new AlgorithmIdentifier(treeDigest)));
+                pki = new SubjectPublicKeyInfo(algorithmIdentifier, params.getKeyData());
+            }
 
             return pki.getEncoded();
         }
@@ -91,8 +116,33 @@ public class BCSphincs256PublicKey
         return params.getKeyData();
     }
 
+    ASN1ObjectIdentifier getTreeDigest()
+    {
+        return treeDigest;
+    }
+
     CipherParameters getKeyParams()
     {
         return params;
+    }
+
+    private void readObject(
+        ObjectInputStream in)
+        throws IOException, ClassNotFoundException
+    {
+        in.defaultReadObject();
+
+        byte[] enc = (byte[])in.readObject();
+
+        init(SubjectPublicKeyInfo.getInstance(enc));
+    }
+
+    private void writeObject(
+        ObjectOutputStream out)
+        throws IOException
+    {
+        out.defaultWriteObject();
+
+        out.writeObject(this.getEncoded());
     }
 }

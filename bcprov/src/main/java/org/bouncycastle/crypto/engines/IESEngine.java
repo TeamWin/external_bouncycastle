@@ -46,7 +46,7 @@ public class IESEngine
     private byte[] IV;
 
     /**
-     * set up for use with stream mode, where the key derivation function
+     * Set up for use with stream mode, where the key derivation function
      * is used to provide a stream of bytes to xor with the message.
      *
      * @param agree the key agreement used as the basis for the encryption
@@ -68,7 +68,7 @@ public class IESEngine
 
     /**
      * Set up for use in conjunction with a block cipher to handle the
-     * message.It is <b>strongly</b> recommended that the cipher is not in ECB mode.
+     * message. It is <b>strongly</b> recommended that the cipher is not in ECB mode.
      *
      * @param agree  the key agreement used as the basis for the encryption
      * @param kdf    the key derivation function used for byte generation
@@ -318,15 +318,15 @@ public class IESEngine
             System.arraycopy(K, 0, K1, 0, K1.length);
             System.arraycopy(K, K1.length, K2, 0, K2.length);
 
+            CipherParameters cp = new KeyParameter(K1);
+
             // If IV provide use it to initialize the cipher
             if (IV != null)
             {
-                cipher.init(false, new ParametersWithIV(new KeyParameter(K1), IV));
+                cp = new ParametersWithIV(cp, IV);
             }
-            else
-            {
-                cipher.init(false, new KeyParameter(K1));
-            }
+
+            cipher.init(false, cp);
 
             M = new byte[cipher.getOutputSize(inLen - V.length - mac.getMacSize())];
 

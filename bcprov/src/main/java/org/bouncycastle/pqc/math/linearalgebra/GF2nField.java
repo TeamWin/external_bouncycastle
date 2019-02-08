@@ -155,16 +155,9 @@ public abstract class GF2nField
         // initialize a as a copy of matrix and inv as E(inheitsmatrix)
         for (i = 0; i < mDegree; i++)
         {
-            try
-            {
-                a[i] = new GF2Polynomial(matrix[i]);
-                inv[i] = new GF2Polynomial(mDegree);
-                inv[i].setBit(mDegree - 1 - i);
-            }
-            catch (RuntimeException BDNEExc)
-            {
-                BDNEExc.printStackTrace();
-            }
+            a[i] = new GF2Polynomial(matrix[i]);
+            inv[i] = new GF2Polynomial(mDegree);
+            inv[i].setBit(mDegree - 1 - i);
         }
         // construct triangle matrix so that for each a[i] the first i bits are
         // zero
@@ -225,8 +218,6 @@ public abstract class GF2nField
      * @param basis the basis to convert <tt>elem</tt> to
      * @return <tt>elem</tt> converted to a new element representation
      *         according to <tt>basis</tt>
-     * @throws DifferentFieldsException if <tt>elem</tt> cannot be converted according to
-     * <tt>basis</tt>.
      * @see GF2nField#computeCOBMatrix
      * @see GF2nField#getRandomRoot
      * @see GF2nPolynomial

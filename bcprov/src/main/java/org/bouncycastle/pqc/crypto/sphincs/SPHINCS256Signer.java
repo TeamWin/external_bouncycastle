@@ -2,6 +2,7 @@ package org.bouncycastle.pqc.crypto.sphincs;
 
 import org.bouncycastle.crypto.CipherParameters;
 import org.bouncycastle.crypto.Digest;
+import org.bouncycastle.crypto.params.ParametersWithRandom;
 import org.bouncycastle.pqc.crypto.MessageSigner;
 import org.bouncycastle.util.Pack;
 
@@ -11,6 +12,10 @@ import org.bouncycastle.util.Pack;
  * This implementation is heavily based on the reference implementation in SUPERCOP, the main difference being the digests used
  * for message hashing and tree construction are now configurable (within limits...) and that the implementation produces
  * detached signatures.
+ * </p>
+ * <p>
+ * The SPHINCS reference implementation is public domain, as per the statement in the second last paragraph of
+ * section 1 in https://eprint.iacr.org/2014/795.pdf
  * </p>
  */
 public class SPHINCS256Signer
@@ -44,7 +49,12 @@ public class SPHINCS256Signer
     {
          if (forSigning)
          {
-             keyData = ((SPHINCSPrivateKeyParameters)param).getKeyData();
+             if (param instanceof ParametersWithRandom) {
+                 // SPHINCS-256 signatures are deterministic, RNG is not required.
+                 keyData = ((SPHINCSPrivateKeyParameters)((ParametersWithRandom) param).getParameters()).getKeyData();
+             } else {
+                 keyData = ((SPHINCSPrivateKeyParameters) param).getKeyData();
+             }
          }
          else
          {

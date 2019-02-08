@@ -44,7 +44,7 @@ public abstract class DefaultTlsServer
 
     protected DHParameters getDHParameters()
     {
-        return DHStandardGroups.rfc3526_2048;
+        return DHStandardGroups.rfc7919_ffdhe2048;
     }
 
     protected int[] getCipherSuites()
@@ -142,12 +142,12 @@ public abstract class DefaultTlsServer
 
     protected TlsKeyExchange createDHKeyExchange(int keyExchange)
     {
-        return new TlsDHKeyExchange(keyExchange, supportedSignatureAlgorithms, getDHParameters());
+        return new TlsDHKeyExchange(keyExchange, supportedSignatureAlgorithms, null, getDHParameters());
     }
 
     protected TlsKeyExchange createDHEKeyExchange(int keyExchange)
     {
-        return new TlsDHEKeyExchange(keyExchange, supportedSignatureAlgorithms, getDHParameters());
+        return new TlsDHEKeyExchange(keyExchange, supportedSignatureAlgorithms, null, getDHParameters());
     }
 
     protected TlsKeyExchange createECDHKeyExchange(int keyExchange)

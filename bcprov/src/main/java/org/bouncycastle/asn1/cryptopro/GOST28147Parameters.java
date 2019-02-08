@@ -9,6 +9,7 @@ import org.bouncycastle.asn1.ASN1OctetString;
 import org.bouncycastle.asn1.ASN1Primitive;
 import org.bouncycastle.asn1.ASN1Sequence;
 import org.bouncycastle.asn1.ASN1TaggedObject;
+import org.bouncycastle.asn1.DEROctetString;
 import org.bouncycastle.asn1.DERSequence;
 import org.bouncycastle.util.Arrays;
 
@@ -44,10 +45,15 @@ public class GOST28147Parameters
         return null;
     }
 
-    /**
-     * @deprecated use the getInstance() method. This constructor will vanish!
-     */
     public GOST28147Parameters(
+        byte[] iv,
+        ASN1ObjectIdentifier paramSet)
+    {
+        this.iv = new DEROctetString(iv);
+        this.paramSet = paramSet;
+    }
+
+    private GOST28147Parameters(
         ASN1Sequence  seq)
     {
         Enumeration     e = seq.getObjects();

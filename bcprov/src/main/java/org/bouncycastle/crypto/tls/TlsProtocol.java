@@ -21,8 +21,6 @@ public abstract class TlsProtocol
     protected static final Integer EXT_RenegotiationInfo = Integers.valueOf(ExtensionType.renegotiation_info);
     protected static final Integer EXT_SessionTicket = Integers.valueOf(ExtensionType.session_ticket);
 
-    private static final String TLS_ERROR_MESSAGE = "Internal TLS error, this could be an attack";
-
     /*
      * Our Connection states
      */
@@ -118,17 +116,100 @@ public abstract class TlsProtocol
 
     protected abstract TlsPeer getPeer();
 
+    protected void handleAlertMessage(short alertLevel, short alertDescription)
+        throws IOException
+    {
+        getPeer().notifyAlertReceived(alertLevel, alertDescription);
+
+        if (alertLevel == AlertLevel.warning)
+        {
+            handleAlertWarningMessage(alertDescription);
+        }
+        else
+        {
+            handleFailure();
+
+            throw new TlsFatalAlertReceived(alertDescription);
+        }
+    }
+
+    protected void handleAlertWarningMessage(short alertDescription)
+        throws IOException
+    {
+        /*
+         * RFC 5246 7.2.1. The other party MUST respond with a close_notify alert of its own
+         * and close down the connection immediately, discarding any pending writes.
+         */
+        if (alertDescription == AlertDescription.close_notify)
+        {
+            if (!appDataReady)
+            {
+                throw new TlsFatalAlert(AlertDescription.handshake_failure);
+            }
+            handleClose(false);
+        }
+    }
+
     protected void handleChangeCipherSpecMessage() throws IOException
     {
     }
 
-    protected abstract void handleHandshakeMessage(short type, ByteArrayInputStream buf)
-        throws IOException;
-
-    protected void handleWarningMessage(short description)
+    protected void handleClose(boolean user_canceled)
         throws IOException
     {
+        if (!closed)
+        {
+            this.closed = true;
+
+            if (user_canceled && !appDataReady)
+            {
+                raiseAlertWarning(AlertDescription.user_canceled, "User canceled handshake");
+            }
+
+            raiseAlertWarning(AlertDescription.close_notify, "Connection closed");
+
+            recordStream.safeClose();
+
+            if (!appDataReady)
+            {
+                cleanupHandshake();
+            }
+        }
     }
+
+    protected void handleException(short alertDescription, String message, Throwable cause)
+        throws IOException
+    {
+        if (!closed)
+        {
+            raiseAlertFatal(alertDescription, message, cause);
+
+            handleFailure();
+        }
+    }
+
+    protected void handleFailure()
+    {
+        this.closed = true;
+        this.failedWithError = true;
+
+        /*
+         * RFC 2246 7.2.1. The session becomes unresumable if any connection is terminated
+         * without proper close_notify messages with level equal to warning.
+         */
+        // TODO This isn't quite in the right place. Also, as of TLS 1.1 the above is obsolete.
+        invalidateSession();
+
+        recordStream.safeClose();
+
+        if (!appDataReady)
+        {
+            cleanupHandshake();
+        }
+    }
+
+    protected abstract void handleHandshakeMessage(short type, ByteArrayInputStream buf)
+        throws IOException;
 
     protected void applyMaxFragmentLengthExtension()
         throws IOException
@@ -229,6 +310,7 @@ public abstract class TlsProtocol
                     this.sessionParameters = new SessionParameters.Builder()
                         .setCipherSuite(this.securityParameters.getCipherSuite())
                         .setCompressionAlgorithm(this.securityParameters.getCompressionAlgorithm())
+                        .setExtendedMasterSecret(securityParameters.isExtendedMasterSecret())
                         .setMasterSecret(this.securityParameters.getMasterSecret())
                         .setPeerCertificate(this.peerCertificate)
                         .setPSKIdentity(this.securityParameters.getPSKIdentity())
@@ -338,31 +420,30 @@ public abstract class TlsProtocol
                 break;
             }
 
-            checkReceivedChangeCipherSpec(connection_state == CS_END || type == HandshakeType.finished);
-
             /*
              * RFC 2246 7.4.9. The value handshake_messages includes all handshake messages
              * starting at client hello up to, but not including, this finished message.
              * [..] Note: [Also,] Hello Request messages are omitted from handshake hashes.
              */
-            switch (type)
+            if (HandshakeType.hello_request != type)
             {
-            case HandshakeType.hello_request:
-                break;
-            case HandshakeType.finished:
-            {
-                TlsContext ctx = getContext();
-                if (this.expected_verify_data == null
-                    && ctx.getSecurityParameters().getMasterSecret() != null)
+                if (HandshakeType.finished == type)
                 {
-                    this.expected_verify_data = createVerifyData(!ctx.isServer());
+                    checkReceivedChangeCipherSpec(true);
+
+                    TlsContext ctx = getContext();
+                    if (this.expected_verify_data == null
+                        && ctx.getSecurityParameters().getMasterSecret() != null)
+                    {
+                        this.expected_verify_data = createVerifyData(!ctx.isServer());
+                    }
+                }
+                else
+                {
+                    checkReceivedChangeCipherSpec(connection_state == CS_END);
                 }
 
-                // NB: Fall through to next case label
-            }
-            default:
                 queue.copyTo(recordStream.getHandshakeHashUpdater(), totalLength);
-                break;
             }
 
             queue.removeData(4);
@@ -393,47 +474,11 @@ public abstract class TlsProtocol
             /*
              * An alert is always 2 bytes. Read the alert.
              */
-            byte[] tmp = alertQueue.removeData(2, 0);
-            short level = tmp[0];
-            short description = tmp[1];
+            byte[] alert = alertQueue.removeData(2, 0);
+            short alertLevel = alert[0];
+            short alertDescription = alert[1];
 
-            getPeer().notifyAlertReceived(level, description);
-
-            if (level == AlertLevel.fatal)
-            {
-                /*
-                 * RFC 2246 7.2.1. The session becomes unresumable if any connection is terminated
-                 * without proper close_notify messages with level equal to warning.
-                 */
-                invalidateSession();
-
-                this.failedWithError = true;
-                this.closed = true;
-
-                recordStream.safeClose();
-
-                throw new IOException(TLS_ERROR_MESSAGE);
-            }
-            else
-            {
-                /*
-                 * RFC 5246 7.2.1. The other party MUST respond with a close_notify alert of its own
-                 * and close down the connection immediately, discarding any pending writes.
-                 */
-                if (description == AlertDescription.close_notify)
-                {
-                    if (!appDataReady)
-                    {
-                        throw new TlsFatalAlert(AlertDescription.handshake_failure);
-                    }
-                    handleClose(false);
-                }
-
-                /*
-                 * If it is just a warning, we continue.
-                 */
-                handleWarningMessage(description);
-            }
+            handleAlertMessage(alertLevel, alertDescription);
         }
     }
 
@@ -495,22 +540,17 @@ public abstract class TlsProtocol
 
         while (applicationDataQueue.available() == 0)
         {
-            /*
-             * We need to read some data.
-             */
             if (this.closed)
             {
                 if (this.failedWithError)
                 {
-                    /*
-                     * Something went terribly wrong, we should throw an IOException
-                     */
-                    throw new IOException(TLS_ERROR_MESSAGE);
+                    throw new IOException("Cannot read application data on failed TLS connection");
+                }
+                if (!appDataReady)
+                {
+                    throw new IllegalStateException("Cannot read application data until initial handshake completed.");
                 }
 
-                /*
-                 * Connection has been closed, there is no more data to read.
-                 */
                 return -1;
             }
 
@@ -531,18 +571,18 @@ public abstract class TlsProtocol
         }
         catch (TlsFatalAlert e)
         {
-            this.failWithError(AlertLevel.fatal, e.getAlertDescription(), "Failed to read record", e);
+            handleException(e.getAlertDescription(), "Failed to read record", e);
             throw e;
         }
         catch (IOException e)
         {
-            this.failWithError(AlertLevel.fatal, AlertDescription.internal_error, "Failed to read record", e);
+            handleException(AlertDescription.internal_error, "Failed to read record", e);
             throw e;
         }
         catch (RuntimeException e)
         {
-            this.failWithError(AlertLevel.fatal, AlertDescription.internal_error, "Failed to read record", e);
-            throw e;
+            handleException(AlertDescription.internal_error, "Failed to read record", e);
+            throw new TlsFatalAlert(AlertDescription.internal_error, e);
         }
     }
 
@@ -551,39 +591,40 @@ public abstract class TlsProtocol
     {
         try
         {
-            if (!recordStream.readRecord())
+            if (recordStream.readRecord())
             {
-                if (!appDataReady)
-                {
-                    throw new TlsFatalAlert(AlertDescription.handshake_failure);
-                }
-                throw new TlsNoCloseNotifyException();
+                return;
             }
+
+            if (!appDataReady)
+            {
+                throw new TlsFatalAlert(AlertDescription.handshake_failure);
+            }
+        }
+        catch (TlsFatalAlertReceived e)
+        {
+            // Connection failure already handled at source
+            throw e;
         }
         catch (TlsFatalAlert e)
         {
-            if (!closed)
-            {
-                this.failWithError(AlertLevel.fatal, e.getAlertDescription(), "Failed to read record", e);
-            }
+            handleException(e.getAlertDescription(), "Failed to read record", e);
             throw e;
         }
         catch (IOException e)
         {
-            if (!closed)
-            {
-                this.failWithError(AlertLevel.fatal, AlertDescription.internal_error, "Failed to read record", e);
-            }
+            handleException(AlertDescription.internal_error, "Failed to read record", e);
             throw e;
         }
         catch (RuntimeException e)
         {
-            if (!closed)
-            {
-                this.failWithError(AlertLevel.fatal, AlertDescription.internal_error, "Failed to read record", e);
-            }
-            throw e;
+            handleException(AlertDescription.internal_error, "Failed to read record", e);
+            throw new TlsFatalAlert(AlertDescription.internal_error, e);
         }
+
+        handleFailure();
+
+        throw new TlsNoCloseNotifyException();
     }
 
     protected void safeWriteRecord(short type, byte[] buf, int offset, int len)
@@ -595,27 +636,18 @@ public abstract class TlsProtocol
         }
         catch (TlsFatalAlert e)
         {
-            if (!closed)
-            {
-                this.failWithError(AlertLevel.fatal, e.getAlertDescription(), "Failed to write record", e);
-            }
+            handleException(e.getAlertDescription(), "Failed to write record", e);
             throw e;
         }
         catch (IOException e)
         {
-            if (!closed)
-            {
-                this.failWithError(AlertLevel.fatal, AlertDescription.internal_error, "Failed to write record", e);
-            }
+            handleException(AlertDescription.internal_error, "Failed to write record", e);
             throw e;
         }
         catch (RuntimeException e)
         {
-            if (!closed)
-            {
-                this.failWithError(AlertLevel.fatal, AlertDescription.internal_error, "Failed to write record", e);
-            }
-            throw e;
+            handleException(AlertDescription.internal_error, "Failed to write record", e);
+            throw new TlsFatalAlert(AlertDescription.internal_error, e);
         }
     }
 
@@ -634,12 +666,7 @@ public abstract class TlsProtocol
     {
         if (this.closed)
         {
-            if (this.failedWithError)
-            {
-                throw new IOException(TLS_ERROR_MESSAGE);
-            }
-
-            throw new IOException("Sorry, connection has been closed, you cannot write more data");
+            throw new IOException("Cannot write application data on closed/failed TLS connection");
         }
 
         while (len > 0)
@@ -950,51 +977,6 @@ public abstract class TlsProtocol
         return bytesToRead;
     }
 
-    /**
-     * Terminate this connection with an alert. Can be used for normal closure too.
-     * 
-     * @param alertLevel
-     *            See {@link AlertLevel} for values.
-     * @param alertDescription
-     *            See {@link AlertDescription} for values.
-     * @throws IOException
-     *             If alert was fatal.
-     */
-    protected void failWithError(short alertLevel, short alertDescription, String message, Throwable cause)
-        throws IOException
-    {
-        /*
-         * Check if the connection is still open.
-         */
-        if (!closed)
-        {
-            /*
-             * Prepare the message
-             */
-            this.closed = true;
-
-            if (alertLevel == AlertLevel.fatal)
-            {
-                /*
-                 * RFC 2246 7.2.1. The session becomes unresumable if any connection is terminated
-                 * without proper close_notify messages with level equal to warning.
-                 */
-                // TODO This isn't quite in the right place. Also, as of TLS 1.1 the above is obsolete.
-                invalidateSession();
-
-                this.failedWithError = true;
-            }
-            raiseAlert(alertLevel, alertDescription, message, cause);
-            recordStream.safeClose();
-            if (alertLevel != AlertLevel.fatal)
-            {
-                return;
-            }
-        }
-
-        throw new IOException(TLS_ERROR_MESSAGE);
-    }
-
     protected void invalidateSession()
     {
         if (this.sessionParameters != null)
@@ -1034,22 +1016,31 @@ public abstract class TlsProtocol
         }
     }
 
-    protected void raiseAlert(short alertLevel, short alertDescription, String message, Throwable cause)
+    protected void raiseAlertFatal(short alertDescription, String message, Throwable cause)
         throws IOException
     {
-        getPeer().notifyAlertRaised(alertLevel, alertDescription, message, cause);
+        getPeer().notifyAlertRaised(AlertLevel.fatal, alertDescription, message, cause);
 
-        byte[] error = new byte[2];
-        error[0] = (byte)alertLevel;
-        error[1] = (byte)alertDescription;
+        byte[] alert = new byte[]{ (byte)AlertLevel.fatal, (byte)alertDescription };
 
-        safeWriteRecord(ContentType.alert, error, 0, 2);
+        try
+        {
+            recordStream.writeRecord(ContentType.alert, alert, 0, 2);
+        }
+        catch (Exception e)
+        {
+            // We are already processing an exception, so just ignore this
+        }
     }
 
-    protected void raiseWarning(short alertDescription, String message)
+    protected void raiseAlertWarning(short alertDescription, String message)
         throws IOException
     {
-        raiseAlert(AlertLevel.warning, alertDescription, message, null);
+        getPeer().notifyAlertRaised(AlertLevel.warning, alertDescription, message, null);
+
+        byte[] alert = new byte[]{ (byte)AlertLevel.warning, (byte)alertDescription };
+
+        safeWriteRecord(ContentType.alert, alert, 0, 2);
     }
 
     protected void sendCertificateMessage(Certificate certificate)
@@ -1069,7 +1060,7 @@ public abstract class TlsProtocol
                 if (serverVersion.isSSL())
                 {
                     String errorMessage = serverVersion.toString() + " client didn't provide credentials";
-                    raiseWarning(AlertDescription.no_certificate, errorMessage);
+                    raiseAlertWarning(AlertDescription.no_certificate, errorMessage);
                     return;
                 }
             }
@@ -1132,19 +1123,6 @@ public abstract class TlsProtocol
         handleClose(true);
     }
 
-    protected void handleClose(boolean user_canceled)
-        throws IOException
-    {
-        if (!closed)
-        {
-            if (user_canceled && !appDataReady)
-            {
-                raiseWarning(AlertDescription.user_canceled, "User canceled handshake");
-            }
-            this.failWithError(AlertLevel.warning, AlertDescription.close_notify, "Connection closed", null);
-        }
-    }
-
     protected void flush()
         throws IOException
     {
@@ -1184,7 +1162,7 @@ public abstract class TlsProtocol
             throw new TlsFatalAlert(AlertDescription.handshake_failure);
         }
 
-        raiseWarning(AlertDescription.no_renegotiation, "Renegotiation not supported");
+        raiseAlertWarning(AlertDescription.no_renegotiation, "Renegotiation not supported");
     }
 
     /**

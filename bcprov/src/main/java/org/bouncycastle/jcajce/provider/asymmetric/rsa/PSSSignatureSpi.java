@@ -5,6 +5,7 @@ import java.security.AlgorithmParameters;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.PrivateKey;
+import java.security.ProviderException;
 import java.security.PublicKey;
 import java.security.SecureRandom;
 import java.security.SignatureException;
@@ -21,6 +22,7 @@ import org.bouncycastle.crypto.CryptoException;
 import org.bouncycastle.crypto.Digest;
 import org.bouncycastle.crypto.engines.RSABlindedEngine;
 import org.bouncycastle.crypto.params.ParametersWithRandom;
+import org.bouncycastle.crypto.params.RSAKeyParameters;
 import org.bouncycastle.jcajce.provider.util.DigestFactory;
 import org.bouncycastle.jcajce.util.BCJcaJceHelper;
 import org.bouncycastle.jcajce.util.JcaJceHelper;
@@ -39,8 +41,10 @@ public class PSSSignatureSpi
     private int saltLength;
     private byte trailer;
     private boolean isRaw;
+    private RSAKeyParameters key;
 
     private org.bouncycastle.crypto.signers.PSSSigner pss;
+    private boolean isInitState = true;
 
     private byte getTrailer(
         int trailerField)
@@ -108,9 +112,10 @@ public class PSSSignatureSpi
             throw new InvalidKeyException("Supplied key is not a RSAPublicKey instance");
         }
 
+        key = RSAUtil.generatePublicKeyParameter((RSAPublicKey)publicKey);
         pss = new org.bouncycastle.crypto.signers.PSSSigner(signer, contentDigest, mgfDigest, saltLength, trailer);
-        pss.init(false,
-            RSAUtil.generatePublicKeyParameter((RSAPublicKey)publicKey));
+        pss.init(false, key);
+        isInitState = true;
     }
 
     protected void engineInitSign(
@@ -123,8 +128,10 @@ public class PSSSignatureSpi
             throw new InvalidKeyException("Supplied key is not a RSAPrivateKey instance");
         }
 
+        key = RSAUtil.generatePrivateKeyParameter((RSAPrivateKey)privateKey);
         pss = new org.bouncycastle.crypto.signers.PSSSigner(signer, contentDigest, mgfDigest, saltLength, trailer);
-        pss.init(true, new ParametersWithRandom(RSAUtil.generatePrivateKeyParameter((RSAPrivateKey)privateKey), random));
+        pss.init(true, new ParametersWithRandom(key, random));
+        isInitState = true;
     }
 
     protected void engineInitSign(
@@ -136,8 +143,10 @@ public class PSSSignatureSpi
             throw new InvalidKeyException("Supplied key is not a RSAPrivateKey instance");
         }
 
+        key = RSAUtil.generatePrivateKeyParameter((RSAPrivateKey)privateKey);
         pss = new org.bouncycastle.crypto.signers.PSSSigner(signer, contentDigest, mgfDigest, saltLength, trailer);
-        pss.init(true, RSAUtil.generatePrivateKeyParameter((RSAPrivateKey)privateKey));
+        pss.init(true, key);
+        isInitState = true;
     }
 
     protected void engineUpdate(
@@ -145,6 +154,7 @@ public class PSSSignatureSpi
         throws SignatureException
     {
         pss.update(b);
+        isInitState = false;
     }
 
     protected void engineUpdate(
@@ -154,11 +164,13 @@ public class PSSSignatureSpi
         throws SignatureException
     {
         pss.update(b, off, len);
+        isInitState = false;
     }
 
     protected byte[] engineSign()
         throws SignatureException
     {
+        isInitState = true;
         try
         {
             return pss.generateSignature();
@@ -173,6 +185,7 @@ public class PSSSignatureSpi
         byte[]  sigBytes) 
         throws SignatureException
     {
+        isInitState = true;
         return pss.verifySignature(sigBytes);
     }
 
@@ -180,6 +193,23 @@ public class PSSSignatureSpi
         AlgorithmParameterSpec params)
         throws InvalidAlgorithmParameterException
     {
+        if (params == null)
+        {
+            if (originalSpec != null)
+            {
+                params = originalSpec;
+            }
+            else
+            {
+                return;  // Java 11 bug
+            }
+        }
+
+        if (!isInitState)
+        {
+            throw new ProviderException("cannot call setParameter in the middle of update");
+        }
+
         if (params instanceof PSSParameterSpec)
         {
             PSSParameterSpec newParamSpec = (PSSParameterSpec)params;
@@ -222,6 +252,19 @@ public class PSSSignatureSpi
             this.trailer = getTrailer(paramSpec.getTrailerField());
 
             setupContentDigest();
+
+            if (key != null)
+            {
+                pss = new org.bouncycastle.crypto.signers.PSSSigner(signer, contentDigest, mgfDigest, saltLength, trailer);
+                if (key.isPrivate())
+                {
+                    pss.init(true, key);
+                }
+                else
+                {
+                    pss.init(false, key);
+                }
+            }
         }
         else
         {

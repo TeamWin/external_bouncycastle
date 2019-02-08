@@ -5,14 +5,23 @@ import java.io.IOException;
 public abstract class DefaultTlsClient
     extends AbstractTlsClient
 {
+    protected TlsDHVerifier dhVerifier;
+
     public DefaultTlsClient()
     {
-        super();
+        this(new DefaultTlsCipherFactory());
     }
 
     public DefaultTlsClient(TlsCipherFactory cipherFactory)
     {
+        this(cipherFactory, new DefaultTlsDHVerifier());
+    }
+
+    public DefaultTlsClient(TlsCipherFactory cipherFactory, TlsDHVerifier dhVerifier)
+    {
         super(cipherFactory);
+
+        this.dhVerifier = dhVerifier;
     }
 
     public int[] getCipherSuites()
@@ -25,12 +34,6 @@ public abstract class DefaultTlsClient
             CipherSuite.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
             CipherSuite.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,
             CipherSuite.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,
-            CipherSuite.TLS_DHE_DSS_WITH_AES_128_GCM_SHA256,
-            CipherSuite.TLS_DHE_DSS_WITH_AES_128_CBC_SHA256,
-            CipherSuite.TLS_DHE_DSS_WITH_AES_128_CBC_SHA,
-            CipherSuite.TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,
-            CipherSuite.TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,
-            CipherSuite.TLS_DHE_RSA_WITH_AES_128_CBC_SHA,
             CipherSuite.TLS_RSA_WITH_AES_128_GCM_SHA256,
             CipherSuite.TLS_RSA_WITH_AES_128_CBC_SHA256,
             CipherSuite.TLS_RSA_WITH_AES_128_CBC_SHA,
@@ -77,12 +80,12 @@ public abstract class DefaultTlsClient
 
     protected TlsKeyExchange createDHKeyExchange(int keyExchange)
     {
-        return new TlsDHKeyExchange(keyExchange, supportedSignatureAlgorithms, null);
+        return new TlsDHKeyExchange(keyExchange, supportedSignatureAlgorithms, dhVerifier, null);
     }
 
     protected TlsKeyExchange createDHEKeyExchange(int keyExchange)
     {
-        return new TlsDHEKeyExchange(keyExchange, supportedSignatureAlgorithms, null);
+        return new TlsDHEKeyExchange(keyExchange, supportedSignatureAlgorithms, dhVerifier, null);
     }
 
     protected TlsKeyExchange createECDHKeyExchange(int keyExchange)

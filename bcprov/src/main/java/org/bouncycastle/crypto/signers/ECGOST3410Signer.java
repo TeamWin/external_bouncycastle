@@ -1,7 +1,11 @@
 package org.bouncycastle.crypto.signers;
 
+import java.math.BigInteger;
+import java.security.SecureRandom;
+
 import org.bouncycastle.crypto.CipherParameters;
-import org.bouncycastle.crypto.DSA;
+import org.bouncycastle.crypto.CryptoServicesRegistrar;
+import org.bouncycastle.crypto.DSAExt;
 import org.bouncycastle.crypto.params.ECDomainParameters;
 import org.bouncycastle.crypto.params.ECKeyParameters;
 import org.bouncycastle.crypto.params.ECPrivateKeyParameters;
@@ -12,15 +16,13 @@ import org.bouncycastle.math.ec.ECConstants;
 import org.bouncycastle.math.ec.ECMultiplier;
 import org.bouncycastle.math.ec.ECPoint;
 import org.bouncycastle.math.ec.FixedPointCombMultiplier;
-
-import java.math.BigInteger;
-import java.security.SecureRandom;
+import org.bouncycastle.util.BigIntegers;
 
 /**
  * GOST R 34.10-2001 Signature Algorithm
  */
 public class ECGOST3410Signer
-    implements DSA
+    implements DSAExt
 {
     ECKeyParameters key;
 
@@ -41,7 +43,7 @@ public class ECGOST3410Signer
             }
             else
             {
-                this.random = new SecureRandom();
+                this.random = CryptoServicesRegistrar.getSecureRandom();
                 this.key = (ECPrivateKeyParameters)param;
             }
         }
@@ -49,6 +51,11 @@ public class ECGOST3410Signer
         {
             this.key = (ECPublicKeyParameters)param;
         }
+    }
+
+    public BigInteger getOrder()
+    {
+        return key.getParameters().getN();
     }
 
     /**
@@ -84,7 +91,7 @@ public class ECGOST3410Signer
             {
                 do
                 {
-                    k = new BigInteger(n.bitLength(), random);
+                    k = BigIntegers.createRandomBigInteger(n.bitLength(), random);
                 }
                 while (k.equals(ECConstants.ZERO));
 

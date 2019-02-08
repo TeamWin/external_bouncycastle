@@ -3,6 +3,7 @@ package org.bouncycastle.crypto.generators;
 import org.bouncycastle.crypto.DataLengthException;
 import org.bouncycastle.util.Arrays;
 import org.bouncycastle.util.Pack;
+import org.bouncycastle.util.Strings;
 
 /**
  * Core of password hashing scheme Bcrypt,
@@ -13,8 +14,8 @@ import org.bouncycastle.util.Pack;
  * "A Future-Adaptable Password Scheme" of Niels Provos and David Mazières,
  * see: https://www.usenix.org/legacy/events/usenix99/provos/provos_html/node1.html.
  * In contrast to the paper, the order of key setup and salt setup is reversed:
- * state <- ExpandKey(state, 0, key)
- * state <- ExpandKey(state, 0, salt)
+ * state &lt;- ExpandKey(state, 0, key)
+ * state &lt;- ExpandKey(state, 0, salt)
  * This corresponds to the OpenBSD reference implementation of Bcrypt. 
  * </p><p>
  * Note: 
@@ -600,6 +601,17 @@ public final class BCrypt
     // Blowfish spec limits keys to 448bit/56 bytes to ensure all bits of key affect all ciphertext
     // bits, but technically algorithm handles 72 byte keys and most implementations support this.
     static final int MAX_PASSWORD_BYTES = 72;
+
+    /**
+     * Converts a character password to bytes incorporating the required trailing zero byte.
+     *
+     * @param password the password to be encoded.
+     * @return a byte representation of the password in UTF8 + trailing zero.
+     */
+    public static byte[] passwordToByteArray(char[] password)
+    {
+        return Arrays.append(Strings.toUTF8ByteArray(password), (byte)0);
+    }
 
     /**
      * Calculates the <b>bcrypt</b> hash of a password.

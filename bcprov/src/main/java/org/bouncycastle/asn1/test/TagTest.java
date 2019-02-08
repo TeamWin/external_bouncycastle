@@ -3,6 +3,7 @@ package org.bouncycastle.asn1.test;
 import java.io.IOException;
 import java.security.SecureRandom;
 
+import org.bouncycastle.asn1.ASN1ApplicationSpecific;
 import org.bouncycastle.asn1.ASN1InputStream;
 import org.bouncycastle.asn1.ASN1Primitive;
 import org.bouncycastle.asn1.ASN1TaggedObject;
@@ -39,11 +40,11 @@ public class TagTest
     {
         ASN1InputStream aIn = new ASN1InputStream(longTagged);
 
-        DERApplicationSpecific app = (DERApplicationSpecific)aIn.readObject();
+        ASN1ApplicationSpecific app = (ASN1ApplicationSpecific)aIn.readObject();
         
         aIn = new ASN1InputStream(app.getContents());
 
-        app = (DERApplicationSpecific)aIn.readObject();
+        app = (ASN1ApplicationSpecific)aIn.readObject();
 
         aIn = new ASN1InputStream(app.getContents());
 
@@ -77,14 +78,14 @@ public class TagTest
 
         aIn = new ASN1InputStream(longAppSpecificTag);
 
-        app = (DERApplicationSpecific)aIn.readObject();
+        app = (ASN1ApplicationSpecific)aIn.readObject();
 
         if (app.getApplicationTag() != 97)
         {
             fail("incorrect tag number read");
         }
 
-        app = (DERApplicationSpecific)ASN1Primitive.fromByteArray(app.getEncoded());
+        app = (ASN1ApplicationSpecific)ASN1Primitive.fromByteArray(app.getEncoded());
 
         if (app.getApplicationTag() != 97)
         {
@@ -96,7 +97,7 @@ public class TagTest
         {
             int testTag = sr.nextInt() >>> (1 + (sr.nextInt() >>> 1) % 26);
             app = new DERApplicationSpecific(testTag, new byte[]{ 1 });
-            app = (DERApplicationSpecific)ASN1Primitive.fromByteArray(app.getEncoded());
+            app = (ASN1ApplicationSpecific)ASN1Primitive.fromByteArray(app.getEncoded());
 
             if (app.getApplicationTag() != testTag)
             {

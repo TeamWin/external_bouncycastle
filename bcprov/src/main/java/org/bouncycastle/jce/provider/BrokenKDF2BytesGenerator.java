@@ -4,6 +4,7 @@ import org.bouncycastle.crypto.DataLengthException;
 import org.bouncycastle.crypto.DerivationFunction;
 import org.bouncycastle.crypto.DerivationParameters;
 import org.bouncycastle.crypto.Digest;
+import org.bouncycastle.crypto.OutputLengthException;
 import org.bouncycastle.crypto.params.KDFParameters;
 
 /**
@@ -74,7 +75,7 @@ public class BrokenKDF2BytesGenerator
     {
         if ((out.length - len) < outOff)
         {
-            throw new DataLengthException("output buffer too small");
+            throw new OutputLengthException("output buffer too small");
         }
 
         long    oBits = len * 8L;
@@ -87,7 +88,7 @@ public class BrokenKDF2BytesGenerator
         //
         if (oBits > (digest.getDigestSize() * 8L * (1L<<32 - 1)))
         {
-            new IllegalArgumentException("Output length to large");
+            throw new IllegalArgumentException("Output length too large");
         }
     
         int cThreshold = (int)(oBits / digest.getDigestSize());

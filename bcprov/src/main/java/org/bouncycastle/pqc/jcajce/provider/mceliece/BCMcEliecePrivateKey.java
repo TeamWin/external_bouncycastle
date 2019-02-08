@@ -15,7 +15,6 @@ import org.bouncycastle.pqc.math.linearalgebra.GF2Matrix;
 import org.bouncycastle.pqc.math.linearalgebra.GF2mField;
 import org.bouncycastle.pqc.math.linearalgebra.Permutation;
 import org.bouncycastle.pqc.math.linearalgebra.PolynomialGF2mSmallM;
-import org.bouncycastle.util.Strings;
 
 /**
  * This class implements a McEliece private key and is usually instantiated by
@@ -24,10 +23,6 @@ import org.bouncycastle.util.Strings;
 public class BCMcEliecePrivateKey
     implements CipherParameters, PrivateKey
 {
-
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
 
     private McEliecePrivateKeyParameters params;
@@ -119,19 +114,20 @@ public class BCMcEliecePrivateKey
         return params.getQInv();
     }
 
-    /**
+    /*
      * @return a human readable form of the key
      */
-    public String toString()
-    {
-        String result = " length of the code          : " + getN() + Strings.lineSeparator();
-        result += " dimension of the code       : " + getK() + Strings.lineSeparator();
-        result += " irreducible Goppa polynomial: " + getGoppaPoly() + Strings.lineSeparator();
-        result += " permutation P1              : " + getP1() + Strings.lineSeparator();
-        result += " permutation P2              : " + getP2() + Strings.lineSeparator();
-        result += " (k x k)-matrix S^-1         : " + getSInv();
-        return result;
-    }
+    // TODO:
+//    public String toString()
+//    {
+//        String result = " length of the code          : " + getN() + Strings.lineSeparator();
+//        result += " dimension of the code       : " + getK() + Strings.lineSeparator();
+//        result += " irreducible Goppa polynomial: " + getGoppaPoly() + Strings.lineSeparator();
+//        result += " permutation P1              : " + getP1() + Strings.lineSeparator();
+//        result += " permutation P2              : " + getP2() + Strings.lineSeparator();
+//        result += " (k x k)-matrix S^-1         : " + getSInv();
+//        return result;
+//    }
 
     /**
      * Compare this key with another object.
@@ -174,7 +170,7 @@ public class BCMcEliecePrivateKey
      * Return the key data to encode in the SubjectPublicKeyInfo structure.
      * <p>
      * The ASN.1 definition of the key structure is
-     * <p>
+     * </p>
      * <pre>
      *   McEliecePrivateKey ::= SEQUENCE {
      *     n          INTEGER                   -- length of the code
@@ -188,7 +184,6 @@ public class BCMcEliecePrivateKey
      *     qInv       SEQUENCE OF OCTET STRING  -- matrix used to compute square roots
      *   }
      * </pre>
-     * </p>
      *
      * @return the key data to encode in the SubjectPublicKeyInfo structure
      */
@@ -203,7 +198,6 @@ public class BCMcEliecePrivateKey
         }
         catch (IOException e)
         {
-            e.printStackTrace();
             return null;
         }
         try
@@ -213,7 +207,6 @@ public class BCMcEliecePrivateKey
         }
         catch (IOException e)
         {
-            e.printStackTrace();
             return null;
         }
     }

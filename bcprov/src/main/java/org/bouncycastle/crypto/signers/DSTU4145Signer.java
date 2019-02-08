@@ -4,7 +4,8 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 
 import org.bouncycastle.crypto.CipherParameters;
-import org.bouncycastle.crypto.DSA;
+import org.bouncycastle.crypto.CryptoServicesRegistrar;
+import org.bouncycastle.crypto.DSAExt;
 import org.bouncycastle.crypto.params.ECDomainParameters;
 import org.bouncycastle.crypto.params.ECKeyParameters;
 import org.bouncycastle.crypto.params.ECPrivateKeyParameters;
@@ -17,6 +18,7 @@ import org.bouncycastle.math.ec.ECMultiplier;
 import org.bouncycastle.math.ec.ECPoint;
 import org.bouncycastle.math.ec.FixedPointCombMultiplier;
 import org.bouncycastle.util.Arrays;
+import org.bouncycastle.util.BigIntegers;
 
 /**
  * DSTU 4145-2002
@@ -25,7 +27,7 @@ import org.bouncycastle.util.Arrays;
  * </p>
  */
 public class DSTU4145Signer
-    implements DSA
+    implements DSAExt
 {
     private static final BigInteger ONE = BigInteger.valueOf(1);
 
@@ -45,7 +47,7 @@ public class DSTU4145Signer
             }
             else
             {
-                this.random = new SecureRandom();
+                this.random = CryptoServicesRegistrar.getSecureRandom();
             }
 
             this.key = (ECPrivateKeyParameters)param;
@@ -55,6 +57,11 @@ public class DSTU4145Signer
             this.key = (ECPublicKeyParameters)param;
         }
 
+    }
+
+    public BigInteger getOrder()
+    {
+        return key.getParameters().getN();
     }
 
     public BigInteger[] generateSignature(byte[] message)
@@ -145,7 +152,7 @@ public class DSTU4145Signer
      */
     private static BigInteger generateRandomInteger(BigInteger n, SecureRandom random)
     {
-        return new BigInteger(n.bitLength() - 1, random);
+        return BigIntegers.createRandomBigInteger(n.bitLength() - 1, random);
     }
 
     private static ECFieldElement hash2FieldElement(ECCurve curve, byte[] hash)

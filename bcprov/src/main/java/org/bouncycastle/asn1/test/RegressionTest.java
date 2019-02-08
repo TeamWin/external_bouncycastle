@@ -10,6 +10,7 @@ public class RegressionTest
         new EqualsAndHashCodeTest(),
         new TagTest(),
         new SetTest(),
+        new ASN1IntegerTest(),
         new DERUTF8StringTest(),
         new CertificateTest(),
         new GenerationTest(),
@@ -71,7 +72,13 @@ public class RegressionTest
         new GeneralNameTest(),
         new ObjectIdentifierTest(),
         new RFC4519Test(),
-        new PolicyConstraintsTest()
+        new PolicyConstraintsTest(),
+        new PollReqContentTest(),
+        new DhSigStaticTest(),
+        new PKIPublicationInfoTest(),
+        new CertifiedKeyPairTest(),
+        new PrivateKeyInfoTest(),
+        new LocaleTest()
     };
 
     public static void main(

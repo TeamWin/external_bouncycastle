@@ -409,6 +409,25 @@ public class TlsDHUtils
         case CipherSuite.DRAFT_TLS_DHE_PSK_WITH_AES_128_OCB:
         case CipherSuite.DRAFT_TLS_DHE_PSK_WITH_AES_256_OCB:
 
+        /*
+         * DH_anon cipher suites are consider ephemeral DH 
+         */
+        case CipherSuite.TLS_DH_anon_WITH_3DES_EDE_CBC_SHA:
+        case CipherSuite.TLS_DH_anon_WITH_AES_128_CBC_SHA:
+        case CipherSuite.TLS_DH_anon_WITH_AES_128_CBC_SHA256:
+        case CipherSuite.TLS_DH_anon_WITH_AES_128_GCM_SHA256:
+        case CipherSuite.TLS_DH_anon_WITH_AES_256_CBC_SHA:
+        case CipherSuite.TLS_DH_anon_WITH_AES_256_CBC_SHA256:
+        case CipherSuite.TLS_DH_anon_WITH_AES_256_GCM_SHA384:
+        case CipherSuite.TLS_DH_anon_WITH_CAMELLIA_128_CBC_SHA:
+        case CipherSuite.TLS_DH_anon_WITH_CAMELLIA_128_CBC_SHA256:
+        case CipherSuite.TLS_DH_anon_WITH_CAMELLIA_128_GCM_SHA256:
+        case CipherSuite.TLS_DH_anon_WITH_CAMELLIA_256_CBC_SHA:
+        case CipherSuite.TLS_DH_anon_WITH_CAMELLIA_256_CBC_SHA256:
+        case CipherSuite.TLS_DH_anon_WITH_CAMELLIA_256_GCM_SHA384:
+        case CipherSuite.TLS_DH_anon_WITH_RC4_128_MD5:
+        case CipherSuite.TLS_DH_anon_WITH_SEED_CBC_SHA:
+
             return true;
 
         default:
@@ -459,41 +478,10 @@ public class TlsDHUtils
         AsymmetricCipherKeyPair kp = generateDHKeyPair(random, dhParams);
 
         DHPublicKeyParameters dhPublic = (DHPublicKeyParameters)kp.getPublic();
-        new ServerDHParams(dhPublic).encode(output);
+        writeDHParameters(dhParams, output);
+        writeDHParameter(dhPublic.getY(), output);
 
         return (DHPrivateKeyParameters)kp.getPrivate();
-    }
-
-    public static DHParameters validateDHParameters(DHParameters params) throws IOException
-    {
-        BigInteger p = params.getP();
-        BigInteger g = params.getG();
-
-        if (!p.isProbablePrime(2))
-        {
-            throw new TlsFatalAlert(AlertDescription.illegal_parameter);
-        }
-        if (g.compareTo(TWO) < 0 || g.compareTo(p.subtract(TWO)) > 0)
-        {
-            throw new TlsFatalAlert(AlertDescription.illegal_parameter);
-        }
-
-        return params;
-    }
-
-    public static DHPublicKeyParameters validateDHPublicKey(DHPublicKeyParameters key) throws IOException
-    {
-        DHParameters params = validateDHParameters(key.getParameters());
-
-        BigInteger Y = key.getY();
-        if (Y.compareTo(TWO) < 0 || Y.compareTo(params.getP().subtract(TWO)) > 0)
-        {
-            throw new TlsFatalAlert(AlertDescription.illegal_parameter);
-        }
-
-        // TODO See RFC 2631 for more discussion of Diffie-Hellman validation
-
-        return key;
     }
 
     public static BigInteger readDHParameter(InputStream input) throws IOException
@@ -501,8 +489,32 @@ public class TlsDHUtils
         return new BigInteger(1, TlsUtils.readOpaque16(input));
     }
 
+    public static DHParameters readDHParameters(InputStream input) throws IOException
+    {
+        BigInteger p = readDHParameter(input);
+        BigInteger g = readDHParameter(input);
+
+        return new DHParameters(p, g);
+    }
+
+    public static DHParameters receiveDHParameters(TlsDHVerifier dhVerifier, InputStream input) throws IOException
+    {
+        DHParameters dhParameters = readDHParameters(input);
+        if (!dhVerifier.accept(dhParameters))
+        {
+            throw new TlsFatalAlert(AlertDescription.insufficient_security);
+        }
+        return dhParameters;
+    }
+
     public static void writeDHParameter(BigInteger x, OutputStream output) throws IOException
     {
         TlsUtils.writeOpaque16(BigIntegers.asUnsignedByteArray(x), output);
+    }
+
+    public static void writeDHParameters(DHParameters dhParameters, OutputStream output) throws IOException
+    {
+        writeDHParameter(dhParameters.getP(), output);
+        writeDHParameter(dhParameters.getG(), output);
     }
 }

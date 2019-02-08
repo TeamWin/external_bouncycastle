@@ -78,9 +78,16 @@ public class RegressionTest
         new Shacal2Test(),
         new DetDSATest(),
         new ThreefishTest(),
+        new SM2SignatureTest(),
         new SM4Test(),
         new TLSKDFTest(),
-        new BCFKSStoreTest()
+        new BCFKSStoreTest(),
+        new DSTU7624Test(),
+        new GOST3412Test(),
+        new GOST3410KeyPairTest(),
+        new EdECTest(),
+        new OpenSSHSpecTests(),
+        new SM2CipherTest()
     };
 
     public static void main(

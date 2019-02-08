@@ -1,12 +1,14 @@
 package org.bouncycastle.crypto.generators;
 
+import java.math.BigInteger;
+import java.security.SecureRandom;
+
 import org.bouncycastle.crypto.CipherParameters;
+import org.bouncycastle.crypto.CryptoServicesRegistrar;
 import org.bouncycastle.crypto.params.ParametersWithRandom;
 import org.bouncycastle.crypto.params.RSAKeyParameters;
 import org.bouncycastle.crypto.params.RSAPrivateCrtKeyParameters;
-
-import java.math.BigInteger;
-import java.security.SecureRandom;
+import org.bouncycastle.util.BigIntegers;
 
 /**
  * Generate a random factor suitable for use with RSA blind signatures
@@ -39,7 +41,7 @@ public class RSABlindingFactorGenerator
         else
         {
             key = (RSAKeyParameters)param;
-            random = new SecureRandom();
+            random = CryptoServicesRegistrar.getSecureRandom();
         }
 
         if (key instanceof RSAPrivateCrtKeyParameters)
@@ -67,7 +69,7 @@ public class RSABlindingFactorGenerator
 
         do
         {
-            factor = new BigInteger(length, random);
+            factor = BigIntegers.createRandomBigInteger(length, random);
             gcd = factor.gcd(m);
         }
         while (factor.equals(ZERO) || factor.equals(ONE) || !gcd.equals(ONE));

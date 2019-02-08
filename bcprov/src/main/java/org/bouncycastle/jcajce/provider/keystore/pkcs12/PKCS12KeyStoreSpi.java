@@ -6,6 +6,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.math.BigInteger;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.Key;
@@ -18,7 +19,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.Principal;
 import java.security.PrivateKey;
-import java.security.Provider;
 import java.security.PublicKey;
 import java.security.SecureRandom;
 import java.security.UnrecoverableKeyException;
@@ -68,6 +68,7 @@ import org.bouncycastle.asn1.cryptopro.CryptoProObjectIdentifiers;
 import org.bouncycastle.asn1.cryptopro.GOST28147Parameters;
 import org.bouncycastle.asn1.nist.NISTObjectIdentifiers;
 import org.bouncycastle.asn1.ntt.NTTObjectIdentifiers;
+import org.bouncycastle.asn1.oiw.OIWObjectIdentifiers;
 import org.bouncycastle.asn1.pkcs.AuthenticatedSafe;
 import org.bouncycastle.asn1.pkcs.CertBag;
 import org.bouncycastle.asn1.pkcs.ContentInfo;
@@ -87,6 +88,7 @@ import org.bouncycastle.asn1.x509.Extension;
 import org.bouncycastle.asn1.x509.SubjectKeyIdentifier;
 import org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 import org.bouncycastle.asn1.x509.X509ObjectIdentifiers;
+import org.bouncycastle.crypto.CryptoServicesRegistrar;
 import org.bouncycastle.crypto.Digest;
 import org.bouncycastle.crypto.util.DigestFactory;
 import org.bouncycastle.jcajce.PKCS12Key;
@@ -94,6 +96,7 @@ import org.bouncycastle.jcajce.PKCS12StoreParameter;
 import org.bouncycastle.jcajce.spec.GOST28147ParameterSpec;
 import org.bouncycastle.jcajce.spec.PBKDF2KeySpec;
 import org.bouncycastle.jcajce.util.BCJcaJceHelper;
+import org.bouncycastle.jcajce.util.DefaultJcaJceHelper;
 import org.bouncycastle.jcajce.util.JcaJceHelper;
 import org.bouncycastle.jce.interfaces.BCKeyStore;
 import org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier;
@@ -101,6 +104,7 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.jce.provider.JDKPKCS12StoreParameter;
 import org.bouncycastle.util.Arrays;
 import org.bouncycastle.util.Integers;
+import org.bouncycastle.util.Properties;
 import org.bouncycastle.util.Strings;
 import org.bouncycastle.util.encoders.Hex;
 
@@ -108,10 +112,12 @@ public class PKCS12KeyStoreSpi
     extends KeyStoreSpi
     implements PKCSObjectIdentifiers, X509ObjectIdentifiers, BCKeyStore
 {
+    static final String PKCS12_MAX_IT_COUNT_PROPERTY = "org.bouncycastle.pkcs12.max_it_count";
+
     private final JcaJceHelper helper = new BCJcaJceHelper();
 
     private static final int SALT_SIZE = 20;
-    private static final int MIN_ITERATIONS = 1024;
+    private static final int MIN_ITERATIONS = 50 * 1024;
 
     private static final DefaultSecretKeyProvider keySizeProvider = new DefaultSecretKeyProvider();
 
@@ -137,12 +143,16 @@ public class PKCS12KeyStoreSpi
     static final int KEY_PUBLIC = 1;
     static final int KEY_SECRET = 2;
 
-    protected SecureRandom random = new SecureRandom();
+    protected SecureRandom random = CryptoServicesRegistrar.getSecureRandom();
 
     // use of final causes problems with JDK 1.2 compiler
     private CertificateFactory certFact;
     private ASN1ObjectIdentifier keyAlgorithm;
     private ASN1ObjectIdentifier certAlgorithm;
+
+    private AlgorithmIdentifier macAlgorithm = new AlgorithmIdentifier(OIWObjectIdentifiers.idSHA1, DERNull.INSTANCE);
+    private int itCount = 2 * MIN_ITERATIONS;
+    private int saltLength = 20;
 
     private class CertId
     {
@@ -185,7 +195,7 @@ public class PKCS12KeyStoreSpi
     }
 
     public PKCS12KeyStoreSpi(
-        Provider provider,
+        JcaJceHelper helper,
         ASN1ObjectIdentifier keyAlgorithm,
         ASN1ObjectIdentifier certAlgorithm)
     {
@@ -194,14 +204,7 @@ public class PKCS12KeyStoreSpi
 
         try
         {
-            if (provider != null)
-            {
-                certFact = CertificateFactory.getInstance("X.509", provider);
-            }
-            else
-            {
-                certFact = CertificateFactory.getInstance("X.509");
-            }
+            certFact = helper.createCertificateFactory("X.509");
         }
         catch (Exception e)
         {
@@ -612,7 +615,7 @@ public class PKCS12KeyStoreSpi
                 PKCS12PBEParams pbeParams = PKCS12PBEParams.getInstance(algId.getParameters());
                 PBEParameterSpec defParams = new PBEParameterSpec(
                     pbeParams.getIV(),
-                    pbeParams.getIterations().intValue());
+                    validateIterationCount(pbeParams.getIterations()));
 
                 Cipher cipher = helper.createCipher(algorithm.getId());
 
@@ -685,8 +688,6 @@ public class PKCS12KeyStoreSpi
         if (algorithm.on(PKCSObjectIdentifiers.pkcs_12PbeIds))
         {
             PKCS12PBEParams pbeParams = PKCS12PBEParams.getInstance(algId.getParameters());
-            PBEKeySpec pbeSpec = new PBEKeySpec(password);
-
             try
             {
                 PBEParameterSpec defParams = new PBEParameterSpec(
@@ -735,16 +736,14 @@ public class PKCS12KeyStoreSpi
 
         if (func.isDefaultPrf())
         {
-            key = keyFact.generateSecret(new PBEKeySpec(password, func.getSalt(), func.getIterationCount().intValue(), keySizeProvider.getKeySize(encScheme)));
+            key = keyFact.generateSecret(new PBEKeySpec(password, func.getSalt(), validateIterationCount(func.getIterationCount()), keySizeProvider.getKeySize(encScheme)));
         }
         else
         {
-            key = keyFact.generateSecret(new PBKDF2KeySpec(password, func.getSalt(), func.getIterationCount().intValue(), keySizeProvider.getKeySize(encScheme), func.getPrf()));
+            key = keyFact.generateSecret(new PBKDF2KeySpec(password, func.getSalt(), validateIterationCount(func.getIterationCount()), keySizeProvider.getKeySize(encScheme), func.getPrf()));
         }
 
         Cipher cipher = Cipher.getInstance(alg.getEncryptionScheme().getAlgorithm().getId());
-
-        AlgorithmIdentifier encryptionAlg = AlgorithmIdentifier.getInstance(alg.getEncryptionScheme());
 
         ASN1Encodable encParams = alg.getEncryptionScheme().getParameters();
         if (encParams instanceof ASN1OctetString)
@@ -790,8 +789,17 @@ public class PKCS12KeyStoreSpi
         bufIn.reset();
 
         ASN1InputStream bIn = new ASN1InputStream(bufIn);
-        ASN1Sequence obj = (ASN1Sequence)bIn.readObject();
-        Pfx bag = Pfx.getInstance(obj);
+        
+        Pfx bag;
+        try
+        {
+            bag = Pfx.getInstance(bIn.readObject());
+        }
+        catch (Exception e)
+        {
+            throw new IOException(e.getMessage());
+        }
+
         ContentInfo info = bag.getAuthSafe();
         Vector chain = new Vector();
         boolean unmarkedKey = false;
@@ -801,15 +809,16 @@ public class PKCS12KeyStoreSpi
         {
             MacData mData = bag.getMacData();
             DigestInfo dInfo = mData.getMac();
-            AlgorithmIdentifier algId = dInfo.getAlgorithmId();
+            macAlgorithm = dInfo.getAlgorithmId();
             byte[] salt = mData.getSalt();
-            int itCount = mData.getIterationCount().intValue();
+            itCount = validateIterationCount(mData.getIterationCount());
+            saltLength = salt.length;
 
             byte[] data = ((ASN1OctetString)info.getContent()).getOctets();
 
             try
             {
-                byte[] res = calculatePbeMac(algId.getAlgorithm(), salt, itCount, password, false, data);
+                byte[] res = calculatePbeMac(macAlgorithm.getAlgorithm(), salt, itCount, password, false, data);
                 byte[] dig = dInfo.getDigest();
 
                 if (!Arrays.constantTimeAreEqual(res, dig))
@@ -820,7 +829,7 @@ public class PKCS12KeyStoreSpi
                     }
 
                     // Try with incorrect zero length password
-                    res = calculatePbeMac(algId.getAlgorithm(), salt, itCount, password, true, data);
+                    res = calculatePbeMac(macAlgorithm.getAlgorithm(), salt, itCount, password, true, data);
 
                     if (!Arrays.constantTimeAreEqual(res, dig))
                     {
@@ -868,7 +877,6 @@ public class PKCS12KeyStoreSpi
                             //
                             // set the attributes on the key
                             //
-                            PKCS12BagAttributeCarrier bagAttr = (PKCS12BagAttributeCarrier)privKey;
                             String alias = null;
                             ASN1OctetString localId = null;
 
@@ -886,19 +894,23 @@ public class PKCS12KeyStoreSpi
                                     {
                                         attr = (ASN1Primitive)attrSet.getObjectAt(0);
 
-                                        ASN1Encodable existing = bagAttr.getBagAttribute(aOid);
-                                        if (existing != null)
+                                        if (privKey instanceof PKCS12BagAttributeCarrier)
                                         {
-                                            // OK, but the value has to be the same
-                                            if (!existing.toASN1Primitive().equals(attr))
+                                            PKCS12BagAttributeCarrier bagAttr = (PKCS12BagAttributeCarrier)privKey;
+                                            ASN1Encodable existing = bagAttr.getBagAttribute(aOid);
+                                            if (existing != null)
                                             {
-                                                throw new IOException(
-                                                    "attempt to add existing attribute with different value");
+                                                // OK, but the value has to be the same
+                                                if (!existing.toASN1Primitive().equals(attr))
+                                                {
+                                                    throw new IOException(
+                                                        "attempt to add existing attribute with different value");
+                                                }
                                             }
-                                        }
-                                        else
-                                        {
-                                            bagAttr.setBagAttribute(aOid, attr);
+                                            else
+                                            {
+                                                bagAttr.setBagAttribute(aOid, attr);
+                                            }
                                         }
                                     }
 
@@ -1206,6 +1218,27 @@ public class PKCS12KeyStoreSpi
                 }
             }
         }
+    }
+
+    private int validateIterationCount(BigInteger i)
+    {
+        int count = i.intValue();
+
+        if (count < 0)
+        {
+            throw new IllegalStateException("negative iteration count found");
+        }
+
+        BigInteger maxValue = Properties.asBigInteger(PKCS12_MAX_IT_COUNT_PROPERTY);
+        if (maxValue != null)
+        {
+            if (maxValue.intValue() < count)
+            {
+                throw new IllegalStateException("iteration count " + count + " greater than " + maxValue.intValue());
+            }
+        }
+
+        return count;
     }
 
     public void engineStore(LoadStoreParameter param)
@@ -1615,8 +1648,7 @@ public class PKCS12KeyStoreSpi
         //
         // create the mac
         //
-        byte[] mSalt = new byte[20];
-        int itCount = MIN_ITERATIONS;
+        byte[] mSalt = new byte[saltLength];
 
         random.nextBytes(mSalt);
 
@@ -1626,10 +1658,9 @@ public class PKCS12KeyStoreSpi
 
         try
         {
-            byte[] res = calculatePbeMac(id_SHA1, mSalt, itCount, password, false, data);
+            byte[] res = calculatePbeMac(macAlgorithm.getAlgorithm(), mSalt, itCount, password, false, data);
 
-            AlgorithmIdentifier algId = new AlgorithmIdentifier(id_SHA1, DERNull.INSTANCE);
-            DigestInfo dInfo = new DigestInfo(algId, res);
+            DigestInfo dInfo = new DigestInfo(macAlgorithm, res);
 
             mData = new MacData(dInfo, mSalt, itCount);
         }
@@ -1706,7 +1737,7 @@ public class PKCS12KeyStoreSpi
     {
         public BCPKCS12KeyStore()
         {
-            super(new BouncyCastleProvider(), pbeWithSHAAnd3_KeyTripleDES_CBC, pbeWithSHAAnd40BitRC2_CBC);
+            super(new BCJcaJceHelper(), pbeWithSHAAnd3_KeyTripleDES_CBC, pbeWithSHAAnd40BitRC2_CBC);
         }
     }
 
@@ -1715,7 +1746,7 @@ public class PKCS12KeyStoreSpi
     {
         public BCPKCS12KeyStore3DES()
         {
-            super(new BouncyCastleProvider(), pbeWithSHAAnd3_KeyTripleDES_CBC, pbeWithSHAAnd3_KeyTripleDES_CBC);
+            super(new BCJcaJceHelper(), pbeWithSHAAnd3_KeyTripleDES_CBC, pbeWithSHAAnd3_KeyTripleDES_CBC);
         }
     }
 
@@ -1724,7 +1755,7 @@ public class PKCS12KeyStoreSpi
     {
         public DefPKCS12KeyStore()
         {
-            super(null, pbeWithSHAAnd3_KeyTripleDES_CBC, pbeWithSHAAnd40BitRC2_CBC);
+            super(new DefaultJcaJceHelper(), pbeWithSHAAnd3_KeyTripleDES_CBC, pbeWithSHAAnd40BitRC2_CBC);
         }
     }
 
@@ -1733,7 +1764,7 @@ public class PKCS12KeyStoreSpi
     {
         public DefPKCS12KeyStore3DES()
         {
-            super(null, pbeWithSHAAnd3_KeyTripleDES_CBC, pbeWithSHAAnd3_KeyTripleDES_CBC);
+            super(new DefaultJcaJceHelper(), pbeWithSHAAnd3_KeyTripleDES_CBC, pbeWithSHAAnd3_KeyTripleDES_CBC);
         }
     }
 

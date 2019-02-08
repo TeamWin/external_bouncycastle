@@ -1,10 +1,11 @@
 package org.bouncycastle.crypto.generators;
 
-import org.bouncycastle.crypto.params.GOST3410Parameters;
-import org.bouncycastle.crypto.params.GOST3410ValidationParameters;
-
 import java.math.BigInteger;
 import java.security.SecureRandom;
+
+import org.bouncycastle.crypto.params.GOST3410Parameters;
+import org.bouncycastle.crypto.params.GOST3410ValidationParameters;
+import org.bouncycastle.util.BigIntegers;
 
 /**
  * generate suitable parameters for GOST3410.
@@ -453,7 +454,7 @@ public class GOST3410ParametersGenerator
     }
 
 
-    /**
+    /*
      * Procedure C
      * procedure generates the a value from the given p,q,
      * returning the a value.
@@ -466,7 +467,7 @@ public class GOST3410ParametersGenerator
 
         for(;;)
         {
-            BigInteger d = new BigInteger(length, init_random);
+            BigInteger d = BigIntegers.createRandomBigInteger(length, init_random);
 
             // 1 < d < p-1
             if (d.compareTo(ONE) > 0 && d.compareTo(pSub1) < 0)
@@ -484,6 +485,8 @@ public class GOST3410ParametersGenerator
     /**
      * which generates the p , q and a values from the given parameters,
      * returning the GOST3410Parameters object.
+     *
+     * @return a generated GOST3410 parameters object.
      */
     public GOST3410Parameters generateParameters()
     {

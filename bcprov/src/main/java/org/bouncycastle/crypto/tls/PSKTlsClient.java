@@ -5,6 +5,7 @@ import java.io.IOException;
 public class PSKTlsClient
     extends AbstractTlsClient
 {
+    protected TlsDHVerifier dhVerifier;
     protected TlsPSKIdentity pskIdentity;
 
     public PSKTlsClient(TlsPSKIdentity pskIdentity)
@@ -14,7 +15,14 @@ public class PSKTlsClient
 
     public PSKTlsClient(TlsCipherFactory cipherFactory, TlsPSKIdentity pskIdentity)
     {
+        this(cipherFactory, new DefaultTlsDHVerifier(), pskIdentity);
+    }
+
+    public PSKTlsClient(TlsCipherFactory cipherFactory, TlsDHVerifier dhVerifier, TlsPSKIdentity pskIdentity)
+    {
         super(cipherFactory);
+
+        this.dhVerifier = dhVerifier;
         this.pskIdentity = pskIdentity;
     }
 
@@ -24,8 +32,6 @@ public class PSKTlsClient
         {
             CipherSuite.TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA256,
             CipherSuite.TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA,
-            CipherSuite.TLS_DHE_PSK_WITH_AES_128_CBC_SHA256,
-            CipherSuite.TLS_DHE_PSK_WITH_AES_128_CBC_SHA
         };
     }
 
@@ -62,7 +68,7 @@ public class PSKTlsClient
 
     protected TlsKeyExchange createPSKKeyExchange(int keyExchange)
     {
-        return new TlsPSKKeyExchange(keyExchange, supportedSignatureAlgorithms, pskIdentity, null, null, namedCurves,
-            clientECPointFormats, serverECPointFormats);
+        return new TlsPSKKeyExchange(keyExchange, supportedSignatureAlgorithms, pskIdentity, null, dhVerifier, null,
+            namedCurves, clientECPointFormats, serverECPointFormats);
     }
 }

@@ -10,6 +10,7 @@ import org.bouncycastle.crypto.params.RSAKeyParameters;
 import org.bouncycastle.crypto.params.RSAPrivateCrtKeyParameters;
 import org.bouncycastle.math.Primes;
 import org.bouncycastle.math.ec.WNafUtil;
+import org.bouncycastle.util.BigIntegers;
 
 /**
  * an RSA key pair generator.
@@ -20,12 +21,10 @@ public class RSAKeyPairGenerator
     private static final BigInteger ONE = BigInteger.valueOf(1);
 
     private RSAKeyGenerationParameters param;
-    private int iterations;
 
     public void init(KeyGenerationParameters param)
     {
         this.param = (RSAKeyGenerationParameters)param;
-        this.iterations = getNumberOfIterations(this.param.getStrength(), this.param.getCertainty());
     }
 
     public AsymmetricCipherKeyPair generateKeyPair()
@@ -161,7 +160,7 @@ public class RSAKeyPairGenerator
     {
         for (int i = 0; i != 5 * bitlength; i++)
         {
-            BigInteger p = new BigInteger(bitlength, 1, param.getRandom());
+            BigInteger p = BigIntegers.createRandomPrime(bitlength, 1, param.getRandom());
 
             if (p.mod(e).equals(ONE))
             {
@@ -191,6 +190,8 @@ public class RSAKeyPairGenerator
 
     protected boolean isProbablePrime(BigInteger x)
     {
+        int iterations = getNumberOfIterations(x.bitLength(), param.getCertainty());
+
         /*
          * Primes class for FIPS 186-4 C.3 primality checking
          */

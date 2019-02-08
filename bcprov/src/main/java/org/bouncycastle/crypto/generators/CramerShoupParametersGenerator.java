@@ -38,6 +38,7 @@ public class CramerShoupParametersGenerator
      * <p>
      * Note: can take a while...
      * </p>
+     * @return a generated CramerShoupParameters object.
      */
     public CramerShoupParameters generateParameters()
     {
@@ -90,7 +91,7 @@ public class CramerShoupParametersGenerator
 
             for (; ; )
             {
-                q = new BigInteger(qLength, 2, random);
+                q = BigIntegers.createRandomPrime(qLength, 2, random);
                 p = q.shiftLeft(1).add(ONE);
                 if (p.isProbablePrime(certainty) && (certainty <= 2 || q.isProbablePrime(certainty)))
                 {

@@ -3,6 +3,7 @@ package org.bouncycastle.asn1.eac;
 import java.io.IOException;
 import java.util.Hashtable;
 
+import org.bouncycastle.asn1.ASN1ApplicationSpecific;
 import org.bouncycastle.asn1.ASN1EncodableVector;
 import org.bouncycastle.asn1.ASN1InputStream;
 import org.bouncycastle.asn1.ASN1Object;
@@ -27,7 +28,7 @@ public class CertificateHolderAuthorization
     extends ASN1Object
 {
     ASN1ObjectIdentifier oid;
-    DERApplicationSpecific accessRights;
+    ASN1ApplicationSpecific accessRights;
     public static final ASN1ObjectIdentifier id_role_EAC = EACObjectIdentifiers.bsi_de.branch("3.1.2.1");
     public static final int CVCA = 0xC0;
     public static final int DV_DOMESTIC = 0x80;
@@ -89,9 +90,9 @@ public class CertificateHolderAuthorization
             throw new IllegalArgumentException("no Oid in CerticateHolderAuthorization");
         }
         obj = cha.readObject();
-        if (obj instanceof DERApplicationSpecific)
+        if (obj instanceof ASN1ApplicationSpecific)
         {
-            this.accessRights = (DERApplicationSpecific)obj;
+            this.accessRights = (ASN1ApplicationSpecific)obj;
         }
         else
         {
@@ -116,12 +117,12 @@ public class CertificateHolderAuthorization
     }
 
     /**
-     * create an Iso7816CertificateHolderAuthorization according to the {@link DERApplicationSpecific}
+     * create an Iso7816CertificateHolderAuthorization according to the {@link ASN1ApplicationSpecific}
      *
      * @param aSpe the DERApplicationSpecific containing the data
      * @throws IOException
      */
-    public CertificateHolderAuthorization(DERApplicationSpecific aSpe)
+    public CertificateHolderAuthorization(ASN1ApplicationSpecific aSpe)
         throws IOException
     {
         if (aSpe.getApplicationTag() == EACTags.CERTIFICATE_HOLDER_AUTHORIZATION_TEMPLATE)

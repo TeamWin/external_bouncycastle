@@ -12,24 +12,24 @@ import org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 import org.bouncycastle.asn1.x509.X509ObjectIdentifiers;
 import org.bouncycastle.crypto.CipherParameters;
-import org.bouncycastle.crypto.DSA;
+import org.bouncycastle.crypto.DSAExt;
 import org.bouncycastle.crypto.Digest;
 import org.bouncycastle.crypto.digests.GOST3411Digest;
 import org.bouncycastle.crypto.params.ParametersWithRandom;
 import org.bouncycastle.crypto.signers.GOST3410Signer;
 import org.bouncycastle.jcajce.provider.asymmetric.util.ECUtil;
+import org.bouncycastle.jcajce.provider.asymmetric.util.GOST3410Util;
 import org.bouncycastle.jce.interfaces.ECKey;
 import org.bouncycastle.jce.interfaces.ECPublicKey;
 import org.bouncycastle.jce.interfaces.GOST3410Key;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.bouncycastle.jcajce.provider.asymmetric.util.GOST3410Util;
 
 public class SignatureSpi
     extends java.security.SignatureSpi
     implements PKCSObjectIdentifiers, X509ObjectIdentifiers
 {
     private Digest                  digest;
-    private DSA                     signer;
+    private DSAExt                  signer;
     private SecureRandom            random;
 
     public SignatureSpi()
@@ -209,7 +209,7 @@ public class SignatureSpi
     }
 
     /**
-     * @deprecated replaced with <a href = "#engineSetParameter(java.security.spec.AlgorithmParameterSpec)">
+     * @deprecated replaced with #engineSetParameter(java.security.spec.AlgorithmParameterSpec)
      */
     protected void engineSetParameter(
         String  param,
