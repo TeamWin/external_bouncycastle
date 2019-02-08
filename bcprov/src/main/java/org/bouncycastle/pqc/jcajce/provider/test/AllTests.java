@@ -8,6 +8,9 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import org.bouncycastle.pqc.jcajce.provider.BouncyCastlePQCProvider;
 
+/**
+ * Full test suite for the BCPQC provider.
+ */
 public class AllTests
     extends TestCase
 {
@@ -37,6 +40,9 @@ public class AllTests
         suite.addTestSuite(NewHopeKeyPairGeneratorTest.class);
         suite.addTestSuite(Sphincs256Test.class);
         suite.addTestSuite(Sphincs256KeyPairGeneratorTest.class);
+        suite.addTestSuite(XMSSTest.class);
+        suite.addTestSuite(XMSSMTTest.class);
+        suite.addTestSuite(QTESLATest.class);
 
         return new BCTestSetup(suite);
     }

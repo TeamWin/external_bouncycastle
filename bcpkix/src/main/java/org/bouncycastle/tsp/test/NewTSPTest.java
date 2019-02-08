@@ -3,7 +3,9 @@ package org.bouncycastle.tsp.test;
 import java.io.OutputStream;
 import java.math.BigInteger;
 import java.security.KeyPair;
+import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.security.Security;
 import java.security.cert.X509Certificate;
 import java.text.SimpleDateFormat;
@@ -11,13 +13,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.SimpleTimeZone;
 
 import junit.framework.TestCase;
-import org.bouncycastle.asn1.ASN1GeneralizedTime;
+import org.bouncycastle.asn1.ASN1Encoding;
 import org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import org.bouncycastle.asn1.DEROctetString;
 import org.bouncycastle.asn1.DERUTF8String;
@@ -30,21 +33,30 @@ import org.bouncycastle.asn1.ess.SigningCertificate;
 import org.bouncycastle.asn1.ess.SigningCertificateV2;
 import org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import org.bouncycastle.asn1.x500.X500Name;
+import org.bouncycastle.asn1.x509.ExtendedKeyUsage;
 import org.bouncycastle.asn1.x509.Extension;
 import org.bouncycastle.asn1.x509.Extensions;
 import org.bouncycastle.asn1.x509.ExtensionsGenerator;
 import org.bouncycastle.asn1.x509.GeneralName;
 import org.bouncycastle.asn1.x509.GeneralNames;
 import org.bouncycastle.asn1.x509.IssuerSerial;
+import org.bouncycastle.asn1.x509.KeyPurposeId;
 import org.bouncycastle.cert.X509CertificateHolder;
 import org.bouncycastle.cert.jcajce.JcaCertStore;
+import org.bouncycastle.cert.jcajce.JcaX509CertificateConverter;
+import org.bouncycastle.cert.jcajce.JcaX509CertificateHolder;
+import org.bouncycastle.cert.jcajce.JcaX509v3CertificateBuilder;
 import org.bouncycastle.cms.CMSAttributeTableGenerationException;
 import org.bouncycastle.cms.CMSAttributeTableGenerator;
+import org.bouncycastle.cms.CMSSignedData;
 import org.bouncycastle.cms.DefaultSignedAttributeTableGenerator;
 import org.bouncycastle.cms.jcajce.JcaSignerInfoGeneratorBuilder;
 import org.bouncycastle.cms.jcajce.JcaSimpleSignerInfoGeneratorBuilder;
 import org.bouncycastle.cms.jcajce.JcaSimpleSignerInfoVerifierBuilder;
+import org.bouncycastle.cms.test.CMSTestUtil;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.bouncycastle.jce.spec.ECNamedCurveGenParameterSpec;
+import org.bouncycastle.operator.ContentSigner;
 import org.bouncycastle.operator.DigestCalculator;
 import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder;
 import org.bouncycastle.operator.jcajce.JcaDigestCalculatorProviderBuilder;
@@ -114,6 +126,78 @@ public class NewTSPTest
         additionalExtensionTest(origKP.getPrivate(), origCert, certs);
     }
 
+    public void testCertOrdering()
+        throws Exception
+    {
+        List            certList = new ArrayList();
+
+        String _origDN   = "O=Bouncy Castle, C=AU";
+        KeyPair _origKP   = CMSTestUtil.makeKeyPair();
+        X509Certificate _origCert = CMSTestUtil.makeCertificate(_origKP, _origDN, _origKP, _origDN);
+
+        String _signDN   = "CN=Bob, OU=Sales, O=Bouncy Castle, C=AU";
+        KeyPair _signKP   = CMSTestUtil.makeKeyPair();
+        X509Certificate _signCert = TSPTestUtil.makeCertificate(_signKP, _signDN, _origKP, _origDN);
+
+        KeyPair _signDsaKP   = CMSTestUtil.makeDsaKeyPair();
+        X509Certificate _signDsaCert = CMSTestUtil.makeCertificate(_signDsaKP, _signDN, _origKP, _origDN);
+
+        certList.add(_origCert);
+        certList.add(_signDsaCert);
+        certList.add(_signCert);
+
+        Store      certs = new JcaCertStore(certList);
+
+        TimeStampTokenGenerator tsTokenGen = new TimeStampTokenGenerator(
+            new JcaSimpleSignerInfoGeneratorBuilder().build("SHA1withRSA", _signKP.getPrivate(), _signCert), new SHA1DigestCalculator(), new ASN1ObjectIdentifier("1.2"));
+
+        tsTokenGen.addCertificates(certs);
+
+        TimeStampRequestGenerator reqGen = new TimeStampRequestGenerator();
+        
+        reqGen.setCertReq(true);
+
+        TimeStampRequest request = reqGen.generate(TSPAlgorithms.SHA1, new byte[20], BigInteger.valueOf(100));
+
+        TimeStampResponseGenerator tsRespGen = new TimeStampResponseGenerator(tsTokenGen, TSPAlgorithms.ALLOWED);
+
+        TimeStampResponse initResp = tsRespGen.generateGrantedResponse(request, new BigInteger("23"), new Date());
+
+        // original CMS SignedData object
+        CMSSignedData sd = initResp.getTimeStampToken().toCMSSignedData();
+
+        certs = sd.getCertificates();
+        Iterator it = certs.getMatches(null).iterator();
+
+        assertEquals(new JcaX509CertificateHolder(_origCert), it.next());
+        assertEquals(new JcaX509CertificateHolder(_signDsaCert), it.next());
+        assertEquals(new JcaX509CertificateHolder(_signCert), it.next());
+
+        // definite-length
+        TimeStampResponse dlResp = new TimeStampResponse(initResp.getEncoded(ASN1Encoding.DL));
+
+        sd = dlResp.getTimeStampToken().toCMSSignedData();
+
+        certs = sd.getCertificates();
+        it = certs.getMatches(null).iterator();
+
+        assertEquals(new JcaX509CertificateHolder(_origCert), it.next());
+        assertEquals(new JcaX509CertificateHolder(_signDsaCert), it.next());
+        assertEquals(new JcaX509CertificateHolder(_signCert), it.next());
+
+        // convert to DER - the default encoding
+        TimeStampResponse derResp = new TimeStampResponse(initResp.getEncoded());
+
+        sd = derResp.getTimeStampToken().toCMSSignedData();
+
+        certs = sd.getCertificates();
+        it = certs.getMatches(null).iterator();
+
+        assertEquals(new JcaX509CertificateHolder(_origCert), it.next());
+        assertEquals(new JcaX509CertificateHolder(_signCert), it.next());
+        assertEquals(new JcaX509CertificateHolder(_signDsaCert), it.next());
+    }
+
     private void basicTest(
         PrivateKey privateKey,
         X509Certificate cert,
@@ -127,6 +211,76 @@ public class NewTSPTest
 
         TimeStampRequestGenerator reqGen = new TimeStampRequestGenerator();
         TimeStampRequest request = reqGen.generate(TSPAlgorithms.SHA1, new byte[20], BigInteger.valueOf(100));
+
+        TimeStampResponseGenerator tsRespGen = new TimeStampResponseGenerator(tsTokenGen, TSPAlgorithms.ALLOWED);
+
+        TimeStampResponse tsResp = tsRespGen.generate(request, new BigInteger("23"), new Date());
+
+        tsResp = new TimeStampResponse(tsResp.getEncoded());
+
+        TimeStampToken tsToken = tsResp.getTimeStampToken();
+
+        tsToken.validate(new JcaSimpleSignerInfoVerifierBuilder().setProvider(BC).build(cert));
+
+        AttributeTable table = tsToken.getSignedAttributes();
+
+        assertNotNull("no signingCertificate attribute found", table.get(PKCSObjectIdentifiers.id_aa_signingCertificate));
+    }
+
+    public void testSM2withSM3()
+        throws Exception
+    {
+        //
+         // set up the keys
+         //
+         PrivateKey privKey;
+         PublicKey pubKey;
+
+         try
+         {
+             KeyPairGenerator g = KeyPairGenerator.getInstance("EC", "BC");
+
+             g.initialize(new ECNamedCurveGenParameterSpec("sm2p256v1"));
+
+             KeyPair p = g.generateKeyPair();
+
+             privKey = p.getPrivate();
+             pubKey = p.getPublic();
+         }
+         catch (Exception e)
+         {
+             fail("error setting up keys - " + e.toString());
+             return;
+         }
+
+        //
+        // extensions
+        //
+
+        //
+        // create the certificate - version 1
+        //
+
+        ContentSigner sigGen = new JcaContentSignerBuilder("SM3withSM2").setProvider(BC).build(privKey);
+        JcaX509v3CertificateBuilder certGen = new JcaX509v3CertificateBuilder(
+            new X500Name("CN=Test"),
+            BigInteger.valueOf(1),
+            new Date(System.currentTimeMillis() - 50000),
+            new Date(System.currentTimeMillis() + 50000),
+            new X500Name("CN=Test"),
+            pubKey);
+
+        certGen.addExtension(Extension.extendedKeyUsage, true, new ExtendedKeyUsage(KeyPurposeId.id_kp_timeStamping));
+
+        X509Certificate cert = new JcaX509CertificateConverter().setProvider(BC).getCertificate(certGen.build(sigGen));
+
+        TimeStampTokenGenerator tsTokenGen = new TimeStampTokenGenerator(
+            new JcaSimpleSignerInfoGeneratorBuilder().build("SM3withSM2", privKey, cert), new SHA1DigestCalculator(), new ASN1ObjectIdentifier("1.2"));
+
+       // tsTokenGen.addCertificates(certs);
+
+        TimeStampRequestGenerator reqGen = new TimeStampRequestGenerator();
+        TimeStampRequest request = reqGen.generate(TSPAlgorithms.SM3, new byte[32], BigInteger.valueOf(100));
 
         TimeStampResponseGenerator tsRespGen = new TimeStampResponseGenerator(tsTokenGen, TSPAlgorithms.ALLOWED);
 

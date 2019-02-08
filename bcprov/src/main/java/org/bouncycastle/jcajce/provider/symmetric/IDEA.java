@@ -9,11 +9,10 @@ import java.security.spec.InvalidParameterSpecException;
 
 import javax.crypto.spec.IvParameterSpec;
 
-import org.bouncycastle.asn1.ASN1InputStream;
-import org.bouncycastle.asn1.ASN1Sequence;
 import org.bouncycastle.asn1.misc.IDEACBCPar;
 import org.bouncycastle.asn1.misc.MiscObjectIdentifiers;
 import org.bouncycastle.crypto.CipherKeyGenerator;
+import org.bouncycastle.crypto.CryptoServicesRegistrar;
 import org.bouncycastle.crypto.engines.IDEAEngine;
 import org.bouncycastle.crypto.macs.CBCBlockCipherMac;
 import org.bouncycastle.crypto.macs.CFBBlockCipherMac;
@@ -95,7 +94,7 @@ public final class IDEA
 
             if (random == null)
             {
-                random = new SecureRandom();
+                random = CryptoServicesRegistrar.getSecureRandom();
             }
 
             random.nextBytes(iv);
@@ -192,8 +191,7 @@ public final class IDEA
             }
             if (format.equals("ASN.1"))
             {
-                ASN1InputStream aIn = new ASN1InputStream(params);
-                IDEACBCPar      oct = new IDEACBCPar((ASN1Sequence)aIn.readObject());
+                IDEACBCPar      oct = IDEACBCPar.getInstance(params);
 
                 engineInit(oct.getIV());
                 return;

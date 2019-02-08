@@ -5,6 +5,7 @@ import java.security.SecureRandom;
 
 import org.bouncycastle.crypto.AsymmetricCipherKeyPair;
 import org.bouncycastle.crypto.CipherParameters;
+import org.bouncycastle.crypto.CryptoServicesRegistrar;
 import org.bouncycastle.crypto.generators.DHKeyPairGenerator;
 import org.bouncycastle.crypto.params.AsymmetricKeyParameter;
 import org.bouncycastle.crypto.params.DHKeyGenerationParameters;
@@ -47,7 +48,7 @@ public class DHAgreement
         }
         else
         {
-            this.random = new SecureRandom();
+            this.random = CryptoServicesRegistrar.getSecureRandom();
             kParam = (AsymmetricKeyParameter)param;
         }
 
@@ -91,8 +92,14 @@ public class DHAgreement
 
         BigInteger p = dhParams.getP();
 
-        BigInteger result = pub.getY().modPow(privateValue, p);
-        if (result.compareTo(ONE) == 0)
+        BigInteger peerY = pub.getY();
+        if (peerY == null || peerY.compareTo(ONE) <= 0 || peerY.compareTo(p.subtract(ONE)) >= 0)
+        {
+            throw new IllegalArgumentException("Diffie-Hellman public key is weak");
+        }
+
+        BigInteger result = peerY.modPow(privateValue, p);
+        if (result.equals(ONE))
         {
             throw new IllegalStateException("Shared key can't be 1");
         }

@@ -30,9 +30,12 @@ import org.bouncycastle.operator.InputDecryptorProvider;
 import org.bouncycastle.operator.OperatorCreationException;
 import org.bouncycastle.util.Strings;
 
+/**
+ * DecryptorProviderBuilder for producing DecryptorProvider for use with PKCS8EncryptedPrivateKeyInfo.
+ */
 public class JceOpenSSLPKCS8DecryptorProviderBuilder
 {
-    private JcaJceHelper helper = new DefaultJcaJceHelper();
+    private JcaJceHelper helper;
 
     public JceOpenSSLPKCS8DecryptorProviderBuilder()
     {
@@ -77,8 +80,17 @@ public class JceOpenSSLPKCS8DecryptorProviderBuilder
 
                         String oid = scheme.getAlgorithm().getId();
 
-                        SecretKey key = PEMUtilities.generateSecretKeyForPKCS5Scheme2(helper, oid, password, salt, iterationCount);
+                        SecretKey key;
 
+                        if (PEMUtilities.isHmacSHA1(defParams.getPrf()))
+                        {
+                            key = PEMUtilities.generateSecretKeyForPKCS5Scheme2(helper, oid, password, salt, iterationCount);
+                        }
+                        else
+                        {
+                            key = PEMUtilities.generateSecretKeyForPKCS5Scheme2(helper, oid, password, salt, iterationCount, defParams.getPrf());
+                        }
+                        
                         cipher = helper.createCipher(oid);
                         AlgorithmParameters algParams = helper.createAlgorithmParameters(oid);
 

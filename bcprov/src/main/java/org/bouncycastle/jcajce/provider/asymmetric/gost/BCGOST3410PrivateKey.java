@@ -4,19 +4,21 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.math.BigInteger;
+import java.security.InvalidKeyException;
 import java.util.Enumeration;
 
 import org.bouncycastle.asn1.ASN1Encodable;
 import org.bouncycastle.asn1.ASN1Encoding;
+import org.bouncycastle.asn1.ASN1Integer;
 import org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import org.bouncycastle.asn1.ASN1OctetString;
-import org.bouncycastle.asn1.ASN1Sequence;
 import org.bouncycastle.asn1.DEROctetString;
 import org.bouncycastle.asn1.cryptopro.CryptoProObjectIdentifiers;
 import org.bouncycastle.asn1.cryptopro.GOST3410PublicKeyAlgParameters;
 import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
 import org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import org.bouncycastle.crypto.params.GOST3410PrivateKeyParameters;
+import org.bouncycastle.jcajce.provider.asymmetric.util.GOST3410Util;
 import org.bouncycastle.jcajce.provider.asymmetric.util.PKCS12BagAttributeCarrierImpl;
 import org.bouncycastle.jce.interfaces.GOST3410Params;
 import org.bouncycastle.jce.interfaces.GOST3410PrivateKey;
@@ -57,17 +59,28 @@ public class BCGOST3410PrivateKey
         PrivateKeyInfo info)
         throws IOException
     {
-        GOST3410PublicKeyAlgParameters    params = new GOST3410PublicKeyAlgParameters((ASN1Sequence)info.getAlgorithmId().getParameters());
-        ASN1OctetString      derX = ASN1OctetString.getInstance(info.parsePrivateKey());
-        byte[]              keyEnc = derX.getOctets();
-        byte[]              keyBytes = new byte[keyEnc.length];
-        
-        for (int i = 0; i != keyEnc.length; i++)
+        GOST3410PublicKeyAlgParameters    params = GOST3410PublicKeyAlgParameters.getInstance(info.getPrivateKeyAlgorithm().getParameters());
+
+        ASN1Encodable privKey = info.parsePrivateKey();
+
+        if (privKey instanceof ASN1Integer)
         {
-            keyBytes[i] = keyEnc[keyEnc.length - 1 - i]; // was little endian
+            this.x = ASN1Integer.getInstance(privKey).getPositiveValue();
         }
-        
-        this.x = new BigInteger(1, keyBytes);
+        else
+        {
+            ASN1OctetString derX = ASN1OctetString.getInstance(info.parsePrivateKey());
+            byte[] keyEnc = derX.getOctets();
+            byte[] keyBytes = new byte[keyEnc.length];
+
+            for (int i = 0; i != keyEnc.length; i++)
+            {
+                keyBytes[i] = keyEnc[keyEnc.length - 1 - i]; // was little endian
+            }
+
+            this.x = new BigInteger(1, keyBytes);
+        }
+
         this.gost3410Spec = GOST3410ParameterSpec.fromPublicKeyAlg(params);
     }
 
@@ -188,6 +201,19 @@ public class BCGOST3410PrivateKey
     public int hashCode()
     {
         return this.getX().hashCode() ^ gost3410Spec.hashCode();
+    }
+
+    public String toString()
+    {
+        try
+        {
+            return GOSTUtil.privateKeyToString("GOST3410", x,
+                ((GOST3410PrivateKeyParameters)GOST3410Util.generatePrivateKeyParameter(this)).getParameters());
+        }
+        catch (InvalidKeyException e)
+        {
+            throw new IllegalStateException(e.getMessage()); // should not be possible
+        }
     }
 
     public void setBagAttribute(

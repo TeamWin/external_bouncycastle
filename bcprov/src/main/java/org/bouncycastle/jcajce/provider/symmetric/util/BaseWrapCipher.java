@@ -1,8 +1,10 @@
 package org.bouncycastle.jcajce.provider.symmetric.util;
 
+import java.io.ByteArrayOutputStream;
 import java.security.AlgorithmParameters;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
+import java.security.InvalidParameterException;
 import java.security.Key;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
@@ -33,6 +35,9 @@ import org.bouncycastle.crypto.Wrapper;
 import org.bouncycastle.crypto.params.KeyParameter;
 import org.bouncycastle.crypto.params.ParametersWithIV;
 import org.bouncycastle.crypto.params.ParametersWithRandom;
+import org.bouncycastle.crypto.params.ParametersWithSBox;
+import org.bouncycastle.crypto.params.ParametersWithUKM;
+import org.bouncycastle.jcajce.spec.GOST28147WrapParameterSpec;
 import org.bouncycastle.jcajce.util.BCJcaJceHelper;
 import org.bouncycastle.jcajce.util.JcaJceHelper;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
@@ -47,10 +52,11 @@ public abstract class BaseWrapCipher
     //
     private Class[]                 availableSpecs =
                                     {
-                                        IvParameterSpec.class,
+                                        GOST28147WrapParameterSpec.class,
                                         PBEParameterSpec.class,
                                         RC2ParameterSpec.class,
-                                        RC5ParameterSpec.class
+                                        RC5ParameterSpec.class,
+                                        IvParameterSpec.class
                                     };
 
     protected int                     pbeType = PKCS12;
@@ -64,6 +70,9 @@ public abstract class BaseWrapCipher
 
     private int                       ivSize;
     private byte[]                    iv;
+
+    private ErasableOutputStream wrapStream = null;
+    private boolean                   forWrapping;
 
     private final JcaJceHelper helper = new BCJcaJceHelper();
 
@@ -109,7 +118,30 @@ public abstract class BaseWrapCipher
 
     protected AlgorithmParameters engineGetParameters()
     {
-        return null;
+        if (engineParams == null)
+        {
+            if (iv != null)
+            {
+                String  name = wrapEngine.getAlgorithmName();
+
+                if (name.indexOf('/') >= 0)
+                {
+                    name = name.substring(0, name.indexOf('/'));
+                }
+
+                try
+                {
+                    engineParams = createParametersInstance(name);
+                    engineParams.init(new IvParameterSpec(iv));
+                }
+                catch (Exception e)
+                {
+                    throw new RuntimeException(e.toString());
+                }
+            }
+        }
+
+        return engineParams;
     }
 
     protected final AlgorithmParameters createParametersInstance(String algorithm)
@@ -165,15 +197,31 @@ public abstract class BaseWrapCipher
 
         if (params instanceof IvParameterSpec)
         {
-            IvParameterSpec iv = (IvParameterSpec) params;
-            param = new ParametersWithIV(param, iv.getIV());
+            IvParameterSpec ivSpec = (IvParameterSpec)params;
+            this.iv = ivSpec.getIV();
+            param = new ParametersWithIV(param, iv);
+        }
+
+        if (params instanceof GOST28147WrapParameterSpec)
+        {
+            GOST28147WrapParameterSpec spec = (GOST28147WrapParameterSpec) params;
+
+            byte[] sBox = spec.getSBox();
+            if (sBox != null)
+            {
+                param = new ParametersWithSBox(param, sBox);
+            }
+            param = new ParametersWithUKM(param, spec.getUKM());
         }
 
         if (param instanceof KeyParameter && ivSize != 0)
         {
-            iv = new byte[ivSize];
-            random.nextBytes(iv);
-            param = new ParametersWithIV(param, iv);
+            if (opmode == Cipher.WRAP_MODE || opmode == Cipher.ENCRYPT_MODE)
+            {
+                iv = new byte[ivSize];
+                random.nextBytes(iv);
+                param = new ParametersWithIV(param, iv);
+            }
         }
 
         if (random != null)
@@ -181,19 +229,37 @@ public abstract class BaseWrapCipher
             param = new ParametersWithRandom(param, random);
         }
 
-        switch (opmode)
+        try
         {
-        case Cipher.WRAP_MODE:
-            wrapEngine.init(true, param);
-            break;
-        case Cipher.UNWRAP_MODE:
-            wrapEngine.init(false, param);
-            break;
-        case Cipher.ENCRYPT_MODE:
-        case Cipher.DECRYPT_MODE:
-            throw new IllegalArgumentException("engine only valid for wrapping");
-        default:
-            System.out.println("eeek!");
+            switch (opmode)
+            {
+            case Cipher.WRAP_MODE:
+                wrapEngine.init(true, param);
+                this.wrapStream = null;
+                this.forWrapping = true;
+                break;
+            case Cipher.UNWRAP_MODE:
+                wrapEngine.init(false, param);
+                this.wrapStream = null;
+                this.forWrapping = false;
+                break;
+            case Cipher.ENCRYPT_MODE:
+                wrapEngine.init(true, param);
+                this.wrapStream = new ErasableOutputStream();
+                this.forWrapping = true;
+                break;
+            case Cipher.DECRYPT_MODE:
+                wrapEngine.init(false, param);
+                this.wrapStream = new ErasableOutputStream();
+                this.forWrapping = false;
+                break;
+            default:
+                throw new InvalidParameterException("Unknown mode parameter passed to init.");
+            }
+        }
+        catch (Exception e)
+        {
+            throw new InvalidKeyOrParametersException(e.getMessage(), e);
         }
     }
 
@@ -243,7 +309,7 @@ public abstract class BaseWrapCipher
         }
         catch (InvalidAlgorithmParameterException e)
         {
-            throw new IllegalArgumentException(e.getMessage());
+            throw new InvalidKeyOrParametersException(e.getMessage(), e);
         }
     }
 
@@ -252,7 +318,14 @@ public abstract class BaseWrapCipher
         int     inputOffset,
         int     inputLen)
     {
-        throw new RuntimeException("not supported for wrapping");
+        if (wrapStream == null)
+        {
+            throw new IllegalStateException("not supported in a wrapping mode");
+        }
+
+        wrapStream.write(input, inputOffset, inputLen);
+
+        return null;
     }
 
     protected int engineUpdate(
@@ -263,7 +336,14 @@ public abstract class BaseWrapCipher
         int     outputOffset)
         throws ShortBufferException
     {
-        throw new RuntimeException("not supported for wrapping");
+        if (wrapStream == null)
+        {
+            throw new IllegalStateException("not supported in a wrapping mode");
+        }
+
+        wrapStream.write(input, inputOffset, inputLen);
+
+        return 0;
     }
 
     protected byte[] engineDoFinal(
@@ -272,7 +352,42 @@ public abstract class BaseWrapCipher
         int     inputLen)
         throws IllegalBlockSizeException, BadPaddingException
     {
-        return null;
+        if (wrapStream == null)
+        {
+            throw new IllegalStateException("not supported in a wrapping mode");
+        }
+
+        wrapStream.write(input, inputOffset, inputLen);
+
+        try
+        {
+            if (forWrapping)
+            {
+                try
+                {
+                    return wrapEngine.wrap(wrapStream.getBuf(), 0, wrapStream.size());
+                }
+                catch (Exception e)
+                {
+                    throw new IllegalBlockSizeException(e.getMessage());
+                }
+            }
+            else
+            {
+                try
+                {
+                    return wrapEngine.unwrap(wrapStream.getBuf(), 0, wrapStream.size());
+                }
+                catch (InvalidCipherTextException e)
+                {
+                    throw new BadPaddingException(e.getMessage());
+                }
+            }
+        }
+        finally
+        {
+            wrapStream.erase();
+        }
     }
 
     protected int engineDoFinal(
@@ -283,7 +398,53 @@ public abstract class BaseWrapCipher
         int     outputOffset)
         throws IllegalBlockSizeException, BadPaddingException, ShortBufferException
     {
-        return 0;
+        if (wrapStream == null)
+        {
+            throw new IllegalStateException("not supported in a wrapping mode");
+        }
+
+        wrapStream.write(input, inputOffset, inputLen);
+
+        try
+        {
+            byte[] enc;
+
+            if (forWrapping)
+            {
+                try
+                {
+                    enc = wrapEngine.wrap(wrapStream.getBuf(), 0, wrapStream.size());
+                }
+                catch (Exception e)
+                {
+                    throw new IllegalBlockSizeException(e.getMessage());
+                }
+            }
+            else
+            {
+                try
+                {
+                    enc = wrapEngine.unwrap(wrapStream.getBuf(), 0, wrapStream.size());
+                }
+                catch (InvalidCipherTextException e)
+                {
+                    throw new BadPaddingException(e.getMessage());
+                }
+            }
+
+            if (outputOffset + enc.length > output.length)
+            {
+                throw new ShortBufferException("output buffer too short for input.");
+            }
+
+            System.arraycopy(enc, 0, output, outputOffset, enc.length);
+
+            return enc.length;
+        }
+        finally
+        {
+            wrapStream.erase();
+        }
     }
 
     protected byte[] engineWrap(
@@ -402,4 +563,39 @@ public abstract class BaseWrapCipher
         }
     }
 
+    protected static final class ErasableOutputStream
+        extends ByteArrayOutputStream
+    {
+        public ErasableOutputStream()
+        {
+        }
+
+        public byte[] getBuf()
+        {
+            return buf;
+        }
+
+        public void erase()
+        {
+            Arrays.fill(this.buf, (byte)0);
+            reset();
+        }
+    }
+
+    protected static class InvalidKeyOrParametersException
+        extends InvalidKeyException
+    {
+        private final Throwable cause;
+
+        InvalidKeyOrParametersException(String msg, Throwable cause)
+        {
+             super(msg);
+            this.cause = cause;
+        }
+
+        public Throwable getCause()
+        {
+            return cause;
+        }
+    }
 }

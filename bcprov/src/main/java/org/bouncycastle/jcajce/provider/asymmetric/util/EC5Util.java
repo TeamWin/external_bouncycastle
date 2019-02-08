@@ -47,12 +47,16 @@ public class EC5Util
             }
         }
 
-        X9ECParameters c25519 = CustomNamedCurves.getByName("Curve25519");
+        X9ECParameters x9_25519 = CustomNamedCurves.getByName("Curve25519");
+        ECCurve c_25519 = x9_25519.getCurve();
 
         customCurves.put(new ECCurve.Fp(
-            c25519.getCurve().getField().getCharacteristic(),
-            c25519.getCurve().getA().toBigInteger(),
-            c25519.getCurve().getB().toBigInteger()), c25519.getCurve());
+            c_25519.getField().getCharacteristic(),
+            c_25519.getA().toBigInteger(),
+            c_25519.getB().toBigInteger(),
+            c_25519.getOrder(),
+            c_25519.getCofactor()
+            ), c_25519);
     }
 
     public static ECCurve getCurve(
@@ -144,9 +148,7 @@ public class EC5Util
             ecSpec = new ECNamedCurveSpec(
                 ECUtil.getCurveName(oid),
                 ellipticCurve,
-                new ECPoint(
-                    ecP.getG().getAffineXCoord().toBigInteger(),
-                    ecP.getG().getAffineYCoord().toBigInteger()),
+                convertPoint(ecP.getG()),
                 ecP.getN(),
                 ecP.getH());
         }
@@ -164,9 +166,7 @@ public class EC5Util
             {
                 ecSpec = new ECParameterSpec(
                     ellipticCurve,
-                    new ECPoint(
-                        ecP.getG().getAffineXCoord().toBigInteger(),
-                        ecP.getG().getAffineYCoord().toBigInteger()),
+                    convertPoint(ecP.getG()),
                     ecP.getN(),
                     ecP.getH().intValue());
             }
@@ -174,10 +174,9 @@ public class EC5Util
             {
                 ecSpec = new ECParameterSpec(
                     ellipticCurve,
-                    new ECPoint(
-                        ecP.getG().getAffineXCoord().toBigInteger(),
-                        ecP.getG().getAffineYCoord().toBigInteger()),
-                    ecP.getN(), 1);      // TODO: not strictly correct... need to fix the test data...
+                    convertPoint(ecP.getG()),
+                    ecP.getN(),
+                    1);      // TODO: not strictly correct... need to fix the test data...
             }
         }
 
@@ -189,9 +188,17 @@ public class EC5Util
     {
         return new ECParameterSpec(
             convertCurve(domainParameters.getCurve(), null),  // JDK 1.5 has trouble with this if it's not null...
-            new ECPoint(
-                domainParameters.getG().getAffineXCoord().toBigInteger(),
-                domainParameters.getG().getAffineYCoord().toBigInteger()),
+            EC5Util.convertPoint(domainParameters.getG()),
+            domainParameters.getN(),
+            domainParameters.getH().intValue());
+    }
+
+    public static ECParameterSpec convertToSpec(
+        ECDomainParameters domainParameters)
+    {
+        return new ECParameterSpec(
+            convertCurve(domainParameters.getCurve(), null),  // JDK 1.5 has trouble with this if it's not null...
+            EC5Util.convertPoint(domainParameters.getG()),
             domainParameters.getN(),
             domainParameters.getH().intValue());
     }
@@ -259,9 +266,7 @@ public class EC5Util
             return new ECNamedCurveSpec(
                 ((ECNamedCurveParameterSpec)spec).getName(),
                 ellipticCurve,
-                new ECPoint(
-                    spec.getG().getAffineXCoord().toBigInteger(),
-                    spec.getG().getAffineYCoord().toBigInteger()),
+                convertPoint(spec.getG()),
                 spec.getN(),
                 spec.getH());
         }
@@ -269,9 +274,7 @@ public class EC5Util
         {
             return new ECParameterSpec(
                 ellipticCurve,
-                new ECPoint(
-                    spec.getG().getAffineXCoord().toBigInteger(),
-                    spec.getG().getAffineYCoord().toBigInteger()),
+                convertPoint(spec.getG()),
                 spec.getN(),
                 spec.getH().intValue());
         }
@@ -283,12 +286,25 @@ public class EC5Util
     {
         ECCurve curve = convertCurve(ecSpec.getCurve());
 
-        return new org.bouncycastle.jce.spec.ECParameterSpec(
-            curve,
-            convertPoint(curve, ecSpec.getGenerator(), withCompression),
-            ecSpec.getOrder(),
-            BigInteger.valueOf(ecSpec.getCofactor()),
-            ecSpec.getCurve().getSeed());
+        if (ecSpec instanceof ECNamedCurveSpec)
+        {
+            return new org.bouncycastle.jce.spec.ECNamedCurveParameterSpec(
+                ((ECNamedCurveSpec)ecSpec).getName(),
+                curve,
+                convertPoint(curve, ecSpec.getGenerator(), withCompression),
+                ecSpec.getOrder(),
+                BigInteger.valueOf(ecSpec.getCofactor()),
+                ecSpec.getCurve().getSeed());
+        }
+        else
+        {
+            return new org.bouncycastle.jce.spec.ECParameterSpec(
+                curve,
+                convertPoint(curve, ecSpec.getGenerator(), withCompression),
+                ecSpec.getOrder(),
+                BigInteger.valueOf(ecSpec.getCofactor()),
+                ecSpec.getCurve().getSeed());
+        }
     }
 
     public static org.bouncycastle.math.ec.ECPoint convertPoint(
@@ -305,5 +321,14 @@ public class EC5Util
         boolean withCompression)
     {
         return curve.createPoint(point.getAffineX(), point.getAffineY());
+    }
+
+    public static ECPoint convertPoint(org.bouncycastle.math.ec.ECPoint point)
+    {
+        point = point.normalize();
+
+        return new ECPoint(
+            point.getAffineXCoord().toBigInteger(),
+            point.getAffineYCoord().toBigInteger());
     }
 }

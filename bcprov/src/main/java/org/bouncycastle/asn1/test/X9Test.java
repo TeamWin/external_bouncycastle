@@ -40,7 +40,7 @@ public class X9Test
                     "H0ywPWp1CjDCUBAtSYhxfZuhWrbT4DFQB9c3QWj/40cbYKhXaGoZR107+i/wQfA2doro4Yu5LPzw" +
                     "BclJqixtlIU9DmYLv4VLHJUF/pWgIef///////////////f///l13rQbOmBXw8QyFGUmVRAgEBBC" +
                     "UwIwIBAQQeAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAU");
- 
+
     private void encodePublicKey()
         throws Exception
     {
@@ -80,17 +80,17 @@ public class X9Test
         }
 
         ASN1Primitive           o = ASN1Primitive.fromByteArray(namedPub);
-        
+
         if (!info.equals(o))
         {
             fail("failed public named equality");
         }
-        
+
         //
         // explicit curve parameters
         //
         params = new X962Parameters(ecP);
-        
+
         info = new SubjectPublicKeyInfo(new AlgorithmIdentifier(X9ObjectIdentifiers.id_ecPublicKey, params), p.getOctets());
 
         if (!areEqual(info.getEncoded(), expPub))
@@ -99,13 +99,13 @@ public class X9Test
         }
 
         o = ASN1Primitive.fromByteArray(expPub);
-        
+
         if (!info.equals(o))
         {
             fail("failed public explicit equality");
         }
     }
-    
+
     private void encodePrivateKey()
         throws Exception
     {
@@ -130,14 +130,14 @@ public class X9Test
         {
             fail("failed private named equality");
         }
-        
+
         //
         // explicit curve parameters
         //
         ecP = X962NamedCurves.getByOID(X9ObjectIdentifiers.prime239v3);
 
         params = new X962Parameters(ecP);
-        
+
         info = new PrivateKeyInfo(new AlgorithmIdentifier(X9ObjectIdentifiers.id_ecPublicKey, params),
             new ECPrivateKey(ecP.getN().bitLength(), BigInteger.valueOf(20)));
 
@@ -147,13 +147,13 @@ public class X9Test
         }
 
         o = ASN1Primitive.fromByteArray(expPriv);
-        
+
         if (!info.equals(o))
         {
             fail("failed private explicit equality");
         }
     }
-    
+
     public void performTest()
         throws Exception
     {

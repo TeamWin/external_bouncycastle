@@ -28,7 +28,7 @@ public class PSKTlsServer
 
     protected DHParameters getDHParameters()
     {
-        return DHStandardGroups.rfc3526_2048;
+        return DHStandardGroups.rfc7919_ffdhe2048;
     }
 
     protected int[] getCipherSuites()
@@ -87,6 +87,6 @@ public class PSKTlsServer
     protected TlsKeyExchange createPSKKeyExchange(int keyExchange)
     {
         return new TlsPSKKeyExchange(keyExchange, supportedSignatureAlgorithms, null, pskIdentityManager,
-            getDHParameters(), namedCurves, clientECPointFormats, serverECPointFormats);
+            null, getDHParameters(), namedCurves, clientECPointFormats, serverECPointFormats);
     }
 }

@@ -9,6 +9,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.net.ssl.SSLSession;
 
@@ -18,6 +20,7 @@ import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x500.style.BCStyle;
 import org.bouncycastle.est.ESTException;
 import org.bouncycastle.util.Strings;
+import org.bouncycastle.util.encoders.Hex;
 
 
 /**
@@ -26,6 +29,7 @@ import org.bouncycastle.util.Strings;
 public class JsseDefaultHostnameAuthorizer
     implements JsseHostnameAuthorizer
 {
+    private static Logger LOG = Logger.getLogger(JsseDefaultHostnameAuthorizer.class.getName());
 
     private final Set<String> knownSuffixes;
 
@@ -84,7 +88,8 @@ public class JsseDefaultHostnameAuthorizer
                 for (Iterator it = n.iterator(); it.hasNext();)
                 {
                     List l = (List)it.next();
-                    switch (((Number)l.get(0)).intValue())
+                    int type = ((Number)l.get(0)).intValue();
+                    switch (type)
                     {
                     case 2:
                         if (isValidNameMatch(name, l.get(1).toString(), knownSuffixes))
@@ -99,7 +104,21 @@ public class JsseDefaultHostnameAuthorizer
                         }
                         break;
                     default:
-                        throw new RuntimeException("Unable to handle ");
+                        // ignore, maybe log
+                        if (LOG.isLoggable(Level.INFO))
+                        {
+                            String value;
+                            if (l.get(1) instanceof byte[])
+                            {
+                                value = Hex.toHexString((byte[])l.get(1));
+                            }
+                            else
+                            {
+                                value = l.get(1).toString();
+                            }
+
+                            LOG.log(Level.INFO, "ignoring type " + type + " value = " + value);
+                        }
                     }
                 }
 
@@ -123,7 +142,7 @@ public class JsseDefaultHostnameAuthorizer
 
         // Common Name match only.
         RDN[] rdNs = X500Name.getInstance(cert.getSubjectX500Principal().getEncoded()).getRDNs();
-        for (int i = 0; i != rdNs.length; i++)
+        for (int i = rdNs.length - 1; i >= 0; --i)
         {
             RDN rdn = rdNs[i];
             AttributeTypeAndValue[] typesAndValues = rdn.getTypesAndValues();
@@ -132,7 +151,7 @@ public class JsseDefaultHostnameAuthorizer
                 AttributeTypeAndValue atv = typesAndValues[j];
                 if (atv.getType().equals(BCStyle.CN))
                 {
-                    return isValidNameMatch(name, rdn.getFirst().getValue().toString(), knownSuffixes);
+                    return isValidNameMatch(name, atv.getValue().toString(), knownSuffixes);
                 }
             }
         }
@@ -180,7 +199,7 @@ public class JsseDefaultHostnameAuthorizer
 
                 if (wildIndex > 0)
                 {
-                    if (loweredName.startsWith(dnsName.substring(0, wildIndex - 1)) && loweredName.endsWith(end))
+                    if (loweredName.startsWith(dnsName.substring(0, wildIndex)) && loweredName.endsWith(end))
                     {
                         return loweredName.substring(wildIndex, loweredName.length() - end.length()).indexOf('.') < 0;
                     }
