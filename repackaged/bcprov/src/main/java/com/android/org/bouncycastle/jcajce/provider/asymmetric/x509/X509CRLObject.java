@@ -32,6 +32,7 @@ import com.android.org.bouncycastle.asn1.ASN1InputStream;
 import com.android.org.bouncycastle.asn1.ASN1Integer;
 import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.org.bouncycastle.asn1.ASN1OctetString;
+import com.android.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.org.bouncycastle.asn1.util.ASN1Dump;
 import com.android.org.bouncycastle.asn1.x500.X500Name;
 import com.android.org.bouncycastle.asn1.x509.CRLDistPoint;
@@ -268,6 +269,19 @@ class X509CRLObject
         if (!c.getSignatureAlgorithm().equals(c.getTBSCertList().getSignature()))
         {
             throw new CRLException("Signature algorithm on CertificateList does not match TBSCertList.");
+        }
+
+        if (sigAlgParams != null)
+        {
+            try
+            {
+                // needs to be called before initVerify().
+                X509SignatureUtil.setSignatureParameters(sig, ASN1Primitive.fromByteArray(sigAlgParams));
+            }
+            catch (IOException e)
+            {
+                throw new SignatureException("cannot decode signature parameters: " + e.getMessage());
+            }
         }
 
         sig.initVerify(key);

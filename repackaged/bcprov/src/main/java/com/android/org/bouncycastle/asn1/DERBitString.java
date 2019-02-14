@@ -4,7 +4,7 @@ package com.android.org.bouncycastle.asn1;
 import java.io.IOException;
 
 /**
- * A BIT STRING with DER encoding.
+ * A BIT STRING with DER encoding - the first byte contains the count of padding bits included in the byte array's last byte.
  * @hide This class is not part of the Android public SDK API
  */
 @libcore.api.CorePlatformApi
@@ -129,7 +129,7 @@ public class DERBitString
     }
 
     void encode(
-        ASN1OutputStream  out)
+        ASN1OutputStream out)
         throws IOException
     {
         byte[] string = derForm(data, padBits);

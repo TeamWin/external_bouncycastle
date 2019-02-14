@@ -18,6 +18,7 @@ import com.android.org.bouncycastle.crypto.params.RSAKeyParameters;
 import com.android.org.bouncycastle.jcajce.provider.asymmetric.util.KeyUtil;
 import com.android.org.bouncycastle.jcajce.provider.asymmetric.util.PKCS12BagAttributeCarrierImpl;
 import com.android.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier;
+import com.android.org.bouncycastle.util.Strings;
 
 /**
  * @hide This class is not part of the Android public SDK API
@@ -145,5 +146,17 @@ public class BCRSAPrivateKey
         throws IOException
     {
         out.defaultWriteObject();
+    }
+
+    public String toString()
+    {
+        StringBuffer    buf = new StringBuffer();
+        String          nl = Strings.lineSeparator();
+
+        buf.append("RSA Private Key [").append(
+                    RSAUtil.generateKeyFingerprint(this.getModulus())).append("],[]").append(nl);
+        buf.append("            modulus: ").append(this.getModulus().toString(16)).append(nl);
+
+        return buf.toString();
     }
 }

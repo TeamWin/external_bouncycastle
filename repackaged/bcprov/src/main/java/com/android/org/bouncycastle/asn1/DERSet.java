@@ -6,6 +6,13 @@ import java.util.Enumeration;
 
 /**
  * A DER encoded SET object
+ * <p>
+ * For X.690 syntax rules, see {@link ASN1Set}.
+ * </p><p>
+ * For short: Constructing this form does sort the supplied elements,
+ * and the sorting happens also before serialization (if necesssary).
+ * This is different from the way {@link BERSet},{@link DLSet} does things.
+ * </p>
  * @hide This class is not part of the Android public SDK API
  */
 public class DERSet

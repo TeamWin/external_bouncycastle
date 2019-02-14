@@ -12,7 +12,7 @@ import com.android.org.bouncycastle.util.Arrays;
 /**
  * @hide This class is not part of the Android public SDK API
  */
-public class SecP224R1FieldElement extends ECFieldElement
+public class SecP224R1FieldElement extends ECFieldElement.AbstractFp
 {
     public static final BigInteger Q = SecP224R1Curve.q;
 

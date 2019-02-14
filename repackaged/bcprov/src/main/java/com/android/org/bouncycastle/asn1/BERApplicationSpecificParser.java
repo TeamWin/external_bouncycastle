@@ -4,7 +4,7 @@ package com.android.org.bouncycastle.asn1;
 import java.io.IOException;
 
 /**
- * A parser for indefinite-length application specific objects.
+ * A parser for indefinite-length ASN.1 ApplicationSpecific objects.
  * @hide This class is not part of the Android public SDK API
  */
 public class BERApplicationSpecificParser

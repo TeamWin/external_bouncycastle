@@ -5,7 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 /**
- * An indefinite-length encoding version of an application specific object.
+ * An indefinite-length encoding version of an ASN.1 ApplicationSpecific object.
  * @hide This class is not part of the Android public SDK API
  */
 public class BERApplicationSpecific
