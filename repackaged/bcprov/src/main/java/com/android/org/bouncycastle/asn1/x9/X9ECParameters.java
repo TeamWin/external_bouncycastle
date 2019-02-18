@@ -14,6 +14,7 @@ import com.android.org.bouncycastle.math.ec.ECAlgorithms;
 import com.android.org.bouncycastle.math.ec.ECCurve;
 import com.android.org.bouncycastle.math.ec.ECPoint;
 import com.android.org.bouncycastle.math.field.PolynomialExtensionField;
+import com.android.org.bouncycastle.util.Arrays;
 
 /**
  * ASN.1 def for Elliptic-Curve ECParameters structure. See
@@ -37,34 +38,35 @@ public class X9ECParameters
         ASN1Sequence  seq)
     {
         if (!(seq.getObjectAt(0) instanceof ASN1Integer)
-           || !((ASN1Integer)seq.getObjectAt(0)).getValue().equals(ONE))
+            || !((ASN1Integer)seq.getObjectAt(0)).getValue().equals(ONE))
         {
             throw new IllegalArgumentException("bad version in X9ECParameters");
         }
 
-        X9Curve     x9c = new X9Curve(
-                        X9FieldID.getInstance(seq.getObjectAt(1)),
-                        ASN1Sequence.getInstance(seq.getObjectAt(2)));
+        this.n = ((ASN1Integer)seq.getObjectAt(4)).getValue();
+
+        if (seq.size() == 6)
+        {
+            this.h = ((ASN1Integer)seq.getObjectAt(5)).getValue();
+        }
+
+        X9Curve x9c = new X9Curve(
+            X9FieldID.getInstance(seq.getObjectAt(1)), n, h,
+            ASN1Sequence.getInstance(seq.getObjectAt(2)));
 
         this.curve = x9c.getCurve();
         Object p = seq.getObjectAt(3);
 
         if (p instanceof X9ECPoint)
         {
-            this.g = ((X9ECPoint)p);
+            this.g = (X9ECPoint)p;
         }
         else
         {
             this.g = new X9ECPoint(curve, (ASN1OctetString)p);
         }
 
-        this.n = ((ASN1Integer)seq.getObjectAt(4)).getValue();
         this.seed = x9c.getSeed();
-
-        if (seq.size() == 6)
-        {
-            this.h = ((ASN1Integer)seq.getObjectAt(5)).getValue();
-        }
     }
 
     public static X9ECParameters getInstance(Object obj)
@@ -129,7 +131,7 @@ public class X9ECParameters
         this.g = g;
         this.n = n;
         this.h = h;
-        this.seed = seed;
+        this.seed = Arrays.clone(seed);
 
         if (ECAlgorithms.isFpCurve(curve))
         {
@@ -180,7 +182,7 @@ public class X9ECParameters
 
     public byte[] getSeed()
     {
-        return seed;
+        return Arrays.clone(seed);
     }
 
     /**

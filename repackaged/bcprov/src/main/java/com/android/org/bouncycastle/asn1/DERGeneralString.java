@@ -7,7 +7,11 @@ import com.android.org.bouncycastle.util.Arrays;
 import com.android.org.bouncycastle.util.Strings;
 
 /**
- * Carrier class for a DER encoding GeneralString
+ * ASN.1 GENERAL-STRING data type.
+ * <p>
+ * This is an 8-bit encoded ISO 646 (ASCII) character set
+ * with optional escapes to other character sets.
+ * </p>
  * @hide This class is not part of the Android public SDK API
  */
 public class DERGeneralString 
@@ -17,7 +21,7 @@ public class DERGeneralString
     private final byte[] string;
 
     /**
-     * return a GeneralString from the given object.
+     * Return a GeneralString from the given object.
      *
      * @param obj the object we want converted.
      * @exception IllegalArgumentException if the object cannot be converted.
@@ -48,7 +52,7 @@ public class DERGeneralString
     }
 
     /**
-     * return a GeneralString from a tagged object.
+     * Return a GeneralString from a tagged object.
      *
      * @param obj the tagged object holding the object we want
      * @param explicit true if the object is meant to be explicitly

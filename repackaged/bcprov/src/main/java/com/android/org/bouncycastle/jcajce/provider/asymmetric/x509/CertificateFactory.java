@@ -263,7 +263,7 @@ public class CertificateFactory
         }
         catch (Exception e)
         {
-            throw new ExCertificateException(e);
+            throw new ExCertificateException("parsing issue: " + e.getMessage(), e);
         }
     }
 

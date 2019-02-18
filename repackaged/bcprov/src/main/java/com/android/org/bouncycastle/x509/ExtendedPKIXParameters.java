@@ -1,9 +1,6 @@
 /* GENERATED SOURCE. DO NOT MODIFY. */
 package com.android.org.bouncycastle.x509;
 
-import com.android.org.bouncycastle.util.Selector;
-import com.android.org.bouncycastle.util.Store;
-
 import java.security.InvalidAlgorithmParameterException;
 import java.security.cert.CertSelector;
 import java.security.cert.CertStore;
@@ -16,6 +13,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
+import com.android.org.bouncycastle.util.Selector;
+import com.android.org.bouncycastle.util.Store;
 
 /**
  * This class extends the PKIXParameters with a validity model parameter.
@@ -288,7 +288,7 @@ public class ExtendedPKIXParameters
      * 
      * @param store The store to add.
      * @see #getStores()
-     * @deprectaed use addStore().
+     * @deprecated use addStore().
      */
     public void addAdditionalStore(Store store)
     {

@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Parse for DER encoded OCTET STRINGS
+ * Parser for DER encoded OCTET STRINGS
  * @hide This class is not part of the Android public SDK API
  */
 public class DEROctetStringParser

@@ -1,6 +1,7 @@
 /* GENERATED SOURCE. DO NOT MODIFY. */
 package com.android.org.bouncycastle.jcajce.provider.asymmetric.util;
 
+import java.io.ByteArrayOutputStream;
 import java.security.AlgorithmParameters;
 import java.security.InvalidKeyException;
 import java.security.Key;
@@ -30,6 +31,7 @@ import com.android.org.bouncycastle.crypto.Wrapper;
 import com.android.org.bouncycastle.jcajce.util.BCJcaJceHelper;
 import com.android.org.bouncycastle.jcajce.util.JcaJceHelper;
 import com.android.org.bouncycastle.jce.provider.BouncyCastleProvider;
+import com.android.org.bouncycastle.util.Arrays;
 
 /**
  * @hide This class is not part of the Android public SDK API
@@ -232,6 +234,25 @@ public abstract class BaseCipherSpi
             }
 
             throw new InvalidKeyException("Unknown key type " + wrappedKeyType);
+        }
+    }
+
+    protected static final class ErasableOutputStream
+        extends ByteArrayOutputStream
+    {
+        public ErasableOutputStream()
+        {
+        }
+
+        public byte[] getBuf()
+        {
+            return buf;
+        }
+
+        public void erase()
+        {
+            Arrays.fill(this.buf, (byte)0);
+            reset();
         }
     }
 }

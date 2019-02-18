@@ -98,6 +98,11 @@ public class DHParameters
             }
         }
 
+        if (m > p.bitLength())
+        {
+            throw new IllegalArgumentException("unsafe p value so small specific l required");
+        }
+
         this.g = g;
         this.p = p;
         this.q = q;

@@ -28,6 +28,11 @@ public abstract class ECFieldElement
     public abstract ECFieldElement invert();
     public abstract ECFieldElement sqrt();
 
+    public ECFieldElement()
+    {
+
+    }
+    
     public int bitLength()
     {
         return toBigInteger().bitLength();
@@ -91,7 +96,14 @@ public abstract class ECFieldElement
     /**
      * @hide This class is not part of the Android public SDK API
      */
-    public static class Fp extends ECFieldElement
+    public static abstract class AbstractFp extends ECFieldElement
+    {
+    }
+
+    /**
+     * @hide This class is not part of the Android public SDK API
+     */
+    public static class Fp extends AbstractFp
     {
         BigInteger q, r, x;
 
@@ -499,6 +511,52 @@ public abstract class ECFieldElement
     }
 
     /**
+     * @hide This class is not part of the Android public SDK API
+     */
+    public static abstract class AbstractF2m extends ECFieldElement
+    {
+        public ECFieldElement halfTrace()
+        {
+            int m = this.getFieldSize();
+            if ((m & 1) == 0)
+            {
+                throw new IllegalStateException("Half-trace only defined for odd m");
+            }
+
+            ECFieldElement fe = this;
+            ECFieldElement ht = fe;
+            for (int i = 2; i < m; i += 2)
+            {
+                fe = fe.squarePow(2);
+                ht = ht.add(fe);
+            }
+
+            return ht;
+        }
+
+        public int trace()
+        {
+            int m = this.getFieldSize();
+            ECFieldElement fe = this;
+            ECFieldElement tr = fe;
+            for (int i = 1; i < m; ++i)
+            {
+                fe = fe.square();
+                tr = tr.add(fe);
+            }
+            if (tr.isZero())
+            {
+                return 0;
+            }
+            if (tr.isOne())
+            {
+                return 1;
+            }
+            throw new IllegalStateException("Internal error in trace calculation");
+        }
+    }
+
+    /**
      * Class representing the Elements of the finite field
      * <code>F<sub>2<sup>m</sup></sub></code> in polynomial basis (PB)
      * representation. Both trinomial (TPB) and pentanomial (PPB) polynomial
@@ -506,7 +564,7 @@ public abstract class ECFieldElement
      * representation is not supported.
      * @hide This class is not part of the Android public SDK API
      */
-    public static class F2m extends ECFieldElement
+    public static class F2m extends AbstractF2m
     {
         /**
          * Indicates gaussian normal basis representation (GNB). Number chosen
@@ -541,7 +599,7 @@ public abstract class ECFieldElement
         /**
          * The <code>LongArray</code> holding the bits.
          */
-        private LongArray x;
+        LongArray x;
 
         /**
          * Constructor for PPB.
@@ -596,23 +654,7 @@ public abstract class ECFieldElement
             this.x = new LongArray(x);
         }
 
-        /**
-         * Constructor for TPB.
-         * @param m  The exponent <code>m</code> of
-         * <code>F<sub>2<sup>m</sup></sub></code>.
-         * @param k The integer <code>k</code> where <code>x<sup>m</sup> +
-         * x<sup>k</sup> + 1</code> represents the reduction
-         * polynomial <code>f(z)</code>.
-         * @param x The BigInteger representing the value of the field element.
-         * @deprecated Use ECCurve.fromBigInteger to construct field elements
-         */
-        public F2m(int m, int k, BigInteger x)
-        {
-            // Set k1 to k, and set k2 and k3 to 0
-            this(m, k, 0, 0, x);
-        }
-
-        private F2m(int m, int[] ks, LongArray x)
+        F2m(int m, int[] ks, LongArray x)
         {
             this.m = m;
             this.representation = (ks.length == 1) ? TPB : PPB;

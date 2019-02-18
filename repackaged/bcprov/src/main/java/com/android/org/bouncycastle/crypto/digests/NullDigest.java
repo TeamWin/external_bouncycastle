@@ -4,6 +4,7 @@ package com.android.org.bouncycastle.crypto.digests;
 import java.io.ByteArrayOutputStream;
 
 import com.android.org.bouncycastle.crypto.Digest;
+import com.android.org.bouncycastle.util.Arrays;
 
 
 /**
@@ -12,7 +13,7 @@ import com.android.org.bouncycastle.crypto.Digest;
 public class NullDigest
     implements Digest
 {
-    private ByteArrayOutputStream bOut = new ByteArrayOutputStream();
+    private OpenByteArrayOutputStream bOut = new OpenByteArrayOutputStream();
 
     public String getAlgorithmName()
     {
@@ -36,17 +37,33 @@ public class NullDigest
 
     public int doFinal(byte[] out, int outOff)
     {
-        byte[] res = bOut.toByteArray();
+        int size = bOut.size();
 
-        System.arraycopy(res, 0, out, outOff, res.length);
+        bOut.copy(out, outOff);
 
         reset();
         
-        return res.length;
+        return size;
     }
 
     public void reset()
     {
         bOut.reset();
+    }
+
+    private static class OpenByteArrayOutputStream
+        extends ByteArrayOutputStream
+    {
+        public void reset()
+        {
+            super.reset();
+
+            Arrays.clear(buf);
+        }
+
+        void copy(byte[] out, int outOff)
+        {
+            System.arraycopy(buf, 0, out, outOff, this.size());
+        }
     }
 }

@@ -1,13 +1,14 @@
 /* GENERATED SOURCE. DO NOT MODIFY. */
 package com.android.org.bouncycastle.asn1.x509;
 
+import java.math.BigInteger;
+
 import com.android.org.bouncycastle.asn1.ASN1Integer;
 import com.android.org.bouncycastle.asn1.ASN1Object;
 import com.android.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.org.bouncycastle.asn1.DERBitString;
-import com.android.org.bouncycastle.asn1.DERTaggedObject;
 import com.android.org.bouncycastle.asn1.x500.X500Name;
 
 /**
@@ -90,6 +91,22 @@ public class TBSCertificate
             version = new ASN1Integer(0);
         }
 
+        boolean isV1 = false;
+        boolean isV2 = false;
+ 
+        if (version.getValue().equals(BigInteger.valueOf(0)))
+        {
+            isV1 = true;
+        }
+        else if (version.getValue().equals(BigInteger.valueOf(1)))
+        {
+            isV2 = true;
+        }
+        else if (!version.getValue().equals(BigInteger.valueOf(2)))
+        {
+            throw new IllegalArgumentException("version number not recognised");
+        }
+
         serialNumber = ASN1Integer.getInstance(seq.getObjectAt(seqStart + 1));
 
         signature = AlgorithmIdentifier.getInstance(seq.getObjectAt(seqStart + 2));
@@ -110,7 +127,13 @@ public class TBSCertificate
         //
         subjectPublicKeyInfo = SubjectPublicKeyInfo.getInstance(seq.getObjectAt(seqStart + 6));
 
-        for (int extras = seq.size() - (seqStart + 6) - 1; extras > 0; extras--)
+        int extras = seq.size() - (seqStart + 6) - 1;
+        if (extras != 0 && isV1)
+        {
+            throw new IllegalArgumentException("version 1 certificate contains extra data");
+        }
+        
+        while (extras > 0)
         {
             ASN1TaggedObject extra = (ASN1TaggedObject)seq.getObjectAt(seqStart + 6 + extras);
 
@@ -123,8 +146,16 @@ public class TBSCertificate
                 subjectUniqueId = DERBitString.getInstance(extra, false);
                 break;
             case 3:
+                if (isV2)
+                {
+                    throw new IllegalArgumentException("version 2 certificate cannot contain extensions");
+                }
                 extensions = Extensions.getInstance(ASN1Sequence.getInstance(extra, true));
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown tag encountered in structure: " + extra.getTagNo());
             }
+            extras--;
         }
     }
 

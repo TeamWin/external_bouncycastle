@@ -60,7 +60,6 @@ import com.android.org.bouncycastle.jcajce.PKIXCertStoreSelector;
 import com.android.org.bouncycastle.jcajce.PKIXExtendedBuilderParameters;
 import com.android.org.bouncycastle.jcajce.PKIXExtendedParameters;
 import com.android.org.bouncycastle.jcajce.util.JcaJceHelper;
-import com.android.org.bouncycastle.jce.PrincipalUtil;
 import com.android.org.bouncycastle.jce.exception.ExtCertPathValidatorException;
 import com.android.org.bouncycastle.util.Arrays;
 
@@ -2422,8 +2421,11 @@ class RFC3280CertPathUtilities
             }
             catch (CertPathValidatorException e)
             {
-                throw new ExtCertPathValidatorException("Additional certificate path checker failed.", e, certPath,
-                    index);
+                throw new ExtCertPathValidatorException(e.getMessage(), e, certPath, index);
+            }
+            catch (Exception e)
+            {
+                throw new CertPathValidatorException("Additional certificate path checker failed.", e, certPath, index);
             }
         }
 

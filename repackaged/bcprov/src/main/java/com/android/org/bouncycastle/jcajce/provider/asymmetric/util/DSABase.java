@@ -8,8 +8,9 @@ import java.security.spec.AlgorithmParameterSpec;
 
 import com.android.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import com.android.org.bouncycastle.asn1.x509.X509ObjectIdentifiers;
-import com.android.org.bouncycastle.crypto.DSA;
+import com.android.org.bouncycastle.crypto.DSAExt;
 import com.android.org.bouncycastle.crypto.Digest;
+import com.android.org.bouncycastle.crypto.signers.DSAEncoding;
 
 /**
  * @hide This class is not part of the Android public SDK API
@@ -18,18 +19,18 @@ public abstract class DSABase
     extends SignatureSpi
     implements PKCSObjectIdentifiers, X509ObjectIdentifiers
 {
-    protected Digest digest;
-    protected DSA                     signer;
-    protected DSAEncoder              encoder;
+    protected Digest        digest;
+    protected DSAExt        signer;
+    protected DSAEncoding   encoding;
 
     protected DSABase(
         Digest                  digest,
-        DSA                     signer,
-        DSAEncoder              encoder)
+        DSAExt                  signer,
+        DSAEncoding             encoding)
     {
         this.digest = digest;
         this.signer = signer;
-        this.encoder = encoder;
+        this.encoding = encoding;
     }
 
     protected void engineUpdate(
@@ -51,15 +52,14 @@ public abstract class DSABase
     protected byte[] engineSign()
         throws SignatureException
     {
-        byte[]  hash = new byte[digest.getDigestSize()];
-
+        byte[] hash = new byte[digest.getDigestSize()];
         digest.doFinal(hash, 0);
 
         try
         {
-            BigInteger[]    sig = signer.generateSignature(hash);
+            BigInteger[] sig = signer.generateSignature(hash);
 
-            return encoder.encode(sig[0], sig[1]);
+            return encoding.encode(signer.getOrder(), sig[0], sig[1]);
         }
         catch (Exception e)
         {
@@ -71,15 +71,13 @@ public abstract class DSABase
         byte[]  sigBytes) 
         throws SignatureException
     {
-        byte[]  hash = new byte[digest.getDigestSize()];
-
+        byte[] hash = new byte[digest.getDigestSize()];
         digest.doFinal(hash, 0);
 
-        BigInteger[]    sig;
-
+        BigInteger[] sig;
         try
         {
-            sig = encoder.decode(sigBytes);
+            sig = encoding.decode(signer.getOrder(), sigBytes);
         }
         catch (Exception e)
         {
@@ -96,7 +94,7 @@ public abstract class DSABase
     }
 
     /**
-     * @deprecated replaced with <a href = "#engineSetParameter(java.security.spec.AlgorithmParameterSpec)">
+     * @deprecated replaced with "#engineSetParameter(java.security.spec.AlgorithmParameterSpec)"
      */
     protected void engineSetParameter(
         String  param,
