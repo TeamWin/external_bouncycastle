@@ -6,7 +6,12 @@ import java.io.IOException;
 import com.android.org.bouncycastle.util.Arrays;
 
 /**
- * Carrier class for DER encoding BMPString object.
+ * DER BMPString object encodes BMP (<i>Basic Multilingual Plane</i>) subset
+ * (aka UCS-2) of UNICODE (ISO 10646) characters in codepoints 0 to 65535.
+ * <p>
+ * At ISO-10646:2011 the term "BMP" has been withdrawn, and replaced by
+ * term "UCS-2".
+ * </p>
  * @hide This class is not part of the Android public SDK API
  */
 public class DERBMPString
@@ -16,7 +21,7 @@ public class DERBMPString
     private final char[]  string;
 
     /**
-     * return a BMP String from the given object.
+     * Return a BMP String from the given object.
      *
      * @param obj the object we want converted.
      * @exception IllegalArgumentException if the object cannot be converted.
@@ -46,7 +51,7 @@ public class DERBMPString
     }
 
     /**
-     * return a BMP String from a tagged object.
+     * Return a BMP String from a tagged object.
      *
      * @param obj the tagged object holding the object we want
      * @param explicit true if the object is meant to be explicitly
@@ -72,7 +77,7 @@ public class DERBMPString
     }
 
     /**
-     * basic constructor - byte encoded string.
+     * Basic constructor - byte encoded string.
      * @param string the encoded BMP STRING to wrap.
      */
     DERBMPString(
@@ -94,7 +99,7 @@ public class DERBMPString
     }
 
     /**
-     * basic constructor
+     * Basic constructor
      * @param string a String to wrap as a BMP STRING.
      */
     public DERBMPString(

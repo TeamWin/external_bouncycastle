@@ -4,7 +4,9 @@ package com.android.org.bouncycastle.asn1;
 import java.io.IOException;
 
 /**
- * A NULL object.
+ * An ASN.1 DER NULL object.
+ * <p>
+ * Preferably use the constant:  DERNull.INSTANCE.
  * @hide This class is not part of the Android public SDK API
  */
 @libcore.api.CorePlatformApi

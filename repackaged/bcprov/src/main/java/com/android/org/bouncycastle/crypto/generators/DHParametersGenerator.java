@@ -1,10 +1,10 @@
 /* GENERATED SOURCE. DO NOT MODIFY. */
 package com.android.org.bouncycastle.crypto.generators;
 
-import com.android.org.bouncycastle.crypto.params.DHParameters;
-
 import java.math.BigInteger;
 import java.security.SecureRandom;
+
+import com.android.org.bouncycastle.crypto.params.DHParameters;
 
 /**
  * @hide This class is not part of the Android public SDK API
@@ -39,6 +39,7 @@ public class DHParametersGenerator
      * returning the DHParameters object.
      * <p>
      * Note: can take a while...
+     * @return a generated Diffie-Hellman parameters object.
      */
     public DHParameters generateParameters()
     {

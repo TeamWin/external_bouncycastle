@@ -10,6 +10,7 @@ import java.security.spec.DSAParameterSpec;
 import java.util.Hashtable;
 
 import com.android.org.bouncycastle.crypto.AsymmetricCipherKeyPair;
+import com.android.org.bouncycastle.crypto.CryptoServicesRegistrar;
 import com.android.org.bouncycastle.crypto.digests.SHA256Digest;
 import com.android.org.bouncycastle.crypto.generators.DSAKeyPairGenerator;
 import com.android.org.bouncycastle.crypto.generators.DSAParametersGenerator;
@@ -19,6 +20,7 @@ import com.android.org.bouncycastle.crypto.params.DSAParameters;
 import com.android.org.bouncycastle.crypto.params.DSAPrivateKeyParameters;
 import com.android.org.bouncycastle.crypto.params.DSAPublicKeyParameters;
 import com.android.org.bouncycastle.jcajce.provider.asymmetric.util.PrimeCertaintyCalculator;
+import com.android.org.bouncycastle.jce.provider.BouncyCastleProvider;
 import com.android.org.bouncycastle.util.Integers;
 import com.android.org.bouncycastle.util.Properties;
 
@@ -39,7 +41,7 @@ public class KeyPairGeneratorSpi
     // a sufficiently long digest to work with 2048-bit keys.
     int strength = 1024;
 
-    SecureRandom random = new SecureRandom();
+    SecureRandom random = CryptoServicesRegistrar.getSecureRandom();
     boolean initialised = false;
 
     public KeyPairGeneratorSpi()
@@ -56,9 +58,26 @@ public class KeyPairGeneratorSpi
             throw new InvalidParameterException("strength must be from 512 - 4096 and a multiple of 1024 above 1024");
         }
 
-        this.strength = strength;
-        this.random = random;
-        this.initialised = false;
+        // Android-added: Treat null SecureRandom as default
+        if (random == null) {
+            random = new SecureRandom();
+        }
+
+        DSAParameterSpec spec = BouncyCastleProvider.CONFIGURATION.getDSADefaultParameters(strength);
+
+        if (spec != null)
+        {
+            param = new DSAKeyGenerationParameters(random, new DSAParameters(spec.getP(), spec.getQ(), spec.getG()));
+
+            engine.init(param);
+            this.initialised = true;
+        }
+        else
+        {
+            this.strength = strength;
+            this.random = random;
+            this.initialised = false;
+        }
     }
 
     public void initialize(
@@ -71,6 +90,11 @@ public class KeyPairGeneratorSpi
             throw new InvalidAlgorithmParameterException("parameter object not a DSAParameterSpec");
         }
         DSAParameterSpec dsaParams = (DSAParameterSpec)params;
+
+        // Android-added: Treat null SecureRandom as default
+        if (random == null) {
+            random = new SecureRandom();
+        }
 
         param = new DSAKeyGenerationParameters(random, new DSAParameters(dsaParams.getP(), dsaParams.getQ(), dsaParams.getG()));
 

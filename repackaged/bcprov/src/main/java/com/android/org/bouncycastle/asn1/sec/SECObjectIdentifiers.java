@@ -10,6 +10,8 @@ import com.android.org.bouncycastle.asn1.x9.X9ObjectIdentifiers;
  *  ellipticCurve OBJECT IDENTIFIER ::= {
  *        iso(1) identified-organization(3) certicom(132) curve(0)
  *  }
+ *  secg-scheme OBJECT IDENTIFIER ::= {
+ *     iso(1) identified-organization(3) certicom(132) schemes(1) }
  * </pre>
  * @hide This class is not part of the Android public SDK API
  */

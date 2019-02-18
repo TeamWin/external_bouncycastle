@@ -4,6 +4,8 @@ package com.android.org.bouncycastle.crypto.signers;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
+import com.android.org.bouncycastle.util.BigIntegers;
+
 /**
  * @hide This class is not part of the Android public SDK API
  */
@@ -38,7 +40,7 @@ public class RandomDSAKCalculator
         BigInteger k;
         do
         {
-            k = new BigInteger(qBitLength, random);
+            k = BigIntegers.createRandomBigInteger(qBitLength, random);
         }
         while (k.equals(ZERO) || k.compareTo(q) >= 0);
 

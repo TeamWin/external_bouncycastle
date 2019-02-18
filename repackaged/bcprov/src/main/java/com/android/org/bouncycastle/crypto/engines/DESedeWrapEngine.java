@@ -4,6 +4,7 @@ package com.android.org.bouncycastle.crypto.engines;
 import java.security.SecureRandom;
 
 import com.android.org.bouncycastle.crypto.CipherParameters;
+import com.android.org.bouncycastle.crypto.CryptoServicesRegistrar;
 import com.android.org.bouncycastle.crypto.Digest;
 import com.android.org.bouncycastle.crypto.InvalidCipherTextException;
 import com.android.org.bouncycastle.crypto.Wrapper;
@@ -81,7 +82,7 @@ public class DESedeWrapEngine
         }
         else
         {
-            sr = new SecureRandom();
+            sr = CryptoServicesRegistrar.getSecureRandom();
         }
 
         if (param instanceof KeyParameter)

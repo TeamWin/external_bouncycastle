@@ -9,7 +9,18 @@ import com.android.org.bouncycastle.jcajce.provider.config.ConfigurableProvider;
  */
 public abstract class AsymmetricAlgorithmProvider
     extends AlgorithmProvider
-{       
+{
+    protected void addSignatureAlgorithm(
+        ConfigurableProvider provider,
+        String algorithm,
+        String className,
+        ASN1ObjectIdentifier oid)
+    {
+        provider.addAlgorithm("Signature." + algorithm, className);
+        provider.addAlgorithm("Alg.Alias.Signature." + oid, algorithm);
+        provider.addAlgorithm("Alg.Alias.Signature.OID." + oid, algorithm);
+    }
+
     protected void addSignatureAlgorithm(
         ConfigurableProvider provider,
         String digest,

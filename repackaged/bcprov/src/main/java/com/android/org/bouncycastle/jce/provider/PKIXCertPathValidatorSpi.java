@@ -1,9 +1,7 @@
 /* GENERATED SOURCE. DO NOT MODIFY. */
 package com.android.org.bouncycastle.jce.provider;
 
-// BEGIN Android-added: Blacklist support
 import java.math.BigInteger;
-// END Android-added: Blacklist support
 import java.security.InvalidAlgorithmParameterException;
 import java.security.PublicKey;
 import java.security.cert.CertPath;
@@ -11,6 +9,7 @@ import java.security.cert.CertPathParameters;
 import java.security.cert.CertPathValidatorException;
 import java.security.cert.CertPathValidatorResult;
 import java.security.cert.CertPathValidatorSpi;
+import java.security.cert.CertificateEncodingException;
 import java.security.cert.PKIXCertPathChecker;
 import java.security.cert.PKIXCertPathValidatorResult;
 import java.security.cert.PKIXParameters;
@@ -27,6 +26,7 @@ import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.org.bouncycastle.asn1.x500.X500Name;
 import com.android.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import com.android.org.bouncycastle.asn1.x509.Extension;
+import com.android.org.bouncycastle.asn1.x509.TBSCertificate;
 import com.android.org.bouncycastle.jcajce.PKIXExtendedBuilderParameters;
 import com.android.org.bouncycastle.jcajce.PKIXExtendedParameters;
 import com.android.org.bouncycastle.jcajce.util.BCJcaJceHelper;
@@ -142,15 +142,17 @@ public class PKIXCertPathValidatorSpi
         {
             trust = CertPathValidatorUtilities.findTrustAnchor((X509Certificate) certs.get(certs.size() - 1),
                     paramsPKIX.getTrustAnchors(), paramsPKIX.getSigProvider());
+
+            if (trust == null)
+            {
+                throw new CertPathValidatorException("Trust anchor for certification path not found.", null, certPath, -1);
+            }
+
+            checkCertificate(trust.getTrustedCert());
         }
         catch (AnnotatedException e)
         {
-            throw new CertPathValidatorException(e.getMessage(), e, certPath, certs.size() - 1);
-        }
-
-        if (trust == null)
-        {
-            throw new CertPathValidatorException("Trust anchor for certification path not found.", null, certPath, -1);
+            throw new CertPathValidatorException(e.getMessage(), e.getUnderlyingException(), certPath, certs.size() - 1);
         }
 
         // RFC 5280 - CRLs must originate from the same trust anchor as the target certificate.
@@ -327,6 +329,15 @@ public class PKIXCertPathValidatorSpi
             cert = (X509Certificate) certs.get(index);
             boolean verificationAlreadyPerformed = (index == certs.size() - 1);
 
+            try
+            {
+                checkCertificate(cert);
+            }
+            catch (AnnotatedException e)
+            {
+                throw new CertPathValidatorException(e.getMessage(), e.getUnderlyingException(), certPath, index);
+            }
+
             //
             // 6.1.3
             //
@@ -346,11 +357,15 @@ public class PKIXCertPathValidatorSpi
             //
             // 6.1.4
             //
-
             if (i != n)
             {
                 if (cert != null && cert.getVersion() == 1)
                 {
+                    // we've found the trust anchor at the top of the path, ignore and keep going
+                    if ((i == 1) && cert.equals(trust.getTrustedCert()))
+                    {
+                        continue;
+                    }
                     throw new CertPathValidatorException("Version 1 certificates can't be used as CA ones.", null,
                             certPath, index);
                 }
@@ -489,4 +504,20 @@ public class PKIXCertPathValidatorSpi
         throw new CertPathValidatorException("Path processing failed on policy.", null, certPath, index);
     }
 
+    static void checkCertificate(X509Certificate cert)
+        throws AnnotatedException
+    {
+        try
+        {
+            TBSCertificate.getInstance(cert.getTBSCertificate());
+        }
+        catch (CertificateEncodingException e)
+        {
+            throw new AnnotatedException("unable to process TBSCertificate", e);
+        }
+        catch (IllegalArgumentException e)
+        {
+            throw new AnnotatedException(e.getMessage());
+        }
+    }
 }

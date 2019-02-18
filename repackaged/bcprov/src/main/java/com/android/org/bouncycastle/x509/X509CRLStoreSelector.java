@@ -8,7 +8,7 @@ import java.security.cert.X509CRL;
 import java.security.cert.X509CRLSelector;
 
 import com.android.org.bouncycastle.asn1.ASN1Integer;
-import com.android.org.bouncycastle.asn1.x509.X509Extensions;
+import com.android.org.bouncycastle.asn1.x509.Extension;
 import com.android.org.bouncycastle.util.Arrays;
 import com.android.org.bouncycastle.util.Selector;
 import com.android.org.bouncycastle.x509.extension.X509ExtensionUtil;
@@ -102,7 +102,7 @@ public class X509CRLStoreSelector
         try
         {
             byte[] bytes = crl
-                .getExtensionValue(X509Extensions.DeltaCRLIndicator.getId());
+                .getExtensionValue(Extension.deltaCRLIndicator.getId());
             if (bytes != null)
             {
                 dci = ASN1Integer.getInstance(X509ExtensionUtil
@@ -141,7 +141,7 @@ public class X509CRLStoreSelector
         if (issuingDistributionPointEnabled)
         {
             byte[] idp = crl
-                .getExtensionValue(X509Extensions.IssuingDistributionPoint
+                .getExtensionValue(Extension.issuingDistributionPoint
                     .getId());
             if (issuingDistributionPoint == null)
             {

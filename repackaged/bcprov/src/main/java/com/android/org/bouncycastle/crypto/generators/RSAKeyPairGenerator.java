@@ -11,6 +11,7 @@ import com.android.org.bouncycastle.crypto.params.RSAKeyParameters;
 import com.android.org.bouncycastle.crypto.params.RSAPrivateCrtKeyParameters;
 import com.android.org.bouncycastle.math.Primes;
 import com.android.org.bouncycastle.math.ec.WNafUtil;
+import com.android.org.bouncycastle.util.BigIntegers;
 
 /**
  * an RSA key pair generator.
@@ -161,7 +162,7 @@ public class RSAKeyPairGenerator
     {
         for (int i = 0; i != 5 * bitlength; i++)
         {
-            BigInteger p = new BigInteger(bitlength, 1, param.getRandom());
+            BigInteger p = BigIntegers.createRandomPrime(bitlength, 1, param.getRandom());
 
             if (p.mod(e).equals(ONE))
             {

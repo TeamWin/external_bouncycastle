@@ -5,7 +5,8 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 
 import com.android.org.bouncycastle.crypto.CipherParameters;
-import com.android.org.bouncycastle.crypto.DSA;
+import com.android.org.bouncycastle.crypto.CryptoServicesRegistrar;
+import com.android.org.bouncycastle.crypto.DSAExt;
 import com.android.org.bouncycastle.crypto.params.ECDomainParameters;
 import com.android.org.bouncycastle.crypto.params.ECKeyParameters;
 import com.android.org.bouncycastle.crypto.params.ECPrivateKeyParameters;
@@ -24,7 +25,7 @@ import com.android.org.bouncycastle.math.ec.FixedPointCombMultiplier;
  * @hide This class is not part of the Android public SDK API
  */
 public class ECDSASigner
-    implements ECConstants, DSA
+    implements ECConstants, DSAExt
 {
     private final DSAKCalculator kCalculator;
 
@@ -75,6 +76,11 @@ public class ECDSASigner
         }
 
         this.random = initSecureRandom(forSigning && !kCalculator.isDeterministic(), providedRandom);
+    }
+
+    public BigInteger getOrder()
+    {
+        return key.getParameters().getN();
     }
 
     // 5.3 pg 28
@@ -249,6 +255,6 @@ public class ECDSASigner
 
     protected SecureRandom initSecureRandom(boolean needed, SecureRandom provided)
     {
-        return !needed ? null : (provided != null) ? provided : new SecureRandom();
+        return !needed ? null : (provided != null) ? provided : CryptoServicesRegistrar.getSecureRandom();
     }
 }

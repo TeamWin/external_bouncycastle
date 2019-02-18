@@ -4,7 +4,7 @@ package com.android.org.bouncycastle.asn1;
 import java.io.IOException;
 
 /**
- * Interface to parse ASN.1 application specific objects.
+ * Interface to parse ASN.1 ApplicationSpecific objects.
  * @hide This class is not part of the Android public SDK API
  */
 public interface ASN1ApplicationSpecificParser

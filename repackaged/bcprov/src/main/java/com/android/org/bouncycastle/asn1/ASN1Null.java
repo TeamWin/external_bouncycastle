@@ -1,4 +1,7 @@
 /* GENERATED SOURCE. DO NOT MODIFY. */
+/***************************************************************/
+/******    DO NOT EDIT THIS CLASS bc-java SOURCE FILE     ******/
+/***************************************************************/
 package com.android.org.bouncycastle.asn1;
 
 import java.io.IOException;
@@ -11,6 +14,11 @@ import java.io.IOException;
 public abstract class ASN1Null
     extends ASN1Primitive
 {
+    ASN1Null()
+    {
+
+    }
+
     /**
      * Return an instance of ASN.1 NULL from the passed in object.
      * <p>

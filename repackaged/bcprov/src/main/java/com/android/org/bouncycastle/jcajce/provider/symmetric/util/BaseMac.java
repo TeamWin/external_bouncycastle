@@ -37,7 +37,7 @@ import com.android.org.bouncycastle.jcajce.spec.AEADParameterSpec;
 public class BaseMac
     extends MacSpi implements PBE
 {
-    private static final Class gcmSpecClass = lookup("javax.crypto.spec.GCMParameterSpec");
+    private static final Class gcmSpecClass = ClassUtil.loadClass(BaseMac.class, "javax.crypto.spec.GCMParameterSpec");
 
     private Mac macEngine;
 
@@ -290,19 +290,5 @@ public class BaseMac
         }
 
         return newTable;
-    }
-
-    private static Class lookup(String className)
-    {
-        try
-        {
-            Class def = BaseBlockCipher.class.getClassLoader().loadClass(className);
-
-            return def;
-        }
-        catch (Exception e)
-        {
-            return null;
-        }
     }
 }

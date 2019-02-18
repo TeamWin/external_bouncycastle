@@ -9,6 +9,7 @@ import java.security.spec.AlgorithmParameterSpec;
 import javax.crypto.spec.DHGenParameterSpec;
 import javax.crypto.spec.DHParameterSpec;
 
+import com.android.org.bouncycastle.crypto.CryptoServicesRegistrar;
 import com.android.org.bouncycastle.crypto.generators.DHParametersGenerator;
 import com.android.org.bouncycastle.crypto.params.DHParameters;
 import com.android.org.bouncycastle.jcajce.provider.asymmetric.util.BaseAlgorithmParameterGeneratorSpi;
@@ -61,7 +62,7 @@ public class AlgorithmParameterGeneratorSpi
         }
         else
         {
-            pGen.init(strength, certainty, new SecureRandom());
+            pGen.init(strength, certainty, CryptoServicesRegistrar.getSecureRandom());
         }
 
         DHParameters p = pGen.generateParameters();

@@ -18,7 +18,10 @@ import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.org.bouncycastle.asn1.oiw.OIWObjectIdentifiers;
 import com.android.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import com.android.org.bouncycastle.crypto.CipherParameters;
+import com.android.org.bouncycastle.crypto.CryptoServicesRegistrar;
 import com.android.org.bouncycastle.crypto.KeyGenerationParameters;
+// Android-removed: Unsupported algorithms
+// import org.bouncycastle.crypto.PasswordConverter;
 import com.android.org.bouncycastle.crypto.engines.DESEngine;
 // Android-removed: Unsupported algorithms
 // import org.bouncycastle.crypto.engines.RFC3211WrapEngine;
@@ -33,6 +36,8 @@ import com.android.org.bouncycastle.crypto.paddings.ISO7816d4Padding;
 import com.android.org.bouncycastle.crypto.params.DESParameters;
 import com.android.org.bouncycastle.crypto.params.KeyParameter;
 import com.android.org.bouncycastle.crypto.params.ParametersWithIV;
+// Android-removed: Unsupported algorithms
+// import org.bouncycastle.jcajce.PBKDF1Key;
 import com.android.org.bouncycastle.jcajce.provider.config.ConfigurableProvider;
 import com.android.org.bouncycastle.jcajce.provider.symmetric.util.BCPBEKey;
 import com.android.org.bouncycastle.jcajce.provider.symmetric.util.BaseAlgorithmParameterGenerator;
@@ -192,7 +197,7 @@ public final class DES
 
             if (random == null)
             {
-                random = new SecureRandom();
+                random = CryptoServicesRegistrar.getSecureRandom();
             }
 
             random.nextBytes(iv);
@@ -242,7 +247,7 @@ public final class DES
         {
             if (uninitialised)
             {
-                engine.init(new KeyGenerationParameters(new SecureRandom(), defaultKeySize));
+                engine.init(new KeyGenerationParameters(CryptoServicesRegistrar.getSecureRandom(), defaultKeySize));
                 uninitialised = false;
             }
 
@@ -351,7 +356,21 @@ public final class DES
 
                 if (pbeSpec.getSalt() == null)
                 {
-                    return new BCPBEKey(this.algName, this.algOid, scheme, digest, keySize, ivSize, pbeSpec, null);
+                    // BEGIN Android-removed: Unsupported algorithms
+                    /*
+                    if (scheme == PKCS5S1 || scheme == PKCS5S1_UTF8)
+                    {
+                        return new PBKDF1Key(pbeSpec.getPassword(),
+                            scheme == PKCS5S1 ? PasswordConverter.ASCII : PasswordConverter.UTF8);
+                    }
+                    else
+                    {
+                    */
+                    // END Android-removed: Unsupported algorithms
+                        return new BCPBEKey(this.algName, this.algOid, scheme, digest, keySize, ivSize, pbeSpec, null);
+                    /*
+                    }
+                    */
                 }
 
                 if (forCipher)

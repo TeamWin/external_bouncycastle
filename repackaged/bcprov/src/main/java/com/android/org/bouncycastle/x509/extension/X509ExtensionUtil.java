@@ -17,16 +17,20 @@ import com.android.org.bouncycastle.asn1.ASN1String;
 import com.android.org.bouncycastle.asn1.DEROctetString;
 import com.android.org.bouncycastle.asn1.DERSequence;
 import com.android.org.bouncycastle.asn1.x500.X500Name;
+import com.android.org.bouncycastle.asn1.x509.Extension;
 import com.android.org.bouncycastle.asn1.x509.GeneralName;
-import com.android.org.bouncycastle.asn1.x509.X509Extension;
 import com.android.org.bouncycastle.util.Integers;
 
 
 /**
+ * @deprecated use org.bouncycastle.cert.jcajce.JcaX509ExtensionUtils
  * @hide This class is not part of the Android public SDK API
  */
 public class X509ExtensionUtil
 {
+    /**
+     * @deprecated use org.bouncycastle.cert.jcajce.JcaX509ExtensionUtils.parseExtensionValue()
+     */
     public static ASN1Primitive fromExtensionValue(
         byte[]  encodedValue) 
         throws IOException
@@ -36,18 +40,24 @@ public class X509ExtensionUtil
         return ASN1Primitive.fromByteArray(octs.getOctets());
     }
 
+    /**
+     * @deprecated use org.bouncycastle.cert.jcajce.JcaX509ExtensionUtils.getIssuerAlternativeNames()
+     */
     public static Collection getIssuerAlternativeNames(X509Certificate cert)
             throws CertificateParsingException
     {
-        byte[] extVal = cert.getExtensionValue(X509Extension.issuerAlternativeName.getId());
+        byte[] extVal = cert.getExtensionValue(Extension.issuerAlternativeName.getId());
 
         return getAlternativeNames(extVal);
     }
 
+    /**
+     * @deprecated use org.bouncycastle.cert.jcajce.JcaX509ExtensionUtils.getSubjectAlternativeNames()
+     */
     public static Collection getSubjectAlternativeNames(X509Certificate cert)
             throws CertificateParsingException
     {        
-        byte[] extVal = cert.getExtensionValue(X509Extension.subjectAlternativeName.getId());
+        byte[] extVal = cert.getExtensionValue(Extension.subjectAlternativeName.getId());
 
         return getAlternativeNames(extVal);
     }

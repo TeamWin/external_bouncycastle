@@ -15,6 +15,7 @@ import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.org.bouncycastle.asn1.x9.ECNamedCurveTable;
 import com.android.org.bouncycastle.asn1.x9.X9ECParameters;
 import com.android.org.bouncycastle.crypto.AsymmetricCipherKeyPair;
+import com.android.org.bouncycastle.crypto.CryptoServicesRegistrar;
 import com.android.org.bouncycastle.crypto.generators.ECKeyPairGenerator;
 import com.android.org.bouncycastle.crypto.params.ECDomainParameters;
 import com.android.org.bouncycastle.crypto.params.ECKeyGenerationParameters;
@@ -54,8 +55,7 @@ public abstract class KeyPairGeneratorSpi
         // 239-bit keys (the Bouncy Castle default) are less widely-supported than 256-bit ones,
         // so we've changed the default strength to 256 for increased compatibility
         int                         strength = 256;
-        int                         certainty = 50;
-        SecureRandom                random = new SecureRandom();
+        SecureRandom                random = CryptoServicesRegistrar.getSecureRandom();
         boolean                     initialised = false;
         String                      algorithm;
         ProviderConfiguration       configuration;
