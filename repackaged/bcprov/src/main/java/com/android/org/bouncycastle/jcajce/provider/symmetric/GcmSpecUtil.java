@@ -8,11 +8,12 @@ import java.security.spec.InvalidParameterSpecException;
 
 import com.android.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.org.bouncycastle.asn1.cms.GCMParameters;
+import com.android.org.bouncycastle.jcajce.provider.symmetric.util.ClassUtil;
 import com.android.org.bouncycastle.util.Integers;
 
 class GcmSpecUtil
 {
-    static final Class gcmSpecClass = lookup("javax.crypto.spec.GCMParameterSpec");
+    static final Class gcmSpecClass = ClassUtil.loadClass(GcmSpecUtil.class, "javax.crypto.spec.GCMParameterSpec");
 
     static boolean gcmSpecExists()
     {
@@ -62,18 +63,6 @@ class GcmSpecUtil
         catch (Exception e)
         {
             throw new InvalidParameterSpecException("Cannot process GCMParameterSpec");
-        }
-    }
-
-    private static Class lookup(String className)
-    {
-        try
-        {
-            return GcmSpecUtil.class.getClassLoader().loadClass(className);
-        }
-        catch (Exception e)
-        {
-            return null;
         }
     }
 }

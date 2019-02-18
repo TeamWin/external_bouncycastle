@@ -1,6 +1,5 @@
 package org.bouncycastle.jcajce.provider.asymmetric.rsa;
 
-import java.io.ByteArrayOutputStream;
 import java.security.AlgorithmParameters;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -25,6 +24,7 @@ import javax.crypto.spec.PSource;
 import org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import org.bouncycastle.crypto.AsymmetricBlockCipher;
 import org.bouncycastle.crypto.CipherParameters;
+import org.bouncycastle.crypto.CryptoServicesRegistrar;
 import org.bouncycastle.crypto.Digest;
 import org.bouncycastle.crypto.InvalidCipherTextException;
 // Android-removed: Unsupported algorithm
@@ -49,12 +49,12 @@ public class CipherSpi
     // Was: private final JcaJceHelper helper = new BCJcaJceHelper();
     private final JcaJceHelper helper = new DefaultJcaJceHelper();
 
-    private AsymmetricBlockCipher cipher;
-    private AlgorithmParameterSpec paramSpec;
-    private AlgorithmParameters engineParams;
+    private AsymmetricBlockCipher   cipher;
+    private AlgorithmParameterSpec  paramSpec;
+    private AlgorithmParameters     engineParams;
     private boolean                 publicKeyOnly = false;
     private boolean                 privateKeyOnly = false;
-    private ByteArrayOutputStream bOut = new ByteArrayOutputStream();
+    private ErasableOutputStream    bOut = new ErasableOutputStream();
 
     public CipherSpi(
         AsymmetricBlockCipher engine)
@@ -350,7 +350,7 @@ public class CipherSpi
             }
             else
             {
-                param = new ParametersWithRandom(param, new SecureRandom());
+                param = new ParametersWithRandom(param, CryptoServicesRegistrar.getSecureRandom());
             }
         }
 
@@ -502,12 +502,11 @@ public class CipherSpi
         int     outputOffset) 
         throws IllegalBlockSizeException, BadPaddingException, ShortBufferException
     {
-        // BEGIN Android-added: Throw ShortBufferException when given a short buffer.
-        if (engineGetOutputSize(inputLen) > output.length - outputOffset)
+        if (outputOffset + engineGetOutputSize(inputLen) > output.length)
         {
             throw new ShortBufferException("output buffer too short for input.");
         }
-        // END Android-added: Throw ShortBufferException when given a short buffer.
+
         if (input != null)
         {
             bOut.write(input, inputOffset, inputLen);
@@ -543,9 +542,7 @@ public class CipherSpi
     {
         try
         {
-            byte[]  bytes = bOut.toByteArray();
-
-            return cipher.processBlock(bytes, 0, bytes.length);
+            return cipher.processBlock(bOut.getBuf(), 0, bOut.size());
         }
         catch (InvalidCipherTextException e)
         {
@@ -557,7 +554,7 @@ public class CipherSpi
         }
         finally
         {
-            bOut.reset();
+            bOut.erase();
         }
     }
 

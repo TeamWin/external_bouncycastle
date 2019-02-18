@@ -132,7 +132,7 @@ public class X500Name
         X500NameStyle style,
         RDN[]         rDNs)
     {
-        this.rdns = rDNs;
+        this.rdns = copy(rDNs);
         this.style = style;
     }
 
@@ -245,6 +245,15 @@ public class X500Name
         RDN[] tmp = new RDN[count];
 
         System.arraycopy(res, 0, tmp, 0, tmp.length);
+
+        return tmp;
+    }
+
+    private RDN[] copy(RDN[] rdns)
+    {
+        RDN[] tmp = new RDN[rdns.length];
+
+        System.arraycopy(rdns, 0, tmp, 0, tmp.length);
 
         return tmp;
     }

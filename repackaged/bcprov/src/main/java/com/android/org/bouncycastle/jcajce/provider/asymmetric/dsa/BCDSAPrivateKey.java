@@ -22,6 +22,7 @@ import com.android.org.bouncycastle.crypto.params.DSAPrivateKeyParameters;
 import com.android.org.bouncycastle.jcajce.provider.asymmetric.util.KeyUtil;
 import com.android.org.bouncycastle.jcajce.provider.asymmetric.util.PKCS12BagAttributeCarrierImpl;
 import com.android.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier;
+import com.android.org.bouncycastle.util.Strings;
 
 /**
  * @hide This class is not part of the Android public SDK API
@@ -167,5 +168,18 @@ public class BCDSAPrivateKey
         out.writeObject(dsaSpec.getP());
         out.writeObject(dsaSpec.getQ());
         out.writeObject(dsaSpec.getG());
+    }
+
+    public String toString()
+    {
+        StringBuffer    buf = new StringBuffer();
+        String          nl = Strings.lineSeparator();
+
+        BigInteger y = getParams().getG().modPow(x, getParams().getP());
+
+        buf.append("DSA Private Key [").append(DSAUtil.generateKeyFingerprint(y, getParams())).append("]").append(nl);
+        buf.append("            Y: ").append(y.toString(16)).append(nl);
+
+        return buf.toString();
     }
 }

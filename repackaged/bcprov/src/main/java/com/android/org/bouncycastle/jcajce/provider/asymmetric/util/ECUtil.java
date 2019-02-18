@@ -9,18 +9,9 @@ import java.util.Enumeration;
 import java.util.Map;
 
 import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
-// Android-removed: Unsupported algorithms
-// import org.bouncycastle.asn1.anssi.ANSSINamedCurves;
-// import org.bouncycastle.asn1.cryptopro.ECGOST3410NamedCurves;
-// import org.bouncycastle.asn1.gm.GMNamedCurves;
-import com.android.org.bouncycastle.asn1.nist.NISTNamedCurves;
 import com.android.org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
-import com.android.org.bouncycastle.asn1.sec.SECNamedCurves;
-// Android-removed: Unsupported algorithms
-// import org.bouncycastle.asn1.teletrust.TeleTrusTNamedCurves;
 import com.android.org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 import com.android.org.bouncycastle.asn1.x9.ECNamedCurveTable;
-import com.android.org.bouncycastle.asn1.x9.X962NamedCurves;
 import com.android.org.bouncycastle.asn1.x9.X962Parameters;
 import com.android.org.bouncycastle.asn1.x9.X9ECParameters;
 import com.android.org.bouncycastle.crypto.ec.CustomNamedCurves;
@@ -35,6 +26,11 @@ import com.android.org.bouncycastle.jce.interfaces.ECPublicKey;
 import com.android.org.bouncycastle.jce.provider.BouncyCastleProvider;
 import com.android.org.bouncycastle.jce.spec.ECNamedCurveParameterSpec;
 import com.android.org.bouncycastle.jce.spec.ECParameterSpec;
+import com.android.org.bouncycastle.math.ec.ECCurve;
+import com.android.org.bouncycastle.math.ec.ECPoint;
+import com.android.org.bouncycastle.util.Arrays;
+import com.android.org.bouncycastle.util.Fingerprint;
+import com.android.org.bouncycastle.util.Strings;
 
 /**
  * utility class for converting jce/jca ECDSA, ECDH, and ECDHC
@@ -237,9 +233,20 @@ public class ECUtil
                 s = BouncyCastleProvider.CONFIGURATION.getEcImplicitlyCa();
             }
 
-            return new ECPrivateKeyParameters(
-                            k.getD(),
-                            new ECDomainParameters(s.getCurve(), s.getG(), s.getN(), s.getH(), s.getSeed()));
+            if (k.getParameters() instanceof ECNamedCurveParameterSpec)
+            {
+                String name = ((ECNamedCurveParameterSpec)k.getParameters()).getName();
+                return new ECPrivateKeyParameters(
+                    k.getD(),
+                    new ECNamedDomainParameters(ECNamedCurveTable.getOID(name),
+                        s.getCurve(), s.getG(), s.getN(), s.getH(), s.getSeed()));
+            }
+            else
+            {
+                return new ECPrivateKeyParameters(
+                    k.getD(),
+                    new ECDomainParameters(s.getCurve(), s.getG(), s.getN(), s.getH(), s.getSeed()));
+            }
         }
         else if (key instanceof java.security.interfaces.ECPrivateKey)
         {
@@ -299,15 +306,12 @@ public class ECUtil
     public static ASN1ObjectIdentifier getNamedCurveOid(
         String curveName)
     {
-        String name;
+        String name = curveName;
 
-        if (curveName.indexOf(' ') > 0)
+        int spacePos = name.indexOf(' ');
+        if (spacePos > 0)
         {
-            name = curveName.substring(curveName.indexOf(' ') + 1);
-        }
-        else
-        {
-            name = curveName;
+            name = name.substring(spacePos + 1);
         }
 
         try
@@ -316,51 +320,12 @@ public class ECUtil
             {
                 return new ASN1ObjectIdentifier(name);
             }
-            else
-            {
-                return lookupOidByName(name);
-            }
         }
         catch (IllegalArgumentException ex)
         {
-            return lookupOidByName(name);
-        }
-    }
-
-    private static ASN1ObjectIdentifier lookupOidByName(String name)
-    {
-        ASN1ObjectIdentifier oid = X962NamedCurves.getOID(name);
-
-        if (oid == null)
-        {
-            oid = SECNamedCurves.getOID(name);
-            if (oid == null)
-            {
-                oid = NISTNamedCurves.getOID(name);
-            }
-            // BEGIN Android-removed: Unsupported algorithms
-            /*
-            if (oid == null)
-            {
-                oid = TeleTrusTNamedCurves.getOID(name);
-            }
-            if (oid == null)
-            {
-                oid = ECGOST3410NamedCurves.getOID(name);
-            }
-            if (oid == null)
-            {
-                oid = ANSSINamedCurves.getOID(name);
-            }
-            if (oid == null)
-            {
-                oid = GMNamedCurves.getOID(name);
-            }
-            */
-            // END Android-removed: Unsupported algorithms
         }
 
-        return oid;
+        return ECNamedCurveTable.getOID(name);
     }
 
     public static ASN1ObjectIdentifier getNamedCurveOid(
@@ -391,27 +356,7 @@ public class ECUtil
 
         if (params == null)
         {
-            params = X962NamedCurves.getByOID(oid);
-            if (params == null)
-            {
-                params = SECNamedCurves.getByOID(oid);
-            }
-            if (params == null)
-            {
-                params = NISTNamedCurves.getByOID(oid);
-            }
-            // BEGIN Android-removed: Unsupported algorithms
-            /*
-            if (params == null)
-            {
-                params = TeleTrusTNamedCurves.getByOID(oid);
-            }
-            if (params == null)
-            {
-                params = GMNamedCurves.getByOID(oid);
-            }
-            */
-            // END Android-removed: Unsupported algorithms
+            params = ECNamedCurveTable.getByOID(oid);
         }
 
         return params;
@@ -424,27 +369,7 @@ public class ECUtil
 
         if (params == null)
         {
-            params = X962NamedCurves.getByName(curveName);
-            if (params == null)
-            {
-                params = SECNamedCurves.getByName(curveName);
-            }
-            if (params == null)
-            {
-                params = NISTNamedCurves.getByName(curveName);
-            }
-            // BEGIN Android-removed: Unsupported algorithms
-            /*
-            if (params == null)
-            {
-                params = TeleTrusTNamedCurves.getByName(curveName);
-            }
-            if (params == null)
-            {
-                params = GMNamedCurves.getByName(curveName);
-            }
-            */
-            // END Android-removed: Unsupported algorithms
+            params = ECNamedCurveTable.getByName(curveName);
         }
 
         return params;
@@ -453,29 +378,52 @@ public class ECUtil
     public static String getCurveName(
         ASN1ObjectIdentifier oid)
     {
-        String name = X962NamedCurves.getName(oid);
-        
-        if (name == null)
+        return ECNamedCurveTable.getName(oid);
+    }
+
+    public static String privateKeyToString(String algorithm, BigInteger d, com.android.org.bouncycastle.jce.spec.ECParameterSpec spec)
+    {
+        StringBuffer buf = new StringBuffer();
+        String nl = Strings.lineSeparator();
+
+        com.android.org.bouncycastle.math.ec.ECPoint q = calculateQ(d, spec);
+
+        buf.append(algorithm);
+        buf.append(" Private Key [").append(ECUtil.generateKeyFingerprint(q, spec)).append("]").append(nl);
+        buf.append("            X: ").append(q.getAffineXCoord().toBigInteger().toString(16)).append(nl);
+        buf.append("            Y: ").append(q.getAffineYCoord().toBigInteger().toString(16)).append(nl);
+
+        return buf.toString();
+    }
+
+    private static com.android.org.bouncycastle.math.ec.ECPoint calculateQ(BigInteger d, com.android.org.bouncycastle.jce.spec.ECParameterSpec spec)
+    {
+        return spec.getG().multiply(d).normalize();
+    }
+
+    public static String publicKeyToString(String algorithm, com.android.org.bouncycastle.math.ec.ECPoint q, com.android.org.bouncycastle.jce.spec.ECParameterSpec spec)
+    {
+        StringBuffer buf = new StringBuffer();
+        String nl = Strings.lineSeparator();
+
+        buf.append(algorithm);
+        buf.append(" Public Key [").append(ECUtil.generateKeyFingerprint(q, spec)).append("]").append(nl);
+        buf.append("            X: ").append(q.getAffineXCoord().toBigInteger().toString(16)).append(nl);
+        buf.append("            Y: ").append(q.getAffineYCoord().toBigInteger().toString(16)).append(nl);
+
+        return buf.toString();
+    }
+
+    public static String generateKeyFingerprint(ECPoint publicPoint, com.android.org.bouncycastle.jce.spec.ECParameterSpec spec)
+    {
+        ECCurve curve = spec.getCurve();
+        ECPoint g = spec.getG();
+
+        if (curve != null)
         {
-            name = SECNamedCurves.getName(oid);
-            if (name == null)
-            {
-                name = NISTNamedCurves.getName(oid);
-            }
-            // BEGIN Android-removed: Unsupported algorithms
-            /*
-            if (name == null)
-            {
-                name = TeleTrusTNamedCurves.getName(oid);
-            }
-            if (name == null)
-            {
-                name = ECGOST3410NamedCurves.getName(oid);
-            }
-            */
-            // END Android-removed: Unsupported algorithms
+            return new Fingerprint(Arrays.concatenate(publicPoint.getEncoded(false), curve.getA().getEncoded(), curve.getB().getEncoded(), g.getEncoded(false))).toString();
         }
 
-        return name;
+        return new Fingerprint(publicPoint.getEncoded(false)).toString();
     }
 }

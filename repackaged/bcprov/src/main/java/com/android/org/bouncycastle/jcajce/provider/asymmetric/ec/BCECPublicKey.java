@@ -30,7 +30,6 @@ import com.android.org.bouncycastle.jcajce.provider.config.ProviderConfiguration
 import com.android.org.bouncycastle.jce.interfaces.ECPointEncoder;
 import com.android.org.bouncycastle.jce.provider.BouncyCastleProvider;
 import com.android.org.bouncycastle.math.ec.ECCurve;
-import com.android.org.bouncycastle.util.Strings;
 
 /**
  * @hide This class is not part of the Android public SDK API
@@ -185,12 +184,10 @@ public class BCECPublicKey
     private ECParameterSpec createSpec(EllipticCurve ellipticCurve, ECDomainParameters dp)
     {
         return new ECParameterSpec(
-                ellipticCurve,
-                new ECPoint(
-                        dp.getG().getAffineXCoord().toBigInteger(),
-                        dp.getG().getAffineYCoord().toBigInteger()),
-                        dp.getN(),
-                        dp.getH().intValue());
+            ellipticCurve,
+            EC5Util.convertPoint(dp.getG()),
+            dp.getN(),
+            dp.getH().intValue());
     }
 
     private void populateFromPubKeyInfo(SubjectPublicKeyInfo info)
@@ -267,9 +264,7 @@ public class BCECPublicKey
 
     public ECPoint getW()
     {
-        com.android.org.bouncycastle.math.ec.ECPoint q = ecPublicKey.getQ();
-
-        return new ECPoint(q.getAffineXCoord().toBigInteger(), q.getAffineYCoord().toBigInteger());
+        return EC5Util.convertPoint(ecPublicKey.getQ());
     }
 
     public com.android.org.bouncycastle.math.ec.ECPoint getQ()
@@ -301,16 +296,7 @@ public class BCECPublicKey
 
     public String toString()
     {
-        StringBuffer    buf = new StringBuffer();
-        String          nl = Strings.lineSeparator();
-        com.android.org.bouncycastle.math.ec.ECPoint q = ecPublicKey.getQ();
-
-        buf.append("EC Public Key").append(nl);
-        buf.append("            X: ").append(q.getAffineXCoord().toBigInteger().toString(16)).append(nl);
-        buf.append("            Y: ").append(q.getAffineYCoord().toBigInteger().toString(16)).append(nl);
-
-        return buf.toString();
-
+        return ECUtil.publicKeyToString("EC", ecPublicKey.getQ(), engineGetSpec());
     }
     
     public void setPointFormat(String style)

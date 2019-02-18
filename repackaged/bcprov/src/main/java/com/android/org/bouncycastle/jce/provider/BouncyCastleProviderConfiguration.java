@@ -2,6 +2,7 @@
 package com.android.org.bouncycastle.jce.provider;
 
 import java.security.Permission;
+import java.security.spec.DSAParameterSpec;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -10,10 +11,14 @@ import java.util.Set;
 
 import javax.crypto.spec.DHParameterSpec;
 
+import com.android.org.bouncycastle.crypto.CryptoServicesRegistrar;
+import com.android.org.bouncycastle.crypto.params.DHParameters;
+import com.android.org.bouncycastle.crypto.params.DSAParameters;
 import com.android.org.bouncycastle.jcajce.provider.asymmetric.util.EC5Util;
 import com.android.org.bouncycastle.jcajce.provider.config.ConfigurableProvider;
 import com.android.org.bouncycastle.jcajce.provider.config.ProviderConfiguration;
 import com.android.org.bouncycastle.jcajce.provider.config.ProviderConfigurationPermission;
+import com.android.org.bouncycastle.jcajce.spec.DHDomainParameterSpec;
 import com.android.org.bouncycastle.jce.spec.ECParameterSpec;
 
 class BouncyCastleProviderConfiguration
@@ -190,6 +195,23 @@ class BouncyCastleProviderConfiguration
                     return specs[i];
                 }
             }
+        }
+
+        DHParameters dhParams = CryptoServicesRegistrar.getSizedProperty(CryptoServicesRegistrar.Property.DH_DEFAULT_PARAMS, keySize);
+        if (dhParams != null)
+        {
+            return new DHDomainParameterSpec(dhParams);
+        }
+
+        return null;
+    }
+
+    public DSAParameterSpec getDSADefaultParameters(int keySize)
+    {
+        DSAParameters dsaParams = CryptoServicesRegistrar.getSizedProperty(CryptoServicesRegistrar.Property.DSA_DEFAULT_PARAMS, keySize);
+        if (dsaParams != null)
+        {
+            return new DSAParameterSpec(dsaParams.getP(), dsaParams.getQ(), dsaParams.getG());
         }
 
         return null;

@@ -10,7 +10,7 @@ import java.io.InputStream;
 import com.android.org.bouncycastle.util.io.Streams;
 
 /**
- * a general purpose ASN.1 decoder - note: this class differs from the
+ * A general purpose ASN.1 decoder - note: this class differs from the
  * others in that it returns null after it has read the last object in
  * the stream. If an ASN.1 NULL is encountered a DER/BER Null object is
  * returned.
@@ -150,7 +150,7 @@ public class ASN1InputStream
 
         if ((tag & APPLICATION) != 0)
         {
-            return new DERApplicationSpecific(isConstructed, tagNo, defIn.toByteArray());
+            return new DLApplicationSpecific(isConstructed, tagNo, defIn.toByteArray());
         }
 
         if ((tag & TAGGED) != 0)
@@ -188,7 +188,7 @@ public class ASN1InputStream
                 case SET:
                     return DERFactory.createSet(buildDEREncodableVector(defIn));
                 case EXTERNAL:
-                    return new DERExternal(buildDEREncodableVector(defIn));                
+                    return new DLExternal(buildDEREncodableVector(defIn));
                 default:
                     throw new IOException("unknown tag " + tagNo + " encountered");
             }

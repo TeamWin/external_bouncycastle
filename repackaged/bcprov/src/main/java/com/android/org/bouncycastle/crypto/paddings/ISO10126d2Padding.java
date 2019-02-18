@@ -3,6 +3,7 @@ package com.android.org.bouncycastle.crypto.paddings;
 
 import java.security.SecureRandom;
 
+import com.android.org.bouncycastle.crypto.CryptoServicesRegistrar;
 import com.android.org.bouncycastle.crypto.InvalidCipherTextException;
 
 /**
@@ -28,7 +29,7 @@ public class ISO10126d2Padding
         }
         else
         {
-            this.random = new SecureRandom();
+            this.random = CryptoServicesRegistrar.getSecureRandom();
         }
     }
 

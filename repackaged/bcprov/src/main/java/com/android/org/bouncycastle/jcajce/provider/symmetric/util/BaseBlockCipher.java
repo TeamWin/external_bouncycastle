@@ -33,9 +33,12 @@ import com.android.org.bouncycastle.asn1.cms.GCMParameters;
 import com.android.org.bouncycastle.crypto.BlockCipher;
 import com.android.org.bouncycastle.crypto.BufferedBlockCipher;
 import com.android.org.bouncycastle.crypto.CipherParameters;
+import com.android.org.bouncycastle.crypto.CryptoServicesRegistrar;
 import com.android.org.bouncycastle.crypto.DataLengthException;
 import com.android.org.bouncycastle.crypto.InvalidCipherTextException;
 import com.android.org.bouncycastle.crypto.OutputLengthException;
+// Android-removed: Unsupported algorithms
+// import org.bouncycastle.crypto.engines.DSTU7624Engine;
 import com.android.org.bouncycastle.crypto.modes.AEADBlockCipher;
 import com.android.org.bouncycastle.crypto.modes.CBCBlockCipher;
 import com.android.org.bouncycastle.crypto.modes.CCMBlockCipher;
@@ -47,6 +50,9 @@ import com.android.org.bouncycastle.crypto.modes.CTSBlockCipher;
 import com.android.org.bouncycastle.crypto.modes.GCMBlockCipher;
 // Android-removed: Unsupported algorithms
 // import org.bouncycastle.crypto.modes.GOFBBlockCipher;
+// import org.bouncycastle.crypto.modes.KCCMBlockCipher;
+// import org.bouncycastle.crypto.modes.KCTRBlockCipher;
+// import org.bouncycastle.crypto.modes.KGCMBlockCipher;
 // import org.bouncycastle.crypto.modes.OCBBlockCipher;
 import com.android.org.bouncycastle.crypto.modes.OFBBlockCipher;
 // Android-removed: Unsupported algorithms
@@ -86,7 +92,7 @@ public class BaseBlockCipher
     extends BaseWrapCipher
     implements PBE
 {
-    private static final Class gcmSpecClass = lookup("javax.crypto.spec.GCMParameterSpec");
+    private static final Class gcmSpecClass = ClassUtil.loadClass(BaseBlockCipher.class, "javax.crypto.spec.GCMParameterSpec");
 
     //
     // specs we can handle.
@@ -97,10 +103,10 @@ public class BaseBlockCipher
                                         // RC2ParameterSpec.class,
                                         // RC5ParameterSpec.class,
                                         gcmSpecClass,
-                                        IvParameterSpec.class,
-                                        PBEParameterSpec.class,
                                         // Android-removed: Unsupported algorithms
                                         // GOST28147ParameterSpec.class
+                                        IvParameterSpec.class,
+                                        PBEParameterSpec.class
                                     };
 
     private BlockCipher             baseEngine;
@@ -121,20 +127,6 @@ public class BaseBlockCipher
     private String                  pbeAlgorithm = null;
 
     private String                  modeName = null;
-
-    private static Class lookup(String className)
-    {
-        try
-        {
-            Class def = BaseBlockCipher.class.getClassLoader().loadClass(className);
-
-            return def;
-        }
-        catch (Exception e)
-        {
-            return null;
-        }
-    }
 
     protected BaseBlockCipher(
         BlockCipher engine)
@@ -193,8 +185,17 @@ public class BaseBlockCipher
         com.android.org.bouncycastle.crypto.BlockCipher engine,
         int ivLength)
     {
+        this(engine, true, ivLength);
+    }
+
+    protected BaseBlockCipher(
+        com.android.org.bouncycastle.crypto.BlockCipher engine,
+        boolean fixedIv,
+        int ivLength)
+    {
         baseEngine = engine;
 
+        this.fixedIv = fixedIv;
         this.cipher = new BufferedGenericBlockCipher(engine);
         this.ivLength = ivLength / 8;
     }
@@ -203,9 +204,18 @@ public class BaseBlockCipher
         BufferedBlockCipher engine,
         int ivLength)
     {
+        this(engine, true, ivLength);
+    }
+
+    protected BaseBlockCipher(
+        BufferedBlockCipher engine,
+        boolean fixedIv,
+        int ivLength)
+    {
         baseEngine = engine.getUnderlyingCipher();
 
         this.cipher = new BufferedGenericBlockCipher(engine);
+        this.fixedIv = fixedIv;
         this.ivLength = ivLength / 8;
     }
 
@@ -276,11 +286,6 @@ public class BaseBlockCipher
                 try
                 {
                     engineParams = createParametersInstance(name);
-                    // Android-changed: Use IvParameterSpec instead of passing raw bytes.
-                    // The documentation of init() says that a byte array should be decoded
-                    // as ASN.1, and Conscrypt's implementations follow that requirement,
-                    // even though Bouncy Castle's implementations don't.  Wrapping it in
-                    // an IvParameterSpec makes the interpretation unambiguous to both.
                     engineParams.init(new IvParameterSpec(ivParam.getIV()));
                 }
                 catch (Exception e)
@@ -375,8 +380,21 @@ public class BaseBlockCipher
         {
             ivLength = baseEngine.getBlockSize();
             fixedIv = false;
-            cipher = new BufferedGenericBlockCipher(new BufferedBlockCipher(
-                        new SICBlockCipher(baseEngine)));
+            // BEGIN Android-removed: Unsupported algorithms
+            /*
+            if (baseEngine instanceof DSTU7624Engine)
+            {
+                cipher = new BufferedGenericBlockCipher(new BufferedBlockCipher(
+                                    new KCTRBlockCipher(baseEngine)));
+            }
+            else
+            {
+            */
+                cipher = new BufferedGenericBlockCipher(new BufferedBlockCipher(
+                    new SICBlockCipher(baseEngine)));
+            /*
+            }
+            */
         }
         // BEGIN Android-removed: Unsupported modes
         /*
@@ -401,8 +419,20 @@ public class BaseBlockCipher
         }
         else if (modeName.startsWith("CCM"))
         {
-            ivLength = 13; // CCM nonce 7..13 bytes
-            cipher = new AEADGenericBlockCipher(new CCMBlockCipher(baseEngine));
+            ivLength = 12; // CCM nonce 7..13 bytes
+            // BEGIN Android-removed: Unsupported algorithms
+            /*
+            if (baseEngine instanceof DSTU7624Engine)
+            {
+                cipher = new AEADGenericBlockCipher(new KCCMBlockCipher(baseEngine));
+            }
+            else
+            {
+            */
+                cipher = new AEADGenericBlockCipher(new CCMBlockCipher(baseEngine));
+            /*
+            }
+            */
         }
         // BEGIN Android-removed: Unsupported modes
         /*
@@ -431,7 +461,19 @@ public class BaseBlockCipher
         else if (modeName.startsWith("GCM"))
         {
             ivLength = baseEngine.getBlockSize();
-            cipher = new AEADGenericBlockCipher(new GCMBlockCipher(baseEngine));
+            // BEGIN Android-removed: Unsupported algorithms
+            /*
+            if (baseEngine instanceof DSTU7624Engine)
+            {
+                cipher = new AEADGenericBlockCipher(new KGCMBlockCipher(baseEngine));
+            }
+            else
+            {
+            */
+                cipher = new AEADGenericBlockCipher(new GCMBlockCipher(baseEngine));
+            /*
+            }
+            */
         }
         else
         {
@@ -452,7 +494,7 @@ public class BaseBlockCipher
                 cipher = new BufferedGenericBlockCipher(new BufferedBlockCipher(cipher.getUnderlyingCipher()));
             }
         }
-        else if (paddingName.equals("WITHCTS"))
+        else if (paddingName.equals("WITHCTS") || paddingName.equals("CTSPADDING") || paddingName.equals("CS3PADDING"))
         {
             cipher = new BufferedGenericBlockCipher(new CTSBlockCipher(cipher.getUnderlyingCipher()));
         }
@@ -872,7 +914,7 @@ public class BaseBlockCipher
 
             if (ivRandom == null)
             {
-                ivRandom = new SecureRandom();
+                ivRandom = CryptoServicesRegistrar.getSecureRandom();
             }
 
             if ((opmode == Cipher.ENCRYPT_MODE) || (opmode == Cipher.WRAP_MODE))
@@ -1349,7 +1391,7 @@ public class BaseBlockCipher
         private static final Constructor aeadBadTagConstructor;
 
         static {
-            Class aeadBadTagClass = lookup("javax.crypto.AEADBadTagException");
+            Class aeadBadTagClass = ClassUtil.loadClass(BaseBlockCipher.class, "javax.crypto.AEADBadTagException");
             if (aeadBadTagClass != null)
             {
                 aeadBadTagConstructor = findExceptionConstructor(aeadBadTagClass);
@@ -1452,23 +1494,6 @@ public class BaseBlockCipher
                 }
                 throw new BadPaddingException(e.getMessage());
             }
-        }
-    }
-
-    private static class InvalidKeyOrParametersException
-        extends InvalidKeyException
-    {
-        private final Throwable cause;
-
-        InvalidKeyOrParametersException(String msg, Throwable cause)
-        {
-             super(msg);
-            this.cause = cause;
-        }
-
-        public Throwable getCause()
-        {
-            return cause;
         }
     }
 }

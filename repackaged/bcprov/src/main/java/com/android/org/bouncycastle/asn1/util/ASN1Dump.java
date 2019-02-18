@@ -8,6 +8,7 @@ import com.android.org.bouncycastle.asn1.ASN1ApplicationSpecific;
 import com.android.org.bouncycastle.asn1.ASN1Boolean;
 import com.android.org.bouncycastle.asn1.ASN1Encodable;
 import com.android.org.bouncycastle.asn1.ASN1Enumerated;
+import com.android.org.bouncycastle.asn1.ASN1External;
 import com.android.org.bouncycastle.asn1.ASN1GeneralizedTime;
 import com.android.org.bouncycastle.asn1.ASN1Integer;
 import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
@@ -26,16 +27,17 @@ import com.android.org.bouncycastle.asn1.BERTags;
 import com.android.org.bouncycastle.asn1.DERApplicationSpecific;
 import com.android.org.bouncycastle.asn1.DERBMPString;
 import com.android.org.bouncycastle.asn1.DERBitString;
-import com.android.org.bouncycastle.asn1.DERExternal;
 import com.android.org.bouncycastle.asn1.DERGraphicString;
 import com.android.org.bouncycastle.asn1.DERIA5String;
 import com.android.org.bouncycastle.asn1.DERNull;
 import com.android.org.bouncycastle.asn1.DERPrintableString;
 import com.android.org.bouncycastle.asn1.DERSequence;
+import com.android.org.bouncycastle.asn1.DERSet;
 import com.android.org.bouncycastle.asn1.DERT61String;
 import com.android.org.bouncycastle.asn1.DERUTF8String;
 import com.android.org.bouncycastle.asn1.DERVideotexString;
 import com.android.org.bouncycastle.asn1.DERVisibleString;
+import com.android.org.bouncycastle.asn1.DLApplicationSpecific;
 import com.android.org.bouncycastle.util.Strings;
 import com.android.org.bouncycastle.util.encoders.Hex;
 
@@ -149,11 +151,14 @@ public class ASN1Dump
             {
                 buf.append("BER Set");
             }
-            else
+            else if (obj instanceof DERSet)
             {
                 buf.append("DER Set");
             }
-
+            else
+            {
+                buf.append("Set");
+            }
             buf.append(nl);
 
             while (e.hasMoreElements())
@@ -270,14 +275,18 @@ public class ASN1Dump
         {
             buf.append(outputApplicationSpecific("DER", indent, verbose, obj, nl));
         }
+        else if (obj instanceof DLApplicationSpecific)
+        {
+            buf.append(outputApplicationSpecific("", indent, verbose, obj, nl));
+        }
         else if (obj instanceof ASN1Enumerated)
         {
             ASN1Enumerated en = (ASN1Enumerated) obj;
             buf.append(indent + "DER Enumerated(" + en.getValue() + ")" + nl);
         }
-        else if (obj instanceof DERExternal)
+        else if (obj instanceof ASN1External)
         {
-            DERExternal ext = (DERExternal) obj;
+            ASN1External ext = (ASN1External) obj;
             buf.append(indent + "External " + nl);
             String          tab = indent + TAB;
             if (ext.getDirectReference() != null)

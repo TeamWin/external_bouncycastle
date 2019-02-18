@@ -11,6 +11,7 @@ import com.android.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.org.bouncycastle.asn1.DEROctetString;
 import com.android.org.bouncycastle.asn1.DERSequence;
+import com.android.org.bouncycastle.util.Arrays;
 
 /**
  * The DigestInfo object.
@@ -54,7 +55,7 @@ public class DigestInfo
         AlgorithmIdentifier  algId,
         byte[]               digest)
     {
-        this.digest = digest;
+        this.digest = Arrays.clone(digest);
         this.algId = algId;
     }
 
@@ -74,7 +75,7 @@ public class DigestInfo
 
     public byte[] getDigest()
     {
-        return digest;
+        return Arrays.clone(digest);
     }
 
     public ASN1Primitive toASN1Primitive()

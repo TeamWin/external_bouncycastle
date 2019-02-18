@@ -14,6 +14,7 @@ import com.android.org.bouncycastle.asn1.DERBitString;
 import com.android.org.bouncycastle.asn1.DERSequence;
 import com.android.org.bouncycastle.math.ec.ECAlgorithms;
 import com.android.org.bouncycastle.math.ec.ECCurve;
+import com.android.org.bouncycastle.util.Arrays;
 
 /**
  * ASN.1 def for Elliptic-Curve Curve structure. See
@@ -31,9 +32,7 @@ public class X9Curve
     public X9Curve(
         ECCurve     curve)
     {
-        this.curve = curve;
-        this.seed = null;
-        setFieldIdentifier();
+        this(curve, null);
     }
 
     public X9Curve(
@@ -41,25 +40,25 @@ public class X9Curve
         byte[]      seed)
     {
         this.curve = curve;
-        this.seed = seed;
+        this.seed = Arrays.clone(seed);
         setFieldIdentifier();
     }
 
     public X9Curve(
         X9FieldID     fieldID,
+        BigInteger    order,
+        BigInteger    cofactor,
         ASN1Sequence  seq)
-    {
-        // TODO Is it possible to get the order(n) and cofactor(h) too?
-
+    {   
         fieldIdentifier = fieldID.getIdentifier();
         if (fieldIdentifier.equals(prime_field))
-        {
-            BigInteger      p = ((ASN1Integer)fieldID.getParameters()).getValue();
-            X9FieldElement  x9A = new X9FieldElement(p, (ASN1OctetString)seq.getObjectAt(0));
-            X9FieldElement  x9B = new X9FieldElement(p, (ASN1OctetString)seq.getObjectAt(1));
-            curve = new ECCurve.Fp(p, x9A.getValue().toBigInteger(), x9B.getValue().toBigInteger());
+        {   
+            BigInteger p = ((ASN1Integer)fieldID.getParameters()).getValue();
+            BigInteger A = new BigInteger(1, ASN1OctetString.getInstance(seq.getObjectAt(0)).getOctets());      
+            BigInteger B = new BigInteger(1, ASN1OctetString.getInstance(seq.getObjectAt(1)).getOctets());      
+            curve = new ECCurve.Fp(p, A, B, order, cofactor);
         }
-        else if (fieldIdentifier.equals(characteristic_two_field)) 
+        else if (fieldIdentifier.equals(characteristic_two_field))
         {
             // Characteristic two field
             ASN1Sequence parameters = ASN1Sequence.getInstance(fieldID.getParameters());
@@ -72,11 +71,11 @@ public class X9Curve
             int k2 = 0;
             int k3 = 0;
 
-            if (representation.equals(tpBasis)) 
+            if (representation.equals(tpBasis))
             {
                 // Trinomial basis representation
                 k1 = ASN1Integer.getInstance(parameters.getObjectAt(2)).getValue().intValue();
-            }
+            }   
             else if (representation.equals(ppBasis))
             {
                 // Pentanomial basis representation
@@ -84,25 +83,25 @@ public class X9Curve
                 k1 = ASN1Integer.getInstance(pentanomial.getObjectAt(0)).getValue().intValue();
                 k2 = ASN1Integer.getInstance(pentanomial.getObjectAt(1)).getValue().intValue();
                 k3 = ASN1Integer.getInstance(pentanomial.getObjectAt(2)).getValue().intValue();
-            }
+            }   
             else
             {
                 throw new IllegalArgumentException("This type of EC basis is not implemented");
-            }
-            X9FieldElement x9A = new X9FieldElement(m, k1, k2, k3, (ASN1OctetString)seq.getObjectAt(0));
-            X9FieldElement x9B = new X9FieldElement(m, k1, k2, k3, (ASN1OctetString)seq.getObjectAt(1));
-            curve = new ECCurve.F2m(m, k1, k2, k3, x9A.getValue().toBigInteger(), x9B.getValue().toBigInteger());
-        }
+            }   
+            BigInteger A = new BigInteger(1, ASN1OctetString.getInstance(seq.getObjectAt(0)).getOctets());      
+            BigInteger B = new BigInteger(1, ASN1OctetString.getInstance(seq.getObjectAt(1)).getOctets());      
+            curve = new ECCurve.F2m(m, k1, k2, k3, A, B, order, cofactor);
+        }   
         else
         {
             throw new IllegalArgumentException("This type of ECCurve is not implemented");
-        }
+        }   
 
         if (seq.size() == 3)
         {
-            seed = ((DERBitString)seq.getObjectAt(2)).getBytes();
-        }
-    }
+            seed = Arrays.clone(((DERBitString)seq.getObjectAt(2)).getBytes());
+        }   
+    }   
 
     private void setFieldIdentifier()
     {
@@ -127,7 +126,7 @@ public class X9Curve
 
     public byte[]   getSeed()
     {
-        return seed;
+        return Arrays.clone(seed);
     }
 
     /**

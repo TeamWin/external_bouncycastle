@@ -1,9 +1,10 @@
 /* GENERATED SOURCE. DO NOT MODIFY. */
 package com.android.org.bouncycastle.crypto.params;
 
-import com.android.org.bouncycastle.crypto.CipherParameters;
-
 import java.security.SecureRandom;
+
+import com.android.org.bouncycastle.crypto.CipherParameters;
+import com.android.org.bouncycastle.crypto.CryptoServicesRegistrar;
 
 /**
  * @hide This class is not part of the Android public SDK API
@@ -25,7 +26,7 @@ public class ParametersWithRandom
     public ParametersWithRandom(
         CipherParameters    parameters)
     {
-        this(parameters, new SecureRandom());
+        this(parameters, CryptoServicesRegistrar.getSecureRandom());
     }
 
     public SecureRandom getRandom()

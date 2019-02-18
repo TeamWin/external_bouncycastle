@@ -1,6 +1,7 @@
 /* GENERATED SOURCE. DO NOT MODIFY. */
 package com.android.org.bouncycastle.jcajce.provider.config;
 
+import java.security.spec.DSAParameterSpec;
 import java.util.Map;
 import java.util.Set;
 
@@ -16,6 +17,8 @@ public interface ProviderConfiguration
     ECParameterSpec getEcImplicitlyCa();
 
     DHParameterSpec getDHDefaultParameters(int keySize);
+
+    DSAParameterSpec getDSADefaultParameters(int keySize);
 
     Set getAcceptableNamedCurves();
 

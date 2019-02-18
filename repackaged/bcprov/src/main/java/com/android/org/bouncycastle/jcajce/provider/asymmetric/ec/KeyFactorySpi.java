@@ -13,8 +13,14 @@ import java.security.spec.KeySpec;
 
 import com.android.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
+import com.android.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import com.android.org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 import com.android.org.bouncycastle.asn1.x9.X9ObjectIdentifiers;
+import com.android.org.bouncycastle.crypto.CipherParameters;
+import com.android.org.bouncycastle.crypto.params.ECDomainParameters;
+import com.android.org.bouncycastle.crypto.params.ECPublicKeyParameters;
+// Android-removed: Unsupported algorithms
+// import org.bouncycastle.crypto.util.OpenSSHPublicKeyUtil;
 import com.android.org.bouncycastle.jcajce.provider.asymmetric.util.BaseKeyFactorySpi;
 import com.android.org.bouncycastle.jcajce.provider.asymmetric.util.EC5Util;
 import com.android.org.bouncycastle.jcajce.provider.config.ProviderConfiguration;
@@ -23,6 +29,9 @@ import com.android.org.bouncycastle.jce.provider.BouncyCastleProvider;
 import com.android.org.bouncycastle.jce.spec.ECParameterSpec;
 import com.android.org.bouncycastle.jce.spec.ECPrivateKeySpec;
 import com.android.org.bouncycastle.jce.spec.ECPublicKeySpec;
+// Android-removed: Unsupported algorithms
+// import org.bouncycastle.jce.spec.OpenSSHPrivateKeySpec;
+// import org.bouncycastle.jce.spec.OpenSSHPublicKeySpec;
 
 /**
  * @hide This class is not part of the Android public SDK API
@@ -43,7 +52,7 @@ public class KeyFactorySpi
     }
 
     protected Key engineTranslateKey(
-        Key    key)
+        Key key)
         throws InvalidKeyException
     {
         if (key instanceof ECPublicKey)
@@ -59,70 +68,115 @@ public class KeyFactorySpi
     }
 
     protected KeySpec engineGetKeySpec(
-        Key    key,
-        Class    spec)
-    throws InvalidKeySpecException
+        Key key,
+        Class spec)
+        throws InvalidKeySpecException
     {
-       if (spec.isAssignableFrom(java.security.spec.ECPublicKeySpec.class) && key instanceof ECPublicKey)
-       {
-           ECPublicKey k = (ECPublicKey)key;
-           if (k.getParams() != null)
-           {
-               return new java.security.spec.ECPublicKeySpec(k.getW(), k.getParams());
-           }
-           else
-           {
-               ECParameterSpec implicitSpec = BouncyCastleProvider.CONFIGURATION.getEcImplicitlyCa();
+        if (spec.isAssignableFrom(java.security.spec.ECPublicKeySpec.class) && key instanceof ECPublicKey)
+        {
+            ECPublicKey k = (ECPublicKey)key;
+            if (k.getParams() != null)
+            {
+                return new java.security.spec.ECPublicKeySpec(k.getW(), k.getParams());
+            }
+            else
+            {
+                ECParameterSpec implicitSpec = BouncyCastleProvider.CONFIGURATION.getEcImplicitlyCa();
 
-               return new java.security.spec.ECPublicKeySpec(k.getW(), EC5Util.convertSpec(EC5Util.convertCurve(implicitSpec.getCurve(), implicitSpec.getSeed()), implicitSpec));
-           }
-       }
-       else if (spec.isAssignableFrom(java.security.spec.ECPrivateKeySpec.class) && key instanceof ECPrivateKey)
-       {
-           ECPrivateKey k = (ECPrivateKey)key;
+                return new java.security.spec.ECPublicKeySpec(k.getW(), EC5Util.convertSpec(EC5Util.convertCurve(implicitSpec.getCurve(), implicitSpec.getSeed()), implicitSpec));
+            }
+        }
+        else if (spec.isAssignableFrom(java.security.spec.ECPrivateKeySpec.class) && key instanceof ECPrivateKey)
+        {
+            ECPrivateKey k = (ECPrivateKey)key;
 
-           if (k.getParams() != null)
-           {
-               return new java.security.spec.ECPrivateKeySpec(k.getS(), k.getParams());
-           }
-           else
-           {
-               ECParameterSpec implicitSpec = BouncyCastleProvider.CONFIGURATION.getEcImplicitlyCa();
+            if (k.getParams() != null)
+            {
+                return new java.security.spec.ECPrivateKeySpec(k.getS(), k.getParams());
+            }
+            else
+            {
+                ECParameterSpec implicitSpec = BouncyCastleProvider.CONFIGURATION.getEcImplicitlyCa();
 
-               return new java.security.spec.ECPrivateKeySpec(k.getS(), EC5Util.convertSpec(EC5Util.convertCurve(implicitSpec.getCurve(), implicitSpec.getSeed()), implicitSpec)); 
-           }
-       }
-       else if (spec.isAssignableFrom(com.android.org.bouncycastle.jce.spec.ECPublicKeySpec.class) && key instanceof ECPublicKey)
-       {
-           ECPublicKey k = (ECPublicKey)key;
-           if (k.getParams() != null)
-           {
-               return new com.android.org.bouncycastle.jce.spec.ECPublicKeySpec(EC5Util.convertPoint(k.getParams(), k.getW(), false), EC5Util.convertSpec(k.getParams(), false));
-           }
-           else
-           {
-               ECParameterSpec implicitSpec = BouncyCastleProvider.CONFIGURATION.getEcImplicitlyCa();
+                return new java.security.spec.ECPrivateKeySpec(k.getS(), EC5Util.convertSpec(EC5Util.convertCurve(implicitSpec.getCurve(), implicitSpec.getSeed()), implicitSpec));
+            }
+        }
+        else if (spec.isAssignableFrom(com.android.org.bouncycastle.jce.spec.ECPublicKeySpec.class) && key instanceof ECPublicKey)
+        {
+            ECPublicKey k = (ECPublicKey)key;
+            if (k.getParams() != null)
+            {
+                return new com.android.org.bouncycastle.jce.spec.ECPublicKeySpec(EC5Util.convertPoint(k.getParams(), k.getW(), false), EC5Util.convertSpec(k.getParams(), false));
+            }
+            else
+            {
+                ECParameterSpec implicitSpec = BouncyCastleProvider.CONFIGURATION.getEcImplicitlyCa();
 
-               return new com.android.org.bouncycastle.jce.spec.ECPublicKeySpec(EC5Util.convertPoint(k.getParams(), k.getW(), false), implicitSpec);
-           }
-       }
-       else if (spec.isAssignableFrom(com.android.org.bouncycastle.jce.spec.ECPrivateKeySpec.class) && key instanceof ECPrivateKey)
-       {
-           ECPrivateKey k = (ECPrivateKey)key;
+                return new com.android.org.bouncycastle.jce.spec.ECPublicKeySpec(EC5Util.convertPoint(k.getParams(), k.getW(), false), implicitSpec);
+            }
+        }
+        else if (spec.isAssignableFrom(com.android.org.bouncycastle.jce.spec.ECPrivateKeySpec.class) && key instanceof ECPrivateKey)
+        {
+            ECPrivateKey k = (ECPrivateKey)key;
 
-           if (k.getParams() != null)
-           {
-               return new com.android.org.bouncycastle.jce.spec.ECPrivateKeySpec(k.getS(), EC5Util.convertSpec(k.getParams(), false));
-           }
-           else
-           {
-               ECParameterSpec implicitSpec = BouncyCastleProvider.CONFIGURATION.getEcImplicitlyCa();
+            if (k.getParams() != null)
+            {
+                return new com.android.org.bouncycastle.jce.spec.ECPrivateKeySpec(k.getS(), EC5Util.convertSpec(k.getParams(), false));
+            }
+            else
+            {
+                ECParameterSpec implicitSpec = BouncyCastleProvider.CONFIGURATION.getEcImplicitlyCa();
 
-               return new com.android.org.bouncycastle.jce.spec.ECPrivateKeySpec(k.getS(), implicitSpec);
-           }
-       }
+                return new com.android.org.bouncycastle.jce.spec.ECPrivateKeySpec(k.getS(), implicitSpec);
+            }
+        }
+        // BEGIN Android-removed: Unsupported algorithms
+        /*
+        else if (spec.isAssignableFrom(OpenSSHPublicKeySpec.class) && key instanceof ECPublicKey)
+        {
+            if (key instanceof BCECPublicKey)
+            {
+                BCECPublicKey bcPk = (BCECPublicKey)key;
+                ECParameterSpec sc = bcPk.getParameters();
+                try
+                {
+                    return new OpenSSHPublicKeySpec(
+                        OpenSSHPublicKeyUtil.encodePublicKey(
+                            new ECPublicKeyParameters(bcPk.getQ(), new ECDomainParameters(sc.getCurve(), sc.getG(), sc.getN(), sc.getH(), sc.getSeed()))));
+                }
+                catch (IOException e)
+                {
+                    throw new IllegalArgumentException("unable to produce encoding: " + e.getMessage());
+                }
+            }
+            else
+            {
+                throw new IllegalArgumentException("invalid key type: " + key.getClass().getName());
+            }
+        }
+        else if (spec.isAssignableFrom(OpenSSHPrivateKeySpec.class) && key instanceof ECPrivateKey)
+        {
+            if (key instanceof BCECPrivateKey)
+            {
+                try
+                {
+                    return new OpenSSHPrivateKeySpec(PrivateKeyInfo.getInstance(key.getEncoded()).parsePrivateKey().toASN1Primitive().getEncoded());
+                }
+                catch (IOException e)
+                {
+                    throw new IllegalArgumentException("cannot encoded key: " + e.getMessage());
+                }
+            }
+            else
+            {
+                throw new IllegalArgumentException("invalid key type: " + key.getClass().getName());
+            }
 
-       return super.engineGetKeySpec(key, spec);
+        }
+        */
+        // END Android-removed: Unsupported algorithms
+
+        return super.engineGetKeySpec(key, spec);
     }
 
     protected PrivateKey engineGeneratePrivate(
@@ -137,6 +191,23 @@ public class KeyFactorySpi
         {
             return new BCECPrivateKey(algorithm, (java.security.spec.ECPrivateKeySpec)keySpec, configuration);
         }
+        // BEGIN Android-removed: Unsupported algorithms
+        /*
+        else if (keySpec instanceof OpenSSHPrivateKeySpec)
+        {
+            org.bouncycastle.asn1.sec.ECPrivateKey ecKey = org.bouncycastle.asn1.sec.ECPrivateKey.getInstance(((OpenSSHPrivateKeySpec)keySpec).getEncoded());
+
+            try
+            {
+                return new BCECPrivateKey(algorithm, new PrivateKeyInfo(new AlgorithmIdentifier(X9ObjectIdentifiers.id_ecPublicKey, ecKey.getParameters()), ecKey), configuration);
+            }
+            catch (IOException e)
+            {
+                throw new InvalidKeySpecException("bad encoding: " + e.getMessage());
+            }
+        }
+        */
+        // END Android-removed: Unsupported algorithms
 
         return super.engineGeneratePrivate(keySpec);
     }
@@ -155,6 +226,26 @@ public class KeyFactorySpi
             {
                 return new BCECPublicKey(algorithm, (java.security.spec.ECPublicKeySpec)keySpec, configuration);
             }
+            // BEGIN Android-removed: Unsupported algorithms
+            /*
+            else if (keySpec instanceof OpenSSHPublicKeySpec)
+            {
+                CipherParameters params = OpenSSHPublicKeyUtil.parsePublicKey(((OpenSSHPublicKeySpec)keySpec).getEncoded());
+                if (params instanceof ECPublicKeyParameters)
+                {
+                    ECDomainParameters parameters = ((ECPublicKeyParameters)params).getParameters();
+                    return engineGeneratePublic(
+                        new ECPublicKeySpec(((ECPublicKeyParameters)params).getQ(),
+                            new ECParameterSpec(parameters.getCurve(), parameters.getG(), parameters.getN(), parameters.getH(), parameters.getSeed())
+                        ));
+                }
+                else
+                {
+                    throw new IllegalArgumentException("openssh key is not ec public key");
+                }
+            }
+            */
+            // END Android-removed: Unsupported algorithms
         }
         catch (Exception e)
         {
@@ -226,6 +317,15 @@ public class KeyFactorySpi
         public ECGOST3410()
         {
             super("ECGOST3410", BouncyCastleProvider.CONFIGURATION);
+        }
+    }
+
+    public static class ECGOST3410_2012
+        extends KeyFactorySpi
+    {
+        public ECGOST3410_2012()
+        {
+            super("ECGOST3410-2012", BouncyCastleProvider.CONFIGURATION);
         }
     }
     */
