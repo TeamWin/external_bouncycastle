@@ -2,6 +2,7 @@
 package com.android.org.bouncycastle.jcajce.provider.asymmetric.ec;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.ECGenParameterSpec;
 import java.security.spec.ECParameterSpec;
@@ -46,7 +47,9 @@ public class AlgorithmParametersSpi
                 throw new InvalidParameterSpecException("EC curve name not recognized: " + ecGenParameterSpec.getName());
             }
             curveName = ecGenParameterSpec.getName();
-            ecParameterSpec = EC5Util.convertToSpec(params);
+            ECParameterSpec baseSpec = EC5Util.convertToSpec(params);
+            ecParameterSpec = new ECNamedCurveSpec(curveName,
+                baseSpec.getCurve(), baseSpec.getGenerator(), baseSpec.getOrder(), BigInteger.valueOf(baseSpec.getCofactor()));
         }
         else if (algorithmParameterSpec instanceof ECParameterSpec)
         {

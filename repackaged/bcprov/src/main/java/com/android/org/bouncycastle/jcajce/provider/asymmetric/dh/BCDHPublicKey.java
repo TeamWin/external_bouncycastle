@@ -24,6 +24,7 @@ import com.android.org.bouncycastle.crypto.params.DHParameters;
 import com.android.org.bouncycastle.crypto.params.DHPublicKeyParameters;
 import com.android.org.bouncycastle.crypto.params.DHValidationParameters;
 import com.android.org.bouncycastle.jcajce.provider.asymmetric.util.KeyUtil;
+import com.android.org.bouncycastle.jcajce.spec.DHDomainParameterSpec;
 
 /**
  * @hide This class is not part of the Android public SDK API
@@ -59,7 +60,7 @@ public class BCDHPublicKey
         DHPublicKeyParameters params)
     {
         this.y = params.getY();
-        this.dhSpec = new DHParameterSpec(params.getParameters().getP(), params.getParameters().getG(), params.getParameters().getL());
+        this.dhSpec = new DHDomainParameterSpec(params.getParameters());
         this.dhPublicKey = params;
     }
 
@@ -69,7 +70,15 @@ public class BCDHPublicKey
     {
         this.y = y;
         this.dhSpec = dhSpec;
-        this.dhPublicKey = new DHPublicKeyParameters(y, new DHParameters(dhSpec.getP(), dhSpec.getG()));
+
+        if (dhSpec instanceof DHDomainParameterSpec)
+        {
+            this.dhPublicKey = new DHPublicKeyParameters(y, ((DHDomainParameterSpec)dhSpec).getDomainParameters());
+        }
+        else
+        {
+            this.dhPublicKey = new DHPublicKeyParameters(y, new DHParameters(dhSpec.getP(), dhSpec.getG()));
+        }
     }
 
     public BCDHPublicKey(
@@ -111,7 +120,6 @@ public class BCDHPublicKey
         {
             DomainParameters params = DomainParameters.getInstance(seq);
 
-            this.dhSpec = new DHParameterSpec(params.getP(), params.getG());
             ValidationParams validationParams = params.getValidationParams();
             if (validationParams != null)
             {
@@ -122,6 +130,7 @@ public class BCDHPublicKey
             {
                 this.dhPublicKey = new DHPublicKeyParameters(y, new DHParameters(params.getP(), params.getG(), params.getQ(), params.getJ(), null));
             }
+            this.dhSpec = new DHDomainParameterSpec(dhPublicKey.getParameters());
         }
         else
         {
@@ -146,7 +155,23 @@ public class BCDHPublicKey
             return KeyUtil.getEncodedSubjectPublicKeyInfo(info);
         }
 
+        if (dhSpec instanceof DHDomainParameterSpec && ((DHDomainParameterSpec)dhSpec).getQ() != null)
+        {
+            DHParameters params = ((DHDomainParameterSpec)dhSpec).getDomainParameters();
+            DHValidationParameters validationParameters = params.getValidationParameters();
+            ValidationParams vParams = null;
+            if (validationParameters != null)
+            {
+                vParams = new ValidationParams(validationParameters.getSeed(), validationParameters.getCounter());
+            }
+            return KeyUtil.getEncodedSubjectPublicKeyInfo(new AlgorithmIdentifier(X9ObjectIdentifiers.dhpublicnumber, new DomainParameters(params.getP(), params.getG(), params.getQ(), params.getJ(), vParams).toASN1Primitive()), new ASN1Integer(y));
+        }
         return KeyUtil.getEncodedSubjectPublicKeyInfo(new AlgorithmIdentifier(PKCSObjectIdentifiers.dhKeyAgreement, new DHParameter(dhSpec.getP(), dhSpec.getG(), dhSpec.getL()).toASN1Primitive()), new ASN1Integer(y));
+    }
+
+    public String toString()
+    {
+        return DHUtil.publicKeyToString("DH", y, new DHParameters(dhSpec.getP(), dhSpec.getG()));
     }
 
     public DHParameterSpec getParams()

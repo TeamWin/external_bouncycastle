@@ -7,6 +7,7 @@ import java.security.SecureRandom;
 
 import com.android.org.bouncycastle.crypto.AsymmetricBlockCipher;
 import com.android.org.bouncycastle.crypto.CipherParameters;
+import com.android.org.bouncycastle.crypto.CryptoServicesRegistrar;
 import com.android.org.bouncycastle.crypto.InvalidCipherTextException;
 import com.android.org.bouncycastle.crypto.params.AsymmetricKeyParameter;
 import com.android.org.bouncycastle.crypto.params.ParametersWithRandom;
@@ -143,7 +144,7 @@ public class PKCS1Encoding
             kParam = (AsymmetricKeyParameter)param;
             if (!kParam.isPrivate() && forEncryption)
             {
-                this.random = new SecureRandom();
+                this.random = CryptoServicesRegistrar.getSecureRandom();
             }
         }
 

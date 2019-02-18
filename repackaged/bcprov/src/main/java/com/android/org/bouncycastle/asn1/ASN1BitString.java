@@ -61,6 +61,7 @@ public abstract class ASN1BitString
             return 0;
         }
 
+
         int bits = 1;
 
         while (((val <<= 1) & 0xFF) != 0)
@@ -138,7 +139,7 @@ public abstract class ASN1BitString
     {
         StringBuffer          buf = new StringBuffer("#");
         ByteArrayOutputStream bOut = new ByteArrayOutputStream();
-        ASN1OutputStream      aOut = new ASN1OutputStream(bOut);
+        ASN1OutputStream aOut = new ASN1OutputStream(bOut);
 
         try
         {
@@ -220,7 +221,7 @@ public abstract class ASN1BitString
     }
 
     protected boolean asn1Equals(
-        ASN1Primitive  o)
+        ASN1Primitive o)
     {
         if (!(o instanceof ASN1BitString))
         {

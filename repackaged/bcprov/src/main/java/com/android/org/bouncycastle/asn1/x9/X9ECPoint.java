@@ -10,7 +10,7 @@ import com.android.org.bouncycastle.math.ec.ECPoint;
 import com.android.org.bouncycastle.util.Arrays;
 
 /**
- * class for describing an ECPoint as a DER object.
+ * Class for describing an ECPoint as a DER object.
  * @hide This class is not part of the Android public SDK API
  */
 public class X9ECPoint

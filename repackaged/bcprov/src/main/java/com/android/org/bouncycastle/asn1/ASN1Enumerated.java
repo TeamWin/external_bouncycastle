@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.math.BigInteger;
 
 import com.android.org.bouncycastle.util.Arrays;
+import com.android.org.bouncycastle.util.Properties;
 
 /**
  * Class representing the ASN.1 ENUMERATED type.
@@ -101,13 +102,9 @@ public class ASN1Enumerated
     public ASN1Enumerated(
         byte[]   bytes)
     {
-        if (bytes.length > 1)
+        if (!Properties.isOverrideSet("com.android.org.bouncycastle.asn1.allow_unsafe_integer"))
         {
-            if (bytes[0] == 0 && (bytes[1] & 0x80) == 0)
-            {
-                throw new IllegalArgumentException("malformed enumerated");
-            }
-            if (bytes[0] == (byte)0xff && (bytes[1] & 0x80) != 0)
+            if (ASN1Integer.isMalformed(bytes))
             {
                 throw new IllegalArgumentException("malformed enumerated");
             }

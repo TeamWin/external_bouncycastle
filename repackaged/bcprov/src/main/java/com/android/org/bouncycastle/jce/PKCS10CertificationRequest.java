@@ -67,8 +67,8 @@ import com.android.org.bouncycastle.util.Strings;
  *  Attributes { ATTRIBUTE:IOSet } ::= SET OF Attribute{{ IOSet }}
  *
  *  Attribute { ATTRIBUTE:IOSet } ::= SEQUENCE {
- *    type    ATTRIBUTE.&id({IOSet}),
- *    values  SET SIZE(1..MAX) OF ATTRIBUTE.&Type({IOSet}{\@type})
+ *    type    ATTRIBUTE.&amp;id({IOSet}),
+ *    values  SET SIZE(1..MAX) OF ATTRIBUTE.&amp;Type({IOSet}{\@type})
  *  }
  * </pre>
  * @deprecated use classes in org.bouncycastle.pkcs.

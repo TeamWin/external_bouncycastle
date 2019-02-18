@@ -30,6 +30,7 @@ import com.android.org.bouncycastle.asn1.x500.X500Name;
  * <p>
  * Note: issuerUniqueID and subjectUniqueID are both deprecated by the IETF. This class
  * will parse them, but you really shouldn't be creating new ones.
+ * @deprecated use TBSCertificate
  * @hide This class is not part of the Android public SDK API
  */
 public class TBSCertificateStructure

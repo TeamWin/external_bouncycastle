@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.math.BigInteger;
 
 /**
+ * @deprecated No longer used
  * @hide This class is not part of the Android public SDK API
  */
 public interface DSAEncoder

@@ -10,6 +10,7 @@ import java.util.Hashtable;
 import javax.crypto.spec.DHParameterSpec;
 
 import com.android.org.bouncycastle.crypto.AsymmetricCipherKeyPair;
+import com.android.org.bouncycastle.crypto.CryptoServicesRegistrar;
 import com.android.org.bouncycastle.crypto.generators.DHBasicKeyPairGenerator;
 import com.android.org.bouncycastle.crypto.generators.DHParametersGenerator;
 import com.android.org.bouncycastle.crypto.params.DHKeyGenerationParameters;
@@ -17,6 +18,7 @@ import com.android.org.bouncycastle.crypto.params.DHParameters;
 import com.android.org.bouncycastle.crypto.params.DHPrivateKeyParameters;
 import com.android.org.bouncycastle.crypto.params.DHPublicKeyParameters;
 import com.android.org.bouncycastle.jcajce.provider.asymmetric.util.PrimeCertaintyCalculator;
+import com.android.org.bouncycastle.jcajce.spec.DHDomainParameterSpec;
 import com.android.org.bouncycastle.jce.provider.BouncyCastleProvider;
 import com.android.org.bouncycastle.util.Integers;
 
@@ -32,7 +34,7 @@ public class KeyPairGeneratorSpi
     DHKeyGenerationParameters param;
     DHBasicKeyPairGenerator engine = new DHBasicKeyPairGenerator();
     int strength = 2048;
-    SecureRandom random = new SecureRandom();
+    SecureRandom random = CryptoServicesRegistrar.getSecureRandom();
     boolean initialised = false;
 
     public KeyPairGeneratorSpi()
@@ -60,10 +62,26 @@ public class KeyPairGeneratorSpi
         }
         DHParameterSpec dhParams = (DHParameterSpec)params;
 
-        param = new DHKeyGenerationParameters(random, new DHParameters(dhParams.getP(), dhParams.getG(), null, dhParams.getL()));
-
+        try
+        {
+            param = convertParams(random, dhParams);
+        }
+        catch (IllegalArgumentException e)
+        {
+            throw new InvalidAlgorithmParameterException(e.getMessage(), e);
+        }
+        
         engine.init(param);
         initialised = true;
+    }
+
+    private DHKeyGenerationParameters convertParams(SecureRandom random, DHParameterSpec dhParams)
+    {
+        if (dhParams instanceof DHDomainParameterSpec)
+        {
+            return new DHKeyGenerationParameters(random, ((DHDomainParameterSpec)dhParams).getDomainParameters());
+        }
+        return new DHKeyGenerationParameters(random, new DHParameters(dhParams.getP(), dhParams.getG(), null, dhParams.getL()));
     }
 
     public KeyPair generateKeyPair()
@@ -81,8 +99,8 @@ public class KeyPairGeneratorSpi
                 DHParameterSpec dhParams = BouncyCastleProvider.CONFIGURATION.getDHDefaultParameters(strength);
 
                 if (dhParams != null)
-                {
-                    param = new DHKeyGenerationParameters(random, new DHParameters(dhParams.getP(), dhParams.getG(), null, dhParams.getL()));
+                {   
+                    param = convertParams(random, dhParams);
                 }
                 else
                 {
