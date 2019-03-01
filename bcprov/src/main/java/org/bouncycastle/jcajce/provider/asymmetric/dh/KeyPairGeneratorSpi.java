@@ -73,10 +73,22 @@ public class KeyPairGeneratorSpi
 
     private DHKeyGenerationParameters convertParams(SecureRandom random, DHParameterSpec dhParams)
     {
+        // BEGIN Android-removed: Don't special-case DHDomainParameterSpec
+        // When DHDomainParameterSpec is special-cased here, it supplies a value for q that
+        // ultimately results in a smaller value of x, which runs afoul of the Wycheproof test
+        // com.google.security.wycheproof.DhTest.testKeyPairGenerator().  See the docs in DhTest
+        // for more details of why that requirement is made.
+        //
+        // While we believe this code would be safe (and likely somewhat faster), in the interest
+        // of being conservative we've disabled it to preserve the old behavior that also passes
+        // the Wycheproof test.
+        /*
         if (dhParams instanceof DHDomainParameterSpec)
         {
             return new DHKeyGenerationParameters(random, ((DHDomainParameterSpec)dhParams).getDomainParameters());
         }
+        */
+        // END Android-removed: Don't special-case DHDomainParameterSpec
         return new DHKeyGenerationParameters(random, new DHParameters(dhParams.getP(), dhParams.getG(), null, dhParams.getL()));
     }
 
