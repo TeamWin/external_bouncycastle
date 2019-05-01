@@ -38,6 +38,7 @@ public class PemObject
      * @param headers a list of PemHeader objects.
      * @param content the binary content of the object.
      */
+    @libcore.api.CorePlatformApi
     public PemObject(String type, List headers, byte[] content)
     {
         this.type = type;
