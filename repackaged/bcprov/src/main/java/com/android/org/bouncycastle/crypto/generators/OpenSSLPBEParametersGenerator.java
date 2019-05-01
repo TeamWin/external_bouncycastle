@@ -18,6 +18,7 @@ import com.android.org.bouncycastle.crypto.digests.AndroidDigestFactory;
  * <p>
  * @hide This class is not part of the Android public SDK API
  */
+@libcore.api.CorePlatformApi
 public class OpenSSLPBEParametersGenerator
     extends PBEParametersGenerator
 {
@@ -28,6 +29,7 @@ public class OpenSSLPBEParametersGenerator
     /**
      * Construct a OpenSSL Parameters generator. 
      */
+    @libcore.api.CorePlatformApi
     public OpenSSLPBEParametersGenerator()
     {
     }
@@ -38,6 +40,7 @@ public class OpenSSLPBEParametersGenerator
      * @param password password to use.
      * @param salt salt to use.
      */
+    @libcore.api.CorePlatformApi
     public void init(
        byte[] password,
        byte[] salt)
@@ -89,6 +92,7 @@ public class OpenSSLPBEParametersGenerator
      * @return a KeyParameter object.
      * @exception IllegalArgumentException if the key length larger than the base hash size.
      */
+    @libcore.api.CorePlatformApi
     public CipherParameters generateDerivedParameters(
         int keySize)
     {
