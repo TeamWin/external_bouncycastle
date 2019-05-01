@@ -191,6 +191,7 @@ public class PrivateKeyInfo
         return privateKeyAlgorithm;
     }
 
+    @libcore.api.CorePlatformApi
     public ASN1Encodable parsePrivateKey()
         throws IOException
     {
