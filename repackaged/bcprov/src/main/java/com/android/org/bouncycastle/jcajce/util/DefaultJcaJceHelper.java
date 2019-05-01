@@ -24,9 +24,11 @@ import javax.crypto.SecretKeyFactory;
  * without specifying a provider).
  * @hide This class is not part of the Android public SDK API
  */
+@libcore.api.CorePlatformApi
 public class DefaultJcaJceHelper
     implements JcaJceHelper
 {
+    @libcore.api.CorePlatformApi
     public Cipher createCipher(
         String algorithm)
         throws NoSuchAlgorithmException, NoSuchPaddingException
