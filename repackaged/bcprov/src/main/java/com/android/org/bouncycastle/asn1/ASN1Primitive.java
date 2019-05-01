@@ -23,6 +23,7 @@ public abstract class ASN1Primitive
      * @return the base ASN.1 object represented by the byte stream.
      * @exception IOException if there is a problem parsing the data, or parsing the stream did not exhaust the available data.
      */
+    @libcore.api.CorePlatformApi
     public static ASN1Primitive fromByteArray(byte[] data)
         throws IOException
     {
@@ -55,6 +56,7 @@ public abstract class ASN1Primitive
         return (o instanceof ASN1Encodable) && asn1Equals(((ASN1Encodable)o).toASN1Primitive());
     }
 
+    @libcore.api.CorePlatformApi
     public ASN1Primitive toASN1Primitive()
     {
         return this;
