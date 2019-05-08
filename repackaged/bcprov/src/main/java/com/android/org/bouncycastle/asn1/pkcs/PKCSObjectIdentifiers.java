@@ -45,6 +45,7 @@ public interface PKCSObjectIdentifiers
     /** PKCS#1: 1.2.840.113549.1.1.12 */
     ASN1ObjectIdentifier    sha384WithRSAEncryption   = pkcs_1.branch("12");
     /** PKCS#1: 1.2.840.113549.1.1.13 */
+    @libcore.api.CorePlatformApi
     ASN1ObjectIdentifier    sha512WithRSAEncryption   = pkcs_1.branch("13");
     /** PKCS#1: 1.2.840.113549.1.1.14 */
     ASN1ObjectIdentifier    sha224WithRSAEncryption   = pkcs_1.branch("14");
