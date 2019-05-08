@@ -1,5 +1,6 @@
 field:com.android.org.bouncycastle.asn1.DERNull#INSTANCE
 field:com.android.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers#sha256WithRSAEncryption
+field:com.android.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers#sha512WithRSAEncryption
 field:com.android.org.bouncycastle.asn1.x500.style.BCStyle#C
 field:com.android.org.bouncycastle.asn1.x500.style.BCStyle#CN
 field:com.android.org.bouncycastle.asn1.x500.style.BCStyle#E
@@ -84,6 +85,7 @@ method:com.android.org.bouncycastle.jcajce.util.DefaultJcaJceHelper#createCipher
 method:com.android.org.bouncycastle.jce.provider.BouncyCastleProvider#BouncyCastleProvider()
 method:com.android.org.bouncycastle.jce.provider.X509CertificateObject#X509CertificateObject(com.android.org.bouncycastle.asn1.x509.Certificate)
 method:com.android.org.bouncycastle.jce.X509Principal#X509Principal(byte[])
+method:com.android.org.bouncycastle.jce.X509Principal#X509Principal(Vector,Hashtable)
 method:com.android.org.bouncycastle.util.io.pem.PemHeader#PemHeader(String,String)
 method:com.android.org.bouncycastle.util.io.pem.PemObject#getContent()
 method:com.android.org.bouncycastle.util.io.pem.PemObject#getType()
@@ -94,6 +96,7 @@ method:com.android.org.bouncycastle.util.io.pem.PemReader#readPemObject()
 method:com.android.org.bouncycastle.util.io.pem.PemWriter#PemWriter(Writer)
 method:com.android.org.bouncycastle.util.io.pem.PemWriter#writeObject(PemObjectGenerator)
 method:com.android.org.bouncycastle.x509.X509V1CertificateGenerator#generate(PrivateKey,String)
+method:com.android.org.bouncycastle.x509.X509V1CertificateGenerator#setIssuerDN(X500Principal)
 method:com.android.org.bouncycastle.x509.X509V1CertificateGenerator#setNotAfter(Date)
 method:com.android.org.bouncycastle.x509.X509V1CertificateGenerator#setNotBefore(Date)
 method:com.android.org.bouncycastle.x509.X509V1CertificateGenerator#setPublicKey(PublicKey)

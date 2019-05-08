@@ -89,6 +89,7 @@ public class X509Principal
      * <p>
      * it's is assumed the table contains OID/String pairs.
      */
+    @libcore.api.CorePlatformApi
     public X509Principal(
         Vector      ordering,
         Hashtable   attributes)
