@@ -85,6 +85,7 @@ public class X509V1CertificateGenerator
      * Set the issuer distinguished name - the issuer is the entity whose private key is used to sign the
      * certificate.
      */
+    @libcore.api.CorePlatformApi
     public void setIssuerDN(
         X500Principal   issuer)
     {
