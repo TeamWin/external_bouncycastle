@@ -81,7 +81,7 @@ java_library {
 
     srcs: [":bouncycastle_java_files"],
 
-    no_standard_libs: true,
+    sdk_version: "none",
     libs: [
         "core-all",
     ],
@@ -98,7 +98,7 @@ java_library {
 
     srcs: [":bouncycastle_java_files"],
 
-    no_standard_libs: true,
+    sdk_version: "none",
     libs: [
         "core-all",
     ],
