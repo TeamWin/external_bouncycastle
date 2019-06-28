@@ -14,6 +14,10 @@
 // limitations under the License.
 //
 
+package {
+    default_visibility: ["//visibility:private"],
+}
+
 java_defaults {
     name: "bouncycastle-errorprone-defaults",
     errorprone: {
@@ -42,26 +46,13 @@ java_defaults {
     },
 }
 
-// A bouncycastle library in the original org.bouncycastle package for use
-// outside of the platform. e.g. for host or in unbundled apps.
-java_library_static {
-    name: "bouncycastle-unbundled",
-    defaults: ["bouncycastle-defaults"],
-    host_supported: true,
-
-    srcs: ["bcprov/src/main/java/**/*.java"],
-    exclude_srcs: [
-        "bcprov/src/main/java/org/bouncycastle/asn1/ocsp/**/*.java",
-    ],
-
-    sdk_version: "core_current",
-    java_version: "1.7",
-}
-
 // The src files for bouncycastle, used to generate core platform / intra-core
 // API stubs.
 filegroup {
     name: "bouncycastle_java_files",
+    visibility: [
+        "//libcore",
+    ],
     srcs: ["repackaged/bcprov/src/main/java/**/*.java"],
 }
 
@@ -93,6 +84,9 @@ java_library {
 // not be stripped. See b/24535627.
 java_library {
     name: "bouncycastle-testdex",
+    visibility: [
+        "//art:__subpackages__",
+    ],
     defaults: ["bouncycastle-defaults"],
     installable: true,
 
@@ -109,10 +103,45 @@ java_library {
     java_version: "1.7",
 }
 
+unbundled_visibility = [
+    "//build/make/tools/signapk",
+    "//build/make/tools/signtos",
+    "//cts/hostsidetests/devicepolicy/app/DeviceOwner",
+    "//cts/tests/libcore/okhttp",
+    "//cts/tests/security",
+    "//cts/tests/tests/keystore",
+    "//external/conscrypt",
+    "//external/okhttp",
+    "//external/robolectric-shadows",
+    "//external/robolectric-shadows/robolectric",
+    "//external/robolectric-shadows/shadows/supportv4",
+    "//external/robolectric-shadows/shadows/httpclient",
+    "//libcore",
+    "//system/extras/verity",
+]
+
+// A bouncycastle library in the original org.bouncycastle package for use
+// outside of the platform. e.g. for host or in unbundled apps.
+java_library {
+    name: "bouncycastle-unbundled",
+    visibility: unbundled_visibility,
+    defaults: ["bouncycastle-defaults"],
+    host_supported: true,
+
+    srcs: ["bcprov/src/main/java/**/*.java"],
+    exclude_srcs: [
+        "bcprov/src/main/java/org/bouncycastle/asn1/ocsp/**/*.java",
+    ],
+
+    sdk_version: "core_current",
+    java_version: "1.7",
+}
+
 // Bouncycastle PKIX classes in the original org.bouncycastle package for use
 // outside of the platform. e.g. for host or in unbundled apps / CTS tests.
-java_library_static {
+java_library {
     name: "bouncycastle-bcpkix-unbundled",
+    visibility: unbundled_visibility,
     defaults: ["bouncycastle-defaults"],
     host_supported: true,
 
@@ -127,6 +156,7 @@ java_library_static {
 // outside of the platform. e.g. for host or in unbundled apps / CTS tests.
 java_library_static {
     name: "bouncycastle-ocsp-unbundled",
+    visibility: unbundled_visibility,
     defaults: ["bouncycastle-defaults"],
     host_supported: true,
 
@@ -143,13 +173,10 @@ java_library_static {
 }
 
 // For compatibility with old bouncycastle-host name.
+//
+// When converting .mk files to .bp files do not change the visibility of this
+// module, instead replace usages of this with bouncycastle-unbundled.
 java_library_host {
     name: "bouncycastle-host",
     static_libs: ["bouncycastle-unbundled"],
-}
-
-// For compatibility with old bouncycastle-bcpkix-host name.
-java_library_host {
-    name: "bouncycastle-bcpkix-host",
-    static_libs: ["bouncycastle-bcpkix-unbundled"],
 }
