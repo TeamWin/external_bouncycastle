@@ -156,7 +156,7 @@ public abstract class GeneralDigest
     {
         return BYTE_LENGTH;
     }
-
+    
     protected abstract void processWord(byte[] in, int inOff);
 
     protected abstract void processLength(long bitLength);
