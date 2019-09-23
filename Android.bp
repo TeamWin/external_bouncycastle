@@ -73,9 +73,6 @@ java_library {
     srcs: [":bouncycastle_java_files"],
 
     sdk_version: "none",
-    libs: [
-        "core-all",
-    ],
     system_modules: "core-all-system-modules",
 }
 
@@ -93,13 +90,10 @@ java_library {
     srcs: [":bouncycastle_java_files"],
 
     sdk_version: "none",
-    libs: [
-        "core-all",
-    ],
+    system_modules: "core-all-system-modules",
     dex_preopt: {
         enabled: false,
     },
-    system_modules: "core-all-system-modules",
     java_version: "1.7",
 }
 
