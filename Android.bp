@@ -110,6 +110,7 @@ unbundled_visibility = [
     "//external/robolectric-shadows/robolectric",
     "//external/robolectric-shadows/shadows/supportv4",
     "//external/robolectric-shadows/shadows/httpclient",
+    "//frameworks/opt/net/wifi/service",
     "//libcore",
     "//system/extras/verity",
 ]
