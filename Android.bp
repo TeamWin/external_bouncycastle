@@ -72,6 +72,8 @@ java_library {
 
     srcs: [":bouncycastle_java_files"],
 
+    libs: ["unsupportedappusage"],
+
     sdk_version: "none",
     system_modules: "art-module-intra-core-api-stubs-system-modules",
 }
@@ -88,6 +90,8 @@ java_library {
     installable: true,
 
     srcs: [":bouncycastle_java_files"],
+
+    libs: ["unsupportedappusage"],
 
     sdk_version: "none",
     system_modules: "art-module-intra-core-api-stubs-system-modules",
