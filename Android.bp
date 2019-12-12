@@ -176,3 +176,22 @@ java_library_host {
     name: "bouncycastle-host",
     static_libs: ["bouncycastle-unbundled"],
 }
+
+// Bouncycastle filegroup for use by frameworks/opt/net/ike project.
+//
+// Specifically, SHA1Digest and MD4Digest (and their dependencies) must be used by IKEv2 to support
+// legacy authentication methods.
+filegroup {
+    name: "bouncycastle_ike_digests",
+    visibility: ["//frameworks/opt/net/ike"],
+    srcs: [
+        "bcprov/src/main/java/org/bouncycastle/crypto/Digest.java",
+        "bcprov/src/main/java/org/bouncycastle/crypto/ExtendedDigest.java",
+        "bcprov/src/main/java/org/bouncycastle/crypto/digests/EncodableDigest.java",
+        "bcprov/src/main/java/org/bouncycastle/crypto/digests/GeneralDigest.java",
+        "bcprov/src/main/java/org/bouncycastle/crypto/digests/MD4Digest.java",
+        "bcprov/src/main/java/org/bouncycastle/crypto/digests/SHA1Digest.java",
+        "bcprov/src/main/java/org/bouncycastle/util/Memoable.java",
+        "bcprov/src/main/java/org/bouncycastle/util/Pack.java",
+    ],
+}
