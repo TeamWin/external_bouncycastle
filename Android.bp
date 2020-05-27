@@ -185,13 +185,13 @@ java_library_host {
     static_libs: ["bouncycastle-unbundled"],
 }
 
-// Bouncycastle filegroup for use by frameworks/opt/net/ike project.
+// Bouncycastle filegroup for use by platform/packages/modules/IPsec project.
 //
 // Specifically, SHA1Digest and MD4Digest (and their dependencies) must be used by IKEv2 to support
 // legacy authentication methods.
 filegroup {
     name: "bouncycastle_ike_digests",
-    visibility: ["//frameworks/opt/net/ike"],
+    visibility: ["//packages/modules/IPsec"],
     srcs: [
         "bcprov/src/main/java/org/bouncycastle/crypto/Digest.java",
         "bcprov/src/main/java/org/bouncycastle/crypto/ExtendedDigest.java",
