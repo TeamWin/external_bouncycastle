@@ -122,6 +122,7 @@ unbundled_visibility = [
     "//frameworks/opt/net/wifi/tests/wifitests",
     "//libcore",
     "//system/extras/verity",
+    "//bootable/recovery/tools/dumpkey",
 ]
 
 // A bouncycastle library in the original org.bouncycastle package for use
@@ -182,6 +183,7 @@ java_library_static {
 // module, instead replace usages of this with bouncycastle-unbundled.
 java_library_host {
     name: "bouncycastle-host",
+    visibility: unbundled_visibility,
     static_libs: ["bouncycastle-unbundled"],
 }
 
